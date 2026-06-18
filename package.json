@@ -1,0 +1,18 @@
+{
+  "name": "procergs-tema",
+  "version": "1.0.0-alpha.0",
+  "description": "Tema principal PROCERGS para projetos Volto",
+  "main": "src/index.js",
+  "license": "MIT",
+  "keywords": [
+    "volto-addon",
+    "volto",
+    "plone",
+    "react",
+    "theme"
+  ],
+  "dependencies": {
+    "@plone/volto": "workspace:*",
+    "@procergs/react-govrs-ds": "^0.2.2"
+  }
+}

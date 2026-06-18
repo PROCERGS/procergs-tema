@@ -1,0 +1,11 @@
+$procergs-text: var(--govrs-color-text-primary, #000000) !default;
+$procergs-surface: var(--govrs-color-surface-base, #ffffff) !default;
+$procergs-link: var(--govrs-color-interactive-link, #1351b4) !default;
+$procergs-link-subtle: var(
+  --govrs-color-interactive-link-subtle,
+  #c5d4eb
+) !default;
+$procergs-focus: var(--govrs-color-focus, #ffcd07) !default;
+
+$procergs-primary: #005ca9 !default;
+$procergs-secondary: #00a3e0 !default;

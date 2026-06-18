@@ -1,0 +1,9 @@
+.block.search {
+  .search-wrapper:has(.govrs-search--block) > .ui.button {
+    display: none;
+  }
+
+  .govrs-search-block-wrapper {
+    width: 100%;
+  }
+}

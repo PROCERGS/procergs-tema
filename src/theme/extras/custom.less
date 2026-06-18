@@ -1,0 +1,42 @@
+
+@linkColor: #1351b4;
+@linkHoverColor: #1351b4;
+@blue: #1351b4;
+@focusColor: #ffcd07;
+
+@procergs-primary: #005ca9;
+
+body {
+  color: var(--govrs-color-text-primary, #000000);
+  background-color: var(--govrs-color-surface-base, #ffffff);
+}
+
+.procergs-text-typography {
+  color: var(--govrs-color-text-primary, #000000);
+}
+
+.ui.primary.button {
+  background-color: @procergs-primary;
+}
+
+.procergs-text-typography a,
+.govrs-accordion-block__content a,
+.ui.breadcrumb a,
+.ui.breadcrumb .section,
+.contents a {
+  color: @linkColor;
+
+  &:hover {
+    color: @linkHoverColor;
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: @linkColor;
+  }
+
+  &:focus-visible {
+    outline: 2px solid @focusColor;
+    outline-offset: 2px;
+  }
+}

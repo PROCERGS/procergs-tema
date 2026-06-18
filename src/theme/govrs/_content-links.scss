@@ -1,0 +1,24 @@
+@import '../variables';
+
+@mixin procergs-content-link-styles {
+  color: $procergs-link;
+
+  &:hover {
+    color: $procergs-link;
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: $procergs-link;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $procergs-focus;
+    outline-offset: 2px;
+  }
+}
+
+.procergs-text-typography a,
+.govrs-accordion-block__content a {
+  @include procergs-content-link-styles;
+}

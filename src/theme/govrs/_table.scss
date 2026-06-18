@@ -1,0 +1,94 @@
+.procergs-slate-table-block {
+  width: 100%;
+
+  .govrs-table__wrapper table.slate-table-block {
+    width: 100%;
+
+    th,
+    td {
+      p,
+      :is(h1, h2, h3, h4, h5, h6) {
+        margin: 0;
+      }
+    }
+  }
+
+  .block.table {
+    margin-bottom: 0;
+
+    p,
+    :is(h1, h2, h3, h4, h5, h6) {
+      margin: 0;
+    }
+
+    .slate-editor {
+      min-height: 0;
+
+      p {
+        margin: 0 !important;
+      }
+    }
+  }
+
+  th.selected,
+  td.selected {
+    box-shadow: inset 0 0 0 1px var(--govrs-color-focus, #ffcd07);
+  }
+}
+
+.procergs-text-typography,
+.slate-editor {
+  table.slate-table {
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+    background: var(--govrs-color-surface-base, #ffffff);
+    color: var(--govrs-color-text-primary, #111111);
+    font-family: var(--govrs-font-family-base);
+
+    th,
+    td {
+      padding: 0.625rem 0.75rem;
+      border: none;
+      vertical-align: middle;
+    }
+
+    thead th,
+    tbody th {
+      border-bottom: var(--govrs-border-width-sm, 1px) solid
+        var(--govrs-color-border-emphasis, #cccccc);
+      background: var(--govrs-color-surface-alt, #f0f0f0);
+      color: var(--govrs-color-brand-primary, #1a7235);
+      font-weight: 600;
+      text-align: left;
+      text-transform: none;
+    }
+
+    thead th + th,
+    tbody th + th,
+    tbody td + td,
+    tbody th + td,
+    tbody td + th {
+      border-left: var(--govrs-border-width-sm, 1px) solid
+        var(--govrs-color-border-emphasis, #cccccc);
+    }
+
+    tbody td {
+      background: var(--govrs-color-surface-base, #ffffff);
+      color: var(--govrs-color-text-primary, #111111);
+      font-size: var(--govrs-font-size-14, 0.875rem);
+    }
+
+    tbody tr + tr td,
+    tbody tr + tr th {
+      border-top: var(--govrs-border-width-sm, 1px) solid
+        var(--govrs-color-border-emphasis, #cccccc);
+    }
+
+    tbody tr:last-child td,
+    tbody tr:last-child th {
+      border-bottom: var(--govrs-border-width-sm, 1px) solid
+        var(--govrs-color-border-emphasis, #cccccc);
+    }
+  }
+}

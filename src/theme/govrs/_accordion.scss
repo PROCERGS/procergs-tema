@@ -1,0 +1,26 @@
+.block.accordion {
+  .govrs-accordion-block {
+    width: 100%;
+
+    &.full-width .govrs-accordion-block__accordion {
+      width: 100%;
+    }
+  }
+
+  .govrs-accordion-block__content {
+    white-space: pre-wrap;
+  }
+
+  .govrs-accordion-block__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 6rem;
+    padding: var(--govrs-space-4, 1rem);
+    background: var(--govrs-color-surface-alt, #f3f3f3);
+    color: var(--govrs-color-text-muted, #555555);
+    font-family: var(--govrs-font-family-base);
+    font-size: var(--govrs-font-size-body-md, 1rem);
+    text-align: center;
+  }
+}

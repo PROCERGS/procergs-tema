@@ -1,0 +1,160 @@
+import React, { createRef } from 'react';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { FormattedMessage } from 'react-intl';
+import { Pagination, Dimmer, Loader } from 'semantic-ui-react';
+import Slugger from 'github-slugger';
+import { List } from '@procergs/react-govrs-ds';
+import Icon from '@plone/volto/components/theme/Icon/Icon';
+import withQuerystringResults from '@plone/volto/components/manage/Blocks/Listing/withQuerystringResults';
+import { normalizeString } from '@plone/volto/helpers/Utils/Utils';
+import paginationLeftSVG from '@plone/volto/icons/left-key.svg';
+import paginationRightSVG from '@plone/volto/icons/right-key.svg';
+import { getListingVariant } from './getListingVariant';
+import { getListVariantProps } from './getListVariantProps';
+import { normalizeListItems } from './normalizeListItems';
+
+const Headline = ({ headlineTag = 'h2', id, data, listingItems }) => {
+  const Tag = headlineTag;
+  const slug = Slugger.slug(normalizeString(data.headline));
+  const headlineId = slug || id;
+
+  return (
+    <Tag
+      id={headlineId}
+      className={cx('govrs-listing-block__headline', 'headline', {
+        emptyListing: !(listingItems?.length > 0),
+      })}
+    >
+      {data.headline}
+    </Tag>
+  );
+};
+
+Headline.propTypes = {
+  headlineTag: PropTypes.string,
+  id: PropTypes.string,
+  data: PropTypes.object,
+  listingItems: PropTypes.array,
+};
+
+const ListingBlockBody = withQuerystringResults((props) => {
+  const {
+    data = {},
+    id,
+    isEditMode,
+    listingItems,
+    totalPages,
+    onPaginationChange,
+    currentPage,
+    prevBatch,
+    nextBatch,
+    isFolderContentsListing,
+    hasLoaded,
+  } = props;
+
+  const listingRef = createRef();
+  const variant = getListingVariant(data);
+  const listProps = getListVariantProps(data);
+  const items = normalizeListItems(listingItems, data, { isEditMode });
+  const HeadlineTag = data.headlineTag || 'h2';
+
+  const listContent =
+    items.length > 0 ? (
+      <List
+        {...listProps}
+        items={items}
+        className="govrs-listing-block__list"
+      />
+    ) : null;
+
+  return (
+    <div
+      className={cx('govrs-listing-block', `govrs-listing-block--${variant}`)}
+    >
+      {data.headline && (
+        <Headline
+          headlineTag={HeadlineTag}
+          id={id}
+          listingItems={listingItems}
+          data={data}
+        />
+      )}
+      {listContent ? (
+        <div ref={listingRef}>
+          {listContent}
+          {totalPages > 1 && (
+            <div className="govrs-listing-block__pagination pagination-wrapper">
+              <Pagination
+                activePage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(e, { activePage }) => {
+                  if (!isEditMode) {
+                    listingRef.current?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                  onPaginationChange(e, { activePage });
+                }}
+                firstItem={null}
+                lastItem={null}
+                prevItem={{
+                  content: <Icon name={paginationLeftSVG} size="18px" />,
+                  icon: true,
+                  'aria-disabled': !prevBatch,
+                  className: !prevBatch ? 'disabled' : null,
+                }}
+                nextItem={{
+                  content: <Icon name={paginationRightSVG} size="18px" />,
+                  icon: true,
+                  'aria-disabled': !nextBatch,
+                  className: !nextBatch ? 'disabled' : null,
+                }}
+              />
+            </div>
+          )}
+        </div>
+      ) : isEditMode ? (
+        <div
+          className="govrs-listing-block__empty listing message"
+          ref={listingRef}
+        >
+          {isFolderContentsListing && (
+            <FormattedMessage
+              id="No items found in this container."
+              defaultMessage="No items found in this container."
+            />
+          )}
+          {hasLoaded && (
+            <FormattedMessage
+              id="No results found."
+              defaultMessage="No results found."
+            />
+          )}
+          <Dimmer active={!hasLoaded} inverted>
+            <Loader indeterminate size="small">
+              <FormattedMessage id="loading" defaultMessage="Loading" />
+            </Loader>
+          </Dimmer>
+        </div>
+      ) : (
+        <div
+          className="govrs-listing-block__empty emptyListing"
+          ref={listingRef}
+        >
+          {hasLoaded && (
+            <FormattedMessage
+              id="No results found."
+              defaultMessage="No results found."
+            />
+          )}
+          <Dimmer active={!hasLoaded} inverted>
+            <Loader indeterminate size="small">
+              <FormattedMessage id="loading" defaultMessage="Loading" />
+            </Loader>
+          </Dimmer>
+        </div>
+      )}
+    </div>
+  );
+});
+
+export default ListingBlockBody;
