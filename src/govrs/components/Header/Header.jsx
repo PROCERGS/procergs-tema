@@ -4,7 +4,6 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import {
-  BarraEstado,
   BarraAcessibilidade,
   Header as GovrsHeader,
 } from '@procergs/react-govrs-ds';
@@ -51,7 +50,6 @@ const Header = ({ pathname }) => {
 
   return (
     <header className="procergs-header-wrapper" role="banner">
-      <BarraEstado />
       <BarraAcessibilidade
         shortcuts={[
           { title: 'Conteúdo', href: '#main' },

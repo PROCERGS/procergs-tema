@@ -93,11 +93,76 @@ export class App extends Component {
 
     return (
       <PluggablesProvider>
-        {language && (
-          <Helmet>
-            <html lang={language} />
-          </Helmet>
-        )}
+        <Helmet>
+          {language && <html lang={language} />}
+          <style>{`
+
+  barra-estado {
+
+    display: block !important;
+
+    width: 100vw !important;
+
+    max-width: 100vw !important;
+
+    min-width: 100vw !important;
+
+    margin-top: 0 !important;
+
+    margin-right: 0 !important;
+
+    margin-left: 0 !important;
+
+    padding: 0 !important;
+
+    margin-left: calc(50% - 50vw) !important;
+
+    margin-right: calc(50% - 50vw) !important;
+
+    position: relative !important;
+
+    z-index: 9999 !important;
+
+  }
+
+  body > barra-estado:first-child {
+
+    margin-top: -8px !important;
+
+  }
+
+`}</style>
+          <style>{`
+
+  body.public-ui {
+
+    flex-wrap: wrap !important;
+
+  }
+
+  body.public-ui > .barra-estado-host,
+
+  body.public-ui > barra-estado {
+
+    flex: 0 0 100% !important;
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+  }
+
+  body.public-ui > #main {
+
+    flex: 1 0 100% !important;
+
+    min-width: 0 !important;
+
+  }
+
+`}</style>
+          <script src="https://cdn.jsdelivr.net/gh/PROCERGS/react-govrs-ds@29dbc8de98b4b6b620bcfdcc23a9449d754b70d6/src/components/BarraEstado/BarraEstadoStandalone.js"></script>
+        </Helmet>
         <BodyClass className={`view-${action}view`} />
 
         {this.props.content && this.props.content['@type'] && (
