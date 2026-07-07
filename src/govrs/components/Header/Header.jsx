@@ -36,6 +36,33 @@ const Header = ({ pathname }) => {
     }
   }, [pathname, token, dispatch]);
 
+  useEffect(() => {
+    const moveStandaloneBar = () => {
+      const slot = document.querySelector('.procergs-standalone-bar-slot');
+      const host = document.querySelector('.barra-estado-host');
+
+      if (!slot || !host || slot.contains(host)) {
+        return;
+      }
+
+      slot.appendChild(host);
+    };
+
+    moveStandaloneBar();
+
+    const observer = new MutationObserver(() => {
+      moveStandaloneBar();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   const menuItems = appendAuthMenuItem(
     mapVoltoNavigationToMenuItems(navigationItems),
     token,
@@ -50,6 +77,7 @@ const Header = ({ pathname }) => {
 
   return (
     <header className="procergs-header-wrapper" role="banner">
+      <div className="procergs-standalone-bar-slot" />
       <BarraAcessibilidade
         shortcuts={[
           { title: 'Conteúdo', href: '#main' },

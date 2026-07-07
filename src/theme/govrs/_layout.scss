@@ -1,6 +1,30 @@
 .procergs-header-wrapper {
   width: 100%;
 
+  .procergs-standalone-bar-slot {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    line-height: 0;
+  }
+
+  .procergs-standalone-bar-slot > .barra-estado-host {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    line-height: 0;
+  }
+
+  .procergs-standalone-bar-slot > .barra-estado-host > barra-estado {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    line-height: normal;
+  }
+
   .procergs-header-logo {
     display: block;
     height: auto;
@@ -8,22 +32,6 @@
     width: auto;
     max-width: 100%;
   }
-}
-
-body.public-ui {
-  flex-wrap: wrap;
-}
-
-body.public-ui > .barra-estado-host,
-body.public-ui > barra-estado {
-  flex: 0 0 100%;
-  width: 100%;
-  max-width: 100%;
-}
-
-body.public-ui > #main {
-  flex: 1 0 100%;
-  min-width: 0;
 }
 
 .procergs-footer-wrapper {
