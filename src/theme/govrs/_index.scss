@@ -5,6 +5,38 @@ body {
   color: $procergs-text;
 }
 
+.govrs-header-wrapper,
+.govrs-header-wrapper[data-menu-open='true'] {
+  position: static !important;
+  z-index: auto !important;
+}
+
+.govrs-header {
+  position: relative;
+}
+
+.govrs-footer {
+  position: static !important;
+  z-index: auto !important;
+}
+
+.govrs-header__scroll-top {
+  z-index: 2 !important;
+}
+
+.govrs-menu-hamburger__toggle {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.govrs-menu-hamburger__content {
+  z-index: 2 !important;
+}
+
+.barra-estado__menu {
+  z-index: 1 !important;
+}
+
 @import './content-links';
 @import './layout';
 @import './typography-text';

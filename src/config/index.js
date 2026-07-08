@@ -1,3 +1,4 @@
+import '../theme/_main.scss';
 import configureSettings from './settings';
 import configureTextBlock from './blocks/text';
 import configureMapsBlock from './blocks/maps';
