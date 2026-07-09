@@ -24,13 +24,12 @@ body {
   z-index: 2 !important;
 }
 
-.govrs-menu-hamburger__toggle {
-  position: relative !important;
-  z-index: 1 !important;
+.govrs-header-wrapper .govrs-menu-hamburger__toggle {
+  z-index: auto !important;
 }
 
-.govrs-menu-hamburger__content {
-  z-index: 2 !important;
+.govrs-header-wrapper[data-menu-open='true'] .govrs-menu-hamburger__content {
+  z-index: var(--govrs-z-index-navigation, 50) !important;
 }
 
 .barra-estado__menu {
