@@ -2,6 +2,12 @@
   .govrs-carousel-block {
     width: 100%;
 
+    .carousel-container {
+      position: relative;
+      z-index: 0;
+      isolation: isolate;
+    }
+
     &.full-width .govrs-carousel-block__carousel {
       width: 100%;
     }
@@ -9,9 +15,9 @@
 
   .govrs-carousel-block__empty {
     display: flex;
+    min-height: 6rem;
     align-items: center;
     justify-content: center;
-    min-height: 6rem;
     padding: var(--govrs-space-4, 1rem);
     background: var(--govrs-color-surface-alt, #f3f3f3);
     color: var(--govrs-color-text-muted, #555555);
