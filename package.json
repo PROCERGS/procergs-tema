@@ -13,6 +13,6 @@
   ],
   "dependencies": {
     "@plone/volto": "workspace:*",
-    "@procergs/react-govrs-ds": "^0.3.0"
+    "@procergs/react-govrs-ds": "^0.3.1"
   }
 }
