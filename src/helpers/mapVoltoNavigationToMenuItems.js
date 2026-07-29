@@ -1,7 +1,8 @@
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 
 function mapItem(item) {
-  const url = item.url === '' ? '/' : flattenToAppURL(item.url);
+  const itemUrl = item.url ?? item['@id'] ?? '';
+  const url = itemUrl === '' ? '/' : flattenToAppURL(itemUrl);
   const mapped = {
     title: item.title,
     url,
@@ -20,27 +21,20 @@ export function mapVoltoNavigationToMenuItems(items = []) {
 }
 
 export function mapVoltoNavigationToFooterSections(items = []) {
-  return items.map((item) => {
-    const mapped = mapItem(item);
+  return items
+    .filter((section) => section.items?.length)
+    .map((section) => ({
+      title: section.title,
+      items: section.items.map((item) => {
+        const mapped = mapItem(item);
 
-    if (mapped.items?.length) {
-      return {
-        title: mapped.title,
-        items: mapped.items,
-      };
-    }
-
-    return {
-      title: mapped.title,
-      items: [
-        {
+        return {
           title: mapped.title,
           url: mapped.url,
           href: mapped.href,
-        },
-      ],
-    };
-  });
+        };
+      }),
+    }));
 }
 
 export function appendAuthMenuItem(menuItems, token, intl) {
