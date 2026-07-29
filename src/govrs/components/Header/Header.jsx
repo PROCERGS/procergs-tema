@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -19,6 +19,8 @@ import ProcergsLogo from './ProcergsLogo';
 
 const Header = ({ pathname }) => {
   const headerRef = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchActive, setSearchActive] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const intl = useIntl();
@@ -158,14 +160,74 @@ const Header = ({ pathname }) => {
     history.push(`./search?SearchableText=${encodeURIComponent(term)}${path}`);
   };
 
+  const isPublicPage = () =>
+    typeof document !== 'undefined' &&
+    document.body.classList.contains('public-ui');
+
+  const focusAfterRender = (selector) => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        const element = headerRef.current?.querySelector(selector);
+        element?.focus();
+
+        if (element instanceof HTMLInputElement) {
+          element.select();
+        }
+      });
+    });
+  };
+
+  const activateContentShortcut = () => {
+    if (!isPublicPage()) return;
+
+    const firstBlock = document.querySelector('#page-document > *');
+    const target = firstBlock || document.getElementById('view');
+
+    if (!(target instanceof HTMLElement)) return;
+
+    if (!target.hasAttribute('tabindex')) {
+      target.setAttribute('tabindex', '-1');
+    }
+
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const activateMenuShortcut = () => {
+    if (!isPublicPage()) return;
+
+    headerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setMenuOpen(true);
+    focusAfterRender('.govrs-menu-hamburger__toggle');
+  };
+
+  const activateSearchShortcut = () => {
+    if (!isPublicPage()) return;
+
+    setSearchActive(true);
+    focusAfterRender('.govrs-search__field');
+  };
+
   return (
     <header ref={headerRef} className="procergs-header-wrapper" role="banner">
       <div className="procergs-standalone-bar-slot" />
       <BarraAcessibilidade
         shortcuts={[
-          { title: 'Conteúdo', href: '#main' },
-          { title: 'Menu', href: '#govrs-header-menu' },
-          { title: 'Busca', href: '#govrs-header-search' },
+          {
+            title: 'Conteúdo',
+            href: '#view',
+            onActivate: activateContentShortcut,
+          },
+          {
+            title: 'Menu',
+            href: '#main',
+            onActivate: activateMenuShortcut,
+          },
+          {
+            title: 'Busca',
+            href: '#main',
+            onActivate: activateSearchShortcut,
+          },
         ]}
         hrefSitemap="/sitemap"
       />
@@ -176,7 +238,11 @@ const Header = ({ pathname }) => {
         siteTitle={siteTitle}
         homeHref="/"
         menuItems={menuItems}
+        menuOpen={menuOpen}
+        onMenuOpenChange={setMenuOpen}
         onSearch={handleSearch}
+        searchActive={searchActive}
+        onSearchActiveChange={setSearchActive}
         searchPlaceholder={intl.formatMessage({
           id: 'Search Site',
           defaultMessage: 'Search Site',
