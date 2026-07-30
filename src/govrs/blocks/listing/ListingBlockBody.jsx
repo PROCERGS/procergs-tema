@@ -22,9 +22,15 @@ const Headline = ({ headlineTag = 'h2', id, data, listingItems }) => {
   return (
     <Tag
       id={headlineId}
-      className={cx('govrs-listing-block__headline', 'headline', {
-        emptyListing: !(listingItems?.length > 0),
-      })}
+      className={cx(
+        'govrs-listing-block__headline',
+        'headline',
+        'procergs-text-typography',
+        'headers-12',
+        {
+          emptyListing: !(listingItems?.length > 0),
+        },
+      )}
     >
       {data.headline}
     </Tag>

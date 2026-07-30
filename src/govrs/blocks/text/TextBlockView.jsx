@@ -10,6 +10,7 @@ import Slugger from 'github-slugger';
 import { normalizeString } from '@plone/volto/helpers/Utils/Utils';
 import {
   TEXT_HEADERS_DESKTOP,
+  TEXT_LISTS_BASE,
   TEXT_TYPOGRAPHY_WRAPPER,
 } from '../../constants/typography';
 
@@ -33,7 +34,12 @@ const TextBlockView = (props) => {
 
   return (
     <div
-      className={cx(TEXT_TYPOGRAPHY_WRAPPER, TEXT_HEADERS_DESKTOP, className)}
+      className={cx(
+        TEXT_TYPOGRAPHY_WRAPPER,
+        TEXT_HEADERS_DESKTOP,
+        TEXT_LISTS_BASE,
+        className,
+      )}
     >
       {serializeNodes(value, getAttributes, { metadata })}
     </div>
