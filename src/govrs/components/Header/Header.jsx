@@ -9,13 +9,13 @@ import {
 } from '@procergs/react-govrs-ds';
 import config from '@plone/volto/registry';
 import { getNavigation } from '@plone/volto/actions/navigation/navigation';
-import { flattenToAppURL, getBaseUrl } from '@plone/volto/helpers/Url/Url';
+import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 import { hasApiExpander } from '@plone/volto/helpers/Utils/Utils';
 import {
   mapVoltoNavigationToMenuItems,
   appendAuthMenuItem,
 } from '../../../helpers/mapVoltoNavigationToMenuItems';
-import ProcergsLogo from './ProcergsLogo';
+import resolveBranding from '../../../helpers/resolveBranding';
 
 const Header = ({ pathname }) => {
   const headerRef = useRef(null);
@@ -29,15 +29,21 @@ const Header = ({ pathname }) => {
     (state) => state.navigation.items,
     shallowEqual,
   );
+  const content = useSelector((state) => state.content?.data, shallowEqual);
+  const navroot = useSelector(
+    (state) => state.navroot?.data?.navroot,
+    shallowEqual,
+  );
   const site = useSelector((state) => state.site?.data, shallowEqual);
 
-  const siteTitle = site?.['plone.site_title'] || 'Site Modelo Matriz3';
-  const siteLogoUrl = flattenToAppURL(site?.['plone.site_logo']);
-  const logo = siteLogoUrl ? (
-    <img src={siteLogoUrl} alt="" className="procergs-header-logo" />
-  ) : (
-    <ProcergsLogo />
-  );
+  const { logoSrc, siteTitle, homeHref, logoHref } = resolveBranding({
+    content,
+    navroot,
+    site,
+  });
+  const logo = logoSrc ? (
+    <img src={logoSrc} alt="" className="procergs-header-logo" />
+  ) : null;
 
   useEffect(() => {
     const { settings } = config;
@@ -232,11 +238,11 @@ const Header = ({ pathname }) => {
         hrefSitemap="/sitemap"
       />
       <GovrsHeader
-        logo={logo}
-        logoHref="/"
+        {...(logo ? { logo } : {})}
+        logoHref={logoHref}
         logoAriaLabel={siteTitle}
         siteTitle={siteTitle}
-        homeHref="/"
+        homeHref={homeHref}
         menuItems={menuItems}
         menuOpen={menuOpen}
         onMenuOpenChange={setMenuOpen}

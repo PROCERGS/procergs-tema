@@ -1,42 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Footer as GovrsFooter } from '@procergs/react-govrs-ds';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import config from '@plone/volto/registry';
-import Api from '@plone/volto/helpers/Api/Api';
+import { getNavigation } from '@plone/volto/actions/navigation/navigation';
+import { hasApiExpander } from '@plone/volto/helpers/Utils/Utils';
 import { mapVoltoNavigationToFooterSections } from '../../../helpers/mapVoltoNavigationToMenuItems';
+import resolveBranding from '../../../helpers/resolveBranding';
 import procergsLogo from '../../../assets/procergs-logo.svg';
 
 const Footer = () => {
-  const [navigationItems, setNavigationItems] = useState([]);
+  const dispatch = useDispatch();
+  const navigationItems = useSelector(
+    (state) => state.navigation.items,
+    shallowEqual,
+  );
+  const navroot = useSelector(
+    (state) => state.navroot?.data?.navroot,
+    shallowEqual,
+  );
   const footerSettings = config.settings.procergsFooter || {};
+  const { navRootPath } = resolveBranding({ navroot });
 
   useEffect(() => {
-    let isCurrent = true;
-    const api = new Api();
-
-    api
-      .get('/@navigation', {
-        params: { 'expand.navigation.depth': 2 },
-      })
-      .then((navigation) => {
-        if (isCurrent) {
-          setNavigationItems(
-            navigation.items ??
-              navigation.navigation?.items ??
-              navigation['@components']?.navigation?.items ??
-              [],
-          );
-        }
-      })
-      .catch(() => {
-        if (isCurrent) {
-          setNavigationItems([]);
-        }
-      });
-
-    return () => {
-      isCurrent = false;
-    };
-  }, []);
+    if (!hasApiExpander('navigation', navRootPath)) {
+      dispatch(getNavigation(navRootPath, 2));
+    }
+  }, [dispatch, navRootPath]);
 
   const items = mapVoltoNavigationToFooterSections(navigationItems);
   const {
