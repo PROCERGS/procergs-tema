@@ -1,5 +1,5 @@
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
-import { resolveImageUrl } from '../blocks/carousel/resolveImageUrl';
+import { resolveImageUrl } from './resolveImageUrl';
 
 export const resolveImageUrlFromContent = (item) => {
   if (!item) {
