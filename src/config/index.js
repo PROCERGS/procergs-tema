@@ -17,6 +17,9 @@ const applyConfig = (config) => {
   configureListingBlock(config);
   configureBannerBlock(config);
   configureSlateTableBlock(config);
+
+  config.blocks.requiredBlocks = [];
+
   return config;
 };
 
