@@ -1,6 +1,6 @@
 import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import { resolveImageUrlFromContent } from '../../helpers/resolveImageUrlFromContent';
-import { getListingVariant } from './getListingVariant';
+import { getListingVariation } from './getListingVariation';
 
 const getItemId = (item) => item.UID || item['@id'] || item.id;
 
@@ -24,8 +24,8 @@ const formatMeta = (item) => {
   return item['@type'] || undefined;
 };
 
-const getContentUrl = (item, { isEditMode, variant }) => {
-  if (isEditMode || !item['@id'] || variant === 'default') {
+const getContentUrl = (item, { isEditMode, variation }) => {
+  if (isEditMode || !item['@id'] || variation === 'default') {
     return undefined;
   }
 
@@ -37,7 +37,7 @@ export const normalizeListItems = (
   data = {},
   { isEditMode = false } = {},
 ) => {
-  const variant = getListingVariant(data);
+  const variation = getListingVariation(data);
   const groupBy = data.groupBy || 'portal_type';
 
   return items.map((item) => {
@@ -45,9 +45,9 @@ export const normalizeListItems = (
     const title = getItemTitle(item);
     const description = getItemDescription(item);
     const image = resolveImageUrlFromContent(item);
-    const contentUrl = getContentUrl(item, { isEditMode, variant });
+    const contentUrl = getContentUrl(item, { isEditMode, variation });
 
-    if (variant === 'link') {
+    if (variation === 'link') {
       return {
         id,
         title,
@@ -56,7 +56,7 @@ export const normalizeListItems = (
       };
     }
 
-    if (variant === 'card') {
+    if (variation === 'card') {
       const cardItem = {
         id,
         title,

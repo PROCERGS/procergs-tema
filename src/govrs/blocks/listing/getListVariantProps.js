@@ -1,9 +1,9 @@
-import { getListingVariant } from './getListingVariant';
+import { getListingVariation } from './getListingVariation';
 
 export const getListVariantProps = (data = {}) => {
-  const variant = getListingVariant(data);
+  const variation = getListingVariation(data);
 
-  switch (variant) {
+  switch (variation) {
     case 'link':
       return {
         variant: 'link',

@@ -1,14 +1,14 @@
-export const getListingVariant = (data = {}) => data.variant || 'default';
+export const getListingVariation = (data = {}) => data.variation || 'default';
 
 export const listingNeedsFullObjects = (data = {}) => {
-  const variant = getListingVariant(data);
+  const variation = getListingVariation(data);
 
-  if (variant === 'card') {
+  if (variation === 'card') {
     return true;
   }
 
   if (
-    variant === 'default' &&
+    variation === 'default' &&
     ['mixed', 'images'].includes(data.mediaPreset || 'mixed')
   ) {
     return true;

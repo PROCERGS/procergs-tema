@@ -10,7 +10,7 @@ import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 import ListingBlockSchema from './schema';
 import ListingBlockBody from './ListingBlockBody';
-import { getListingVariant } from './getListingVariant';
+import { getListingVariation } from './getListingVariation';
 
 const messages = defineMessages({
   listing: {
@@ -48,7 +48,7 @@ const Edit = React.memo(
         : intl.formatMessage(messages.items));
 
     return (
-      <div className={cx('block listing', getListingVariant(data))}>
+      <div className={cx('block listing', getListingVariation(data))}>
         <p className="items-preview">{placeholder}</p>
         <ListingBlockBody
           {...props}

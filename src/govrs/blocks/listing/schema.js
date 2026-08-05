@@ -25,10 +25,6 @@ const messages = defineMessages({
     id: 'Headline level',
     defaultMessage: 'Headline level',
   },
-  variant: {
-    id: 'Variant',
-    defaultMessage: 'Variant',
-  },
   horizontal: {
     id: 'Horizontal layout',
     defaultMessage: 'Horizontal layout',
@@ -80,8 +76,8 @@ const DEFAULT_HEADLINE_LEVELS = [
   ['h3', 'h3'],
 ];
 
-const getAppearanceFields = (variant, data) => {
-  switch (variant) {
+const getAppearanceFields = (variation, data) => {
+  switch (variation) {
     case 'link':
       return ['numbered', 'invert', 'mediaPreset'];
     case 'card':
@@ -97,7 +93,7 @@ const getAppearanceFields = (variant, data) => {
 };
 
 export const ListingBlockSchema = ({ data = {}, intl }) => {
-  const variant = data.variant || 'default';
+  const variation = data.variation || 'default';
 
   return {
     title: intl.formatMessage(messages.listing),
@@ -105,12 +101,12 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
       {
         id: 'default',
         title: intl.formatMessage(messages.content),
-        fields: ['headline', 'headlineTag', 'querystring', 'variant'],
+        fields: ['headline', 'headlineTag', 'querystring'],
       },
       {
         id: 'appearance',
         title: intl.formatMessage(messages.appearance),
-        fields: getAppearanceFields(variant, data),
+        fields: getAppearanceFields(variation, data),
       },
     ],
     properties: {
@@ -126,15 +122,6 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
       querystring: {
         title: intl.formatMessage(messages.query),
         widget: 'querystring',
-      },
-      variant: {
-        title: intl.formatMessage(messages.variant),
-        choices: [
-          ['default', 'Default'],
-          ['link', 'Link'],
-          ['card', 'Card'],
-        ],
-        default: 'default',
       },
       horizontal: {
         title: intl.formatMessage(messages.horizontal),
@@ -154,7 +141,7 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
       mediaPreset: {
         title: intl.formatMessage(messages.mediaPreset),
         choices:
-          variant === 'link'
+          variation === 'link'
             ? [
                 ['icons', 'Icons'],
                 ['none', 'None'],
@@ -165,7 +152,7 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
                 ['icons', 'Icons'],
                 ['none', 'None'],
               ],
-        default: variant === 'link' ? 'none' : 'mixed',
+        default: variation === 'link' ? 'none' : 'mixed',
       },
       groupBy: {
         title: intl.formatMessage(messages.groupBy),

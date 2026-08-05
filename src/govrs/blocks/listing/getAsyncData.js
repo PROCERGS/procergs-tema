@@ -1,7 +1,7 @@
 import { getQueryStringResults } from '@plone/volto/actions/querystringsearch/querystringsearch';
 import qs from 'query-string';
 import { slugify } from '@plone/volto/helpers/Utils/Utils';
-import { listingNeedsFullObjects } from './getListingVariant';
+import { listingNeedsFullObjects } from './getListingVariation';
 
 const getCurrentPage = (location, id) => {
   const pageQueryParam = qs.parse(location.search);

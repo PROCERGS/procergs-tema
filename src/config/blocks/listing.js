@@ -4,6 +4,7 @@ import ListingBlockView from '../../govrs/blocks/listing/View';
 import ListingBlockEdit from '../../govrs/blocks/listing/Edit';
 import ListingBlockSchema from '../../govrs/blocks/listing/schema';
 import getListingBlockAsyncData from '../../govrs/blocks/listing/getAsyncData';
+import ListingVariationTemplate from '../../govrs/blocks/listing/ListingVariationTemplate';
 
 const configureListingBlock = (config) => {
   const existing = config.blocks.blocksConfig.listing;
@@ -16,6 +17,19 @@ const configureListingBlock = (config) => {
     blockSchema: ListingBlockSchema,
     getAsyncData: getListingBlockAsyncData,
     noResultsComponent: DefaultNoResultsComponent,
+    variations: [
+      ...(existing.variations || []),
+      {
+        id: 'link',
+        title: 'Link',
+        template: ListingVariationTemplate,
+      },
+      {
+        id: 'card',
+        title: 'Card',
+        template: ListingVariationTemplate,
+      },
+    ],
   };
 
   return config;

@@ -10,7 +10,7 @@ import withQuerystringResults from '@plone/volto/components/manage/Blocks/Listin
 import { normalizeString } from '@plone/volto/helpers/Utils/Utils';
 import paginationLeftSVG from '@plone/volto/icons/left-key.svg';
 import paginationRightSVG from '@plone/volto/icons/right-key.svg';
-import { getListingVariant } from './getListingVariant';
+import { getListingVariation } from './getListingVariation';
 import { getListVariantProps } from './getListVariantProps';
 import { normalizeListItems } from './normalizeListItems';
 
@@ -60,7 +60,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
   } = props;
 
   const listingRef = createRef();
-  const variant = getListingVariant(data);
+  const variation = getListingVariation(data);
   const listProps = getListVariantProps(data);
   const items = normalizeListItems(listingItems, data, { isEditMode });
   const HeadlineTag = data.headlineTag || 'h2';
@@ -76,7 +76,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
 
   return (
     <div
-      className={cx('govrs-listing-block', `govrs-listing-block--${variant}`)}
+      className={cx('govrs-listing-block', `govrs-listing-block--${variation}`)}
     >
       {data.headline && (
         <Headline
