@@ -31,8 +31,7 @@ function resolveInheritedLogo(content) {
 
 export default function resolveBranding({ content, navroot, site }) {
   const navRootPath = normalizePath(resolveUrl(navroot?.['@id']));
-  const siteRootPath = normalizePath(resolveUrl(site?.['@id']));
-  const isSubsite = navRootPath !== siteRootPath;
+  const isSubsite = Boolean(navRootPath && navRootPath !== '/');
 
   return {
     logoSrc:
