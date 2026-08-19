@@ -15,6 +15,7 @@ export const getListVariantProps = (data = {}) => {
       return {
         variant: 'card',
         perRow: data.perRow ?? 3,
+        overflow: data.cardOverflow === 'scroll' ? 'scroll' : 'wrap',
       };
     default:
       return {

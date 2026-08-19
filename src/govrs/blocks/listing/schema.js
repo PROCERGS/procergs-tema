@@ -69,6 +69,26 @@ const messages = defineMessages({
     id: 'Show card action link',
     defaultMessage: 'Show card action link',
   },
+  showTags: {
+    id: 'Show tags',
+    defaultMessage: 'Exibir tags',
+  },
+  tagsLimit: {
+    id: 'Number of tags',
+    defaultMessage: 'Quantidade de tags',
+  },
+  cardOverflow: {
+    id: 'Card overflow',
+    defaultMessage: 'Quando os cards não cabem',
+  },
+  cardOverflowWrap: {
+    id: 'Wrap to next row',
+    defaultMessage: 'Quebrar linha',
+  },
+  cardOverflowScroll: {
+    id: 'Horizontal scroll',
+    defaultMessage: 'Rolagem horizontal',
+  },
 });
 
 const DEFAULT_HEADLINE_LEVELS = [
@@ -81,7 +101,15 @@ const getAppearanceFields = (variation, data) => {
     case 'link':
       return ['numbered', 'invert', 'mediaPreset'];
     case 'card':
-      return ['perRow', 'cardVariant', 'cardSize', 'showCardAction'];
+      return [
+        'perRow',
+        'cardOverflow',
+        'cardVariant',
+        'cardSize',
+        'showCardAction',
+        'showTags',
+        ...(data?.showTags ? ['tagsLimit'] : []),
+      ];
     default:
       return [
         'horizontal',
@@ -177,6 +205,15 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
         type: 'number',
         default: 3,
       },
+      cardOverflow: {
+        title: intl.formatMessage(messages.cardOverflow),
+        choices: [
+          ['wrap', intl.formatMessage(messages.cardOverflowWrap)],
+          ['scroll', intl.formatMessage(messages.cardOverflowScroll)],
+        ],
+        default: 'wrap',
+        noValueOption: false,
+      },
       cardVariant: {
         title: intl.formatMessage(messages.cardVariant),
         choices: [
@@ -199,6 +236,21 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
         title: intl.formatMessage(messages.showCardAction),
         type: 'boolean',
         default: true,
+      },
+      showTags: {
+        title: intl.formatMessage(messages.showTags),
+        type: 'boolean',
+        default: false,
+      },
+      tagsLimit: {
+        title: intl.formatMessage(messages.tagsLimit),
+        choices: [
+          ['1', '1'],
+          ['2', '2'],
+          ['3', '3'],
+        ],
+        default: '3',
+        noValueOption: false,
       },
     },
     required: [],

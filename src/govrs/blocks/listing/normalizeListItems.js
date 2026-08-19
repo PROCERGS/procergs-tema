@@ -2,11 +2,24 @@ import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import { resolveImageUrlFromContent } from '../../helpers/resolveImageUrlFromContent';
 import { getListingVariation } from './getListingVariation';
 
+const CARD_TEXT_MAX_LENGTH = 140;
+
 const getItemId = (item) => item.UID || item['@id'] || item.id;
 
 const getItemTitle = (item) => item.title || item.Title || item.id || '';
 
 const getItemDescription = (item) => item.description || item.Description || '';
+
+const truncateText = (value) => {
+  const text = String(value ?? '').trim();
+
+  if (text.length <= CARD_TEXT_MAX_LENGTH) {
+    return text;
+  }
+
+  const ellipsis = '...';
+  return `${text.slice(0, CARD_TEXT_MAX_LENGTH - ellipsis.length).trimEnd()}${ellipsis}`;
+};
 
 const getGroupLabel = (item, groupBy) => {
   if (groupBy === 'portal_type') {
@@ -30,6 +43,16 @@ const getContentUrl = (item, { isEditMode, variation }) => {
   }
 
   return flattenToAppURL(item['@id']);
+};
+
+const getSubjectTags = (item) => {
+  const subjects = item.Subject || item.subjects;
+  if (!Array.isArray(subjects) || subjects.length === 0) {
+    return undefined;
+  }
+
+  const tags = subjects.filter(Boolean);
+  return tags.length > 0 ? tags : undefined;
 };
 
 export const normalizeListItems = (
@@ -59,8 +82,8 @@ export const normalizeListItems = (
     if (variation === 'card') {
       const cardItem = {
         id,
-        title,
-        description: description || undefined,
+        title: truncateText(title),
+        description: description ? truncateText(description) : undefined,
         image,
         imageAlt: title,
         variant: data.cardVariant || 'news',
@@ -70,6 +93,14 @@ export const normalizeListItems = (
 
       if (data.showCardAction && contentUrl) {
         cardItem.acao = { label: 'Ler mais', url: contentUrl };
+      }
+
+      if (data.showTags) {
+        const tags = getSubjectTags(item);
+        if (tags) {
+          cardItem.tags = tags;
+          cardItem.tagsLimit = Math.min(3, Math.max(1, Number(data.tagsLimit) || 3));
+        }
       }
 
       return cardItem;
