@@ -25,8 +25,6 @@ const Headline = ({ headlineTag = 'h2', id, data, listingItems }) => {
       className={cx(
         'govrs-listing-block__headline',
         'headline',
-        'procergs-text-typography',
-        'headers-12',
         {
           emptyListing: !(listingItems?.length > 0),
         },

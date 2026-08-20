@@ -1,11 +1,12 @@
+html:root {
+  --govrs-font-size-root: 100%;
+  font-size: var(--govrs-font-size-root, 100%);
+}
+
 body.public-ui {
   font-family: var(--govrs-font-family-base);
   font-size: var(--govrs-font-size-body-md, 1rem);
   line-height: var(--govrs-line-height-body-sm, 1.5rem);
-}
-
-body.public-ui :is(h1, h2, h3, h4, h5) {
-  font-family: var(--govrs-font-family-base);
 }
 
 body.public-ui .ui.form .field > label,
@@ -17,12 +18,78 @@ body.public-ui .ui.form :is(.ui.input > input, textarea)::placeholder {
   font-family: var(--govrs-font-family-base);
 }
 
-.procergs-text-typography {
-  color: var(--govrs-color-text-primary, #000000);
-  font-family: var(--govrs-font-family-base);
+body:is(.public-ui, .cms-ui) {
+  .documentFirstHeading {
+    margin: 0 0 var(--govrs-space-5, 1.25rem) 0;
+    color: var(--govrs-color-text-primary);
+    font-family: var(--govrs-font-family-base);
+    font-size: var(--govrs-font-size-heading-3xl, 2.5625rem);
+    font-weight: var(--govrs-font-weight-regular, 400);
+    line-height: var(--govrs-line-height-heading-3xl, 3.625rem);
+  }
 
-  > p + p {
-    margin-block-start: var(--govrs-space-5, 1.25rem);
+  .procergs-text-typography {
+    color: var(--govrs-color-text-primary, #000000);
+    font-family: var(--govrs-font-family-base);
+
+    :is(h1, h2, h3, h4, h5) {
+      font-family: var(--govrs-font-family-base);
+    }
+
+    &.headers-12 h1,
+    h1.headers-12 {
+      margin: 0 0 var(--govrs-space-5, 1.25rem) 0;
+      color: var(--govrs-color-text-primary);
+      font-family: var(--govrs-font-family-base);
+      font-size: var(--govrs-font-size-heading-3xl, 2.5625rem);
+      font-weight: var(--govrs-font-weight-regular, 400);
+      line-height: var(--govrs-line-height-heading-3xl, 3.625rem);
+    }
+
+    &.headers-12 h2,
+    h2.headers-12 {
+      margin: 0 0 var(--govrs-space-5, 1.25rem) 0;
+      color: var(--govrs-color-text-primary);
+      font-family: var(--govrs-font-family-base);
+      font-size: var(--govrs-font-size-heading-2xl, 2.25rem);
+      font-weight: var(--govrs-font-weight-regular, 400);
+      line-height: var(--govrs-line-height-heading-2xl, 3.25rem);
+    }
+
+    &.headers-12 h3,
+    h3.headers-12 {
+      margin: 0 0 var(--govrs-space-5, 1.25rem) 0;
+      color: var(--govrs-color-text-primary);
+      font-family: var(--govrs-font-family-base);
+      font-size: var(--govrs-font-size-heading-xl, 1.875rem);
+      font-weight: var(--govrs-font-weight-regular, 400);
+      line-height: var(--govrs-line-height-heading-xl, 2.625rem);
+    }
+
+    &.headers-12 h4,
+    h4.headers-12 {
+      margin: 0 0 var(--govrs-space-5, 1.25rem) 0;
+      color: var(--govrs-color-text-primary);
+      font-family: var(--govrs-font-family-base);
+      font-size: var(--govrs-font-size-heading-lg, 1.5rem);
+      font-weight: var(--govrs-font-weight-regular, 400);
+      line-height: var(--govrs-line-height-heading-lg, 2.25rem);
+    }
+
+    p {
+      font-size: var(--govrs-font-size-20, 1.25rem);
+      line-height: var(--govrs-line-height-32, 2rem);
+    }
+
+    > p + p {
+      margin-block-start: var(--govrs-space-5, 1.25rem);
+    }
+
+    &.listas-base ul,
+    &.listas-base ol {
+      font-size: var(--govrs-font-size-20, 1.25rem);
+      line-height: var(--govrs-line-height-32, 2rem);
+    }
   }
 }
 
@@ -30,34 +97,44 @@ body.public-ui .ui.form :is(.ui.input > input, textarea)::placeholder {
   margin-block-start: var(--govrs-space-5, 1.25rem);
 }
 
-body.public-ui .documentFirstHeading {
-  margin: 0 0 var(--govrs-space-5, 1.25rem) 0;
-  color: var(--govrs-color-text-primary);
-  font-family: var(--govrs-font-family-base);
-  font-size: var(--govrs-font-size-heading-3xl, 2.5625rem);
-  font-weight: var(--govrs-font-weight-regular, 400);
-  line-height: var(--govrs-line-height-heading-3xl, 3.625rem);
-}
+@media (max-width: #{$procergs-breakpoint-smartphone-portrait-max}) {
+  body:is(.public-ui, .cms-ui) {
+    .documentFirstHeading {
+      font-size: var(--govrs-font-size-heading-xl, 1.875rem);
+      line-height: var(--govrs-line-height-heading-xl, 2.625rem);
+    }
 
-@media (max-width: var(--govrs-breakpoint-smartphone-portrait-max, 35.9375rem)) {
-  .procergs-text-typography.headers-12 {
-    --govrs-font-size-heading-3xl: var(--govrs-font-size-30);
-    --govrs-line-height-heading-3xl: var(--govrs-line-height-42);
-    --govrs-font-size-heading-2xl: var(--govrs-font-size-24);
-    --govrs-line-height-heading-2xl: var(--govrs-line-height-36);
-    --govrs-font-size-heading-xl: var(--govrs-font-size-20);
-    --govrs-line-height-heading-xl: var(--govrs-line-height-32);
-    --govrs-font-size-heading-lg: var(--govrs-font-size-18);
-    --govrs-line-height-heading-lg: var(--govrs-line-height-28);
-  }
+    .procergs-text-typography {
+      &.headers-12 h1,
+      h1.headers-12 {
+        font-size: var(--govrs-font-size-heading-xl, 1.875rem);
+        line-height: var(--govrs-line-height-heading-xl, 2.625rem);
+      }
 
-  .procergs-text-typography .paragraph-12-long {
-    font-size: var(--govrs-font-size-16, 1rem);
-    line-height: var(--govrs-line-height-28, 1.75rem);
-  }
+      &.headers-12 h2,
+      h2.headers-12 {
+        font-size: var(--govrs-font-size-heading-lg, 1.5rem);
+        line-height: var(--govrs-line-height-heading-lg, 2.25rem);
+      }
 
-  body.public-ui .documentFirstHeading {
-    font-size: var(--govrs-font-size-30, 1.875rem);
-    line-height: var(--govrs-line-height-42, 2.625rem);
+      &.headers-12 h3,
+      h3.headers-12 {
+        font-size: var(--govrs-font-size-heading-md, 1.25rem);
+        line-height: var(--govrs-line-height-heading-md, 2rem);
+      }
+
+      &.headers-12 h4,
+      h4.headers-12 {
+        font-size: var(--govrs-font-size-heading-sm, 1.125rem);
+        line-height: var(--govrs-line-height-heading-sm, 1.75rem);
+      }
+
+      p,
+      &.listas-base ul,
+      &.listas-base ol {
+        font-size: var(--govrs-font-size-16, 1rem);
+        line-height: var(--govrs-line-height-28, 1.75rem);
+      }
+    }
   }
 }
