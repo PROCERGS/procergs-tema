@@ -1,5 +1,4 @@
 .govrs-pagination {
-  /* Volto/Semantic usam html ~14px; o DS assume 16px. */
   font-size: 16px;
 
   &:not(:has(.govrs-pagination__group--start)):not(
