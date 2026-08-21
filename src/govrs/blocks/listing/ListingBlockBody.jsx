@@ -2,14 +2,12 @@ import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { FormattedMessage } from 'react-intl';
-import { Pagination, Dimmer, Loader } from 'semantic-ui-react';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import Slugger from 'github-slugger';
 import { List } from '@procergs/react-govrs-ds';
-import Icon from '@plone/volto/components/theme/Icon/Icon';
 import withQuerystringResults from '@plone/volto/components/manage/Blocks/Listing/withQuerystringResults';
 import { normalizeString } from '@plone/volto/helpers/Utils/Utils';
-import paginationLeftSVG from '@plone/volto/icons/left-key.svg';
-import paginationRightSVG from '@plone/volto/icons/right-key.svg';
+import Pagination from '../../components/Pagination/Pagination';
 import { getListingVariation } from './getListingVariation';
 import { getListVariantProps } from './getListVariantProps';
 import { normalizeListItems } from './normalizeListItems';
@@ -53,8 +51,8 @@ const ListingBlockBody = withQuerystringResults((props) => {
     totalPages,
     onPaginationChange,
     currentPage,
-    prevBatch,
-    nextBatch,
+    total,
+    batch_size,
     isFolderContentsListing,
     hasLoaded,
   } = props;
@@ -89,34 +87,20 @@ const ListingBlockBody = withQuerystringResults((props) => {
       {listContent ? (
         <div ref={listingRef}>
           {listContent}
-          {totalPages > 1 && (
-            <div className="govrs-listing-block__pagination pagination-wrapper">
-              <Pagination
-                activePage={currentPage}
-                totalPages={totalPages}
-                onPageChange={(e, { activePage }) => {
-                  if (!isEditMode) {
-                    listingRef.current?.scrollIntoView({ behavior: 'smooth' });
-                  }
-                  onPaginationChange(e, { activePage });
-                }}
-                firstItem={null}
-                lastItem={null}
-                prevItem={{
-                  content: <Icon name={paginationLeftSVG} size="18px" />,
-                  icon: true,
-                  'aria-disabled': !prevBatch,
-                  className: !prevBatch ? 'disabled' : null,
-                }}
-                nextItem={{
-                  content: <Icon name={paginationRightSVG} size="18px" />,
-                  icon: true,
-                  'aria-disabled': !nextBatch,
-                  className: !nextBatch ? 'disabled' : null,
-                }}
-              />
-            </div>
-          )}
+          <Pagination
+            page={currentPage}
+            pageSize={batch_size}
+            totalItems={
+              total || (totalPages > 0 ? totalPages * (batch_size || 1) : 0)
+            }
+            onPageChange={(page) => {
+              if (!isEditMode) {
+                listingRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }
+              onPaginationChange(null, { activePage: page });
+            }}
+            className="govrs-listing-block__pagination"
+          />
         </div>
       ) : isEditMode ? (
         <div

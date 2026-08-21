@@ -153,35 +153,6 @@ html[data-govrs-contrast='high'] {
         background-color: var(--govrs-color-surface-alt);
         color: var(--govrs-color-text-primary);
       }
-
-      .ui.pagination.menu {
-        border-color: var(--govrs-color-border-default);
-        background-color: var(--govrs-color-surface-base);
-        box-shadow: none;
-
-        .item {
-          border-color: var(--govrs-color-border-default);
-          background-color: var(--govrs-color-surface-base);
-          color: var(--govrs-color-interactive-link);
-
-          &:hover,
-          &:focus-visible {
-            background-color: var(--govrs-color-surface-alt);
-            color: var(--govrs-color-text-primary);
-          }
-
-          &:focus-visible {
-            outline: 2px solid var(--govrs-color-focus);
-            outline-offset: 2px;
-          }
-
-          &.active,
-          &.disabled {
-            background-color: var(--govrs-color-surface-alt);
-            color: var(--govrs-color-text-primary);
-          }
-        }
-      }
     }
 
     :is(.callout, .block .ui.message) {

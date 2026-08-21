@@ -1,4 +1,5 @@
-export const getListingVariation = (data = {}) => data.variation || 'default';
+export const getListingVariation = (data = {}) =>
+  data.variation || data.listingBodyTemplate || 'default';
 
 export const listingNeedsFullObjects = (data = {}) => {
   const variation = getListingVariation(data);
