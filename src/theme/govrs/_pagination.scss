@@ -1,0 +1,25 @@
+.govrs-pagination {
+  /* Volto/Semantic usam html ~14px; o DS assume 16px. */
+  font-size: 16px;
+
+  &:not(:has(.govrs-pagination__group--start)):not(
+      :has(.govrs-pagination__group--end)
+    )::after {
+    display: none;
+  }
+
+  .govrs-pagination__pages {
+    gap: 0.5em;
+  }
+
+  .govrs-pagination__page,
+  .govrs-pagination__ellipsis {
+    width: 2.25em;
+    height: 2.25em;
+    font-size: 0.875em;
+  }
+
+  .govrs-pagination__pager-button {
+    padding: 0.375em;
+  }
+}
