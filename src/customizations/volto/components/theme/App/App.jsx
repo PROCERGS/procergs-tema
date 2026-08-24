@@ -1,5 +1,3 @@
-
-
 import React, { Component } from 'react';
 import jwtDecode from 'jwt-decode';
 import PropTypes from 'prop-types';
@@ -43,7 +41,6 @@ import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFa
 import RouteAnnouncer from '@plone/volto/components/theme/RouteAnnouncer/RouteAnnouncer';
 
 export class App extends Component {
-
   static propTypes = {
     pathname: PropTypes.string.isRequired,
   };
@@ -237,7 +234,6 @@ export function connectAppComponent(AppComponent) {
       {
         key: 'breadcrumbs',
         promise: ({ location, store: { dispatch } }) => {
-
           if (
             __SERVER__ &&
             !hasApiExpander('breadcrumbs', getBaseUrl(location.pathname))
@@ -254,7 +250,6 @@ export function connectAppComponent(AppComponent) {
       {
         key: 'navigation',
         promise: ({ location, store: { dispatch } }) => {
-
           if (
             __SERVER__ &&
             !hasApiExpander('navigation', getBaseUrl(location.pathname))
@@ -271,7 +266,6 @@ export function connectAppComponent(AppComponent) {
       {
         key: 'types',
         promise: ({ location, store: { dispatch } }) => {
-
           if (
             __SERVER__ &&
             !hasApiExpander('types', getBaseUrl(location.pathname))

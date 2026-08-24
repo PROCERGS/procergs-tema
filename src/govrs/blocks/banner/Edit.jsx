@@ -34,7 +34,7 @@ const Edit = (props) => {
       className={cx(
         'block banner align',
         {
-          center: !Boolean(data.align),
+          center: !data.align,
         },
         data.align,
       )}

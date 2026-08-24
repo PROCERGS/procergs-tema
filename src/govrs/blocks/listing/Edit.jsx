@@ -28,7 +28,7 @@ const messages = defineMessages({
 });
 
 const Edit = React.memo(
-  (props) => {
+  function ListingBlockEdit(props) {
     const {
       block,
       blocksErrors,

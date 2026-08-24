@@ -132,7 +132,6 @@ const messages = defineMessages({
 });
 
 class Edit extends Component {
-
   static propTypes = {
     data: PropTypes.objectOf(PropTypes.any).isRequired,
     detached: PropTypes.bool,
@@ -376,7 +375,6 @@ class Edit extends Component {
     const schema = TableSchema(this.props);
 
     return (
-
       <div
         className={cx('block table procergs-slate-table-block', {
           selected: this.props.selected,

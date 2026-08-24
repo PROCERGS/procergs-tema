@@ -123,7 +123,6 @@ function normalizeState({
 
   if (searchText) {
     params.query = params.query.reduce(
-
       (acc, kvp) => (kvp.i === 'SearchableText' ? acc : [...acc, kvp]),
       [],
     );
@@ -387,7 +386,6 @@ const withSearch = (options) => (WrappedComponent) => {
       },
 
       [
-
         deepQuery,
         facets,
         id,
@@ -403,7 +401,6 @@ const withSearch = (options) => (WrappedComponent) => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
       let newSearchData = { ...searchData };
       newSearchData.query = searchData.query.reduce(
-
         (acc, kvp) => (kvp.i === 'SearchableText' ? acc : [...acc, kvp]),
         [],
       );

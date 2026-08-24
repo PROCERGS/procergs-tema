@@ -93,9 +93,7 @@ const View = ({ data }) => {
                   key={cell.key}
                   scope="col"
                   tabIndex={table.sortable ? 0 : -1}
-                  aria-sort={
-                    state.column === index ? state.direction : 'none'
-                  }
+                  aria-sort={state.column === index ? state.direction : 'none'}
                   onClick={() => handleSort(index)}
                   onKeyDown={(event) => {
                     if (event.key === 'Enter' || event.key === ' ') {

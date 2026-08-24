@@ -21,12 +21,7 @@ const BannerBlockBody = ({ data, isEditMode = false }) => {
     );
   }
 
-  return (
-    <Banner
-      {...bannerProps}
-      className="govrs-banner-block__banner"
-    />
-  );
+  return <Banner {...bannerProps} className="govrs-banner-block__banner" />;
 };
 
 BannerBlockBody.propTypes = {

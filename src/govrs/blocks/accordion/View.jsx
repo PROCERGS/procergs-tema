@@ -10,7 +10,7 @@ const View = ({ data }) => (
     className={cx(
       'block accordion align',
       {
-        center: !Boolean(data.align),
+        center: !data.align,
       },
       data.align,
     )}

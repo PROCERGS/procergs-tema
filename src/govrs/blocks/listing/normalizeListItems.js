@@ -99,7 +99,10 @@ export const normalizeListItems = (
         const tags = getSubjectTags(item);
         if (tags) {
           cardItem.tags = tags;
-          cardItem.tagsLimit = Math.min(3, Math.max(1, Number(data.tagsLimit) || 3));
+          cardItem.tagsLimit = Math.min(
+            3,
+            Math.max(1, Number(data.tagsLimit) || 3),
+          );
         }
       }
 

@@ -17,8 +17,7 @@ function getDisplayName(WrappedComponent) {
 
 const withCarouselItems = (WrappedComponent) => {
   function WithCarouselItems(props) {
-    const { data = {}, id, block, properties: content, path, pathname } =
-      props;
+    const { data = {}, id, block, properties: content, path, pathname } = props;
     const dispatch = useDispatch();
     const blockId = id ?? block;
     const pagePath = path ?? pathname;

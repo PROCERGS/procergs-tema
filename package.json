@@ -11,8 +11,32 @@
     "react",
     "theme"
   ],
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint 'src/**/*.{js,jsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{js,jsx}'",
+    "prettier": "prettier --check 'src/**/*.{js,jsx}'",
+    "prettier:fix": "prettier --write 'src/**/*.{js,jsx}'"
+  },
   "dependencies": {
-    "@plone/volto": "workspace:*",
     "@procergs/react-govrs-ds": "^0.3.44"
+  },
+  "peerDependencies": {
+    "@plone/volto": "18.23.0",
+    "react": "18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "babel-jest": "^29.7.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "jest": "^29.7.0",
+    "prettier": "^3.3.3",
+    "react": "18.2.0"
   }
 }
