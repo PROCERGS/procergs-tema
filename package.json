@@ -1,6 +1,7 @@
 {
   "name": "procergs-tema",
   "version": "1.0.0-alpha.0",
+  "packageManager": "pnpm@9.15.9",
   "description": "Tema principal PROCERGS para projetos Volto",
   "main": "src/index.js",
   "license": "MIT",
