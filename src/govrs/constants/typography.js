@@ -6,4 +6,5 @@ export const TEXT_LISTS_BASE = 'listas-base';
 export const TEXT_TYPOGRAPHY_CLASSES = [
   TEXT_TYPOGRAPHY_WRAPPER,
   TEXT_HEADERS_DESKTOP,
+  TEXT_LISTS_BASE,
 ].join(' ');
