@@ -1,4 +1,5 @@
 import { defineMessages } from 'react-intl';
+import { getAppearanceFields } from './getAppearanceFields';
 
 const messages = defineMessages({
   listing: {
@@ -96,32 +97,9 @@ const DEFAULT_HEADLINE_LEVELS = [
   ['h3', 'h3'],
 ];
 
-const getAppearanceFields = (variation, data) => {
-  switch (variation) {
-    case 'link':
-      return ['numbered', 'invert', 'mediaPreset'];
-    case 'card':
-      return [
-        'perRow',
-        'cardOverflow',
-        'cardVariant',
-        'cardSize',
-        'showCardAction',
-        'showTags',
-        ...(data?.showTags ? ['tagsLimit'] : []),
-      ];
-    default:
-      return [
-        'horizontal',
-        'labeled',
-        ...(data?.labeled ? ['collapsible', 'groupBy'] : []),
-        'mediaPreset',
-      ];
-  }
-};
-
 export const ListingBlockSchema = ({ data = {}, intl }) => {
   const variation = data.variation || 'default';
+  const appearanceFields = getAppearanceFields(variation, data);
 
   return {
     title: intl.formatMessage(messages.listing),
@@ -131,11 +109,15 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
         title: intl.formatMessage(messages.content),
         fields: ['headline', 'headlineTag', 'querystring'],
       },
-      {
-        id: 'appearance',
-        title: intl.formatMessage(messages.appearance),
-        fields: getAppearanceFields(variation, data),
-      },
+      ...(appearanceFields.length > 0
+        ? [
+            {
+              id: 'appearance',
+              title: intl.formatMessage(messages.appearance),
+              fields: appearanceFields,
+            },
+          ]
+        : []),
     ],
     properties: {
       headline: {
