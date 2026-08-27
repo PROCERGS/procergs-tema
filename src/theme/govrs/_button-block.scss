@@ -1,0 +1,51 @@
+.block.__button {
+  .procergs-button-block__inner {
+    display: flex;
+
+    &.align-left {
+      justify-content: flex-start;
+    }
+
+    &.align-center {
+      justify-content: center;
+    }
+
+    &.align-right {
+      justify-content: flex-end;
+    }
+
+    &.align-full,
+    &.is-full-width {
+      justify-content: stretch;
+
+      .govrs-button,
+      .govrs-button--block {
+        width: 100%;
+      }
+    }
+  }
+
+  .procergs-button-block__button.govrs-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .procergs-button-block__error {
+    margin: 0;
+    color: var(--color-danger, #b42318);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 767px) {
+    .procergs-button-block__inner {
+      width: 100%;
+    }
+
+    .procergs-button-block__button.govrs-button,
+    .govrs-button {
+      width: 100%;
+    }
+  }
+}

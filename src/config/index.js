@@ -7,6 +7,7 @@ import configureCarouselBlock from './blocks/carousel';
 import configureListingBlock from './blocks/listing';
 import configureBannerBlock from './blocks/banner';
 import configureSlateTableBlock from './blocks/slateTable';
+import configureButtonBlock from './blocks/button';
 
 const applyConfig = (config) => {
   configureSettings(config);
@@ -17,6 +18,7 @@ const applyConfig = (config) => {
   configureListingBlock(config);
   configureBannerBlock(config);
   configureSlateTableBlock(config);
+  configureButtonBlock(config);
 
   config.blocks.requiredBlocks = [];
 
