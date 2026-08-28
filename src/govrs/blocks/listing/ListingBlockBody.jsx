@@ -2,6 +2,7 @@ import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import Slugger from 'github-slugger';
 import { List } from '@procergs/react-govrs-ds';
@@ -11,6 +12,10 @@ import Pagination from '../../components/Pagination/Pagination';
 import { getListingVariation } from './getListingVariation';
 import { getListVariantProps } from './getListVariantProps';
 import { normalizeListItems } from './normalizeListItems';
+import {
+  getListingItemHrefFromEvent,
+  shouldHandleListingNavigation,
+} from './listingItemNavigation';
 
 const Headline = ({ headlineTag = 'h2', id, data, listingItems }) => {
   const Tag = headlineTag;
@@ -52,17 +57,44 @@ const ListingBlockBody = withQuerystringResults((props) => {
   } = props;
 
   const listingRef = createRef();
+  const history = useHistory();
   const variation = getListingVariation(data);
   const listProps = getListVariantProps(data);
   const items = normalizeListItems(listingItems, data, { isEditMode });
   const HeadlineTag = data.headlineTag || 'h2';
+  const isClickableDefault =
+    variation === 'default' && !isEditMode && items.some((item) => item.href);
+
+  const handleListClick = (event) => {
+    if (!isClickableDefault || !shouldHandleListingNavigation(event)) {
+      return;
+    }
+
+    const href = getListingItemHrefFromEvent(
+      event,
+      items,
+      Boolean(data.labeled),
+    );
+    if (!href) {
+      return;
+    }
+
+    event.preventDefault();
+    history.push(href);
+  };
 
   const listContent =
     items.length > 0 ? (
       <List
         {...listProps}
         items={items}
-        className="govrs-listing-block__list"
+        className={cx('govrs-listing-block__list', {
+          'govrs-listing-block__list--media-left':
+            listProps.mediaPosition === 'left',
+          'govrs-listing-block__list--show-tags':
+            variation === 'default' && Boolean(data.showTags),
+          'govrs-listing-block__list--clickable': isClickableDefault,
+        })}
       />
     ) : null;
 
@@ -79,7 +111,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
         />
       )}
       {listContent ? (
-        <div ref={listingRef}>
+        <div ref={listingRef} onClick={handleListClick}>
           {listContent}
           <Pagination
             page={currentPage}
