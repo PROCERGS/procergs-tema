@@ -17,6 +17,7 @@ export const getListVariantProps = (data = {}) => {
         perRow: data.perRow ?? 3,
         overflow: data.cardOverflow === 'scroll' ? 'scroll' : 'wrap',
       };
+    case 'default':
     default: {
       const horizontal = Boolean(data.horizontal);
 
