@@ -92,7 +92,7 @@ export class App extends Component {
       <PluggablesProvider>
         <Helmet>
           {language && <html lang={language} />}
-          <script src="https://cdn.jsdelivr.net/gh/PROCERGS/react-govrs-ds@29dbc8de98b4b6b620bcfdcc23a9449d754b70d6/src/components/BarraEstado/BarraEstadoStandalone.js"></script>
+          <script src="https://cdn.jsdelivr.net/gh/PROCERGS/react-govrs-ds@a62a819ce2a9662e21edada58c6f99d549b0e7ba/src/components/BarraEstado/BarraEstadoStandalone.js"></script>
         </Helmet>
         <BodyClass className={`view-${action}view`} />
 
