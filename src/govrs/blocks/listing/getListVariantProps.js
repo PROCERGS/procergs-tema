@@ -18,13 +18,23 @@ export const getListVariantProps = (data = {}) => {
         overflow: data.cardOverflow === 'scroll' ? 'scroll' : 'wrap',
       };
     case 'default':
-    default:
+    default: {
+      const horizontal = Boolean(data.horizontal);
+
       return {
         variant: 'default',
-        horizontal: Boolean(data.horizontal),
+        horizontal,
+        ...(horizontal ? { perRow: data.perRow ?? 3 } : {}),
         labeled: Boolean(data.labeled),
         collapsible: Boolean(data.labeled) && data.collapsible !== false,
         mediaPreset: data.mediaPreset || 'mixed',
+        showTags: Boolean(data.showTags),
+        mediaPosition: horizontal
+          ? 'above'
+          : data.mediaPosition === 'above'
+            ? 'above'
+            : 'left',
       };
+    }
   }
 };

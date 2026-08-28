@@ -21,9 +21,12 @@ export const getAppearanceFields = (variation, data) => {
     default:
       return [
         'horizontal',
+        ...(data?.horizontal ? ['perRow'] : ['mediaPosition']),
         'labeled',
         ...(data?.labeled ? ['collapsible', 'groupBy'] : []),
         'mediaPreset',
+        'showTags',
+        ...(data?.showTags ? ['tagsLimit'] : []),
       ];
   }
 };

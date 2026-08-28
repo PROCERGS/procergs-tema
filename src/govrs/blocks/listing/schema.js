@@ -32,19 +32,59 @@ const messages = defineMessages({
   },
   labeled: {
     id: 'Group items by label',
-    defaultMessage: 'Group items by label',
+    defaultMessage: 'Agrupar itens',
   },
   collapsible: {
     id: 'Collapsible groups',
-    defaultMessage: 'Collapsible groups',
+    defaultMessage: 'Grupos recolhíveis',
   },
   mediaPreset: {
-    id: 'Media preset',
-    defaultMessage: 'Media preset',
+    id: 'Item media',
+    defaultMessage: 'Mídia dos itens',
+  },
+  mediaPresetMixed: {
+    id: 'Automatic image or icon',
+    defaultMessage: 'Automático (imagem, senão ícone; senão nada)',
+  },
+  mediaPresetImages: {
+    id: 'Images only',
+    defaultMessage: 'Somente imagens',
+  },
+  mediaPresetIcons: {
+    id: 'Icons only',
+    defaultMessage: 'Somente ícones',
+  },
+  mediaPresetNone: {
+    id: 'No media',
+    defaultMessage: 'Sem mídia',
+  },
+  mediaPosition: {
+    id: 'Media position',
+    defaultMessage: 'Posição da imagem',
+  },
+  mediaPositionAbove: {
+    id: 'Media above text',
+    defaultMessage: 'Acima do texto',
+  },
+  mediaPositionLeft: {
+    id: 'Media to the left of text',
+    defaultMessage: 'À esquerda do texto',
+  },
+  mediaPositionDescription: {
+    id: 'Media position description',
+    defaultMessage: 'Só vale na lista vertical.',
   },
   groupBy: {
     id: 'Group by',
-    defaultMessage: 'Group by',
+    defaultMessage: 'Agrupar por',
+  },
+  groupBySubject: {
+    id: 'Group by tags',
+    defaultMessage: 'Tags',
+  },
+  groupByPortalType: {
+    id: 'Group by content type',
+    defaultMessage: 'Tipo de conteúdo',
   },
   numbered: {
     id: 'Numbered list',
@@ -57,6 +97,10 @@ const messages = defineMessages({
   perRow: {
     id: 'Cards per row',
     defaultMessage: 'Cards per row',
+  },
+  itemsPerRow: {
+    id: 'Items per row',
+    defaultMessage: 'Itens por linha',
   },
   cardVariant: {
     id: 'Card style',
@@ -153,24 +197,35 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
         choices:
           variation === 'link'
             ? [
-                ['icons', 'Icons'],
-                ['none', 'None'],
+                ['icons', intl.formatMessage(messages.mediaPresetIcons)],
+                ['none', intl.formatMessage(messages.mediaPresetNone)],
               ]
             : [
-                ['mixed', 'Mixed'],
-                ['images', 'Images'],
-                ['icons', 'Icons'],
-                ['none', 'None'],
+                ['mixed', intl.formatMessage(messages.mediaPresetMixed)],
+                ['images', intl.formatMessage(messages.mediaPresetImages)],
+                ['icons', intl.formatMessage(messages.mediaPresetIcons)],
+                ['none', intl.formatMessage(messages.mediaPresetNone)],
               ],
         default: variation === 'link' ? 'none' : 'mixed',
+      },
+      mediaPosition: {
+        title: intl.formatMessage(messages.mediaPosition),
+        description: intl.formatMessage(messages.mediaPositionDescription),
+        choices: [
+          ['left', intl.formatMessage(messages.mediaPositionLeft)],
+          ['above', intl.formatMessage(messages.mediaPositionAbove)],
+        ],
+        default: 'left',
+        noValueOption: false,
       },
       groupBy: {
         title: intl.formatMessage(messages.groupBy),
         choices: [
-          ['portal_type', 'Content type'],
-          ['none', 'None'],
+          ['subject', intl.formatMessage(messages.groupBySubject)],
+          ['portal_type', intl.formatMessage(messages.groupByPortalType)],
         ],
-        default: 'portal_type',
+        default: 'subject',
+        noValueOption: false,
       },
       numbered: {
         title: intl.formatMessage(messages.numbered),
@@ -183,7 +238,10 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
         default: false,
       },
       perRow: {
-        title: intl.formatMessage(messages.perRow),
+        title:
+          variation === 'card'
+            ? intl.formatMessage(messages.perRow)
+            : intl.formatMessage(messages.itemsPerRow),
         type: 'number',
         default: 3,
       },

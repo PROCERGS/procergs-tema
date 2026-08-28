@@ -4,8 +4,10 @@ describe('getAppearanceFields', () => {
   it('returns DS fields for the default variation', () => {
     expect(getAppearanceFields('default')).toEqual([
       'horizontal',
+      'mediaPosition',
       'labeled',
       'mediaPreset',
+      'showTags',
     ]);
   });
 

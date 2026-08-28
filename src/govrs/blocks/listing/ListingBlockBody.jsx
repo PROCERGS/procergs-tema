@@ -2,6 +2,7 @@ import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import Slugger from 'github-slugger';
 import { List } from '@procergs/react-govrs-ds';
@@ -16,6 +17,10 @@ import {
 } from './getListingVariation';
 import { getListVariantProps } from './getListVariantProps';
 import { normalizeListItems } from './normalizeListItems';
+import {
+  getListingItemHrefFromEvent,
+  shouldHandleListingNavigation,
+} from './listingItemNavigation';
 
 const Headline = ({ headlineTag = 'h2', id, data, listingItems }) => {
   const Tag = headlineTag;
@@ -69,17 +74,46 @@ const ListingBlockBody = withQuerystringResults((props) => {
   const NoResults =
     variationConfig?.noResultsComponent ||
     config.blocks?.blocksConfig?.listing?.noResultsComponent;
+  const history = useHistory();
+  const listProps = getListVariantProps(data);
+  const items = normalizeListItems(listingItems, data, { isEditMode });
   const HeadlineTag = data.headlineTag || 'h2';
-  const hasItems = listingItems?.length > 0;
+  const hasItems = items.length > 0;
+  const isClickableDefault =
+    variationId === 'default' && !isEditMode && items.some((item) => item.href);
+
+  const handleListClick = (event) => {
+    if (!isClickableDefault || !shouldHandleListingNavigation(event)) {
+      return;
+    }
+
+    const href = getListingItemHrefFromEvent(
+      event,
+      items,
+      Boolean(data.labeled),
+    );
+    if (!href) {
+      return;
+    }
+
+    event.preventDefault();
+    history.push(href);
+  };
 
   let listContent = null;
   if (hasItems) {
     if (useDsList) {
       listContent = (
         <List
-          {...getListVariantProps(data)}
-          items={normalizeListItems(listingItems, data, { isEditMode })}
-          className="govrs-listing-block__list"
+          {...listProps}
+          items={items}
+          className={cx('govrs-listing-block__list', {
+            'govrs-listing-block__list--media-left':
+              listProps.mediaPosition === 'left',
+            'govrs-listing-block__list--show-tags':
+              variationId === 'default' && Boolean(data.showTags),
+            'govrs-listing-block__list--clickable': isClickableDefault,
+          })}
         />
       );
     } else if (ListingBodyTemplate) {
@@ -121,7 +155,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
         />
       )}
       {listContent ? (
-        <div ref={listingRef}>
+        <div ref={listingRef} onClick={handleListClick}>
           {listContent}
           <Pagination
             page={currentPage}

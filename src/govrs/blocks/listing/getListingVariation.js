@@ -31,10 +31,19 @@ export const listingNeedsFullObjects = (data = {}) => {
     return true;
   }
 
-  if (
-    variation === 'default' &&
-    ['mixed', 'images'].includes(data.mediaPreset || 'mixed')
-  ) {
+  if (variation === 'default') {
+    if (data.showTags) {
+      return true;
+    }
+
+    if (data.labeled && (data.groupBy || 'subject') === 'subject') {
+      return true;
+    }
+
+    return ['mixed', 'images', 'icons'].includes(data.mediaPreset || 'mixed');
+  }
+
+  if (variation === 'link' && data.mediaPreset === 'icons') {
     return true;
   }
 
