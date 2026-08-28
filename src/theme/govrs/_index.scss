@@ -16,10 +16,6 @@ body {
   z-index: auto !important;
 }
 
-.govrs-header__scroll-top {
-  z-index: 2 !important;
-}
-
 .govrs-header-wrapper .govrs-menu-hamburger__toggle {
   z-index: auto !important;
 }
@@ -70,4 +66,5 @@ body:not(.cms-ui).has-toolbar-collapsed
 @import './pagination';
 @import './banner';
 @import './table';
+@import './section';
 @import './high-contrast';

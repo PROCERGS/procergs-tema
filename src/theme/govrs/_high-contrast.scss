@@ -185,6 +185,15 @@ html[data-govrs-contrast='high'] {
         outline-offset: 2px;
       }
     }
+
+    .block.procergsSection {
+      --procergs-section-background: var(--govrs-color-surface-base) !important;
+      --procergs-section-foreground: var(--govrs-color-text-primary) !important;
+
+      .govrs-section-block__background {
+        display: none;
+      }
+    }
   }
 
   .block-editor-teaser .block.teaser .teaser-item {

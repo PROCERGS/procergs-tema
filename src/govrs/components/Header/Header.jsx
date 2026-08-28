@@ -17,7 +17,7 @@ import {
 } from '../../../helpers/mapVoltoNavigationToMenuItems';
 import resolveBranding from '../../../helpers/resolveBranding';
 
-const Header = ({ pathname }) => {
+const Header = ({ pathname, overlayForeground }) => {
   const headerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
@@ -83,29 +83,73 @@ const Header = ({ pathname }) => {
     let resizeObserver;
     let observedHeader;
     let observedToolbar;
+    let observedAccessibilityBar;
+    let observedHeaderWrapper;
 
     const updateToolbarInsets = () => {
+      const headerWrapper = headerRef.current;
       const govrsHeader = headerRef.current?.querySelector(
         '.govrs-header-wrapper',
       );
+      const accessibilityBar =
+        headerRef.current?.querySelector('.acess-bar');
       const toolbar = document.querySelector('#toolbar .toolbar-body');
 
-      if (!govrsHeader || !toolbar) {
+      if (!govrsHeader) {
         return;
       }
 
+      if (
+        resizeObserver &&
+        headerWrapper &&
+        headerWrapper !== observedHeaderWrapper
+      ) {
+        resizeObserver.observe(headerWrapper);
+        observedHeaderWrapper = headerWrapper;
+      }
       if (resizeObserver && govrsHeader !== observedHeader) {
         resizeObserver.observe(govrsHeader);
         observedHeader = govrsHeader;
       }
 
-      if (resizeObserver && toolbar !== observedToolbar) {
+      if (resizeObserver && toolbar && toolbar !== observedToolbar) {
         resizeObserver.observe(toolbar);
         observedToolbar = toolbar;
       }
+      if (
+        resizeObserver &&
+        accessibilityBar &&
+        accessibilityBar !== observedAccessibilityBar
+      ) {
+        resizeObserver.observe(accessibilityBar);
+        observedAccessibilityBar = accessibilityBar;
+      }
 
       const headerRect = govrsHeader.getBoundingClientRect();
-      const toolbarRect = toolbar.getBoundingClientRect();
+      document.documentElement.style.setProperty(
+        '--procergs-overlay-header-height',
+        `${headerRect.height}px`,
+      );
+      document.documentElement.style.setProperty(
+        '--procergs-overlay-header-total-height',
+        `${headerWrapper?.getBoundingClientRect().height || headerRect.height}px`,
+      );
+      document.documentElement.style.setProperty(
+        '--procergs-overlay-accessibility-height',
+        `${accessibilityBar?.getBoundingClientRect().height || 0}px`,
+      );
+      const toolbarRect = toolbar?.getBoundingClientRect();
+      if (!toolbarRect) {
+        govrsHeader.style.setProperty(
+          '--procergs-header-menu-inset-left',
+          '0px',
+        );
+        govrsHeader.style.setProperty(
+          '--procergs-header-menu-inset-right',
+          '0px',
+        );
+        return;
+      }
       const overlapsVertically =
         toolbarRect.top < headerRect.bottom &&
         toolbarRect.bottom > headerRect.top;
@@ -151,6 +195,15 @@ const Header = ({ pathname }) => {
       observer.disconnect();
       resizeObserver?.disconnect();
       window.removeEventListener('resize', updateToolbarInsets);
+      document.documentElement.style.removeProperty(
+        '--procergs-overlay-header-height',
+      );
+      document.documentElement.style.removeProperty(
+        '--procergs-overlay-header-total-height',
+      );
+      document.documentElement.style.removeProperty(
+        '--procergs-overlay-accessibility-height',
+      );
     };
   }, []);
 
@@ -215,7 +268,16 @@ const Header = ({ pathname }) => {
   };
 
   return (
-    <header ref={headerRef} className="procergs-header-wrapper" role="banner">
+    <header
+      ref={headerRef}
+      className="procergs-header-wrapper"
+      role="banner"
+      style={
+        overlayForeground
+          ? { '--procergs-overlay-header-foreground': overlayForeground }
+          : undefined
+      }
+    >
       <div className="procergs-standalone-bar-slot" />
       <BarraAcessibilidade
         shortcuts={[
@@ -266,6 +328,7 @@ const Header = ({ pathname }) => {
 
 Header.propTypes = {
   pathname: PropTypes.string.isRequired,
+  overlayForeground: PropTypes.string,
 };
 
 export default Header;

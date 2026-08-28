@@ -80,12 +80,14 @@ const Edit = React.memo(
   },
   (prevProps, nextProps) =>
     !(
+      nextProps.index !== prevProps.index ||
       nextProps.selected !== prevProps.selected ||
       !isEqual(prevProps.data, nextProps.data)
     ),
 );
 
 Edit.propTypes = {
+  index: PropTypes.number.isRequired,
   selected: PropTypes.bool.isRequired,
   block: PropTypes.string.isRequired,
   data: PropTypes.objectOf(PropTypes.any).isRequired,
