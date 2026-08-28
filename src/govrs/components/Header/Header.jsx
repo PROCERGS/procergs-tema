@@ -85,17 +85,31 @@ const Header = ({ pathname, overlayForeground }) => {
     let observedToolbar;
     let observedAccessibilityBar;
     let observedHeaderWrapper;
+    const headerElement = headerRef.current;
+    const layoutRoot = document.documentElement;
+
+    const setLayoutInsets = (left, right, top) => {
+      const values = { left, right, top };
+
+      Object.entries(values).forEach(([side, value]) => {
+        const property = `--procergs-header-layout-inset-${side}`;
+        headerElement?.style.setProperty(property, value);
+        layoutRoot.style.setProperty(property, value);
+      });
+    };
 
     const updateToolbarInsets = () => {
-      const headerWrapper = headerRef.current;
-      const govrsHeader = headerRef.current?.querySelector(
-        '.govrs-header-wrapper',
-      );
-      const accessibilityBar =
-        headerRef.current?.querySelector('.acess-bar');
-      const toolbar = document.querySelector('#toolbar .toolbar-body');
+      const headerWrapper = headerElement;
+      const govrsHeader = headerElement?.querySelector('.govrs-header-wrapper');
+      const accessibilityBar = headerElement?.querySelector('.acess-bar');
+      const toolbar = document.querySelector('#toolbar .toolbar');
+      const isPublicUi = document.body.classList.contains('public-ui');
+      const isContentsView =
+        document.body.classList.contains('view-contentsview');
+      const shouldApplyLayoutInsets = isPublicUi || isContentsView;
 
       if (!govrsHeader) {
+        setLayoutInsets('0px', '0px', '0px');
         return;
       }
 
@@ -148,25 +162,41 @@ const Header = ({ pathname, overlayForeground }) => {
           '--procergs-header-menu-inset-right',
           '0px',
         );
+        setLayoutInsets('0px', '0px', '0px');
         return;
       }
+      const layoutRect = headerWrapper?.getBoundingClientRect() || headerRect;
       const overlapsVertically =
-        toolbarRect.top < headerRect.bottom &&
-        toolbarRect.bottom > headerRect.top;
+        toolbarRect.top < layoutRect.bottom &&
+        toolbarRect.bottom > layoutRect.top;
+      const isSideToolbar =
+        toolbarRect.width < layoutRect.width &&
+        toolbarRect.height > toolbarRect.width;
+      const isTopToolbar =
+        !isSideToolbar &&
+        toolbarRect.top <= layoutRect.top &&
+        toolbarRect.bottom > layoutRect.top;
       const leftInset =
-        overlapsVertically && toolbarRect.left <= headerRect.left
+        isSideToolbar &&
+        overlapsVertically &&
+        toolbarRect.left <= layoutRect.left
           ? Math.max(
               0,
-              Math.min(headerRect.width, toolbarRect.right - headerRect.left),
+              Math.min(layoutRect.width, toolbarRect.right - layoutRect.left),
             )
           : 0;
       const rightInset =
-        overlapsVertically && toolbarRect.right >= headerRect.right
+        isSideToolbar &&
+        overlapsVertically &&
+        toolbarRect.right >= layoutRect.right
           ? Math.max(
               0,
-              Math.min(headerRect.width, headerRect.right - toolbarRect.left),
+              Math.min(layoutRect.width, layoutRect.right - toolbarRect.left),
             )
           : 0;
+      const topInset = isTopToolbar
+        ? Math.max(0, toolbarRect.bottom - layoutRect.top)
+        : 0;
 
       govrsHeader.style.setProperty(
         '--procergs-header-menu-inset-left',
@@ -175,6 +205,11 @@ const Header = ({ pathname, overlayForeground }) => {
       govrsHeader.style.setProperty(
         '--procergs-header-menu-inset-right',
         `${rightInset}px`,
+      );
+      setLayoutInsets(
+        shouldApplyLayoutInsets ? `${leftInset}px` : '0px',
+        shouldApplyLayoutInsets ? `${rightInset}px` : '0px',
+        shouldApplyLayoutInsets ? `${topInset}px` : '0px',
       );
     };
 
@@ -204,6 +239,16 @@ const Header = ({ pathname, overlayForeground }) => {
       document.documentElement.style.removeProperty(
         '--procergs-overlay-accessibility-height',
       );
+      headerElement?.style.removeProperty(
+        '--procergs-header-layout-inset-left',
+      );
+      layoutRoot.style.removeProperty('--procergs-header-layout-inset-left');
+      headerElement?.style.removeProperty(
+        '--procergs-header-layout-inset-right',
+      );
+      layoutRoot.style.removeProperty('--procergs-header-layout-inset-right');
+      headerElement?.style.removeProperty('--procergs-header-layout-inset-top');
+      layoutRoot.style.removeProperty('--procergs-header-layout-inset-top');
     };
   }, []);
 
