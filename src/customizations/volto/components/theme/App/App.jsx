@@ -39,6 +39,7 @@ import MultilingualRedirector from '@plone/volto/components/theme/MultilingualRe
 import WorkingCopyToastsFactory from '@plone/volto/components/manage/WorkingCopyToastsFactory/WorkingCopyToastsFactory';
 import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFactory/LockingToastsFactory';
 import RouteAnnouncer from '@plone/volto/components/theme/RouteAnnouncer/RouteAnnouncer';
+import getPageSectionChrome from '../../../../../helpers/getPageSectionChrome';
 
 export class App extends Component {
   static propTypes = {
@@ -84,6 +85,9 @@ export class App extends Component {
     const action = getView(this.props.pathname);
     const isCmsUI = isCmsUi(this.props.pathname);
     const ConnectionRefusedView = views.errorViews.ECONNREFUSED;
+    const sectionChrome = getPageSectionChrome(this.props.content);
+    const headerOverlay = !isCmsUI && sectionChrome.headerEnabled;
+    const footerOverlay = !isCmsUI && sectionChrome.footerEnabled;
 
     const language =
       this.props.content?.language?.token ?? this.props.intl?.locale;
@@ -121,10 +125,19 @@ export class App extends Component {
             'is-anonymous': !this.props.token,
             'cms-ui': isCmsUI,
             'public-ui': !isCmsUI,
+            'has-section-header-overlay': headerOverlay,
+            'has-section-accessibility-overlay':
+              headerOverlay && sectionChrome.accessibilityBarEnabled,
+            'has-section-footer-overlay': footerOverlay,
           })}
         />
         <SkipLinks />
-        <Header pathname={path} />
+        <Header
+          pathname={path}
+          overlayForeground={
+            headerOverlay ? sectionChrome.headerForeground : undefined
+          }
+        />
         <MultilingualRedirector
           pathname={this.props.pathname}
           contentLanguage={this.props.content?.language?.token}
@@ -152,7 +165,11 @@ export class App extends Component {
           </Segment>
         </MultilingualRedirector>
         <RouteAnnouncer />
-        <Footer />
+        <Footer
+          overlayForeground={
+            footerOverlay ? sectionChrome.footerForeground : undefined
+          }
+        />
         <LockingToastsFactory
           content={this.props.content}
           user={this.props.userId}

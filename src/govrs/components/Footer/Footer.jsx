@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { Footer as GovrsFooter } from '@procergs/react-govrs-ds';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import config from '@plone/volto/registry';
@@ -8,7 +9,8 @@ import { mapVoltoNavigationToFooterSections } from '../../../helpers/mapVoltoNav
 import resolveBranding from '../../../helpers/resolveBranding';
 import procergsLogo from '../../../assets/procergs-logo.svg';
 
-const Footer = () => {
+const Footer = ({ overlayForeground }) => {
+  const footerRef = useRef(null);
   const dispatch = useDispatch();
   const navigationItems = useSelector(
     (state) => state.navigation.items,
@@ -27,6 +29,34 @@ const Footer = () => {
     }
   }, [dispatch, navRootPath]);
 
+  useEffect(() => {
+    const updateFooterHeight = () => {
+      const height = footerRef.current?.getBoundingClientRect().height;
+      if (height) {
+        document.documentElement.style.setProperty(
+          '--procergs-overlay-footer-height',
+          `${height}px`,
+        );
+      }
+    };
+    const observer =
+      typeof ResizeObserver !== 'undefined'
+        ? new ResizeObserver(updateFooterHeight)
+        : null;
+
+    updateFooterHeight();
+    if (footerRef.current) observer?.observe(footerRef.current);
+    window.addEventListener('resize', updateFooterHeight);
+
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener('resize', updateFooterHeight);
+      document.documentElement.style.removeProperty(
+        '--procergs-overlay-footer-height',
+      );
+    };
+  }, []);
+
   const items = mapVoltoNavigationToFooterSections(navigationItems);
   const {
     socialLinks = {},
@@ -38,7 +68,15 @@ const Footer = () => {
   } = footerSettings;
 
   return (
-    <footer className="procergs-footer-wrapper">
+    <footer
+      ref={footerRef}
+      className="procergs-footer-wrapper"
+      style={
+        overlayForeground
+          ? { '--procergs-overlay-footer-foreground': overlayForeground }
+          : undefined
+      }
+    >
       <GovrsFooter
         items={items}
         images={images}
@@ -51,6 +89,10 @@ const Footer = () => {
       </GovrsFooter>
     </footer>
   );
+};
+
+Footer.propTypes = {
+  overlayForeground: PropTypes.string,
 };
 
 export default Footer;
