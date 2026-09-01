@@ -20,8 +20,8 @@ import {
   bootstrapGlobalRegions,
   GlobalRegionsProvider,
   GlobalRegionsToolbarPlug,
-} from '@procergs/volto-global-regions';
-import { GlobalRegionsSidebar } from '@procergs/volto-global-regions/components';
+} from 'volto-global-regions';
+import { GlobalRegionsSidebar } from 'volto-global-regions/components';
 
 import Error from '@plone/volto/error';
 

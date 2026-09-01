@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Footer as GovrsFooter } from '@procergs/react-govrs-ds';
-import { GlobalBlocksRegion } from '@procergs/volto-global-regions';
+import { GlobalBlocksRegion } from 'volto-global-regions';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import config from '@plone/volto/registry';
 import { getNavigation } from '@plone/volto/actions/navigation/navigation';

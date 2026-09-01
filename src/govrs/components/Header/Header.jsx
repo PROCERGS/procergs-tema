@@ -5,7 +5,7 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Header as GovrsHeader, MenuHamburger } from '@procergs/react-govrs-ds';
-import { GlobalBlocksRegion } from '@procergs/volto-global-regions';
+import { GlobalBlocksRegion } from 'volto-global-regions';
 import config from '@plone/volto/registry';
 import { getNavigation } from '@plone/volto/actions/navigation/navigation';
 import { getBaseUrl } from '@plone/volto/helpers/Url/Url';

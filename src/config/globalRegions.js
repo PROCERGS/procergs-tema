@@ -2,7 +2,7 @@ import layoutSVG from '@plone/volto/icons/grid-block.svg';
 import stateBarSVG from '@plone/volto/icons/row-before.svg';
 import accessibilitySVG from '@plone/volto/icons/accessibility.svg';
 import BlockSettingsSchema from '@plone/volto/components/manage/Blocks/Block/Schema';
-import { configureGlobalRegions } from '@procergs/volto-global-regions';
+import { configureGlobalRegions } from 'volto-global-regions';
 import { ProcergsGlobalHeaderBlock } from '../govrs/components/Header/Header';
 import HeaderBlockEdit from '../govrs/blocks/globalHeader/Edit';
 import HeaderBlockSchema from '../govrs/blocks/globalHeader/schema';
