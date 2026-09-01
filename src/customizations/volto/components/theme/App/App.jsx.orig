@@ -135,12 +135,17 @@ export class App extends Component {
               'cms-ui': isCmsUI,
               'public-ui': !isCmsUI,
               'has-section-header-overlay': headerOverlay,
+              'has-section-accessibility-overlay':
+                headerOverlay && sectionChrome.accessibilityBarEnabled,
               'has-section-footer-overlay': footerOverlay,
             })}
           />
           <SkipLinks />
           <Header
             pathname={path}
+            overlayAccessibilityBar={
+              headerOverlay && sectionChrome.accessibilityBarEnabled
+            }
             overlayForeground={
               headerOverlay ? sectionChrome.headerForeground : undefined
             }

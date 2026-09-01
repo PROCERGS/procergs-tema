@@ -50,9 +50,6 @@ const sectionDataAdapter = ({ block, data, id, onChangeBlock, value }) => {
       delete nextData.videoFile;
     }
   }
-  if (id === 'overlayHeader' && !value) {
-    delete nextData.overlayAccessibilityBar;
-  }
 
   onChangeBlock(block, nextData);
 };
