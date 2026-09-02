@@ -6,8 +6,10 @@ import { List } from '@procergs/react-govrs-ds';
 import { getListingVariation } from './getListingVariation';
 import { getListVariantProps } from './getListVariantProps';
 import { normalizeListItems } from './normalizeListItems';
+import { withDefaultListingTags } from './withDefaultListingTags';
 import {
   getListingItemHrefFromEvent,
+  isClickableDefaultListing,
   shouldHandleListingNavigation,
 } from './listingItemNavigation';
 
@@ -16,11 +18,18 @@ const ListingVariationTemplate = ({ id, items, isEditMode, ...data }) => {
   const listingData = { ...data, variation: id };
   const listProps = getListVariantProps(listingData);
   const variation = getListingVariation(listingData);
-  const listItems = normalizeListItems(items, listingData, { isEditMode });
-  const isClickableDefault =
-    variation === 'default' &&
-    !isEditMode &&
-    listItems.some((item) => item.href);
+  const normalizedItems = normalizeListItems(items, listingData, {
+    isEditMode,
+  });
+  const listItems =
+    variation === 'default'
+      ? withDefaultListingTags(normalizedItems)
+      : normalizedItems;
+  const isClickableDefault = isClickableDefaultListing(
+    listingData,
+    listItems,
+    isEditMode,
+  );
 
   const handleListClick = (event) => {
     if (!isClickableDefault || !shouldHandleListingNavigation(event)) {
