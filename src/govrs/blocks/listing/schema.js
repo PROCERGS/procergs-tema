@@ -114,6 +114,14 @@ const messages = defineMessages({
     id: 'Show card action link',
     defaultMessage: 'Show card action link',
   },
+  activeLink: {
+    id: 'Active link',
+    defaultMessage: 'Link ativo',
+  },
+  activeLinkDescription: {
+    id: 'Active link description',
+    defaultMessage: 'Quando marcado, o clique no item abre a página correspondente.',
+  },
   showTags: {
     id: 'Show tags',
     defaultMessage: 'Exibir tags',
@@ -276,6 +284,12 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
         title: intl.formatMessage(messages.showCardAction),
         type: 'boolean',
         default: true,
+      },
+      activeLink: {
+        title: intl.formatMessage(messages.activeLink),
+        description: intl.formatMessage(messages.activeLinkDescription),
+        type: 'boolean',
+        default: false,
       },
       showTags: {
         title: intl.formatMessage(messages.showTags),

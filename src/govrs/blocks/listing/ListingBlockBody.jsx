@@ -17,8 +17,10 @@ import {
 } from './getListingVariation';
 import { getListVariantProps } from './getListVariantProps';
 import { normalizeListItems } from './normalizeListItems';
+import { withDefaultListingTags } from './withDefaultListingTags';
 import {
   getListingItemHrefFromEvent,
+  isClickableDefaultListing,
   shouldHandleListingNavigation,
 } from './listingItemNavigation';
 
@@ -76,11 +78,16 @@ const ListingBlockBody = withQuerystringResults((props) => {
     config.blocks?.blocksConfig?.listing?.noResultsComponent;
   const history = useHistory();
   const listProps = getListVariantProps(data);
-  const items = normalizeListItems(listingItems, data, { isEditMode });
+  const normalizedItems = normalizeListItems(listingItems, data, {
+    isEditMode,
+  });
+  const items =
+    variationId === 'default'
+      ? withDefaultListingTags(normalizedItems)
+      : normalizedItems;
   const HeadlineTag = data.headlineTag || 'h2';
   const hasItems = items.length > 0;
-  const isClickableDefault =
-    variationId === 'default' && !isEditMode && items.some((item) => item.href);
+  const isClickableDefault = isClickableDefaultListing(data, items, isEditMode);
 
   const handleListClick = (event) => {
     if (!isClickableDefault || !shouldHandleListingNavigation(event)) {

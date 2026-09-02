@@ -132,7 +132,7 @@ export const normalizeListItems = (
       id,
       title: truncateText(title),
       text: description ? truncateText(description) : undefined,
-      ...(contentUrl ? { href: contentUrl } : {}),
+      ...(data.activeLink && contentUrl ? { href: contentUrl } : {}),
       ...(media.image ? { image: media.image, imageAlt: title } : {}),
       ...(media.icon ? { icon: media.icon } : {}),
     };
