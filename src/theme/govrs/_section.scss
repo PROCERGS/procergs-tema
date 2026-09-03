@@ -263,7 +263,9 @@ body.cms-ui .block.procergsSection {
 }
 
 :root:not(.high-contrast):not([data-govrs-contrast='high'])
-  body.public-ui.has-section-header-overlay:not(.global-region-editing-header) {
+  body.public-ui.has-section-header-overlay:not(.cms-ui):not(
+    .section-overlays-disabled
+  ):not(.global-region-editing) {
   .global-blocks-region-header {
     position: absolute;
     z-index: var(--govrs-z-index-header, 40);
@@ -359,6 +361,29 @@ body.cms-ui .block.procergsSection {
     );
   }
 
+  .procergs-breadcrumbs-wrapper.allows-group-overlay {
+    background: transparent;
+
+    .govrs-breadcrumbs {
+      --govrs-breadcrumbs-link: var(
+        --procergs-overlay-header-foreground,
+        #ffffff
+      );
+      --govrs-breadcrumbs-link-hover: var(
+        --procergs-overlay-header-foreground,
+        #ffffff
+      );
+      --govrs-breadcrumbs-current: var(
+        --procergs-overlay-header-foreground,
+        #ffffff
+      );
+      --govrs-breadcrumbs-separator: var(
+        --procergs-overlay-header-foreground,
+        #ffffff
+      );
+    }
+  }
+
   #page-document
     > .block.procergsSection:first-child
     .govrs-section-block__content {
@@ -370,7 +395,9 @@ body.cms-ui .block.procergsSection {
 }
 
 :root:not(.high-contrast):not([data-govrs-contrast='high'])
-  body.public-ui.has-section-footer-overlay:not(.global-region-editing-footer) {
+  body.public-ui.has-section-footer-overlay:not(.cms-ui):not(
+    .section-overlays-disabled
+  ):not(.global-region-editing) {
   &.has-section-header-overlay .global-blocks-region-header {
     z-index: var(--govrs-z-index-toast, 120);
   }

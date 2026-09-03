@@ -32,7 +32,8 @@ body.global-region-editing-header
   :is(
     .procergs-state-bar-wrapper,
     .procergs-accessibility-wrapper,
-    .procergs-header-wrapper
+    .procergs-header-wrapper,
+    .procergs-breadcrumbs-wrapper
   ),
 body.global-region-editing-footer .procergs-footer-wrapper {
   position: relative !important;
@@ -164,6 +165,7 @@ body.cms-ui.view-editview
 .block-editor-procergsGlobalStateBar,
 .block-editor-procergsGlobalAccessibilityBar,
 .block-editor-procergsGlobalHeader,
+.block-editor-procergsGlobalBreadcrumbs,
 .block-editor-procergsGlobalFooter {
   .block {
     margin: 0;
@@ -172,6 +174,7 @@ body.cms-ui.view-editview
   .procergs-state-bar-wrapper,
   .procergs-accessibility-wrapper,
   .procergs-header-wrapper,
+  .procergs-breadcrumbs-wrapper,
   .procergs-footer-wrapper {
     pointer-events: auto;
   }

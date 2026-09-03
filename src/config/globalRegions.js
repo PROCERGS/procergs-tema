@@ -15,53 +15,28 @@ import AccessibilityBarBlockSchema from '../govrs/blocks/globalAccessibility/sch
 import { ProcergsGlobalFooterBlock } from '../govrs/components/Footer/Footer';
 import FooterBlockEdit from '../govrs/blocks/globalFooter/Edit';
 import FooterBlockSchema from '../govrs/blocks/globalFooter/schema';
+import { ProcergsGlobalBreadcrumbsBlock } from '../govrs/components/Breadcrumbs/Breadcrumbs';
+import BreadcrumbsBlockEdit from '../govrs/blocks/globalBreadcrumbs/Edit';
+import BreadcrumbsBlockSchema from '../govrs/blocks/globalBreadcrumbs/schema';
+import {
+  ACCESSIBILITY_BAR_BLOCK_TYPE,
+  BREADCRUMBS_BLOCK_TYPE,
+  createDefaultFooterRegion,
+  createDefaultHeaderRegion,
+  FOOTER_BLOCK_TYPE,
+  HEADER_BLOCK_TYPE,
+  STATE_BAR_BLOCK_TYPE,
+} from './globalRegionDefaults';
 
-export const HEADER_BLOCK_TYPE = 'procergsGlobalHeader';
-export const STATE_BAR_BLOCK_TYPE = 'procergsGlobalStateBar';
-export const ACCESSIBILITY_BAR_BLOCK_TYPE = 'procergsGlobalAccessibilityBar';
-export const FOOTER_BLOCK_TYPE = 'procergsGlobalFooter';
-
-const createSingleBlockRegion = (id, type) => ({
-  blocks: {
-    [id]: {
-      '@type': type,
-      allowOverlay: true,
-    },
-  },
-  blocks_layout: {
-    items: [id],
-  },
-});
-
-export const createDefaultHeaderRegion = () => ({
-  blocks: {
-    'procergs-global-state-bar': {
-      '@type': STATE_BAR_BLOCK_TYPE,
-      allowOverlay: true,
-    },
-    'procergs-global-accessibility-bar': {
-      '@type': ACCESSIBILITY_BAR_BLOCK_TYPE,
-      allowOverlay: true,
-    },
-    'procergs-global-header': {
-      '@type': HEADER_BLOCK_TYPE,
-      variation: 'default',
-      allowOverlay: true,
-      showLogo: true,
-      showTitle: true,
-    },
-  },
-  blocks_layout: {
-    items: [
-      'procergs-global-state-bar',
-      'procergs-global-accessibility-bar',
-      'procergs-global-header',
-    ],
-  },
-});
-
-export const createDefaultFooterRegion = () =>
-  createSingleBlockRegion('procergs-global-footer', FOOTER_BLOCK_TYPE);
+export {
+  ACCESSIBILITY_BAR_BLOCK_TYPE,
+  BREADCRUMBS_BLOCK_TYPE,
+  createDefaultFooterRegion,
+  createDefaultHeaderRegion,
+  FOOTER_BLOCK_TYPE,
+  HEADER_BLOCK_TYPE,
+  STATE_BAR_BLOCK_TYPE,
+} from './globalRegionDefaults';
 
 const configureGlobalRegionBlocks = (config) => {
   config.blocks.blocksConfig[HEADER_BLOCK_TYPE] = {
@@ -124,6 +99,21 @@ const configureGlobalRegionBlocks = (config) => {
     blockHasValue: () => true,
   };
 
+  config.blocks.blocksConfig[BREADCRUMBS_BLOCK_TYPE] = {
+    id: BREADCRUMBS_BLOCK_TYPE,
+    title: 'Breadcrumbs GovRS',
+    icon: layoutSVG,
+    group: 'common',
+    view: ProcergsGlobalBreadcrumbsBlock,
+    edit: BreadcrumbsBlockEdit,
+    schema: BlockSettingsSchema,
+    blockSchema: BreadcrumbsBlockSchema,
+    restricted: true,
+    mostUsed: false,
+    sidebarTab: 0,
+    blockHasValue: () => true,
+  };
+
   return configureGlobalRegions(config, {
     activeRegion: 'header',
     fetchPath: '/?expand=actions',
@@ -136,8 +126,9 @@ const configureGlobalRegionBlocks = (config) => {
           STATE_BAR_BLOCK_TYPE,
           ACCESSIBILITY_BAR_BLOCK_TYPE,
           HEADER_BLOCK_TYPE,
+          BREADCRUMBS_BLOCK_TYPE,
         ],
-        maxLength: 3,
+        maxLength: 4,
         createDefault: createDefaultHeaderRegion,
       },
       footer: {

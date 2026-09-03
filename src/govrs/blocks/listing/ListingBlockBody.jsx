@@ -88,6 +88,10 @@ const ListingBlockBody = withQuerystringResults((props) => {
   const HeadlineTag = data.headlineTag || 'h2';
   const hasItems = items.length > 0;
   const isClickableDefault = isClickableDefaultListing(data, items, isEditMode);
+  const defaultListingStyle =
+    variationId === 'default' && listProps.horizontal
+      ? { '--govrs-list-default-cols': listProps.perRow }
+      : undefined;
 
   const handleListClick = (event) => {
     if (!isClickableDefault || !shouldHandleListingNavigation(event)) {
@@ -152,6 +156,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
         'govrs-listing-block',
         `govrs-listing-block--${variationId}`,
       )}
+      style={defaultListingStyle}
     >
       {data.headline && (
         <Headline

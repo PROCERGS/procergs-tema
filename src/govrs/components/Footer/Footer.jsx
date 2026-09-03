@@ -9,6 +9,7 @@ import { hasApiExpander } from '@plone/volto/helpers/Utils/Utils';
 import { mapVoltoNavigationToFooterSections } from '../../../helpers/mapVoltoNavigationToMenuItems';
 import resolveBranding from '../../../helpers/resolveBranding';
 import procergsLogo from '../../../assets/procergs-logo.svg';
+import { createDefaultFooterRegion } from '../../../config/globalRegionDefaults';
 
 export const LegacyGovrsFooter = ({
   allowOverlay = true,
@@ -133,9 +134,7 @@ const Footer = ({ pathname, overlayForeground }) => (
   <GlobalBlocksRegion
     name="footer"
     pathname={pathname}
-    fallback={
-      <LegacyGovrsFooter allowOverlay overlayForeground={overlayForeground} />
-    }
+    fallback={createDefaultFooterRegion()}
     viewProps={{
       location: { pathname },
       metadata: {
