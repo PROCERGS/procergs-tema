@@ -13,6 +13,8 @@ html[data-govrs-contrast='high'] {
 }
 
 :root:is(.high-contrast, [data-govrs-contrast='high']) {
+  --govrs-color-neutral-text-subtle: var(--govrs-color-contrast-muted);
+
   body.public-ui {
     .documentFirstHeading {
       border-bottom-color: var(--govrs-color-border-emphasis);
@@ -184,6 +186,34 @@ html[data-govrs-contrast='high'] {
         outline: 2px solid var(--govrs-color-focus);
         outline-offset: 2px;
       }
+    }
+
+    .block.procergsSection {
+      --procergs-section-background: var(--govrs-color-surface-base) !important;
+      --procergs-section-foreground: var(--govrs-color-text-primary) !important;
+
+      .govrs-section-block__background {
+        display: none;
+      }
+    }
+  }
+
+  .govrs-list-default {
+    --govrs-color-brand-primary: var(--govrs-color-contrast-foreground);
+    --govrs-color-brand-primary-hover: var(--govrs-color-contrast-foreground);
+    --govrs-color-text-subtle: var(--govrs-color-contrast-muted);
+    --govrs-color-neutral-text-subtle: var(--govrs-color-contrast-muted);
+
+    .govrs-list-default__title {
+      color: var(--govrs-color-contrast-foreground);
+    }
+
+    .govrs-list-default__text {
+      color: var(--govrs-color-text-primary);
+    }
+
+    .govrs-list-default__tags {
+      color: var(--govrs-color-neutral-text-subtle);
     }
   }
 

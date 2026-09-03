@@ -10,7 +10,10 @@ import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 import ListingBlockSchema from './schema';
 import ListingBlockBody from './ListingBlockBody';
-import { getListingVariation } from './getListingVariation';
+import {
+  getListingVariation,
+  listingNeedsFullObjects,
+} from './getListingVariation';
 
 const messages = defineMessages({
   listing: {
@@ -55,6 +58,10 @@ const Edit = React.memo(
           data={data}
           path={getBaseUrl(pathname)}
           isEditMode
+          variation={{
+            ...props.variation,
+            fullobjects: listingNeedsFullObjects(data),
+          }}
         />
         {!selected && <div className="listing-overlay" />}
         <SidebarPortal selected={selected}>
@@ -80,12 +87,14 @@ const Edit = React.memo(
   },
   (prevProps, nextProps) =>
     !(
+      nextProps.index !== prevProps.index ||
       nextProps.selected !== prevProps.selected ||
       !isEqual(prevProps.data, nextProps.data)
     ),
 );
 
 Edit.propTypes = {
+  index: PropTypes.number.isRequired,
   selected: PropTypes.bool.isRequired,
   block: PropTypes.string.isRequired,
   data: PropTypes.objectOf(PropTypes.any).isRequired,

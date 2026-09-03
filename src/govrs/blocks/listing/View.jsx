@@ -4,14 +4,25 @@ import cx from 'classnames';
 import { compose } from 'redux';
 import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import ListingBlockBody from './ListingBlockBody';
-import { getListingVariation } from './getListingVariation';
+import {
+  getListingVariation,
+  listingNeedsFullObjects,
+} from './getListingVariation';
 
 const View = ({ data, path, pathname, className, style, ...props }) => (
   <div
     className={cx('block listing', getListingVariation(data), className)}
     style={style}
   >
-    <ListingBlockBody {...props} data={data} path={path ?? pathname} />
+    <ListingBlockBody
+      {...props}
+      data={data}
+      path={path ?? pathname}
+      variation={{
+        ...props.variation,
+        fullobjects: listingNeedsFullObjects(data),
+      }}
+    />
   </div>
 );
 
