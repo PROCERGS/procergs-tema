@@ -9,8 +9,15 @@ import configureBannerBlock from './blocks/banner';
 import configureSlateTableBlock from './blocks/slateTable';
 import configureSectionBlock from './blocks/section';
 import configureTitleBlock from './blocks/title';
+import configureGlobalRegionBlocks from './globalRegions';
+import ColorInputWidget from '../govrs/widgets/ColorInputWidget';
 
 const applyConfig = (config) => {
+  config.widgets.widget = {
+    ...(config.widgets.widget || {}),
+    color_input: ColorInputWidget,
+  };
+
   configureSettings(config);
   configureTextBlock(config);
   configureMapsBlock(config);
@@ -20,6 +27,7 @@ const applyConfig = (config) => {
   configureBannerBlock(config);
   configureSlateTableBlock(config);
   configureSectionBlock(config);
+  configureGlobalRegionBlocks(config);
 
   config.blocks.requiredBlocks = [];
 
