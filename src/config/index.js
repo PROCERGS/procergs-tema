@@ -8,6 +8,7 @@ import configureListingBlock from './blocks/listing';
 import configureBannerBlock from './blocks/banner';
 import configureSlateTableBlock from './blocks/slateTable';
 import configureSectionBlock from './blocks/section';
+import configureTitleBlock from './blocks/title';
 import configureGlobalRegionBlocks from './globalRegions';
 import ColorInputWidget from '../govrs/widgets/ColorInputWidget';
 
@@ -30,6 +31,7 @@ const applyConfig = (config) => {
 
   config.blocks.requiredBlocks = [];
 
+  configureTitleBlock(config);
   return config;
 };
 
