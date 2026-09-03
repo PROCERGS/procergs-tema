@@ -10,12 +10,9 @@ export default function getPageSectionChrome(content) {
   const last = getBlock(content, items[items.length - 1]);
   const headerEnabled = isSection(first) && Boolean(first.overlayHeader);
   const footerEnabled = isSection(last) && Boolean(last.overlayFooter);
-  const accessibilityBarEnabled =
-    headerEnabled && Boolean(first.overlayAccessibilityBar);
 
   return {
     headerEnabled,
-    accessibilityBarEnabled,
     footerEnabled,
     headerForeground: headerEnabled
       ? normalizeSection(first).foregroundColor

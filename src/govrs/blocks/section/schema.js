@@ -73,10 +73,6 @@ const messages = defineMessages({
     id: 'Use background behind header',
     defaultMessage: 'Estender o fundo sob o Header',
   },
-  overlayAccessibilityBar: {
-    id: 'Use background behind accessibility bar',
-    defaultMessage: 'Incluir a Barra de Acessibilidade',
-  },
   overlayFooter: {
     id: 'Use background behind footer',
     defaultMessage: 'Estender o fundo sob o Footer',
@@ -119,11 +115,7 @@ export const sectionSchemaEnhancer = ({ schema, formData }) => {
   const integrationFieldset = schema.fieldsets.find(
     (fieldset) => fieldset.id === 'integration',
   );
-  integrationFieldset.fields = [
-    'overlayHeader',
-    ...(formData?.overlayHeader ? ['overlayAccessibilityBar'] : []),
-    'overlayFooter',
-  ];
+  integrationFieldset.fields = ['overlayHeader', 'overlayFooter'];
 
   return schema;
 };
@@ -267,13 +259,6 @@ export const SectionBlockSchema = ({ intl }) => ({
       title: intl.formatMessage(messages.overlayHeader),
       description:
         'Só tem efeito quando este grupo é o primeiro bloco da página.',
-      type: 'boolean',
-      default: false,
-    },
-    overlayAccessibilityBar: {
-      title: intl.formatMessage(messages.overlayAccessibilityBar),
-      description:
-        'Também estende o fundo sob a Barra de Acessibilidade do Header.',
       type: 'boolean',
       default: false,
     },
