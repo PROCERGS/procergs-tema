@@ -1,3 +1,5 @@
+import { getListingVariation } from './getListingVariation';
+
 const flattenGroupedItems = (items = [], labeled = false) => {
   if (!labeled) {
     return items;
@@ -14,6 +16,16 @@ const flattenGroupedItems = (items = [], labeled = false) => {
 
   return Array.from(groups.values()).flat();
 };
+
+export const isClickableDefaultListing = (
+  data = {},
+  items = [],
+  isEditMode = false,
+) =>
+  getListingVariation(data) === 'default' &&
+  Boolean(data.activeLink) &&
+  !isEditMode &&
+  items.some((item) => item.href);
 
 export const shouldHandleListingNavigation = (event) => {
   if (event.defaultPrevented || event.button !== 0) {

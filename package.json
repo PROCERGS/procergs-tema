@@ -21,7 +21,7 @@
     "prettier:fix": "prettier --write 'src/**/*.{js,jsx}'"
   },
   "dependencies": {
-    "@procergs/react-govrs-ds": "^0.3.45",
+    "@procergs/react-govrs-ds": "^0.3.44",
     "volto-global-regions": "0.1.1"
   },
   "peerDependencies": {
