@@ -8,6 +8,7 @@ import configureListingBlock from './blocks/listing';
 import configureBannerBlock from './blocks/banner';
 import configureSlateTableBlock from './blocks/slateTable';
 import configureSectionBlock from './blocks/section';
+import configureTitleBlock from './blocks/title';
 
 const applyConfig = (config) => {
   configureSettings(config);
@@ -22,6 +23,7 @@ const applyConfig = (config) => {
 
   config.blocks.requiredBlocks = [];
 
+  configureTitleBlock(config);
   return config;
 };
 

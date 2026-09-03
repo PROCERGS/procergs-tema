@@ -1,0 +1,24 @@
+.procergs-news-title-block .documentFirstHeading {
+  border-bottom: 0;
+  margin-bottom: 0;
+
+  &::before {
+    content: none;
+  }
+}
+
+.procergs-news-publication-date {
+  margin: var(--govrs-space-2, 0.5rem) 0 var(--govrs-space-1, 0.25rem);
+}
+
+.procergs-news-publication-date--left {
+  text-align: left;
+}
+
+.procergs-news-publication-date--center {
+  text-align: center;
+}
+
+.procergs-news-publication-date--right {
+  text-align: right;
+}
