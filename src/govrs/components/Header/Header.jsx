@@ -16,12 +16,12 @@ import {
 } from '../../../helpers/mapVoltoNavigationToMenuItems';
 import resolveBranding from '../../../helpers/resolveBranding';
 import toHexColor from '../../helpers/toHexColor';
+import { createDefaultHeaderRegion } from '../../../config/globalRegionDefaults';
 
 const DEFAULT_LOGO_BACKGROUND = '#ffffff';
 const DEFAULT_MENU_BACKGROUND = '#172b36';
 
-const resolveBackgroundColor = (value, fallback) =>
-  toHexColor(value, fallback);
+const resolveBackgroundColor = (value, fallback) => toHexColor(value, fallback);
 
 const clampOpacity = (value, fallback) => {
   if (value === '' || value === null || value === undefined) {
@@ -289,6 +289,7 @@ export const LegacyGovrsHeader = ({
     let observedSidebar;
     let observedAccessibilityBar;
     let observedStateBar;
+    let observedBreadcrumbs;
     const headerElement = headerRef.current;
     const layoutRoot = document.documentElement;
 
@@ -313,6 +314,9 @@ export const LegacyGovrsHeader = ({
       );
       const accessibilityBar = headerWrapper?.querySelector(
         '.procergs-accessibility-wrapper .acess-bar',
+      );
+      const breadcrumbs = headerWrapper?.querySelector(
+        '.procergs-breadcrumbs-wrapper',
       );
       const toolbar = document.querySelector('#toolbar .toolbar');
       const sidebar = document.querySelector('#sidebar .sidebar-container');
@@ -347,13 +351,21 @@ export const LegacyGovrsHeader = ({
         resizeObserver.observe(accessibilityBar);
         observedAccessibilityBar = accessibilityBar;
       }
+      if (
+        resizeObserver &&
+        breadcrumbs &&
+        breadcrumbs !== observedBreadcrumbs
+      ) {
+        resizeObserver.observe(breadcrumbs);
+        observedBreadcrumbs = breadcrumbs;
+      }
 
       const headerRect = govrsHeader.getBoundingClientRect();
       const headerWrapperRect = headerWrapper?.getBoundingClientRect();
       const regionPartRects = headerWrapper
         ? [
             ...headerWrapper.querySelectorAll(
-              '.procergs-state-bar-wrapper, .procergs-accessibility-wrapper, .procergs-header-wrapper',
+              '.procergs-state-bar-wrapper, .procergs-accessibility-wrapper, .procergs-header-wrapper, .procergs-breadcrumbs-wrapper',
             ),
           ].map((element) => element.getBoundingClientRect())
         : [];
@@ -658,16 +670,7 @@ const Header = ({ pathname, overlayForeground }) => (
   <GlobalBlocksRegion
     name="header"
     pathname={pathname}
-    fallback={
-      <LegacyGovrsHeader
-        allowOverlay
-        showLogo
-        showTitle
-        variation="default"
-        pathname={pathname}
-        overlayForeground={overlayForeground}
-      />
-    }
+    fallback={createDefaultHeaderRegion()}
     viewProps={{
       location: { pathname },
       metadata: {

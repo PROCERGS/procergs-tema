@@ -48,6 +48,7 @@ import WorkingCopyToastsFactory from '@plone/volto/components/manage/WorkingCopy
 import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFactory/LockingToastsFactory';
 import RouteAnnouncer from '@plone/volto/components/theme/RouteAnnouncer/RouteAnnouncer';
 import getPageSectionChrome from '../../../../../helpers/getPageSectionChrome';
+import isSectionOverlayEnabled from '../../../../../helpers/isSectionOverlayEnabled';
 
 export class App extends Component {
   static propTypes = {
@@ -92,10 +93,14 @@ export class App extends Component {
     const path = getBaseUrl(this.props.pathname);
     const action = getView(this.props.pathname);
     const isCmsUI = isCmsUi(this.props.pathname);
+    const sectionOverlaysEnabled = isSectionOverlayEnabled({
+      action,
+      isCmsUI,
+    });
     const ConnectionRefusedView = views.errorViews.ECONNREFUSED;
     const sectionChrome = getPageSectionChrome(this.props.content);
-    const headerOverlay = !isCmsUI && sectionChrome.headerEnabled;
-    const footerOverlay = !isCmsUI && sectionChrome.footerEnabled;
+    const headerOverlay = sectionOverlaysEnabled && sectionChrome.headerEnabled;
+    const footerOverlay = sectionOverlaysEnabled && sectionChrome.footerEnabled;
 
     const language =
       this.props.content?.language?.token ?? this.props.intl?.locale;
@@ -134,6 +139,7 @@ export class App extends Component {
               'is-anonymous': !this.props.token,
               'cms-ui': isCmsUI,
               'public-ui': !isCmsUI,
+              'section-overlays-disabled': !sectionOverlaysEnabled,
               'has-section-header-overlay': headerOverlay,
               'has-section-footer-overlay': footerOverlay,
             })}

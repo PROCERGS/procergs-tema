@@ -30,6 +30,10 @@ const ListingVariationTemplate = ({ id, items, isEditMode, ...data }) => {
     listItems,
     isEditMode,
   );
+  const defaultListingStyle =
+    variation === 'default' && listProps.horizontal
+      ? { '--govrs-list-default-cols': listProps.perRow }
+      : undefined;
 
   const handleListClick = (event) => {
     if (!isClickableDefault || !shouldHandleListingNavigation(event)) {
@@ -50,7 +54,7 @@ const ListingVariationTemplate = ({ id, items, isEditMode, ...data }) => {
   };
 
   return (
-    <div onClick={handleListClick}>
+    <div onClick={handleListClick} style={defaultListingStyle}>
       <List
         {...listProps}
         items={listItems}
