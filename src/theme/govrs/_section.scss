@@ -186,11 +186,11 @@ body.cms-ui .block.procergsSection {
   color: var(--procergs-section-foreground, inherit);
 
   :is(
-      .procergs-text-typography,
-      .slate-editor,
-      .block.html,
-      .block.listing:not(.card)
-    ) {
+    .procergs-text-typography,
+    .slate-editor,
+    .block.html,
+    .block.listing:not(.card)
+  ) {
     --govrs-color-text-primary: var(--procergs-section-foreground, inherit);
     --govrs-color-text-secondary: var(--procergs-section-foreground, inherit);
     --govrs-color-text-muted: var(--procergs-section-foreground, inherit);
@@ -244,6 +244,16 @@ body.cms-ui .block.procergsSection {
     display: flex;
     align-items: center;
     gap: var(--govrs-space-2, 0.5rem);
+  }
+
+  .govrs-color-contrast-widget__custom--vertical {
+    flex-direction: column;
+    align-items: flex-start;
+
+    label {
+      display: grid;
+      grid-template-columns: 3.5rem auto;
+    }
   }
 
   input[type='color'] {
