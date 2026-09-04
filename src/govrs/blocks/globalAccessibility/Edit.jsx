@@ -46,7 +46,10 @@ const AccessibilityBarBlockEdit = (props) => {
             });
           }}
           onChangeBlock={onChangeBlock}
-          formData={data}
+          formData={{
+            ...data,
+            allowOverlay: data?.allowOverlay !== false,
+          }}
           block={block}
           navRoot={navRoot}
           contentType={contentType}

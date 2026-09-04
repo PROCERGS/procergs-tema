@@ -2,6 +2,10 @@
   position: relative;
   width: 100%;
 
+  > .acess-bar {
+    background: var(--govrs-color-surface-base, #ffffff);
+  }
+
   .acess-wrapper {
     --govrs-layout-container-barra-max-lg: var(
       --govrs-layout-container-header-max-width,
