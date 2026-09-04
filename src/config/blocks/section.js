@@ -7,7 +7,6 @@ import SectionBlockSchema, {
   sectionSchemaEnhancer,
 } from '../../govrs/blocks/section/schema';
 import sectionTemplates from '../../govrs/blocks/section/templates';
-import ColorContrastWidget from '../../govrs/widgets/ColorContrastWidget';
 
 const DEFAULT_ALLOWED_BLOCKS = [
   'slate',
@@ -20,6 +19,7 @@ const DEFAULT_ALLOWED_BLOCKS = [
   'accordion',
   'slateTable',
   'gridBlock',
+  'procergsButton',
 ];
 
 const sectionDataAdapter = ({ block, data, id, onChangeBlock, value }) => {
@@ -57,8 +57,6 @@ const sectionDataAdapter = ({ block, data, id, onChangeBlock, value }) => {
 const configureSectionBlock = (config) => {
   const sectionSettings = config.settings.procergsSection || {};
   const allowedBlocks = sectionSettings.allowedBlocks || DEFAULT_ALLOWED_BLOCKS;
-
-  config.widgets.widget.color_contrast = ColorContrastWidget;
 
   config.blocks.blocksConfig.procergsSection = {
     id: 'procergsSection',
