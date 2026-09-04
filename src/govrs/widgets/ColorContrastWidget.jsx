@@ -5,18 +5,49 @@ import { GOVRS_COLOR_PAIRS, getContrastRatio } from '../helpers/colorContrast';
 
 const DEFAULT_PAIR = GOVRS_COLOR_PAIRS[0];
 
-const ColorContrastWidget = ({ id, title, description, value, onChange }) => {
-  const [draft, setDraft] = useState({
-    background: value?.background || DEFAULT_PAIR.background,
-    foreground: value?.foreground || DEFAULT_PAIR.foreground,
-  });
+const getDraftColors = ({
+  value,
+  defaultValue,
+  showBorder,
+  legacyBorderColor,
+}) => {
+  const background =
+    value?.background || defaultValue?.background || DEFAULT_PAIR.background;
+  const foreground =
+    value?.foreground || defaultValue?.foreground || DEFAULT_PAIR.foreground;
+
+  return {
+    background,
+    foreground,
+    ...(showBorder && {
+      border:
+        value?.border ||
+        legacyBorderColor ||
+        (value?.background ? background : defaultValue?.border) ||
+        background,
+    }),
+  };
+};
+
+const ColorContrastWidget = ({
+  id,
+  title,
+  description,
+  value,
+  onChange,
+  default: defaultValue,
+  showBorder = false,
+  legacyBorderColor,
+}) => {
+  const [draft, setDraft] = useState(() =>
+    getDraftColors({ value, defaultValue, showBorder, legacyBorderColor }),
+  );
 
   useEffect(() => {
-    setDraft({
-      background: value?.background || DEFAULT_PAIR.background,
-      foreground: value?.foreground || DEFAULT_PAIR.foreground,
-    });
-  }, [value?.background, value?.foreground]);
+    setDraft(
+      getDraftColors({ value, defaultValue, showBorder, legacyBorderColor }),
+    );
+  }, [value, defaultValue, showBorder, legacyBorderColor]);
 
   const contrast = useMemo(
     () => getContrastRatio(draft.background, draft.foreground),
@@ -48,6 +79,9 @@ const ColorContrastWidget = ({ id, title, description, value, onChange }) => {
               onChange(id, {
                 background: pair.background,
                 foreground: pair.foreground,
+                ...(showBorder && {
+                  border: pair.border || pair.background,
+                }),
               });
             }}
           >
@@ -56,7 +90,11 @@ const ColorContrastWidget = ({ id, title, description, value, onChange }) => {
         ))}
       </div>
 
-      <div className="govrs-color-contrast-widget__custom">
+      <div
+        className={`govrs-color-contrast-widget__custom${
+          showBorder ? ' govrs-color-contrast-widget__custom--vertical' : ''
+        }`}
+      >
         <label>
           Fundo
           <input
@@ -83,6 +121,21 @@ const ColorContrastWidget = ({ id, title, description, value, onChange }) => {
             }
           />
         </label>
+        {showBorder ? (
+          <label>
+            Borda
+            <input
+              type="color"
+              value={draft.border}
+              onChange={(event) =>
+                setDraft((current) => ({
+                  ...current,
+                  border: event.target.value,
+                }))
+              }
+            />
+          </label>
+        ) : null}
       </div>
 
       <Message
@@ -116,7 +169,15 @@ ColorContrastWidget.propTypes = {
   value: PropTypes.shape({
     background: PropTypes.string,
     foreground: PropTypes.string,
+    border: PropTypes.string,
   }),
+  default: PropTypes.shape({
+    background: PropTypes.string,
+    foreground: PropTypes.string,
+    border: PropTypes.string,
+  }),
+  showBorder: PropTypes.bool,
+  legacyBorderColor: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
 
