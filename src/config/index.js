@@ -7,15 +7,18 @@ import configureCarouselBlock from './blocks/carousel';
 import configureListingBlock from './blocks/listing';
 import configureBannerBlock from './blocks/banner';
 import configureSlateTableBlock from './blocks/slateTable';
+import configureButtonBlock from './blocks/button';
 import configureSectionBlock from './blocks/section';
 import configureTitleBlock from './blocks/title';
 import configureGlobalRegionBlocks from './globalRegions';
 import ColorInputWidget from '../govrs/widgets/ColorInputWidget';
+import ColorContrastWidget from '../govrs/widgets/ColorContrastWidget';
 
 const applyConfig = (config) => {
   config.widgets.widget = {
     ...(config.widgets.widget || {}),
     color_input: ColorInputWidget,
+    color_contrast: ColorContrastWidget,
   };
 
   configureSettings(config);
@@ -26,6 +29,7 @@ const applyConfig = (config) => {
   configureListingBlock(config);
   configureBannerBlock(config);
   configureSlateTableBlock(config);
+  configureButtonBlock(config);
   configureSectionBlock(config);
   configureGlobalRegionBlocks(config);
 
