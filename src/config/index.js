@@ -7,6 +7,7 @@ import configureCarouselBlock from './blocks/carousel';
 import configureListingBlock from './blocks/listing';
 import configureBannerBlock from './blocks/banner';
 import configureSlateTableBlock from './blocks/slateTable';
+import configureButtonBlock from './blocks/button';
 import configureSectionBlock from './blocks/section';
 import configureTitleBlock from './blocks/title';
 import configureGlobalRegionBlocks from './globalRegions';
@@ -26,6 +27,7 @@ const applyConfig = (config) => {
   configureListingBlock(config);
   configureBannerBlock(config);
   configureSlateTableBlock(config);
+  configureButtonBlock(config);
   configureSectionBlock(config);
   configureGlobalRegionBlocks(config);
 
