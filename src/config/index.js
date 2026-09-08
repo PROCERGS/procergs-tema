@@ -13,12 +13,14 @@ import configureTitleBlock from './blocks/title';
 import configureGlobalRegionBlocks from './globalRegions';
 import ColorInputWidget from '../govrs/widgets/ColorInputWidget';
 import ColorContrastWidget from '../govrs/widgets/ColorContrastWidget';
+import ButtonIconWidget from '../govrs/widgets/ButtonIconWidget';
 
 const applyConfig = (config) => {
   config.widgets.widget = {
     ...(config.widgets.widget || {}),
     color_input: ColorInputWidget,
     color_contrast: ColorContrastWidget,
+    button_icon: ButtonIconWidget,
   };
 
   configureSettings(config);
