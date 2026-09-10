@@ -16,6 +16,7 @@ import {
   resolveListingVariationConfig,
 } from './getListingVariation';
 import { getListVariantProps } from './getListVariantProps';
+import { getGridColumnCount } from './gridRules';
 import { normalizeListItems } from './normalizeListItems';
 import { withDefaultListingTags } from './withDefaultListingTags';
 import {
@@ -62,6 +63,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
     isFolderContentsListing,
     hasLoaded,
     variation: variationProp,
+    gridColumns,
   } = props;
 
   const listingRef = createRef();
@@ -72,6 +74,12 @@ const ListingBlockBody = withQuerystringResults((props) => {
     variationProp,
     config.blocks?.blocksConfig?.listing?.variations,
   );
+  const gridColumnCount = getGridColumnCount(gridColumns);
+  const itemsPerRow =
+    variationId === 'card' ||
+    (variationId === 'default' && Boolean(data.horizontal))
+      ? Number(data.perRow) || 3
+      : null;
   const ListingBodyTemplate = variationConfig?.template;
   const NoResults =
     variationConfig?.noResultsComponent ||
@@ -155,6 +163,10 @@ const ListingBlockBody = withQuerystringResults((props) => {
       className={cx(
         'govrs-listing-block',
         `govrs-listing-block--${variationId}`,
+        gridColumnCount && 'govrs-listing-block--in-grid',
+        gridColumnCount &&
+          `govrs-listing-block--grid-columns-${gridColumnCount}`,
+        itemsPerRow && `govrs-listing-block--items-per-row-${itemsPerRow}`,
       )}
       style={defaultListingStyle}
     >
@@ -167,7 +179,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
         />
       )}
       {listContent ? (
-        <div ref={listingRef} onClick={handleListClick}>
+        <div ref={listingRef} onClick={handleListClick} role="presentation">
           {listContent}
           <Pagination
             page={currentPage}

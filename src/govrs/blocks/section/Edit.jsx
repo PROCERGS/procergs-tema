@@ -4,9 +4,10 @@ import { compose } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
-import ContainerEdit from '@plone/volto/components/manage/Blocks/Container/Edit';
 import { deleteBlock } from '@plone/volto/helpers/Blocks/Blocks';
 import { setUIState } from '@plone/volto/actions/form/form';
+import ContainerEdit from '../container/Edit';
+import isNestedContainer from '../container/isNestedContainer';
 import SectionBlockBody from './SectionBlockBody';
 
 const deleteNestedBlock = (container, blockId, intl) => {
@@ -42,7 +43,7 @@ const Edit = (props) => {
   useEffect(() => {
     const handleOrderDelete = (event) => {
       const nestedDeleteButton = event.target.closest(
-        '#sidebar-order .tree-item.depth-1 .action.delete',
+        '#sidebar-order .tree-item:not(.depth-0) .action.delete',
       );
       if (!nestedDeleteButton || !hoveredBlock) return;
 
@@ -65,6 +66,7 @@ const Edit = (props) => {
       data={data}
       className={className}
       style={style}
+      isNested={isNestedContainer(props.properties, props.isContainer)}
       isEditMode
     >
       <ContainerEdit {...props} direction="vertical" />
@@ -81,6 +83,8 @@ Edit.propTypes = {
   manage: PropTypes.bool.isRequired,
   className: PropTypes.string,
   style: PropTypes.objectOf(PropTypes.any),
+  properties: PropTypes.objectOf(PropTypes.any),
+  isContainer: PropTypes.bool,
 };
 
 export default compose(withBlockExtensions)(Edit);

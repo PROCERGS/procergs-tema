@@ -8,6 +8,9 @@ const SectionBlockBody = ({
   children,
   className,
   style,
+  blockType = 'procergsSection',
+  variant = 'section',
+  isNested = false,
   isEditMode = false,
 }) => {
   const [motionAllowed, setMotionAllowed] = useState(false);
@@ -75,12 +78,18 @@ const SectionBlockBody = ({
   return (
     <div
       className={cx(
-        'block procergsSection govrs-section-block',
+        'block',
+        blockType,
+        'govrs-section-block',
         `govrs-section-block--${backgroundType}`,
         `govrs-section-block--position-${mediaPosition}`,
         `govrs-section-block--width-${contentWidth}`,
         `govrs-section-block--spacing-${spacing}`,
-        { 'govrs-section-block--editing': isEditMode },
+        {
+          'govrs-grid-background-block': variant === 'grid',
+          'govrs-section-block--nested': isNested,
+          'govrs-section-block--editing': isEditMode,
+        },
         className,
       )}
       style={sectionStyle}
@@ -124,7 +133,8 @@ const SectionBlockBody = ({
       </div>
       <div
         className={cx('govrs-section-block__content', {
-          'ui container': contentWidth === 'layout',
+          'ui container':
+            variant === 'section' && contentWidth === 'layout' && !isNested,
         })}
       >
         {children}
@@ -138,6 +148,9 @@ SectionBlockBody.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   style: PropTypes.objectOf(PropTypes.any),
+  blockType: PropTypes.string,
+  variant: PropTypes.oneOf(['section', 'grid']),
+  isNested: PropTypes.bool,
   isEditMode: PropTypes.bool,
 };
 

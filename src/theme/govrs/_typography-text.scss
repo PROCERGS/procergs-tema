@@ -32,6 +32,18 @@ body:is(.public-ui, .cms-ui) {
     color: var(--govrs-color-text-primary, #000000);
     font-family: var(--govrs-font-family-base);
 
+    &.procergs-text-block--align-left {
+      text-align: left;
+    }
+
+    &.procergs-text-block--align-center {
+      text-align: center;
+    }
+
+    &.procergs-text-block--align-right {
+      text-align: right;
+    }
+
     :is(h1, h2, h3, h4, h5) {
       font-family: var(--govrs-font-family-base);
     }

@@ -1,5 +1,6 @@
 import { defineMessages } from 'react-intl';
 import { getAppearanceFields } from './getAppearanceFields';
+import { getGridColumnCount, getGridListingMaxPerRow } from './gridRules';
 
 const messages = defineMessages({
   listing: {
@@ -74,6 +75,10 @@ const messages = defineMessages({
     id: 'Media position description',
     defaultMessage: 'Só vale na lista vertical.',
   },
+  mediaPositionGridDescription: {
+    id: 'Media position in Grid description',
+    defaultMessage: 'Em Grid com 3 ou 4 colunas, a imagem fica acima do texto.',
+  },
   groupBy: {
     id: 'Group by',
     defaultMessage: 'Agrupar por',
@@ -102,6 +107,11 @@ const messages = defineMessages({
     id: 'Items per row',
     defaultMessage: 'Itens por linha',
   },
+  perRowGridDescription: {
+    id: 'Items per row in Grid description',
+    defaultMessage:
+      'O máximo é ajustado automaticamente à largura disponível no Grid.',
+  },
   cardVariant: {
     id: 'Card style',
     defaultMessage: 'Card style',
@@ -120,7 +130,8 @@ const messages = defineMessages({
   },
   activeLinkDescription: {
     id: 'Active link description',
-    defaultMessage: 'Quando marcado, o clique no item abre a página correspondente.',
+    defaultMessage:
+      'Quando marcado, o clique no item abre a página correspondente.',
   },
   showTags: {
     id: 'Show tags',
@@ -138,6 +149,11 @@ const messages = defineMessages({
     id: 'Wrap to next row',
     defaultMessage: 'Quebrar linha',
   },
+  cardOverflowGridDescription: {
+    id: 'Card overflow in Grid description',
+    defaultMessage:
+      'Dentro de Grid, os cards sempre quebram para a linha seguinte.',
+  },
   cardOverflowScroll: {
     id: 'Horizontal scroll',
     defaultMessage: 'Rolagem horizontal',
@@ -149,9 +165,21 @@ const DEFAULT_HEADLINE_LEVELS = [
   ['h3', 'h3'],
 ];
 
-export const ListingBlockSchema = ({ data = {}, intl }) => {
+export const ListingBlockSchema = ({
+  data = {},
+  intl,
+  gridColumns: gridColumnsProp,
+}) => {
   const variation = data.variation || 'default';
   const appearanceFields = getAppearanceFields(variation, data);
+  const gridColumns = getGridColumnCount(gridColumnsProp);
+  const isInGrid = Boolean(gridColumns);
+  const maxPerRow = getGridListingMaxPerRow({
+    variation,
+    cardSize: data.cardSize,
+    gridColumns,
+  });
+  const forceMediaAbove = variation === 'default' && gridColumns > 2;
 
   return {
     title: intl.formatMessage(messages.listing),
@@ -218,12 +246,18 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
       },
       mediaPosition: {
         title: intl.formatMessage(messages.mediaPosition),
-        description: intl.formatMessage(messages.mediaPositionDescription),
-        choices: [
-          ['left', intl.formatMessage(messages.mediaPositionLeft)],
-          ['above', intl.formatMessage(messages.mediaPositionAbove)],
-        ],
-        default: 'left',
+        description: intl.formatMessage(
+          forceMediaAbove
+            ? messages.mediaPositionGridDescription
+            : messages.mediaPositionDescription,
+        ),
+        choices: forceMediaAbove
+          ? [['above', intl.formatMessage(messages.mediaPositionAbove)]]
+          : [
+              ['left', intl.formatMessage(messages.mediaPositionLeft)],
+              ['above', intl.formatMessage(messages.mediaPositionAbove)],
+            ],
+        default: forceMediaAbove ? 'above' : 'left',
         noValueOption: false,
       },
       groupBy: {
@@ -252,13 +286,25 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
             : intl.formatMessage(messages.itemsPerRow),
         type: 'number',
         default: 3,
+        minimum: 1,
+        ...(maxPerRow ? { maximum: maxPerRow } : {}),
+        ...(isInGrid
+          ? {
+              description: intl.formatMessage(messages.perRowGridDescription),
+            }
+          : {}),
       },
       cardOverflow: {
         title: intl.formatMessage(messages.cardOverflow),
-        choices: [
-          ['wrap', intl.formatMessage(messages.cardOverflowWrap)],
-          ['scroll', intl.formatMessage(messages.cardOverflowScroll)],
-        ],
+        description: isInGrid
+          ? intl.formatMessage(messages.cardOverflowGridDescription)
+          : undefined,
+        choices: isInGrid
+          ? [['wrap', intl.formatMessage(messages.cardOverflowWrap)]]
+          : [
+              ['wrap', intl.formatMessage(messages.cardOverflowWrap)],
+              ['scroll', intl.formatMessage(messages.cardOverflowScroll)],
+            ],
         default: 'wrap',
         noValueOption: false,
       },

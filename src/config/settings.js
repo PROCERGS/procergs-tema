@@ -45,6 +45,7 @@ const configureSettings = (config) => {
       'accordion',
       'slateTable',
       'gridBlock',
+      'procergsSection',
       'procergsButton',
     ],
   };

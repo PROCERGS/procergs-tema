@@ -85,7 +85,7 @@ const imageBrowserField = (title) => ({
   objectBrowserPickerType: 'image',
 });
 
-export const sectionSchemaEnhancer = ({ schema, formData }) => {
+export const backgroundSchemaEnhancer = ({ schema, formData }) => {
   const videoSource =
     formData?.videoSource || (formData?.videoFile ? 'file' : 'youtube');
   const backgroundFields = {
@@ -112,10 +112,19 @@ export const sectionSchemaEnhancer = ({ schema, formData }) => {
 
   schema.fieldsets[0].fields =
     backgroundFields[formData?.backgroundType] || backgroundFields.none;
+
+  return schema;
+};
+
+export const sectionSchemaEnhancer = (args) => {
+  const schema = backgroundSchemaEnhancer(args);
   const integrationFieldset = schema.fieldsets.find(
     (fieldset) => fieldset.id === 'integration',
   );
-  integrationFieldset.fields = ['overlayHeader', 'overlayFooter'];
+
+  if (integrationFieldset) {
+    integrationFieldset.fields = ['overlayHeader', 'overlayFooter'];
+  }
 
   return schema;
 };
@@ -272,5 +281,20 @@ export const SectionBlockSchema = ({ intl }) => ({
   },
   required: [],
 });
+
+export const NestedSectionBlockSchema = ({ intl }) => {
+  const schema = SectionBlockSchema({ intl });
+  const backgroundFieldset = schema.fieldsets.find(
+    (fieldset) => fieldset.id === 'default',
+  );
+  const layoutFieldset = schema.fieldsets.find(
+    (fieldset) => fieldset.id === 'layout',
+  );
+
+  return {
+    ...schema,
+    fieldsets: [backgroundFieldset, { ...layoutFieldset, fields: ['spacing'] }],
+  };
+};
 
 export default SectionBlockSchema;

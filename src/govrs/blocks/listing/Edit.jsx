@@ -8,12 +8,15 @@ import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
+import config from '@plone/volto/registry';
 import ListingBlockSchema from './schema';
 import ListingBlockBody from './ListingBlockBody';
 import {
   getListingVariation,
   listingNeedsFullObjects,
 } from './getListingVariation';
+import { useGridColumns } from '../grid/GridContext';
+import { getGridListingVariations, normalizeListingForGrid } from './gridRules';
 
 const messages = defineMessages({
   listing: {
@@ -43,24 +46,56 @@ const Edit = React.memo(
       pathname,
     } = props;
     const intl = useIntl();
-    const schema = ListingBlockSchema({ ...props, data, intl });
+    const gridColumns = useGridColumns();
+    const normalizedData = normalizeListingForGrid(data, gridColumns);
+    const baseBlocksConfig =
+      props.blocksConfig || config.blocks?.blocksConfig || {};
+    const listingBlockConfig =
+      baseBlocksConfig.listing || config.blocks?.blocksConfig?.listing || {};
+    const contextualBlocksConfig = gridColumns
+      ? {
+          ...baseBlocksConfig,
+          listing: {
+            ...listingBlockConfig,
+            variations: getGridListingVariations(
+              listingBlockConfig.variations,
+              gridColumns,
+            ),
+          },
+        }
+      : props.blocksConfig;
+    const schema = ListingBlockSchema({
+      ...props,
+      data: normalizedData,
+      intl,
+      gridColumns,
+    });
     const placeholder =
-      data.placeholder ||
-      (data?.querystring?.query?.length
+      normalizedData.placeholder ||
+      (normalizedData?.querystring?.query?.length
         ? intl.formatMessage(messages.results)
         : intl.formatMessage(messages.items));
+    const handleChangeBlock = (id, value) =>
+      onChangeBlock(id, normalizeListingForGrid(value, gridColumns));
 
     return (
-      <div className={cx('block listing', getListingVariation(data))}>
+      <div
+        className={cx(
+          'block listing',
+          getListingVariation(normalizedData),
+          gridColumns && 'listing--in-grid',
+        )}
+      >
         <p className="items-preview">{placeholder}</p>
         <ListingBlockBody
           {...props}
-          data={data}
+          data={normalizedData}
+          gridColumns={gridColumns}
           path={getBaseUrl(pathname)}
           isEditMode
           variation={{
             ...props.variation,
-            fullobjects: listingNeedsFullObjects(data),
+            fullobjects: listingNeedsFullObjects(normalizedData),
           }}
         />
         {!selected && <div className="listing-overlay" />}
@@ -68,14 +103,15 @@ const Edit = React.memo(
           <BlockDataForm
             schema={schema}
             title={intl.formatMessage(messages.listing)}
+            blocksConfig={contextualBlocksConfig}
             onChangeField={(id, value) => {
-              onChangeBlock(block, {
+              handleChangeBlock(block, {
                 ...data,
                 [id]: value,
               });
             }}
-            onChangeBlock={onChangeBlock}
-            formData={data}
+            onChangeBlock={handleChangeBlock}
+            formData={normalizedData}
             block={block}
             navRoot={navRoot}
             contentType={contentType}

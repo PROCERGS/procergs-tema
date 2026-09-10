@@ -107,19 +107,22 @@ export const ButtonBlockSchema = ({ intl, data }) => ({
     colorPair: {
       title: intl.formatMessage(messages.colors),
       description:
-        'Escolha um par GovRS ou aplique cores personalizadas com contraste adequado.',
+        'Escolha as cores. Em opacidade, 0% é transparente e 100% é sólido.',
       widget: 'color_contrast',
       default: DEFAULT_BUTTON_COLORS,
       showBorder: true,
+      showOpacity: true,
       legacyBorderColor: data?.borderColor,
     },
     hoverColorPair: {
       title: intl.formatMessage(messages.hoverColors),
-      description:
-        'Redefina as cores exibidas quando o ponteiro estiver sobre o botão.',
+      description: 'Defina como o botão aparece ao passar o ponteiro.',
       widget: 'color_contrast',
       default: DEFAULT_BUTTON_HOVER_COLORS,
       showBorder: true,
+      showOpacity: true,
+      inheritedBackgroundOpacity: data?.colorPair?.backgroundOpacity,
+      inheritedBorderOpacity: data?.colorPair?.borderOpacity,
       legacyBorderColor: data?.hoverBorderColor,
     },
     icon: {

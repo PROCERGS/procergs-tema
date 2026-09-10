@@ -6,6 +6,7 @@ import saveSlateBlockSelection from '@plone/volto-slate/actions/selection';
 import DefaultTextBlockEditor from '@plone/volto-slate/blocks/Text/DefaultTextBlockEditor';
 import DetachedTextBlockEditor from '@plone/volto-slate/blocks/Text/DetachedTextBlockEditor';
 import { TEXT_TYPOGRAPHY_CLASSES } from '../../constants/typography';
+import { normalizeTextAlignment } from './textAlignment';
 
 import '@plone/volto-slate/blocks/Text/css/editor.css';
 
@@ -15,7 +16,14 @@ const TextBlockEdit = (props) => {
     : DefaultTextBlockEditor;
 
   return (
-    <div className={cx(TEXT_TYPOGRAPHY_CLASSES)}>
+    <div
+      className={cx(
+        TEXT_TYPOGRAPHY_CLASSES,
+        `procergs-text-block--align-${normalizeTextAlignment(
+          props.data?.textAlignment,
+        )}`,
+      )}
+    >
       <Editor {...props} />
     </div>
   );

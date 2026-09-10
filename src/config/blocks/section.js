@@ -1,14 +1,24 @@
-import cloneDeep from 'lodash/cloneDeep';
 import layoutSVG from '@plone/volto/icons/grid-block.svg';
 import BlockSettingsSchema from '@plone/volto/components/manage/Blocks/Block/Schema';
 import SectionBlockView from '../../govrs/blocks/section/View';
 import SectionBlockEdit from '../../govrs/blocks/section/Edit';
 import SectionBlockSchema, {
+  NestedSectionBlockSchema,
+  backgroundSchemaEnhancer,
   sectionSchemaEnhancer,
 } from '../../govrs/blocks/section/schema';
 import sectionTemplates from '../../govrs/blocks/section/templates';
+import GridBlockView from '../../govrs/blocks/grid/View';
+import GridBlockEdit from '../../govrs/blocks/grid/Edit';
+import GridBlockSchema, {
+  gridSchemaEnhancer,
+} from '../../govrs/blocks/grid/schema';
+import restrictGridImageAlignment from '../../govrs/blocks/grid/imageSchema';
+import backgroundDataAdapter from '../../govrs/blocks/container/backgroundDataAdapter';
+import { getGridRuleBlockTypes } from '../../govrs/blocks/container/restrictions';
+import { buildContainerHierarchy } from './containerHierarchy';
 
-const DEFAULT_ALLOWED_BLOCKS = [
+export const DEFAULT_ALLOWED_BLOCKS = [
   'slate',
   'image',
   'teaser',
@@ -19,46 +29,36 @@ const DEFAULT_ALLOWED_BLOCKS = [
   'accordion',
   'slateTable',
   'gridBlock',
+  'procergsSection',
   'procergsButton',
 ];
 
-const sectionDataAdapter = ({ block, data, id, onChangeBlock, value }) => {
-  const nextData = {
-    ...data,
-    [id]: value,
-  };
-  delete nextData.videoPoster;
+const pickBlockConfigs = (blocksConfig, blockTypes) =>
+  Object.fromEntries(
+    blockTypes
+      .filter((blockType) => blocksConfig?.[blockType])
+      .map((blockType) => [blockType, blocksConfig[blockType]]),
+  );
 
-  if (id === 'backgroundType') {
-    if (value !== 'image') {
-      delete nextData.backgroundImage;
-    }
-    if (value !== 'video') {
-      delete nextData.videoSource;
-      delete nextData.videoFile;
-      delete nextData.videoUrl;
-      delete nextData.videoStart;
-      delete nextData.videoEnd;
-    } else if (!nextData.videoSource) {
-      nextData.videoSource = data.videoFile ? 'file' : 'youtube';
-    }
-  }
-  if (id === 'videoSource') {
-    if (value === 'file') {
-      delete nextData.videoUrl;
-    } else {
-      delete nextData.videoFile;
-    }
-  }
+export const buildContainerBlocksConfig = (
+  blocksConfig,
+  sectionSettings = {},
+) => {
+  const configuredAllowedBlocks =
+    sectionSettings.allowedBlocks || DEFAULT_ALLOWED_BLOCKS;
+  const originalGridConfig = blocksConfig.gridBlock;
+  const originalGridAllowedBlocks = originalGridConfig.allowedBlocks || [];
+  const gridRuleBlockTypes = getGridRuleBlockTypes(blocksConfig);
+  const {
+    rootSectionAllowedBlocks,
+    terminalSectionAllowedBlocks,
+    gridAllowedBlocks,
+  } = buildContainerHierarchy({
+    sectionAllowedBlocks: configuredAllowedBlocks,
+    gridAllowedBlocks: [...originalGridAllowedBlocks, ...gridRuleBlockTypes],
+  });
 
-  onChangeBlock(block, nextData);
-};
-
-const configureSectionBlock = (config) => {
-  const sectionSettings = config.settings.procergsSection || {};
-  const allowedBlocks = sectionSettings.allowedBlocks || DEFAULT_ALLOWED_BLOCKS;
-
-  config.blocks.blocksConfig.procergsSection = {
+  const commonSectionConfig = {
     id: 'procergsSection',
     title: 'Grupo',
     icon: layoutSVG,
@@ -66,20 +66,84 @@ const configureSectionBlock = (config) => {
     view: SectionBlockView,
     edit: SectionBlockEdit,
     schema: BlockSettingsSchema,
-    blockSchema: SectionBlockSchema,
-    schemaEnhancer: sectionSchemaEnhancer,
-    dataAdapter: sectionDataAdapter,
+    dataAdapter: backgroundDataAdapter,
     templates: sectionTemplates,
     maxLength: sectionSettings.maxLength || 50,
-    allowedBlocks,
     restricted: false,
     mostUsed: true,
     sidebarTab: 1,
   };
 
-  const childBlocksConfig = cloneDeep(config.blocks.blocksConfig);
-  delete childBlocksConfig.procergsSection;
-  config.blocks.blocksConfig.procergsSection.blocksConfig = childBlocksConfig;
+  const terminalSectionConfig = {
+    ...commonSectionConfig,
+    blockSchema: NestedSectionBlockSchema,
+    schemaEnhancer: backgroundSchemaEnhancer,
+    allowedBlocks: terminalSectionAllowedBlocks,
+    blocksConfig: pickBlockConfigs(blocksConfig, terminalSectionAllowedBlocks),
+  };
+
+  const originalGridBlocksConfig =
+    originalGridConfig.blocksConfig || blocksConfig;
+  const gridImageConfig = {
+    ...(originalGridBlocksConfig.image || blocksConfig.image),
+    schemaEnhancer: restrictGridImageAlignment,
+  };
+  const gridCarouselConfig =
+    originalGridBlocksConfig.carousel || blocksConfig.carousel;
+  const gridTerminalSectionConfig = {
+    ...terminalSectionConfig,
+    blocksConfig: {
+      ...terminalSectionConfig.blocksConfig,
+      image: gridImageConfig,
+    },
+  };
+
+  const gridConfig = {
+    ...originalGridConfig,
+    view: GridBlockView,
+    edit: GridBlockEdit,
+    blockSchema: GridBlockSchema,
+    schemaEnhancer: gridSchemaEnhancer,
+    dataAdapter: backgroundDataAdapter,
+    allowedBlocks: gridAllowedBlocks,
+    blocksConfig: {
+      ...pickBlockConfigs(originalGridBlocksConfig, originalGridAllowedBlocks),
+      ...pickBlockConfigs(blocksConfig, gridRuleBlockTypes),
+      ...(gridCarouselConfig ? { carousel: gridCarouselConfig } : {}),
+      image: gridImageConfig,
+      procergsSection: gridTerminalSectionConfig,
+    },
+  };
+
+  const sectionConfig = {
+    ...commonSectionConfig,
+    blockSchema: SectionBlockSchema,
+    schemaEnhancer: sectionSchemaEnhancer,
+    allowedBlocks: rootSectionAllowedBlocks,
+    blocksConfig: {
+      ...pickBlockConfigs(blocksConfig, terminalSectionAllowedBlocks),
+      gridBlock: gridConfig,
+      procergsSection: terminalSectionConfig,
+    },
+  };
+
+  return {
+    gridConfig,
+    sectionConfig,
+    terminalSectionConfig,
+    gridTerminalSectionConfig,
+  };
+};
+
+const configureSectionBlock = (config) => {
+  const sectionSettings = config.settings.procergsSection || {};
+  const { gridConfig, sectionConfig } = buildContainerBlocksConfig(
+    config.blocks.blocksConfig,
+    sectionSettings,
+  );
+
+  config.blocks.blocksConfig.gridBlock = gridConfig;
+  config.blocks.blocksConfig.procergsSection = sectionConfig;
 
   return config;
 };

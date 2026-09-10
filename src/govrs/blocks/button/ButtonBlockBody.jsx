@@ -18,6 +18,8 @@ const ButtonBlockBody = ({ data, isEditMode = false }) => {
     '--procergs-button-background': colors.background,
     '--procergs-button-foreground': colors.foreground,
     '--procergs-button-border': colors.border,
+    '--procergs-button-background-opacity': String(colors.backgroundOpacity),
+    '--procergs-button-border-opacity': String(colors.borderOpacity),
     ...(colors.hover.background && {
       '--procergs-button-hover-background': colors.hover.background,
     }),
@@ -27,6 +29,12 @@ const ButtonBlockBody = ({ data, isEditMode = false }) => {
     ...(colors.hover.border && {
       '--procergs-button-hover-border': colors.hover.border,
     }),
+    '--procergs-button-hover-background-opacity': String(
+      colors.hover.backgroundOpacity,
+    ),
+    '--procergs-button-hover-border-opacity': String(
+      colors.hover.borderOpacity,
+    ),
   };
   const content = (
     <span

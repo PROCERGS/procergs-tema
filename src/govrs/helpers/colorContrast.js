@@ -82,6 +82,55 @@ const composite = (overlay, base, opacity) =>
 const rgbToHex = (rgb) =>
   `#${rgb.map((channel) => channel.toString(16).padStart(2, '0')).join('')}`;
 
+export const clampOpacity = (value, fallback = 1) => {
+  if (value === null || value === undefined || value === '') {
+    return fallback;
+  }
+
+  const number = Number(value);
+  if (!Number.isFinite(number)) {
+    return fallback;
+  }
+
+  return Math.min(1, Math.max(0, number));
+};
+
+export const hexToRgba = (hex, opacity = 1) => {
+  const rgb = parseHexColor(hex);
+  const alpha = clampOpacity(opacity, 1);
+
+  if (!rgb) {
+    return alpha <= 0 ? 'transparent' : hex;
+  }
+
+  if (alpha <= 0) {
+    return 'transparent';
+  }
+
+  if (alpha >= 1) {
+    return hex;
+  }
+
+  return `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${alpha})`;
+};
+
+export const getContrastRatioWithOpacity = (
+  background,
+  foreground,
+  opacity = 1,
+  baseRgb = [255, 255, 255],
+) => {
+  const overlay = parseHexColor(background);
+  if (!overlay || !parseHexColor(foreground)) {
+    return 0;
+  }
+
+  return getContrastRatio(
+    rgbToHex(composite(overlay, baseRgb, clampOpacity(opacity, 1))),
+    foreground,
+  );
+};
+
 export const getSafeOverlayOpacity = (
   overlayColor,
   foregroundColor,

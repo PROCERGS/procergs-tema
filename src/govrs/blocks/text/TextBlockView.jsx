@@ -13,6 +13,7 @@ import {
   TEXT_LISTS_BASE,
   TEXT_TYPOGRAPHY_WRAPPER,
 } from '../../constants/typography';
+import { normalizeTextAlignment } from './textAlignment';
 
 const TextBlockView = (props) => {
   const { id, data, styling = {}, className } = props;
@@ -38,6 +39,7 @@ const TextBlockView = (props) => {
         TEXT_TYPOGRAPHY_WRAPPER,
         TEXT_HEADERS_DESKTOP,
         TEXT_LISTS_BASE,
+        `procergs-text-block--align-${normalizeTextAlignment(data.textAlignment)}`,
         className,
       )}
     >

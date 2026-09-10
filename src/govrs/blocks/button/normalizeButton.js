@@ -1,4 +1,5 @@
 import { flattenToAppURL, isInternalURL } from '@plone/volto/helpers/Url/Url';
+import { clampOpacity } from '../../helpers/colorContrast';
 import toHexColor from '../../helpers/toHexColor';
 import { resolveImageUrlFromContent } from '../../helpers/resolveImageUrlFromContent';
 
@@ -6,6 +7,8 @@ export const DEFAULT_BUTTON_COLORS = {
   background: '#1a7235',
   foreground: '#ffffff',
   border: '#1a7235',
+  backgroundOpacity: 1,
+  borderOpacity: 1,
 };
 
 export const DEFAULT_BUTTON_HOVER_COLORS = {
@@ -66,12 +69,34 @@ export const normalizeButton = (data = {}) => {
         data.colorPair?.border,
         toHexColor(data.borderColor, background),
       ),
+      backgroundOpacity: clampOpacity(
+        data.colorPair?.backgroundOpacity,
+        DEFAULT_BUTTON_COLORS.backgroundOpacity,
+      ),
+      borderOpacity: clampOpacity(
+        data.colorPair?.borderOpacity,
+        DEFAULT_BUTTON_COLORS.borderOpacity,
+      ),
       hover: {
         background: hoverBackground,
         foreground: toHexColor(data.hoverColorPair?.foreground, null),
         border: toHexColor(
           data.hoverColorPair?.border,
           toHexColor(data.hoverBorderColor, hoverBackground),
+        ),
+        backgroundOpacity: clampOpacity(
+          data.hoverColorPair?.backgroundOpacity,
+          clampOpacity(
+            data.colorPair?.backgroundOpacity,
+            DEFAULT_BUTTON_COLORS.backgroundOpacity,
+          ),
+        ),
+        borderOpacity: clampOpacity(
+          data.hoverColorPair?.borderOpacity,
+          clampOpacity(
+            data.colorPair?.borderOpacity,
+            DEFAULT_BUTTON_COLORS.borderOpacity,
+          ),
         ),
       },
     },
