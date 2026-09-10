@@ -11,6 +11,49 @@ import SortableItem from '@plone/volto/components/manage/Blocks/Block/Order/Sort
 
 import { injectLazyLibs } from '@plone/volto/helpers/Loadable/Loadable';
 
+export function getMoveCoordinates({
+  items,
+  activeId,
+  overId,
+  parentId,
+  depth,
+  arrayMove,
+}) {
+  const activeIndex = items.findIndex(({ id }) => id === activeId);
+  const overIndex = items.findIndex(({ id }) => id === overId);
+
+  if (activeIndex < 0 || overIndex < 0) return null;
+
+  const activeItem = items[activeIndex];
+  const reorderedItems = arrayMove(
+    items.map((item) =>
+      item.id === activeId ? { ...item, depth, parentId } : item,
+    ),
+    activeIndex,
+    overIndex,
+  );
+  const destinationIndex = reorderedItems.findIndex(
+    ({ id }) => id === activeId,
+  );
+
+  return {
+    source: {
+      position: activeItem.index,
+      parent: activeItem.parentId,
+      id: activeId,
+    },
+    destination: {
+      // `index` in the flattened tree belongs to each item's original
+      // container. Count the destination's direct children instead so this
+      // remains correct when crossing Group/Grid boundaries at any depth.
+      position: reorderedItems
+        .slice(0, destinationIndex)
+        .filter((item) => item.parentId === parentId).length,
+      parent: parentId,
+    },
+  };
+}
+
 export function Order({
   items = [],
   onMoveBlock,
@@ -197,96 +240,16 @@ export function Order({
     if (projected && over) {
       const { depth, parentId } = projected;
       const clonedItems = JSON.parse(JSON.stringify(flattenedItems));
-      const overIndex = clonedItems.findIndex(({ id }) => id === over.id);
-      const activeIndex = clonedItems.findIndex(({ id }) => id === active.id);
-      const activeTreeItem = clonedItems[activeIndex];
-      const oldParentId = activeTreeItem.parentId;
+      const coordinates = getMoveCoordinates({
+        items: clonedItems,
+        activeId: active.id,
+        overId: over.id,
+        parentId,
+        depth,
+        arrayMove,
+      });
 
-      clonedItems[activeIndex] = { ...activeTreeItem, depth, parentId };
-
-      // Translate position depending on parent
-      if (parentId === oldParentId) {
-        // Move from and to toplevel or move within the same grid block
-
-        let destIndex = clonedItems[overIndex].index;
-        if (clonedItems[overIndex].depth > clonedItems[activeIndex].depth) {
-          destIndex = find(clonedItems, {
-            id: clonedItems[overIndex].parentId,
-          }).index;
-        }
-        onMoveBlock({
-          source: {
-            position: clonedItems[activeIndex].index,
-            parent: oldParentId,
-            id: active.id,
-          },
-          destination: {
-            position: destIndex,
-            parent: parentId,
-          },
-        });
-      } else if (parentId && oldParentId) {
-        // Move from one gridblock to another
-
-        onMoveBlock({
-          source: {
-            position: clonedItems[activeIndex].index,
-            parent: oldParentId,
-            id: active.id,
-          },
-          destination: {
-            position:
-              overIndex < activeIndex
-                ? clonedItems[overIndex - 1].parentId
-                  ? clonedItems[overIndex - 1].index + 1
-                  : clonedItems[overIndex].index
-                : overIndex + 1 < clonedItems.length
-                  ? clonedItems[overIndex + 1].index
-                  : clonedItems[overIndex].index + 1,
-            parent: parentId,
-          },
-        });
-      } else if (oldParentId) {
-        // Moving to the main container from a gridblock
-
-        onMoveBlock({
-          source: {
-            position: clonedItems[activeIndex].index,
-            parent: oldParentId,
-            id: active.id,
-          },
-          destination: {
-            position:
-              overIndex > activeIndex
-                ? overIndex + 1 < clonedItems.length
-                  ? clonedItems[overIndex + 1].index
-                  : clonedItems[overIndex].index + 1
-                : clonedItems[overIndex].index,
-            parent: parentId,
-          },
-        });
-      } else {
-        // Moving from the main container to a gridblock
-
-        onMoveBlock({
-          source: {
-            position: clonedItems[activeIndex].index,
-            parent: oldParentId,
-            id: active.id,
-          },
-          destination: {
-            position:
-              overIndex < activeIndex
-                ? clonedItems[overIndex - 1].parentId
-                  ? clonedItems[overIndex - 1].index + 1
-                  : clonedItems[overIndex].index
-                : overIndex + 1 < clonedItems.length
-                  ? clonedItems[overIndex + 1].index
-                  : clonedItems[overIndex].index + 1,
-            parent: parentId,
-          },
-        });
-      }
+      if (coordinates) onMoveBlock(coordinates);
     }
 
     resetState();
