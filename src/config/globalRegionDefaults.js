@@ -3,6 +3,7 @@ export const STATE_BAR_BLOCK_TYPE = 'procergsGlobalStateBar';
 export const ACCESSIBILITY_BAR_BLOCK_TYPE = 'procergsGlobalAccessibilityBar';
 export const FOOTER_BLOCK_TYPE = 'procergsGlobalFooter';
 export const BREADCRUMBS_BLOCK_TYPE = 'procergsGlobalBreadcrumbs';
+export const THEME_BLOCK_TYPE = 'procergsGlobalTheme';
 
 const createSingleBlockRegion = (id, type) => ({
   blocks: {
@@ -53,3 +54,19 @@ export const createDefaultHeaderRegion = () => ({
 
 export const createDefaultFooterRegion = () =>
   createSingleBlockRegion('procergs-global-footer', FOOTER_BLOCK_TYPE);
+
+export const createDefaultThemeRegion = () => ({
+  blocks: {
+    'procergs-global-theme': {
+      '@type': THEME_BLOCK_TYPE,
+      primaryColor: '#1A7235',
+      secondaryColor: '#005CA9',
+      textColor: '#000000',
+      backgroundColor: '#FFFFFF',
+      linkColor: '#1351B4',
+    },
+  },
+  blocks_layout: {
+    items: ['procergs-global-theme'],
+  },
+});

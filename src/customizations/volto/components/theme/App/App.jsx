@@ -49,6 +49,10 @@ import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFa
 import RouteAnnouncer from '@plone/volto/components/theme/RouteAnnouncer/RouteAnnouncer';
 import getPageSectionChrome from '../../../../../helpers/getPageSectionChrome';
 import isSectionOverlayEnabled from '../../../../../helpers/isSectionOverlayEnabled';
+import {
+  SiteThemeGlobalStyle,
+  SiteThemeToolbar,
+} from '../../../../../govrs/components/SiteTheme/SiteThemeToolbar';
 
 export class App extends Component {
   static propTypes = {
@@ -151,6 +155,7 @@ export class App extends Component {
               headerOverlay ? sectionChrome.headerForeground : undefined
             }
           />
+          <SiteThemeGlobalStyle />
           <MultilingualRedirector
             pathname={this.props.pathname}
             contentLanguage={this.props.content?.language?.token}
@@ -210,19 +215,20 @@ export class App extends Component {
             initializeLabel="Inicializar cabeçalho global"
             cancelLabel="Cancelar edição do cabeçalho"
             visible={Boolean(this.props.token)}
-            morePluggable={null}
+            morePluggable="toolbar-more-menu-list"
             order={10}
           />
           <GlobalRegionsToolbarPlug
             region="footer"
             icon={footerRegionSVG}
             label="Editar rodapé global"
-            initializeLabel="Inicializar rodapé global"
+            initializeLabel="Editar rodapé global"
             cancelLabel="Cancelar edição do rodapé"
             visible={Boolean(this.props.token)}
-            morePluggable={null}
+            morePluggable="toolbar-more-menu-list"
             order={20}
           />
+          <SiteThemeToolbar visible={Boolean(this.props.token)} order={30} />
           <GlobalRegionsSidebar />
         </GlobalRegionsProvider>
       </PluggablesProvider>

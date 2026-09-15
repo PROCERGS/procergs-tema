@@ -18,10 +18,10 @@ body.global-region-editing {
   .global-blocks-region.is-editing {
     position: relative;
     z-index: 30;
-    flex: 0 0 auto;
+    overflow: visible;
     width: 100%;
     min-height: 0;
-    overflow: visible;
+    flex: 0 0 auto;
     background: #fff;
     outline: 3px solid var(--govrs-color-primary, #1351b4);
     outline-offset: 4px;
@@ -37,11 +37,11 @@ body.global-region-editing-header
   ),
 body.global-region-editing-footer .procergs-footer-wrapper {
   position: relative !important;
+  z-index: auto !important;
   top: auto !important;
   right: auto !important;
   bottom: auto !important;
   left: auto !important;
-  z-index: auto !important;
   margin-top: 0 !important;
 }
 
@@ -80,11 +80,11 @@ body.global-region-editing-footer .procergs-footer-wrapper {
 }
 
 #toolbar .toolbar-actions .global-regions-toolbar-button {
-  order: 1;
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  order: 1;
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -113,30 +113,44 @@ body.cms-ui.view-editview
   order: 2;
 }
 
-.pastanaga-menu-list .global-regions-more-item button {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  cursor: pointer;
-  text-align: left;
+.pastanaga-menu-list .global-regions-more-item {
+  display: none;
 
-  &[aria-pressed='true'] {
-    font-weight: 700;
+  button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    text-align: left;
+
+    &[aria-pressed='true'] {
+      font-weight: 700;
+    }
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  #toolbar .toolbar-actions .global-regions-toolbar-button {
+    display: none !important;
+  }
+
+  .pastanaga-menu-list .global-regions-more-item {
+    display: list-item;
   }
 }
 
 .global-blocks-region-edit-header {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  position: relative;
-  z-index: 1;
   padding: 0.75rem 1rem;
   background: #fff8e5;
   color: #333;
+  gap: 1rem;
 
   p {
     margin: 0.25rem 0 0;
@@ -156,8 +170,8 @@ body.cms-ui.view-editview
 }
 
 .global-blocks-region-error {
-  margin: 0;
   padding: 0.75rem 1rem;
+  margin: 0;
   background: #fbe9e7;
   color: #b71c1c;
 }
