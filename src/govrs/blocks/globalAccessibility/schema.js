@@ -46,7 +46,7 @@ const AccessibilityBarBlockSchema = ({ intl, data = {} }) => ({
   ],
   properties: {
     isSecretariat: {
-      title: 'É uma secretaria',
+      title: 'É vinculada a uma secretaria',
       description:
         'Divide a barra em identificação da secretaria, atalhos e controles de acessibilidade.',
       type: 'boolean',
