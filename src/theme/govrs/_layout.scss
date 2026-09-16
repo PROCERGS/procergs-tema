@@ -26,6 +26,84 @@
   }
 }
 
+.procergs-accessibility-wrapper.is-secretariat {
+  > .procergs-secretariat-bar {
+    display: block !important;
+    background: var(--govrs-color-surface-subtle, #e6e6e6);
+    color: var(--govrs-color-text-primary, #1a1a1a);
+  }
+
+  .procergs-secretariat-bar__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 0.75rem clamp(1.5rem, 3vw, 3rem);
+    padding-block: 0.5rem;
+
+    > .acess-bar,
+    > .acess-bar > .acess-wrapper {
+      display: contents !important;
+    }
+
+    > .acess-bar {
+      --govrs-acess-bar-foreground: inherit;
+      --govrs-acess-bar-hover-foreground: inherit;
+    }
+  }
+
+  .procergs-secretariat-bar__identity {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-width: 0;
+  }
+
+  .procergs-secretariat-bar__image {
+    display: block;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: 0 0 2.75rem;
+    object-fit: contain;
+  }
+
+  .procergs-secretariat-bar__text {
+    min-width: 0;
+    color: inherit;
+    font-size: 1rem;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .acess-right,
+  .acess-left {
+    min-width: 0;
+  }
+
+  .acess-right {
+    justify-self: center;
+  }
+
+  .acess-left {
+    justify-self: end;
+  }
+
+  .acess-ul {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  @media (max-width: 47.9375rem) {
+    .procergs-secretariat-bar__layout {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .acess-right,
+    .acess-left {
+      display: none;
+    }
+  }
+}
+
 body > .barra-estado-host {
   display: none !important;
 }

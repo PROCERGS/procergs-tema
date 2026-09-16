@@ -24,14 +24,19 @@ const messages = defineMessages({
   },
 });
 
-const AccessibilityBarBlockSchema = ({ intl }) => ({
+const AccessibilityBarBlockSchema = ({ intl, data = {} }) => ({
   title: intl.formatMessage(messages.accessibilityBar),
   description: intl.formatMessage(messages.description),
   fieldsets: [
     {
       id: 'default',
       title: intl.formatMessage(messages.default),
-      fields: [],
+      fields: [
+        'isSecretariat',
+        ...(data.isSecretariat === true
+          ? ['secretariatText', 'secretariatImage']
+          : []),
+      ],
     },
     {
       id: 'behavior',
@@ -40,6 +45,22 @@ const AccessibilityBarBlockSchema = ({ intl }) => ({
     },
   ],
   properties: {
+    isSecretariat: {
+      title: 'É uma secretaria',
+      description:
+        'Divide a barra em identificação da secretaria, atalhos e controles de acessibilidade.',
+      type: 'boolean',
+      default: false,
+    },
+    secretariatText: {
+      title: 'Nome da secretaria',
+      type: 'string',
+    },
+    secretariatImage: {
+      title: 'Imagem da secretaria',
+      description: 'Imagem pequena exibida antes do nome da secretaria.',
+      widget: 'image',
+    },
     allowOverlay: {
       title: intl.formatMessage(messages.allowOverlay),
       description:
