@@ -524,9 +524,7 @@ export const LegacyGovrsHeader = ({
   );
 
   const handleSearch = (term) => {
-    const path =
-      pathname?.length > 0 ? `&path=${encodeURIComponent(pathname)}` : '';
-    history.push(`./search?SearchableText=${encodeURIComponent(term)}${path}`);
+    history.push(`/search?SearchableText=${encodeURIComponent(term)}`);
   };
 
   return (
