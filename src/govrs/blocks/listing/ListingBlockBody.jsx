@@ -18,7 +18,6 @@ import {
 import { getListVariantProps } from './getListVariantProps';
 import { getGridColumnCount } from './gridRules';
 import { normalizeListItems } from './normalizeListItems';
-import { withDefaultListingTags } from './withDefaultListingTags';
 import {
   getListingItemHrefFromEvent,
   isClickableDefaultListing,
@@ -86,13 +85,9 @@ const ListingBlockBody = withQuerystringResults((props) => {
     config.blocks?.blocksConfig?.listing?.noResultsComponent;
   const history = useHistory();
   const listProps = getListVariantProps(data);
-  const normalizedItems = normalizeListItems(listingItems, data, {
+  const items = normalizeListItems(listingItems, data, {
     isEditMode,
   });
-  const items =
-    variationId === 'default'
-      ? withDefaultListingTags(normalizedItems)
-      : normalizedItems;
   const HeadlineTag = data.headlineTag || 'h2';
   const hasItems = items.length > 0;
   const isClickableDefault = isClickableDefaultListing(data, items, isEditMode);
