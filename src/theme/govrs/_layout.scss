@@ -520,6 +520,11 @@ body.cms-ui {
     transform: none;
   }
 
+  &:is(.view-editview, .view-addview):not(.global-region-editing)
+    .ui.basic.segment.content-area:has(.power-user-menu) {
+    z-index: 2;
+  }
+
   &:is(.view-editview, .view-addview) {
     --procergs-cms-chrome-left: 0px;
     --procergs-cms-chrome-right: 0px;
