@@ -18,7 +18,6 @@ import { visitBlocks } from '@plone/volto/helpers/Blocks/Blocks';
 import { injectIntl } from 'react-intl';
 import {
   bootstrapGlobalRegions,
-  GlobalRegionsProvider,
   GlobalRegionsToolbarPlug,
 } from 'volto-global-regions';
 import { GlobalRegionsSidebar } from 'volto-global-regions/components';
@@ -49,6 +48,8 @@ import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFa
 import RouteAnnouncer from '@plone/volto/components/theme/RouteAnnouncer/RouteAnnouncer';
 import getPageSectionChrome from '../../../../../helpers/getPageSectionChrome';
 import isSectionOverlayEnabled from '../../../../../helpers/isSectionOverlayEnabled';
+import { getCurrentContentEditPermission } from '../../../../../helpers/canEditCurrentContent';
+import GlobalRegionsPermissions from '../../../../../govrs/components/GlobalRegionsPermissions';
 
 export class App extends Component {
   static propTypes = {
@@ -96,6 +97,8 @@ export class App extends Component {
     const sectionOverlaysEnabled = isSectionOverlayEnabled({
       action,
       isCmsUI,
+      pathname: this.props.pathname,
+      content: this.props.content,
     });
     const ConnectionRefusedView = views.errorViews.ECONNREFUSED;
     const sectionChrome = getPageSectionChrome(this.props.content);
@@ -107,7 +110,11 @@ export class App extends Component {
 
     return (
       <PluggablesProvider>
-        <GlobalRegionsProvider>
+        <GlobalRegionsPermissions
+          token={this.props.token}
+          userId={this.props.userId}
+          canEditContent={this.props.canEditContent}
+        >
           <Helmet>
             {language && <html lang={language} />}
             <script src="https://cdn.jsdelivr.net/gh/PROCERGS/react-govrs-ds@29dbc8de98b4b6b620bcfdcc23a9449d754b70d6/src/components/BarraEstado/BarraEstadoStandalone.js"></script>
@@ -210,6 +217,7 @@ export class App extends Component {
             initializeLabel="Inicializar cabeçalho global"
             cancelLabel="Cancelar edição do cabeçalho"
             visible={Boolean(this.props.token)}
+            requireEditPermission
             morePluggable={null}
             order={10}
           />
@@ -220,11 +228,12 @@ export class App extends Component {
             initializeLabel="Inicializar rodapé global"
             cancelLabel="Cancelar edição do rodapé"
             visible={Boolean(this.props.token)}
+            requireEditPermission
             morePluggable={null}
             order={20}
           />
           <GlobalRegionsSidebar />
-        </GlobalRegionsProvider>
+        </GlobalRegionsPermissions>
       </PluggablesProvider>
     );
   }
@@ -234,6 +243,13 @@ export const __test__ = connect(
   (state, props) => ({
     pathname: props.location.pathname,
     token: state.userSession.token,
+    userId: state.userSession.token
+      ? jwtDecode(state.userSession.token).sub
+      : '',
+    canEditContent: getCurrentContentEditPermission(
+      state,
+      state.userSession.token ? jwtDecode(state.userSession.token).sub : '',
+    ),
     content: state.content.data,
     apiError: state.apierror.error,
     connectionRefused: state.apierror.connectionRefused,
@@ -342,6 +358,10 @@ export function connectAppComponent(AppComponent) {
       (state, props) => ({
         pathname: props.location.pathname,
         token: state.userSession.token,
+        canEditContent: getCurrentContentEditPermission(
+          state,
+          state.userSession.token ? jwtDecode(state.userSession.token).sub : '',
+        ),
         userId: state.userSession.token
           ? jwtDecode(state.userSession.token).sub
           : '',

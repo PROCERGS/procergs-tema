@@ -3,6 +3,10 @@ import stateBarSVG from '@plone/volto/icons/row-before.svg';
 import accessibilitySVG from '@plone/volto/icons/accessibility.svg';
 import BlockSettingsSchema from '@plone/volto/components/manage/Blocks/Block/Schema';
 import { configureGlobalRegions } from 'volto-global-regions';
+import {
+  globalRegionsRequestMiddleware,
+  guardGlobalRegionsReducer,
+} from '../helpers/globalRegionsRequests';
 import { ProcergsGlobalHeaderBlock } from '../govrs/components/Header/Header';
 import HeaderBlockEdit from '../govrs/blocks/globalHeader/Edit';
 import HeaderBlockSchema from '../govrs/blocks/globalHeader/schema';
@@ -114,7 +118,7 @@ const configureGlobalRegionBlocks = (config) => {
     blockHasValue: () => true,
   };
 
-  return configureGlobalRegions(config, {
+  configureGlobalRegions(config, {
     activeRegion: 'header',
     fetchPath: '/?expand=actions',
     savePath: '/',
@@ -140,6 +144,15 @@ const configureGlobalRegionBlocks = (config) => {
       },
     },
   });
+
+  config.addonReducers.globalRegions = guardGlobalRegionsReducer(
+    config.addonReducers.globalRegions,
+  );
+  config.settings.storeExtenders = [
+    ...(config.settings.storeExtenders || []),
+    (stack) => [globalRegionsRequestMiddleware, ...stack],
+  ];
+  return config;
 };
 
 export default configureGlobalRegionBlocks;

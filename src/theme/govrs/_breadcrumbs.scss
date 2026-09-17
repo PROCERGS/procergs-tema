@@ -2,32 +2,23 @@
   width: 100%;
   box-sizing: border-box;
   background: var(--govrs-color-surface-base, #ffffff);
+  padding-inline-start: var(--procergs-header-layout-inset-left, 0px);
+  padding-inline-end: var(--procergs-header-layout-inset-right, 0px);
 }
 
 .procergs-breadcrumbs-container {
   width: 100%;
   box-sizing: border-box;
+  margin-inline: auto;
   padding-block: var(--govrs-space-3, 0.75rem);
-  padding-inline-end: max(
-    calc(
-      var(--procergs-header-layout-inset-right, 0px) +
-        var(--govrs-header-padding-inline, var(--govrs-space-4, 1rem))
-    ),
-    calc(
-      (100% - var(--govrs-layout-container-header-max-width, 90rem)) / 2 +
-        var(--govrs-header-padding-inline, var(--govrs-space-4, 1rem))
-    )
+  padding-inline: var(
+    --govrs-header-padding-inline,
+    var(--govrs-space-2-5, 0.625rem)
   );
-  padding-inline-start: max(
-    calc(
-      var(--procergs-header-layout-inset-left, 0px) +
-        var(--govrs-header-padding-inline, var(--govrs-space-4, 1rem))
-    ),
-    calc(
-      (100% - var(--govrs-layout-container-header-max-width, 90rem)) / 2 +
-        var(--govrs-header-padding-inline, var(--govrs-space-4, 1rem))
-    )
-  );
+
+  @media (min-width: 90rem) {
+    max-width: var(--govrs-layout-container-header-max-width, 90rem);
+  }
 }
 
 :root:is(.high-contrast, [data-govrs-contrast='high']) {

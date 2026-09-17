@@ -4,6 +4,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import AccessibilityBarBlockSchema from './schema';
+import { updateAccessibilityField } from './secretariat';
 import { ProcergsGlobalAccessibilityBarBlock } from '../../components/Header/AccessibilityBar';
 
 const messages = defineMessages({
@@ -39,15 +40,16 @@ const AccessibilityBarBlockEdit = (props) => {
           schema={schema}
           title={intl.formatMessage(messages.accessibilityBar)}
           description={intl.formatMessage(messages.description)}
-          onChangeField={(id, value) => {
-            onChangeBlock(block, {
-              ...data,
-              [id]: value,
-            });
+          onChangeField={(id, value, itemInfo) => {
+            onChangeBlock(
+              block,
+              updateAccessibilityField(data, id, value, itemInfo),
+            );
           }}
           onChangeBlock={onChangeBlock}
           formData={{
             ...data,
+            isSecretariat: data?.isSecretariat === true,
             allowOverlay: data?.allowOverlay !== false,
           }}
           block={block}

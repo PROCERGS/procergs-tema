@@ -25,7 +25,6 @@ export const getAppearanceFields = (variation, data) => {
         'labeled',
         ...(data?.labeled ? ['collapsible', 'groupBy'] : []),
         'mediaPreset',
-        'activeLink',
         'showTags',
         ...(data?.showTags ? ['tagsLimit'] : []),
       ];
