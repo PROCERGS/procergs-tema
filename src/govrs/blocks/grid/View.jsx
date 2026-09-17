@@ -7,6 +7,7 @@ import config from '@plone/volto/registry';
 import isNestedContainer from '../container/isNestedContainer';
 import SectionBlockBody from '../section/SectionBlockBody';
 import { GridColumnsProvider } from './GridContext';
+import { GridDividersProvider, GridViewColumn } from './GridDividers';
 
 const GridBlockView = (props) => {
   const { data, path, className, style } = props;
@@ -30,6 +31,7 @@ const GridBlockView = (props) => {
       variant="grid"
       className={cx(
         {
+          'govrs-grid-with-dividers': data.verticalDividers === true,
           one: columns.length === 1,
           two: columns.length === 2,
           three: columns.length === 3,
@@ -41,18 +43,20 @@ const GridBlockView = (props) => {
       isNested={isNestedContainer(props.properties, props.isContainer)}
     >
       <GridColumnsProvider columns={columns.length}>
-        {data.headline && <h2 className="headline">{data.headline}</h2>}
-        <Grid stackable stretched columns={columns.length}>
-          <RenderBlocks
-            {...props}
-            blockWrapperTag={Grid.Column}
-            metadata={metadata}
-            content={data}
-            location={location}
-            blocksConfig={blocksConfig}
-            isContainer
-          />
-        </Grid>
+        <GridDividersProvider data={data}>
+          {data.headline && <h2 className="headline">{data.headline}</h2>}
+          <Grid stackable stretched columns={columns.length}>
+            <RenderBlocks
+              {...props}
+              blockWrapperTag={GridViewColumn}
+              metadata={metadata}
+              content={data}
+              location={location}
+              blocksConfig={blocksConfig}
+              isContainer
+            />
+          </Grid>
+        </GridDividersProvider>
       </GridColumnsProvider>
     </SectionBlockBody>
   );

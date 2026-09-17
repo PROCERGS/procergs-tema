@@ -59,7 +59,9 @@ const ContainerBlockEdit = (props) => {
     blockConfig.containerToolbar || SimpleContainerToolbar;
   const TemplateChooser = blockConfig.templateChooser || DefaultTemplateChooser;
   const EditBlockWrapper =
-    blockConfig.editBlockWrapper || DefaultEditBlockWrapper;
+    props.editBlockWrapper ||
+    blockConfig.editBlockWrapper ||
+    DefaultEditBlockWrapper;
 
   let [selectedBlock, setSelectedBlock] = useState(
     properties.blocks_layout.items[0],
@@ -208,6 +210,7 @@ ContainerBlockEdit.propTypes = {
   properties: PropTypes.objectOf(PropTypes.any),
   isContainer: PropTypes.bool,
   setSelectedBlock: PropTypes.func,
+  editBlockWrapper: PropTypes.elementType,
 };
 
 export default ContainerBlockEdit;

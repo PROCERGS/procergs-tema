@@ -6,6 +6,7 @@ import ContainerEdit from '../container/Edit';
 import isNestedContainer from '../container/isNestedContainer';
 import SectionBlockBody from '../section/SectionBlockBody';
 import { GridColumnsProvider } from './GridContext';
+import { GridDividersProvider, GridEditBlockWrapper } from './GridDividers';
 
 const GridBlockEdit = (props) => {
   const { data, className, style } = props;
@@ -24,28 +25,37 @@ const GridBlockEdit = (props) => {
       data={data}
       blockType="gridBlock"
       variant="grid"
-      className={cx(columnsClassNames, className)}
+      className={cx(
+        columnsClassNames,
+        {
+          'govrs-grid-with-dividers': data.verticalDividers === true,
+        },
+        className,
+      )}
       style={style}
       isNested={isNestedContainer(props.properties, props.isContainer)}
       isEditMode
     >
       <GridColumnsProvider columns={columnsLength}>
-        <div
-          className={cx('grid-items', columnsClassNames)}
-          onClick={(event) => {
-            if (!event.block) dispatch(setUIState({ gridSelected: null }));
-          }}
-          role="presentation"
-        >
-          <ContainerEdit
-            {...props}
-            selectedBlock={selectedBlock}
-            setSelectedBlock={(id) =>
-              dispatch(setUIState({ gridSelected: id }))
-            }
-            direction="horizontal"
-          />
-        </div>
+        <GridDividersProvider data={data}>
+          <div
+            className={cx('grid-items', columnsClassNames)}
+            onClick={(event) => {
+              if (!event.block) dispatch(setUIState({ gridSelected: null }));
+            }}
+            role="presentation"
+          >
+            <ContainerEdit
+              {...props}
+              editBlockWrapper={GridEditBlockWrapper}
+              selectedBlock={selectedBlock}
+              setSelectedBlock={(id) =>
+                dispatch(setUIState({ gridSelected: id }))
+              }
+              direction="horizontal"
+            />
+          </div>
+        </GridDividersProvider>
       </GridColumnsProvider>
     </SectionBlockBody>
   );
