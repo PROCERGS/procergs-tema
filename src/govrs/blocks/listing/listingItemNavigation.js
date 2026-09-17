@@ -23,7 +23,6 @@ export const isClickableDefaultListing = (
   isEditMode = false,
 ) =>
   getListingVariation(data) === 'default' &&
-  Boolean(data.activeLink) &&
   !isEditMode &&
   items.some((item) => item.href);
 
