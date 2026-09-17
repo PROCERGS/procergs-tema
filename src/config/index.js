@@ -8,6 +8,7 @@ import configureListingBlock from './blocks/listing';
 import configureBannerBlock from './blocks/banner';
 import configureSlateTableBlock from './blocks/slateTable';
 import configureButtonBlock from './blocks/button';
+import configureDivisorBlock from './blocks/divisor';
 import configureSectionBlock from './blocks/section';
 import configureTitleBlock from './blocks/title';
 import configureGlobalRegionBlocks from './globalRegions';
@@ -32,6 +33,7 @@ const applyConfig = (config) => {
   configureBannerBlock(config);
   configureSlateTableBlock(config);
   configureButtonBlock(config);
+  configureDivisorBlock(config);
   configureSectionBlock(config);
   configureGlobalRegionBlocks(config);
 

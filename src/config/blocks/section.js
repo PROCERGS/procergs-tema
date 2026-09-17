@@ -31,6 +31,7 @@ export const DEFAULT_ALLOWED_BLOCKS = [
   'gridBlock',
   'procergsSection',
   'procergsButton',
+  'procergsDivisor',
 ];
 
 const pickBlockConfigs = (blocksConfig, blockTypes) =>
