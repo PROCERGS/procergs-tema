@@ -109,7 +109,7 @@ export const ButtonBlockSchema = ({ intl, data }) => ({
       description:
         'Escolha as cores. Em opacidade, 0% é transparente e 100% é sólido.',
       widget: 'color_contrast',
-      default: DEFAULT_BUTTON_COLORS,
+      default: { ...DEFAULT_BUTTON_COLORS },
       showBorder: true,
       showOpacity: true,
       legacyBorderColor: data?.borderColor,
@@ -118,7 +118,7 @@ export const ButtonBlockSchema = ({ intl, data }) => ({
       title: intl.formatMessage(messages.hoverColors),
       description: 'Defina como o botão aparece ao passar o ponteiro.',
       widget: 'color_contrast',
-      default: DEFAULT_BUTTON_HOVER_COLORS,
+      default: { ...DEFAULT_BUTTON_HOVER_COLORS },
       showBorder: true,
       showOpacity: true,
       legacyBorderColor: data?.hoverBorderColor,
