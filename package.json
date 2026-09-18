@@ -4,6 +4,9 @@
   "packageManager": "pnpm@9.15.9",
   "description": "Tema principal PROCERGS para projetos Volto",
   "main": "src/index.js",
+  "addons": [
+    "volto-global-regions"
+  ],
   "license": "MIT",
   "keywords": [
     "volto-addon",

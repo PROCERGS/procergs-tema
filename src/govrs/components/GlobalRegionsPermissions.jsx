@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import {
   GlobalRegionsContext,
@@ -40,14 +40,10 @@ export function GlobalRegionsPermissionBoundary({
   canEditContent,
 }) {
   const globalRegions = useGlobalRegions();
-  const rootPermission = useSelector(
-    (state) => state.globalRegions?.editPermission ?? null,
-  );
   const sessionUser = token ? userId : null;
   const sessionVersion = useSelector(
     (state) => state.globalRegions?.sessionVersion || 0,
   );
-  const [verifiedSession, setVerifiedSession] = useState(null);
   const globalRegionsRef = useRef(globalRegions);
   globalRegionsRef.current = globalRegions;
   const { cancelEditing, editingRegion } = globalRegions;
@@ -65,36 +61,14 @@ export function GlobalRegionsPermissionBoundary({
   }, [permissionRefreshRequired]);
 
   useEffect(() => {
-    let active = true;
+    globalRegionsRef.current.cancelEditing();
     Promise.resolve()
       .then(() => globalRegionsRef.current.fetch())
-      .then(
-        () => {
-          if (active)
-            setVerifiedSession({ user: sessionUser, version: sessionVersion });
-        },
-        () => {
-          if (active) setVerifiedSession(null);
-        },
-      );
-    return () => {
-      active = false;
-    };
+      .catch(() => {});
   }, [sessionUser, sessionVersion]);
 
-  const sessionVerified = Boolean(
-    sessionUser &&
-      sessionUser === verifiedSession?.user &&
-      sessionVersion === verifiedSession?.version,
-  );
-
-  const canEdit = Boolean(
-    sessionVerified && canEditContent === true && rootPermission === true,
-  );
-
-  const preserveEditing = Boolean(
-    sessionVerified && canEditContent !== false && rootPermission !== false,
-  );
+  const canEdit = Boolean(token && canEditContent);
+  const preserveEditing = canEdit;
 
   if (!preserveEditing || !editingRegion) {
     editingSnapshot.current = null;
