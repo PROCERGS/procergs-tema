@@ -426,6 +426,9 @@ html:has(> body.cms-ui) {
 }
 
 body.cms-ui {
+  --procergs-cms-chrome-left: 0px;
+  --procergs-cms-chrome-right: 0px;
+
   display: flex;
   flex-direction: column;
   height: auto !important;
@@ -525,56 +528,45 @@ body.cms-ui {
     z-index: 2;
   }
 
+  &.has-toolbar {
+    --procergs-cms-chrome-left: 80px;
+  }
+
+  &.has-toolbar-collapsed {
+    --procergs-cms-chrome-left: 20px;
+  }
+
+  .global-blocks-region-header,
+  .global-blocks-region-footer,
+  .ui.basic.segment.content-area {
+    --procergs-header-layout-inset-left: 0px;
+    --procergs-header-layout-inset-right: 0px;
+    box-sizing: border-box;
+    width: calc(
+      100% - var(--procergs-cms-chrome-left) - var(--procergs-cms-chrome-right)
+    ) !important;
+    max-width: none;
+    margin-inline-start: var(--procergs-cms-chrome-left) !important;
+    margin-inline-end: var(--procergs-cms-chrome-right) !important;
+    padding-inline: 0 !important;
+  }
+
+  .procergs-state-bar-wrapper,
+  .procergs-accessibility-wrapper,
+  .procergs-accessibility-wrapper > .acess-bar,
+  header.procergs-header-wrapper,
+  .procergs-header-wrapper,
+  .procergs-header-wrapper > .govrs-header-wrapper,
+  .procergs-footer-wrapper {
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+    width: 100% !important;
+  }
+
   &:is(.view-editview, .view-addview) {
-    --procergs-cms-chrome-left: 0px;
-    --procergs-cms-chrome-right: 0px;
-
-    &.has-toolbar {
-      --procergs-cms-chrome-left: 80px;
-    }
-
-    &.has-toolbar-collapsed {
-      --procergs-cms-chrome-left: 20px;
-    }
-
-    &.has-sidebar {
-      --procergs-cms-chrome-right: 375px;
-    }
-
-    &.has-sidebar-collapsed {
-      --procergs-cms-chrome-right: 20px;
-    }
-
-    .global-blocks-region-header,
-    .global-blocks-region-footer,
-    .ui.basic.segment.content-area {
-      --procergs-header-layout-inset-left: 0px;
-      --procergs-header-layout-inset-right: 0px;
-      box-sizing: border-box;
-      width: calc(
-        100% - var(--procergs-cms-chrome-left) - var(--procergs-cms-chrome-right)
-      ) !important;
-      max-width: none;
-      margin-inline-start: var(--procergs-cms-chrome-left) !important;
-      margin-inline-end: var(--procergs-cms-chrome-right) !important;
-      padding-inline: 0 !important;
-    }
-
     .ui.basic.segment.content-area {
       padding-top: 50px !important;
       padding-bottom: 1rem !important;
-    }
-
-    .procergs-state-bar-wrapper,
-    .procergs-accessibility-wrapper,
-    .procergs-accessibility-wrapper > .acess-bar,
-    header.procergs-header-wrapper,
-    .procergs-header-wrapper,
-    .procergs-header-wrapper > .govrs-header-wrapper,
-    .procergs-footer-wrapper {
-      margin-inline: 0 !important;
-      padding-inline: 0 !important;
-      width: 100% !important;
     }
 
     .content-area .ui.container,

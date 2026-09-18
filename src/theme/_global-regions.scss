@@ -46,7 +46,7 @@ body.global-region-editing-footer .procergs-footer-wrapper {
 }
 
 @media (min-width: 48rem) {
-  body.global-region-editing-footer {
+  body.global-region-editing-footer:not(.cms-ui) {
     --global-regions-toolbar-inset: 0px;
     --global-regions-sidebar-inset: 0px;
 
