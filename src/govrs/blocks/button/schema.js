@@ -121,8 +121,6 @@ export const ButtonBlockSchema = ({ intl, data }) => ({
       default: DEFAULT_BUTTON_HOVER_COLORS,
       showBorder: true,
       showOpacity: true,
-      inheritedBackgroundOpacity: data?.colorPair?.backgroundOpacity,
-      inheritedBorderOpacity: data?.colorPair?.borderOpacity,
       legacyBorderColor: data?.hoverBorderColor,
     },
     icon: {

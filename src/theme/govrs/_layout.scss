@@ -528,12 +528,28 @@ body.cms-ui {
     z-index: 2;
   }
 
-  &.has-toolbar {
-    --procergs-cms-chrome-left: 80px;
-  }
+  @media (min-width: 48rem) {
+    &.has-toolbar {
+      --procergs-cms-chrome-left: 80px;
+    }
 
-  &.has-toolbar-collapsed {
-    --procergs-cms-chrome-left: 20px;
+    &.has-toolbar-collapsed {
+      --procergs-cms-chrome-left: 20px;
+    }
+
+    &.has-sidebar:has(#sidebar .sidebar-container) {
+      --procergs-cms-chrome-right: 375px;
+    }
+
+    &.has-sidebar-collapsed:has(#sidebar .sidebar-container) {
+      --procergs-cms-chrome-right: 20px;
+    }
+
+    &:has(#sidebar .sidebar-container.full-size:not(.collapsed)) {
+      --procergs-cms-chrome-right: calc(
+        100vw - var(--procergs-cms-chrome-left)
+      );
+    }
   }
 
   .global-blocks-region-header,
@@ -542,8 +558,13 @@ body.cms-ui {
     --procergs-header-layout-inset-left: 0px;
     --procergs-header-layout-inset-right: 0px;
     box-sizing: border-box;
-    width: calc(
-      100% - var(--procergs-cms-chrome-left) - var(--procergs-cms-chrome-right)
+    width: max(
+      0px,
+      calc(
+        100% - var(--procergs-cms-chrome-left) - var(
+            --procergs-cms-chrome-right
+          )
+      )
     ) !important;
     max-width: none;
     margin-inline-start: var(--procergs-cms-chrome-left) !important;
