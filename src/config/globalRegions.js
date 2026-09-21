@@ -124,7 +124,7 @@ const configureGlobalRegionBlocks = (config) => {
     savePath: '/',
     regions: {
       header: {
-        fieldName: 'global_regions',
+        fieldName: 'header',
         title: 'Cabeçalho global',
         allowedBlocks: [
           STATE_BAR_BLOCK_TYPE,
@@ -136,7 +136,7 @@ const configureGlobalRegionBlocks = (config) => {
         createDefault: createDefaultHeaderRegion,
       },
       footer: {
-        fieldName: 'global_regions',
+        fieldName: 'footer',
         title: 'Rodapé global',
         allowedBlocks: [FOOTER_BLOCK_TYPE],
         maxLength: 1,

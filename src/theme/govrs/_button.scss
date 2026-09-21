@@ -9,42 +9,36 @@
   .procergs-button-block__inner--left {
     justify-content: flex-start;
   }
-
   .procergs-button-block__inner--center {
     justify-content: center;
   }
-
   .procergs-button-block__inner--right {
     justify-content: flex-end;
   }
 
+  .procergs-button-block__appearance {
+    display: inline-flex;
+  }
+
   .procergs-button-block__button.govrs-button {
-    --govrs-button-background: color-mix(
-      in srgb,
-      var(
-          --procergs-button-background,
-          var(--govrs-color-brand-primary, #1a7235)
-        )
-        calc(var(--procergs-button-background-opacity, 1) * 100%),
-      transparent
-    );
-    --govrs-button-border: color-mix(
-      in srgb,
-      var(
-          --procergs-button-border,
-          var(--govrs-color-brand-primary, #1a7235)
-        )
-        calc(var(--procergs-button-border-opacity, 1) * 100%),
-      transparent
-    );
-    --govrs-button-foreground: var(
-      --procergs-button-foreground,
-      var(--govrs-color-text-inverse, #ffffff)
-    );
     padding: var(--govrs-space-2, 0.5rem)
       var(--govrs-button-padding-inline, 1.5rem);
-    color: var(--procergs-button-foreground, #ffffff) !important;
+    background-color: var(--procergs-button-resolved-background);
+    border-color: var(--procergs-button-resolved-border);
+    color: var(--procergs-button-foreground) !important;
     text-decoration: none;
+
+    &:disabled {
+      opacity: 1;
+    }
+
+    &:not(:disabled):hover,
+    &:not(:disabled):active {
+      background-color: var(--procergs-button-resolved-hover-background);
+      border-color: var(--procergs-button-resolved-hover-border);
+      color: var(--procergs-button-hover-foreground) !important;
+      text-decoration: none;
+    }
   }
 
   .procergs-button-block__content {
@@ -57,11 +51,9 @@
   .procergs-button-block__content--top {
     flex-direction: column;
   }
-
   .procergs-button-block__content--right {
     flex-direction: row-reverse;
   }
-
   .procergs-button-block__content--bottom {
     flex-direction: column-reverse;
   }
@@ -78,92 +70,33 @@
     -webkit-mask-size: contain;
     mask-size: contain;
   }
-
-  .procergs-button-block__button.govrs-button:not(:disabled):hover {
-    border-color: color-mix(
-      in srgb,
-      var(
-          --procergs-button-hover-border,
-          color-mix(in srgb, var(--procergs-button-border, #1a7235) 88%, #000000)
-        )
-        calc(
-          var(
-              --procergs-button-hover-border-opacity,
-              var(--procergs-button-border-opacity, 1)
-            ) * 100%
-        ),
-      transparent
-    );
-    background-color: color-mix(
-      in srgb,
-      var(
-          --procergs-button-hover-background,
-          color-mix(
-            in srgb,
-            var(--procergs-button-background, #1a7235) 88%,
-            #000000
-          )
-        )
-        calc(
-          var(
-              --procergs-button-hover-background-opacity,
-              var(--procergs-button-background-opacity, 1)
-            ) * 100%
-        ),
-      transparent
-    );
-    color: var(
-      --procergs-button-hover-foreground,
-      var(--procergs-button-foreground, #ffffff)
-    ) !important;
-  }
-
-  .procergs-button-block__button.govrs-button:not(:disabled):active {
-    border-color: color-mix(
-      in srgb,
-      color-mix(in srgb, var(--procergs-button-border, #1a7235) 76%, #000000)
-        calc(var(--procergs-button-border-opacity, 1) * 100%),
-      transparent
-    );
-    background-color: color-mix(
-      in srgb,
-      color-mix(in srgb, var(--procergs-button-background, #1a7235) 76%, #000000)
-        calc(var(--procergs-button-background-opacity, 1) * 100%),
-      transparent
-    );
-    color: var(--procergs-button-foreground, #ffffff);
-  }
 }
 
 :root:is(.high-contrast, [data-govrs-contrast='high'])
   .govrs-button-block
   .procergs-button-block__button.govrs-button {
-  --procergs-button-background: var(
+  --procergs-button-resolved-background: var(
     --govrs-color-contrast-control-background,
     #000000
+  ) !important;
+  --procergs-button-resolved-border: var(
+    --govrs-color-contrast-control-border,
+    #ffffff
   ) !important;
   --procergs-button-foreground: var(
     --govrs-color-contrast-control-foreground,
     #ffffff
   ) !important;
-  --procergs-button-border: var(
-    --govrs-color-contrast-control-border,
-    #ffffff
-  ) !important;
-  --procergs-button-hover-background: var(
+  --procergs-button-resolved-hover-background: var(
     --govrs-color-contrast-control-background,
     #000000
+  ) !important;
+  --procergs-button-resolved-hover-border: var(
+    --govrs-color-contrast-control-border,
+    #ffffff
   ) !important;
   --procergs-button-hover-foreground: var(
     --govrs-color-contrast-control-foreground,
     #ffffff
   ) !important;
-  --procergs-button-hover-border: var(
-    --govrs-color-contrast-control-border,
-    #ffffff
-  ) !important;
-  --procergs-button-background-opacity: 1 !important;
-  --procergs-button-border-opacity: 1 !important;
-  --procergs-button-hover-background-opacity: 1 !important;
-  --procergs-button-hover-border-opacity: 1 !important;
 }

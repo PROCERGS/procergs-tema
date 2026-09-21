@@ -1,10 +1,12 @@
-import React, { useEffect, useMemo, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   GlobalRegionsContext,
   GlobalRegionsProvider,
+  SAVE_GLOBAL_REGIONS,
   useGlobalRegions,
 } from 'volto-global-regions';
+import { buildCollectionSaveRequest } from '../../helpers/globalRegionsRequests';
 
 export function restrictGlobalRegions(
   globalRegions,
@@ -39,7 +41,12 @@ export function GlobalRegionsPermissionBoundary({
   userId,
   canEditContent,
 }) {
+  const dispatch = useDispatch();
   const globalRegions = useGlobalRegions();
+  const collection = useSelector(
+    (state) => state.globalRegions?.collection || {},
+  );
+  const storedData = useSelector((state) => state.globalRegions?.data || {});
   const sessionUser = token ? userId : null;
   const sessionVersion = useSelector(
     (state) => state.globalRegions?.sessionVersion || 0,
@@ -50,6 +57,39 @@ export function GlobalRegionsPermissionBoundary({
   const editingSnapshot = useRef(null);
   const permissionRefreshRequired = useSelector((state) =>
     Boolean(state.globalRegions?.permissionRefreshRequired),
+  );
+
+  const saveNamedRegion = useCallback(
+    (name, region, options = {}) => {
+      const etag = options.etag ?? globalRegions.etag;
+      return dispatch({
+        type: SAVE_GLOBAL_REGIONS,
+        fieldName: name,
+        regionName: name,
+        definitions: globalRegions.definitions,
+        getETag: globalRegions.settings?.getETag,
+        region,
+        etag: etag || null,
+        request: buildCollectionSaveRequest(
+          { collection, data: storedData },
+          name,
+          region,
+          {
+            op: 'patch',
+            path:
+              globalRegions.settings?.savePath ||
+              globalRegions.settings?.rootPath ||
+              '/',
+            headers: {
+              Prefer: 'return=representation',
+              ...(etag ? { 'If-Match': etag } : {}),
+              ...(options.headers || {}),
+            },
+          },
+        ),
+      });
+    },
+    [collection, dispatch, globalRegions, storedData],
   );
 
   useEffect(() => {
@@ -86,25 +126,27 @@ export function GlobalRegionsPermissionBoundary({
   }, [preserveEditing, cancelEditing, editingRegion]);
 
   const value = useMemo(() => {
-    const source = snapshot
-      ? {
-          ...globalRegions,
-          regions: snapshot.regions,
-          etag: snapshot.etag,
-          save: (name, region, options = {}) =>
-            globalRegions.save(name, region, {
-              etag: snapshot.etag,
-              ...options,
-            }),
-          saveRegion: (name, region, options = {}) =>
-            globalRegions.saveRegion(name, region, {
-              etag: snapshot.etag,
-              ...options,
-            }),
-        }
-      : globalRegions;
+    const source = {
+      ...globalRegions,
+      ...(snapshot
+        ? {
+            regions: snapshot.regions,
+            etag: snapshot.etag,
+          }
+        : {}),
+      save: (name, region, options = {}) =>
+        saveNamedRegion(name, region, {
+          ...(snapshot ? { etag: snapshot.etag } : {}),
+          ...options,
+        }),
+      saveRegion: (name, region, options = {}) =>
+        saveNamedRegion(name, region, {
+          ...(snapshot ? { etag: snapshot.etag } : {}),
+          ...options,
+        }),
+    };
     return restrictGlobalRegions(source, canEdit, preserveEditing);
-  }, [canEdit, globalRegions, preserveEditing, snapshot]);
+  }, [canEdit, globalRegions, preserveEditing, saveNamedRegion, snapshot]);
 
   return (
     <GlobalRegionsContext.Provider value={value}>

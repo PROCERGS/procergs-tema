@@ -15,6 +15,8 @@ export const DEFAULT_BUTTON_HOVER_COLORS = {
   background: '#135428',
   foreground: '#ffffff',
   border: '#135428',
+  backgroundOpacity: 1,
+  borderOpacity: 1,
 };
 
 const ALIGNMENTS = ['left', 'center', 'right'];
@@ -46,7 +48,10 @@ export const normalizeButton = (data = {}) => {
     data.colorPair?.background,
     DEFAULT_BUTTON_COLORS.background,
   );
-  const hoverBackground = toHexColor(data.hoverColorPair?.background, null);
+  const hoverBackground = toHexColor(
+    data.hoverColorPair?.background,
+    DEFAULT_BUTTON_HOVER_COLORS.background,
+  );
 
   return {
     label: data.title?.trim?.() || 'Botão',
@@ -79,24 +84,21 @@ export const normalizeButton = (data = {}) => {
       ),
       hover: {
         background: hoverBackground,
-        foreground: toHexColor(data.hoverColorPair?.foreground, null),
+        foreground: toHexColor(
+          data.hoverColorPair?.foreground,
+          DEFAULT_BUTTON_HOVER_COLORS.foreground,
+        ),
         border: toHexColor(
           data.hoverColorPair?.border,
           toHexColor(data.hoverBorderColor, hoverBackground),
         ),
         backgroundOpacity: clampOpacity(
           data.hoverColorPair?.backgroundOpacity,
-          clampOpacity(
-            data.colorPair?.backgroundOpacity,
-            DEFAULT_BUTTON_COLORS.backgroundOpacity,
-          ),
+          DEFAULT_BUTTON_HOVER_COLORS.backgroundOpacity,
         ),
         borderOpacity: clampOpacity(
           data.hoverColorPair?.borderOpacity,
-          clampOpacity(
-            data.colorPair?.borderOpacity,
-            DEFAULT_BUTTON_COLORS.borderOpacity,
-          ),
+          DEFAULT_BUTTON_HOVER_COLORS.borderOpacity,
         ),
       },
     },

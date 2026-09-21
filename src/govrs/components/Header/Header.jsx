@@ -415,8 +415,25 @@ export const LegacyGovrsHeader = ({
       };
       const toolbarRect = getVisiblePanelRect(toolbar);
       const sidebarRect = getVisiblePanelRect(sidebar);
-      document.body.style.setProperty('--procergs-cms-chrome-left', '0px');
-      document.body.style.setProperty('--procergs-cms-chrome-right', '0px');
+      document.body.style.removeProperty('--procergs-cms-chrome-left');
+      document.body.style.removeProperty('--procergs-cms-chrome-right');
+
+      if (isCmsUI) {
+        const topInset =
+          toolbarRect && toolbarRect.width >= viewportWidth - 1
+            ? Math.max(0, toolbarRect.bottom)
+            : 0;
+        govrsHeader.style.setProperty(
+          '--procergs-header-menu-inset-left',
+          '0px',
+        );
+        govrsHeader.style.setProperty(
+          '--procergs-header-menu-inset-right',
+          '0px',
+        );
+        setLayoutInsets('0px', '0px', `${topInset}px`);
+        return;
+      }
       if (!toolbarRect && !sidebarRect) {
         govrsHeader.style.setProperty(
           '--procergs-header-menu-inset-left',
@@ -430,9 +447,7 @@ export const LegacyGovrsHeader = ({
         return;
       }
 
-      const layoutRect = isCmsUI
-        ? { left: 0, right: viewportWidth, width: viewportWidth }
-        : headerWrapperRect || headerRect;
+      const layoutRect = headerWrapperRect || headerRect;
       const getSideInsets = (panelRect) => {
         if (!panelRect) {
           return { left: 0, right: 0 };
@@ -440,7 +455,7 @@ export const LegacyGovrsHeader = ({
 
         const isSidePanel =
           panelRect.width < layoutRect.width &&
-          (isCmsUI || panelRect.height > panelRect.width);
+          panelRect.height > panelRect.width;
 
         if (!isSidePanel) {
           return { left: 0, right: 0 };
@@ -474,27 +489,6 @@ export const LegacyGovrsHeader = ({
         toolbarRect.width >= toolbarRect.height &&
         toolbarRect.top <= 1;
       const topInset = isTopToolbar ? Math.max(0, toolbarRect.height) : 0;
-
-      if (isCmsUI) {
-        document.body.style.setProperty(
-          '--procergs-cms-chrome-left',
-          `${leftInset}px`,
-        );
-        document.body.style.setProperty(
-          '--procergs-cms-chrome-right',
-          `${rightInset}px`,
-        );
-        govrsHeader.style.setProperty(
-          '--procergs-header-menu-inset-left',
-          '0px',
-        );
-        govrsHeader.style.setProperty(
-          '--procergs-header-menu-inset-right',
-          '0px',
-        );
-        setLayoutInsets('0px', '0px', `${topInset}px`);
-        return;
-      }
 
       govrsHeader.style.setProperty(
         '--procergs-header-menu-inset-left',
