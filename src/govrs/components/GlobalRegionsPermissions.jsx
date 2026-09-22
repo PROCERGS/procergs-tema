@@ -6,7 +6,7 @@ import {
   SAVE_GLOBAL_REGIONS,
   useGlobalRegions,
 } from 'volto-global-regions';
-import { buildCollectionSaveRequest } from '../../helpers/globalRegionsRequests';
+import { buildRegionSaveRequest } from '../../helpers/globalRegionsRequests';
 
 export function restrictGlobalRegions(
   globalRegions,
@@ -43,10 +43,6 @@ export function GlobalRegionsPermissionBoundary({
 }) {
   const dispatch = useDispatch();
   const globalRegions = useGlobalRegions();
-  const collection = useSelector(
-    (state) => state.globalRegions?.collection || {},
-  );
-  const storedData = useSelector((state) => state.globalRegions?.data || {});
   const sessionUser = token ? userId : null;
   const sessionVersion = useSelector(
     (state) => state.globalRegions?.sessionVersion || 0,
@@ -61,35 +57,33 @@ export function GlobalRegionsPermissionBoundary({
 
   const saveNamedRegion = useCallback(
     (name, region, options = {}) => {
+      const fieldName = globalRegions.definitions[name]?.fieldName;
+      if (!fieldName)
+        return Promise.reject(new Error('Região global desconhecida.'));
       const etag = options.etag ?? globalRegions.etag;
       return dispatch({
         type: SAVE_GLOBAL_REGIONS,
-        fieldName: name,
+        fieldName,
         regionName: name,
         definitions: globalRegions.definitions,
         getETag: globalRegions.settings?.getETag,
         region,
         etag: etag || null,
-        request: buildCollectionSaveRequest(
-          { collection, data: storedData },
-          name,
-          region,
-          {
-            op: 'patch',
-            path:
-              globalRegions.settings?.savePath ||
-              globalRegions.settings?.rootPath ||
-              '/',
-            headers: {
-              Prefer: 'return=representation',
-              ...(etag ? { 'If-Match': etag } : {}),
-              ...(options.headers || {}),
-            },
+        request: buildRegionSaveRequest(fieldName, region, {
+          op: 'patch',
+          path:
+            globalRegions.settings?.savePath ||
+            globalRegions.settings?.rootPath ||
+            '/',
+          headers: {
+            Prefer: 'return=representation',
+            ...(etag ? { 'If-Match': etag } : {}),
+            ...(options.headers || {}),
           },
-        ),
+        }),
       });
     },
-    [collection, dispatch, globalRegions, storedData],
+    [dispatch, globalRegions],
   );
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 const REQUEST_TYPES = new Set(['FETCH_GLOBAL_REGIONS', 'SAVE_GLOBAL_REGIONS']);
+const hasOwn = (value, key) => Object.prototype.hasOwnProperty.call(value, key);
 const SESSION_RESET_TYPES = new Set([
   'LOGIN_PENDING',
   'LOGIN_SUCCESS',
@@ -32,52 +33,41 @@ const copyValidRegions = (source, target) => {
   return target;
 };
 
-const instanceFieldNames = (definitions = {}) => {
-  const names = Object.keys(definitions);
-  return [...new Set(names.map((name) => definitions[name]?.fieldName || name))];
-};
-
-export const mergeRegionCollection = (state, regionName, region) => {
-  const merged = copyValidRegions(
-    state?.data,
-    copyValidRegions(state?.collection, {}),
-  );
-  if (isValidRegionDocument(region)) {
-    merged[regionName] = region;
-  } else {
-    delete merged[regionName];
-  }
-  return merged;
-};
+const instanceFieldNames = (definitions = {}) => [
+  ...new Set(
+    Object.entries(definitions).map(
+      ([name, definition]) => definition?.fieldName || name,
+    ),
+  ),
+];
 
 export const flattenRegionCollection = (
   action,
   { fillMissing = true } = {},
 ) => {
   if (!isObject(action?.result)) return action;
+  const definitions = action.definitions || {};
+  const names = Object.keys(definitions);
+  const hasRegionField = names.some((name) =>
+    hasOwn(action.result, definitions[name]?.fieldName || name),
+  );
   if (
-    !Object.prototype.hasOwnProperty.call(
-      action.result,
-      GLOBAL_REGIONS_COLLECTION_FIELD,
-    )
-  ) {
+    !hasOwn(action.result, GLOBAL_REGIONS_COLLECTION_FIELD) &&
+    !hasRegionField
+  )
     return action;
-  }
 
   const collection = action.result[GLOBAL_REGIONS_COLLECTION_FIELD];
-  const definitions = action.definitions || {};
   const namedMap = copyValidRegions(isObject(collection) ? collection : {}, {});
-  const names = Object.keys(definitions);
+  names.forEach((name) => {
+    const fieldName = definitions[name]?.fieldName || name;
+    const instance = action.result[fieldName];
+    if (isValidRegionDocument(instance)) namedMap[name] = instance;
+  });
 
   if (fillMissing) {
     names.forEach((name) => {
-      if (!Object.prototype.hasOwnProperty.call(namedMap, name)) {
-        namedMap[name] =
-          isObject(collection) &&
-          Object.prototype.hasOwnProperty.call(collection, name)
-            ? collection[name]
-            : null;
-      }
+      if (!hasOwn(namedMap, name)) namedMap[name] = null;
     });
   }
 
@@ -102,23 +92,16 @@ export const flattenRegionCollection = (
   };
 };
 
-export const buildCollectionSaveRequest = (
-  state,
-  regionName,
-  region,
-  request = {},
-) => ({
-  ...request,
-  data: {
-    [GLOBAL_REGIONS_COLLECTION_FIELD]: mergeRegionCollection(
-      state,
-      regionName,
-      region,
-    ),
-  },
-});
+export const buildRegionSaveRequest = (fieldName, region, request = {}) => {
+  if (!fieldName || !isValidRegionDocument(region))
+    throw new Error('Invalid global region save request');
+  return {
+    ...request,
+    data: { [fieldName]: region },
+  };
+};
 
-export const globalRegionsRequestMiddleware = ({ getState } = {}) => {
+export const globalRegionsRequestMiddleware = () => {
   let requestId = 0;
   return (next) => (action) => {
     if (!action?.request || !REQUEST_TYPES.has(action.type)) {
@@ -130,17 +113,11 @@ export const globalRegionsRequestMiddleware = ({ getState } = {}) => {
       return next(nextAction);
     }
 
-    const region =
-      action.region ??
-      action.request.data?.[action.fieldName] ??
-      action.request.data?.[action.regionName];
-
     return next({
       ...nextAction,
-      request: buildCollectionSaveRequest(
-        getState?.()?.globalRegions,
-        action.regionName,
-        region,
+      request: buildRegionSaveRequest(
+        action.fieldName,
+        action.region,
         action.request,
       ),
     });
@@ -196,38 +173,14 @@ export const guardGlobalRegionsReducer =
     }
 
     let collection = state?.collection || {};
-    let data = nextState.data;
     if (status === 'SUCCESS' && requestType === 'FETCH_GLOBAL_REGIONS') {
       collection = isObject(action.result?.[GLOBAL_REGIONS_COLLECTION_FIELD])
         ? action.result[GLOBAL_REGIONS_COLLECTION_FIELD]
         : {};
-      data = copyValidRegions(collection, {});
-    }
-    if (status === 'SUCCESS' && requestType === 'SAVE_GLOBAL_REGIONS') {
-      const saved = isValidRegionDocument(action.region)
-        ? action.region
-        : data?.[action.regionName];
-      data = {
-        ...copyValidRegions(collection, {}),
-        ...copyValidRegions(data, {}),
-        [action.regionName]: saved,
-      };
-      collection = mergeRegionCollection(
-        {
-          collection: isObject(action.result?.[GLOBAL_REGIONS_COLLECTION_FIELD])
-            ? action.result[GLOBAL_REGIONS_COLLECTION_FIELD]
-            : state?.collection,
-          data,
-        },
-        action.regionName,
-        saved,
-      );
-      data = copyValidRegions(collection, {});
     }
 
     return {
       ...nextState,
-      data,
       requestIds,
       collection,
       editPermission,

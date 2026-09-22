@@ -20,12 +20,18 @@ body.public-ui .ui.form :is(.ui.input > input, textarea)::placeholder {
 
 body:is(.public-ui, .cms-ui) {
   .documentFirstHeading {
+    border-bottom: 0;
     margin: 0 0 var(--govrs-space-5, 1.25rem) 0;
+    margin-bottom: 0;
     color: var(--govrs-color-text-primary);
     font-family: var(--govrs-font-family-base);
     font-size: var(--govrs-font-size-heading-3xl, 2.5625rem);
     font-weight: var(--govrs-font-weight-regular, 400);
     line-height: var(--govrs-line-height-heading-3xl, 3.625rem);
+
+    &::before {
+      content: none;
+    }
   }
 
   .procergs-text-typography {
