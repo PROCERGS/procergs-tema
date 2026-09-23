@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { BarraAcessibilidade } from '@procergs/react-govrs-ds';
+import { getSecretariatIdentity } from '../../blocks/globalAccessibility/secretariat';
 
 const isPublicPage = () =>
   typeof document !== 'undefined' &&
@@ -73,11 +74,36 @@ const activateSearchShortcut = () => {
 export const ProcergsGlobalAccessibilityBarBlock = ({ data, metadata }) => {
   const regionProps = metadata?.globalRegionProps || {};
   const allowOverlay = data?.allowOverlay !== false;
+  const identity = getSecretariatIdentity(data);
+
+  const accessibilityBar = (
+    <BarraAcessibilidade
+      shortcuts={[
+        {
+          title: 'Conteúdo',
+          href: '#view',
+          onActivate: activateContentShortcut,
+        },
+        {
+          title: 'Menu',
+          href: '#main',
+          onActivate: activateMenuShortcut,
+        },
+        {
+          title: 'Busca',
+          href: '#main',
+          onActivate: activateSearchShortcut,
+        },
+      ]}
+      hrefSitemap="/sitemap"
+    />
+  );
 
   return (
     <div
       className={cx('procergs-accessibility-wrapper', {
         'allows-group-overlay': allowOverlay,
+        'is-secretariat': Boolean(identity),
       })}
       style={
         regionProps.overlayForeground
@@ -88,26 +114,29 @@ export const ProcergsGlobalAccessibilityBarBlock = ({ data, metadata }) => {
           : undefined
       }
     >
-      <BarraAcessibilidade
-        shortcuts={[
-          {
-            title: 'Conteúdo',
-            href: '#view',
-            onActivate: activateContentShortcut,
-          },
-          {
-            title: 'Menu',
-            href: '#main',
-            onActivate: activateMenuShortcut,
-          },
-          {
-            title: 'Busca',
-            href: '#main',
-            onActivate: activateSearchShortcut,
-          },
-        ]}
-        hrefSitemap="/sitemap"
-      />
+      {identity ? (
+        <div className="acess-bar procergs-secretariat-bar">
+          <div className="acess-wrapper procergs-secretariat-bar__layout">
+            <div className="procergs-secretariat-bar__identity">
+              {identity.imageUrl && (
+                <img
+                  className="procergs-secretariat-bar__image"
+                  src={identity.imageUrl}
+                  alt={identity.imageAlt}
+                />
+              )}
+              {identity.text && (
+                <span className="procergs-secretariat-bar__text">
+                  {identity.text}
+                </span>
+              )}
+            </div>
+            {accessibilityBar}
+          </div>
+        </div>
+      ) : (
+        accessibilityBar
+      )}
     </div>
   );
 };

@@ -4,6 +4,9 @@
   "packageManager": "pnpm@9.15.9",
   "description": "Tema principal PROCERGS para projetos Volto",
   "main": "src/index.js",
+  "addons": [
+    "volto-global-regions"
+  ],
   "license": "MIT",
   "keywords": [
     "volto-addon",
@@ -21,7 +24,7 @@
     "prettier:fix": "prettier --write 'src/**/*.{js,jsx}'"
   },
   "dependencies": {
-    "@procergs/react-govrs-ds": "^0.3.44",
+    "@procergs/react-govrs-ds": "^0.3.46",
     "volto-global-regions": "0.1.1"
   },
   "peerDependencies": {

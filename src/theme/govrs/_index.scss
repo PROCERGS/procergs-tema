@@ -24,15 +24,13 @@ body {
   z-index: var(--govrs-z-index-navigation, 50) !important;
 }
 
-body.cms-ui.has-sidebar .govrs-header-wrapper .govrs-menu-hamburger__content,
-body.cms-ui.has-sidebar-collapsed
-  .govrs-header-wrapper
-  .govrs-menu-hamburger__content,
+body.cms-ui .govrs-header-wrapper .govrs-menu-hamburger__content,
 body.has-sidebar .govrs-header-wrapper .govrs-menu-hamburger__content,
 body.has-sidebar-collapsed
   .govrs-header-wrapper
   .govrs-menu-hamburger__content {
   left: 0;
+  right: 0;
   width: 100%;
   max-width: 100%;
   transform: none;
@@ -69,6 +67,9 @@ body:not(.cms-ui).has-toolbar-collapsed
 @import './breadcrumbs';
 @import './banner';
 @import './button';
+@import './divisor';
 @import './table';
 @import './section';
+@import './native-blocks';
+@import './grid-dividers';
 @import './high-contrast';

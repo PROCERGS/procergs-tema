@@ -390,11 +390,39 @@ export const LegacyGovrsHeader = ({
         `${accessibilityBar?.getBoundingClientRect().height || 0}px`,
       );
 
-      const isCmsEdit =
-        document.body.classList.contains('cms-ui') &&
-        (document.body.classList.contains('view-editview') ||
-          document.body.classList.contains('view-addview'));
-      if (isCmsEdit) {
+      const isCmsUI = document.body.classList.contains('cms-ui');
+      const viewportWidth = layoutRoot.clientWidth;
+      const getVisiblePanelRect = (panel) => {
+        if (!panel || !panel.getClientRects().length) {
+          return null;
+        }
+
+        const style = window.getComputedStyle(panel);
+        const rect = panel.getBoundingClientRect();
+        if (
+          style.display === 'none' ||
+          style.visibility === 'hidden' ||
+          style.visibility === 'collapse' ||
+          rect.width <= 0 ||
+          rect.height <= 0 ||
+          rect.right <= 0 ||
+          rect.left >= viewportWidth
+        ) {
+          return null;
+        }
+
+        return rect;
+      };
+      const toolbarRect = getVisiblePanelRect(toolbar);
+      const sidebarRect = getVisiblePanelRect(sidebar);
+      document.body.style.removeProperty('--procergs-cms-chrome-left');
+      document.body.style.removeProperty('--procergs-cms-chrome-right');
+
+      if (isCmsUI) {
+        const topInset =
+          toolbarRect && toolbarRect.width >= viewportWidth - 1
+            ? Math.max(0, toolbarRect.bottom)
+            : 0;
         govrsHeader.style.setProperty(
           '--procergs-header-menu-inset-left',
           '0px',
@@ -403,12 +431,9 @@ export const LegacyGovrsHeader = ({
           '--procergs-header-menu-inset-right',
           '0px',
         );
-        setLayoutInsets('0px', '0px', '0px');
+        setLayoutInsets('0px', '0px', `${topInset}px`);
         return;
       }
-
-      const toolbarRect = toolbar?.getBoundingClientRect();
-      const sidebarRect = sidebar?.getBoundingClientRect();
       if (!toolbarRect && !sidebarRect) {
         govrsHeader.style.setProperty(
           '--procergs-header-menu-inset-left',
@@ -490,11 +515,23 @@ export const LegacyGovrsHeader = ({
       updateToolbarInsets();
     }
     window.addEventListener('resize', updateToolbarInsets);
+    const handleChromeTransitionEnd = (event) => {
+      if (
+        event.target.matches?.('#toolbar .toolbar, #sidebar .sidebar-container')
+      ) {
+        updateToolbarInsets();
+      }
+    };
+    document.body.addEventListener('transitionend', handleChromeTransitionEnd);
 
     return () => {
       observer.disconnect();
       resizeObserver?.disconnect();
       window.removeEventListener('resize', updateToolbarInsets);
+      document.body.removeEventListener(
+        'transitionend',
+        handleChromeTransitionEnd,
+      );
       document.documentElement.style.removeProperty(
         '--procergs-overlay-header-height',
       );
@@ -514,6 +551,8 @@ export const LegacyGovrsHeader = ({
       layoutRoot.style.removeProperty('--procergs-header-layout-inset-right');
       headerElement?.style.removeProperty('--procergs-header-layout-inset-top');
       layoutRoot.style.removeProperty('--procergs-header-layout-inset-top');
+      document.body.style.removeProperty('--procergs-cms-chrome-left');
+      document.body.style.removeProperty('--procergs-cms-chrome-right');
     };
   }, []);
 
@@ -524,9 +563,7 @@ export const LegacyGovrsHeader = ({
   );
 
   const handleSearch = (term) => {
-    const path =
-      pathname?.length > 0 ? `&path=${encodeURIComponent(pathname)}` : '';
-    history.push(`./search?SearchableText=${encodeURIComponent(term)}${path}`);
+    history.push(`/search?SearchableText=${encodeURIComponent(term)}`);
   };
 
   return (

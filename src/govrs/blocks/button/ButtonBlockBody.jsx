@@ -4,6 +4,7 @@ import cx from 'classnames';
 import UniversalLink from '@plone/volto/components/manage/UniversalLink/UniversalLink';
 import { Button } from '@procergs/react-govrs-ds';
 import { normalizeButton } from './normalizeButton';
+import { hexToRgba } from '../../helpers/colorContrast';
 
 const ButtonBlockBody = ({ data, isEditMode = false }) => {
   const { label, href, openLinkInNewTab, iconUrl, iconPosition, colors } =
@@ -15,24 +16,22 @@ const ButtonBlockBody = ({ data, isEditMode = false }) => {
     'govrs-button--medium',
   );
   const style = {
-    '--procergs-button-background': colors.background,
+    '--procergs-button-resolved-background': hexToRgba(
+      colors.background,
+      colors.backgroundOpacity,
+    ),
+    '--procergs-button-resolved-border': hexToRgba(
+      colors.border,
+      colors.borderOpacity,
+    ),
     '--procergs-button-foreground': colors.foreground,
-    '--procergs-button-border': colors.border,
-    '--procergs-button-background-opacity': String(colors.backgroundOpacity),
-    '--procergs-button-border-opacity': String(colors.borderOpacity),
-    ...(colors.hover.background && {
-      '--procergs-button-hover-background': colors.hover.background,
-    }),
-    ...(colors.hover.foreground && {
-      '--procergs-button-hover-foreground': colors.hover.foreground,
-    }),
-    ...(colors.hover.border && {
-      '--procergs-button-hover-border': colors.hover.border,
-    }),
-    '--procergs-button-hover-background-opacity': String(
+    '--procergs-button-hover-foreground': colors.hover.foreground,
+    '--procergs-button-resolved-hover-background': hexToRgba(
+      colors.hover.background,
       colors.hover.backgroundOpacity,
     ),
-    '--procergs-button-hover-border-opacity': String(
+    '--procergs-button-resolved-hover-border': hexToRgba(
+      colors.hover.border,
       colors.hover.borderOpacity,
     ),
   };
@@ -54,29 +53,28 @@ const ButtonBlockBody = ({ data, isEditMode = false }) => {
     </span>
   );
 
-  if (href && !isEditMode) {
-    return (
-      <UniversalLink
-        href={href}
-        className={className}
-        openLinkInNewTab={openLinkInNewTab}
-        style={style}
-      >
-        <span className="govrs-button__label">{content}</span>
-      </UniversalLink>
-    );
-  }
-
   return (
-    <Button
-      className="procergs-button-block__button"
-      variant="primary"
-      size="medium"
-      disabled={!href && !isEditMode}
-      style={style}
-    >
-      {content}
-    </Button>
+    <span className="procergs-button-block__appearance" style={style}>
+      {href ? (
+        <UniversalLink
+          href={href}
+          className={className}
+          openLinkInNewTab={openLinkInNewTab}
+          onClick={isEditMode ? (event) => event.preventDefault() : undefined}
+        >
+          <span className="govrs-button__label">{content}</span>
+        </UniversalLink>
+      ) : (
+        <Button
+          className="procergs-button-block__button"
+          variant="primary"
+          size="medium"
+          disabled={!href}
+        >
+          {content}
+        </Button>
+      )}
+    </span>
   );
 };
 

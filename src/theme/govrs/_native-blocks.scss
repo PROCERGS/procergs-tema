@@ -1,0 +1,605 @@
+@import '../variables';
+
+body:is(.public-ui, .cms-ui) {
+  :is(
+    .block.title,
+    .block.description,
+    .block.slate,
+    .block.detachedSlate,
+    .block.image,
+    .block.leadimage,
+    .block.listing,
+    .block.video,
+    .block.toc,
+    .block.maps,
+    .block.html,
+    .block.search,
+    .block.gridBlock,
+    .block.teaser,
+    .block.slateTable,
+    .documentFirstHeading,
+    .documentDescription,
+    .procergs-text-typography,
+    .procergs-slate-table-block,
+    .table-of-contents
+  ) {
+    font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+  }
+
+  :is(
+      .block.listing,
+      .block.teaser,
+      .block.html,
+      .block.search,
+      .block.gridBlock,
+      .table-of-contents,
+      .procergs-slate-table-block
+    )
+    :is(h1, h2, h3, h4, h5, h6, .ui.header) {
+    font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+  }
+
+  .documentDescription {
+    color: var(--govrs-color-text-secondary);
+    font-size: var(--govrs-font-size-body-xl);
+    font-weight: var(--govrs-font-weight-regular);
+    line-height: var(--govrs-line-height-body-xl);
+  }
+
+  .documentFirstHeading {
+    border-bottom-color: var(--govrs-color-border-default);
+
+    &::before {
+      border-bottom-color: var(--govrs-color-brand-primary);
+    }
+  }
+
+  .block.gridBlock > .govrs-section-block__content > .headline {
+    color: var(--procergs-section-foreground, var(--govrs-color-text-primary));
+    font-size: var(--govrs-font-size-heading-2xl);
+    font-weight: var(--govrs-font-weight-regular);
+    line-height: var(--govrs-line-height-heading-2xl);
+  }
+
+  :is(.block.listing, .block.search) {
+    .listing.message,
+    .govrs-listing-block__empty {
+      border-color: var(--govrs-color-border-default);
+      background-color: var(--govrs-color-surface-muted);
+      color: var(--govrs-color-text-primary);
+      font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+      font-size: var(--govrs-font-size-body-md);
+      line-height: var(--govrs-line-height-body-md);
+    }
+
+    .listing-item > a,
+    .listing-body,
+    .listing-body p,
+    .listing-body h3,
+    .footer > a {
+      font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+    }
+
+    .listing-body h3 {
+      color: var(
+        --procergs-section-foreground,
+        var(--govrs-color-brand-primary)
+      );
+      font-size: var(--govrs-font-size-heading-lg);
+      font-weight: var(--govrs-font-weight-semibold);
+      line-height: var(--govrs-line-height-heading-lg);
+    }
+
+    .listing-body p {
+      color: var(--govrs-color-text-primary);
+      font-size: var(--govrs-font-size-body-md);
+      font-weight: var(--govrs-font-weight-regular);
+      line-height: var(--govrs-line-height-body-md);
+    }
+
+    .listing-item > a,
+    .footer > a {
+      @include procergs-content-link-styles;
+    }
+
+    .image-gallery {
+      font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+
+      .image-gallery-content.fullscreen {
+        background-color: var(--govrs-color-media-backdrop);
+      }
+
+      .image-gallery-description {
+        background-color: var(--govrs-color-overlay-backdrop);
+        color: var(--govrs-color-text-inverse);
+        font-size: var(--govrs-font-size-body-md);
+        line-height: var(--govrs-line-height-body-md);
+      }
+
+      .ui.button.image-gallery-icon {
+        color: var(--govrs-color-interactive-link) !important;
+        box-shadow: none !important;
+        font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+
+        svg {
+          fill: currentColor;
+        }
+
+        &:hover {
+          color: var(--govrs-color-text-primary) !important;
+        }
+
+        &:focus-visible {
+          outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
+          outline-offset: var(--govrs-space-1);
+        }
+      }
+
+      .image-gallery-thumbnail {
+        border-color: transparent;
+
+        &:hover,
+        &.active,
+        &:focus-visible {
+          border-color: var(--govrs-color-focus);
+        }
+      }
+
+      .image-gallery-bullet {
+        border-color: var(--govrs-color-border-default);
+        box-shadow: var(--govrs-shadow-sm);
+
+        &.active {
+          background-color: var(--govrs-color-interactive-link);
+        }
+      }
+    }
+  }
+
+  .block.teaser {
+    .teaser-item,
+    .teaser-item .content,
+    .teaser-item p,
+    .teaser-item .headline {
+      color: var(
+        --procergs-section-foreground,
+        var(--govrs-color-text-primary)
+      );
+      font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+    }
+
+    .teaser-item h2 {
+      color: var(
+        --procergs-section-foreground,
+        var(--govrs-color-brand-primary)
+      );
+      font-size: var(
+        --procergs-teaser-font-size,
+        var(--govrs-font-size-heading-2xl)
+      );
+      font-weight: var(--govrs-font-weight-regular);
+      line-height: var(
+        --procergs-teaser-line-height,
+        var(--govrs-line-height-heading-2xl)
+      );
+    }
+
+    .teaser-item p {
+      font-size: var(--govrs-font-size-body-md);
+      line-height: var(--govrs-line-height-body-md);
+    }
+
+    .teaser-item .headline {
+      font-size: var(--govrs-font-size-body-sm);
+      font-weight: var(--govrs-font-weight-semibold);
+      line-height: var(--govrs-line-height-body-sm);
+    }
+
+    > a {
+      color: var(
+        --procergs-section-foreground,
+        var(--govrs-color-interactive-link)
+      );
+
+      &:hover,
+      &:visited {
+        color: var(
+          --procergs-section-foreground,
+          var(--govrs-color-interactive-link)
+        );
+      }
+
+      &:focus-visible {
+        outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
+        outline-offset: var(--govrs-space-1);
+      }
+    }
+  }
+
+  .table-of-contents {
+    color: var(--govrs-color-text-primary);
+
+    h2 {
+      font-size: var(--govrs-font-size-heading-lg);
+      font-weight: var(--govrs-font-weight-semibold);
+      line-height: var(--govrs-line-height-heading-lg);
+    }
+
+    .ui.list,
+    .ui.list .item,
+    .ui.menu,
+    .ui.menu .item {
+      color: var(--govrs-color-text-primary);
+      font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+      font-size: var(--govrs-font-size-body-md);
+      line-height: var(--govrs-line-height-body-md);
+    }
+
+    a,
+    .ui.menu a.item {
+      @include procergs-content-link-styles;
+    }
+
+    .ui.menu,
+    .ui.menu .menu {
+      border-color: var(--govrs-color-border-default);
+      background-color: var(--govrs-color-surface-base);
+      box-shadow: var(--govrs-shadow-sm);
+    }
+
+    .ui.menu .item::before {
+      background-color: var(--govrs-color-border-default);
+    }
+
+    .ui.menu .item:is(:hover, .active, .selected),
+    .ui.menu .dropdown.item .menu > .item:is(:hover, .active, .selected) {
+      background-color: var(--govrs-color-surface-alt);
+      color: var(--govrs-color-interactive-link);
+    }
+
+    .item.dropdown .focused > a {
+      border-color: var(--govrs-color-focus) !important;
+      border-radius: var(--govrs-radius-xs);
+    }
+  }
+
+  .block.search {
+    color: var(--govrs-color-text-primary);
+
+    :is(
+      .ui.header,
+      .ui.button,
+      .ui.label,
+      .ui.checkbox label,
+      .ui.form input,
+      .search-details,
+      .search-sort-on,
+      .sort-label,
+      .sorted-label-value,
+      .filter-list-group,
+      .filter-list-header,
+      .react-select-container,
+      .search-react-select-container
+    ) {
+      color: var(--govrs-color-text-primary);
+      font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+    }
+
+    .ui.header {
+      font-size: var(--govrs-font-size-heading-sm);
+      font-weight: var(--govrs-font-weight-semibold);
+      line-height: var(--govrs-line-height-heading-sm);
+    }
+
+    .ui.label,
+    .ui.accordion.filter-listing .filter-list-header {
+      border-color: var(--govrs-color-border-default);
+      background-color: var(--govrs-color-surface-alt);
+    }
+
+    .search-input-actions .divider {
+      border-color: var(--govrs-color-border-default);
+    }
+
+    .ui.basic.button {
+      color: var(--govrs-color-interactive-link) !important;
+      box-shadow: inset 0 0 0 var(--govrs-border-width-sm)
+        var(--govrs-color-border-default) !important;
+
+      &:hover,
+      &.active {
+        background-color: var(--govrs-color-surface-alt) !important;
+      }
+    }
+
+    :is(button, input, [tabindex]):focus-visible {
+      outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
+      outline-offset: var(--govrs-space-1);
+    }
+
+    .ui.checkbox {
+      label,
+      input:checked ~ label {
+        color: var(--govrs-color-text-primary);
+      }
+
+      label::before {
+        border-color: var(--govrs-color-border-default);
+        background-color: var(--govrs-color-surface-base);
+      }
+
+      input:checked ~ label::before {
+        border-color: var(--govrs-color-interactive-link);
+      }
+
+      input:checked ~ label::after {
+        color: var(--govrs-color-interactive-link);
+      }
+
+      input:focus-visible ~ label::before {
+        outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
+        outline-offset: var(--govrs-space-1);
+      }
+
+      &.radio input:checked ~ label::after {
+        background-color: var(--govrs-color-interactive-link);
+      }
+
+      &.toggle input:checked ~ label::before {
+        background-color: var(--govrs-color-interactive-link) !important;
+      }
+
+      &.toggle label::after {
+        background-color: var(--govrs-color-surface-base);
+      }
+    }
+
+    :is(.react-select-container, .search-react-select-container) {
+      .react-select__control,
+      .react-select__menu {
+        border-color: var(--govrs-color-border-default) !important;
+        background-color: var(--govrs-color-surface-base) !important;
+      }
+
+      .react-select__single-value,
+      .react-select__input-container,
+      .react-select__option,
+      .react-select__indicator {
+        color: var(--govrs-color-text-primary) !important;
+      }
+
+      .react-select__placeholder {
+        color: var(--govrs-color-text-placeholder) !important;
+      }
+
+      .react-select__multi-value {
+        background-color: var(--govrs-color-surface-alt) !important;
+      }
+
+      .react-select__multi-value__label {
+        color: var(--govrs-color-text-primary) !important;
+      }
+
+      .react-select__indicator-separator {
+        background-color: var(--govrs-color-border-default) !important;
+      }
+
+      .react-select__option--is-focused,
+      .react-select__option--is-selected,
+      .react-select__multi-value__remove:hover {
+        background-color: var(--govrs-color-surface-alt) !important;
+        color: var(--govrs-color-interactive-link) !important;
+      }
+
+      .react-select__control--is-focused {
+        outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
+        outline-offset: var(--govrs-space-1);
+      }
+    }
+
+    .daterange-facet {
+      .DayPicker__withBorder {
+        box-shadow: var(--govrs-shadow-overlay);
+      }
+
+      :is(
+        .DateInput,
+        .DateInput_input,
+        .DateRangePickerInput,
+        .DayPicker,
+        .DayPicker__withBorder,
+        .CalendarMonth,
+        .CalendarMonthGrid,
+        .CalendarDay__default
+      ) {
+        border-color: var(--govrs-color-border-default);
+        background-color: var(--govrs-color-surface-base);
+        color: var(--govrs-color-text-primary);
+        font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+      }
+
+      .DateInput_input {
+        font-size: var(--govrs-font-size-body-md);
+        line-height: var(--govrs-line-height-body-md);
+
+        &::placeholder {
+          color: var(--govrs-color-text-placeholder);
+        }
+      }
+
+      .DateInput_input__focused {
+        border-bottom-color: var(--govrs-color-focus);
+      }
+
+      :is(
+        .CalendarMonth_caption,
+        .DayPicker_weekHeader,
+        .DateRangePickerInput_arrow
+      ) {
+        color: var(--govrs-color-text-primary);
+      }
+
+      :is(.prev-icon, .next-icon) {
+        color: var(--govrs-color-interactive-link) !important;
+      }
+
+      .CalendarDay__default:hover,
+      .CalendarDay__hovered_span,
+      .CalendarDay__selected_span {
+        border-color: var(--govrs-color-border-default);
+        background-color: var(--govrs-color-surface-alt);
+        color: var(--govrs-color-interactive-link);
+      }
+
+      .CalendarDay__selected,
+      .CalendarDay__selected:hover {
+        border-color: var(--govrs-color-interactive-link);
+        background-color: var(--govrs-color-interactive-link);
+        color: var(--govrs-color-surface-base);
+      }
+    }
+  }
+
+  :is(.block.html, .procergs-text-typography) {
+    :is(h1, h2, h3, h4, h5, h6, p, li, dt, dd, blockquote) {
+      color: var(--govrs-color-text-primary);
+      font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+    }
+
+    :is(strong, b) {
+      font-weight: var(--govrs-font-weight-bold);
+    }
+
+    blockquote {
+      border-color: var(--govrs-color-border-default);
+      font-size: var(--govrs-font-size-body-xl);
+      line-height: var(--govrs-line-height-body-xl);
+    }
+
+    h6 {
+      font-size: var(--govrs-font-size-heading-sm);
+      font-weight: var(--govrs-font-weight-semibold);
+      line-height: var(--govrs-line-height-heading-sm);
+    }
+
+    h4 {
+      font-size: var(--govrs-font-size-heading-md);
+      font-weight: var(--govrs-font-weight-regular);
+      line-height: var(--govrs-line-height-heading-md);
+    }
+
+    h5 {
+      font-size: var(--govrs-font-size-heading-sm);
+      font-weight: var(--govrs-font-weight-regular);
+      line-height: var(--govrs-line-height-heading-sm);
+    }
+  }
+
+  .block.html {
+    h1 {
+      font-size: var(--govrs-font-size-heading-3xl);
+      font-weight: var(--govrs-font-weight-regular);
+      line-height: var(--govrs-line-height-heading-3xl);
+    }
+
+    h2 {
+      font-size: var(--govrs-font-size-heading-2xl);
+      font-weight: var(--govrs-font-weight-regular);
+      line-height: var(--govrs-line-height-heading-2xl);
+    }
+
+    h3 {
+      font-size: var(--govrs-font-size-heading-xl);
+      font-weight: var(--govrs-font-weight-regular);
+      line-height: var(--govrs-line-height-heading-xl);
+    }
+
+    a {
+      @include procergs-content-link-styles;
+    }
+
+    :is(p, li, dt, dd) {
+      font-size: var(--govrs-font-size-body-md);
+      line-height: var(--govrs-line-height-body-md);
+    }
+  }
+
+  :is(.block.image, .block.leadimage, .block.video) {
+    color: var(--govrs-color-text-primary);
+
+    :is(figcaption, .caption) {
+      color: var(--govrs-color-text-secondary);
+      font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+      font-size: var(--govrs-font-size-body-sm);
+      line-height: var(--govrs-line-height-body-sm);
+    }
+
+    a {
+      @include procergs-content-link-styles;
+    }
+
+    .ui.embed {
+      background-color: var(--govrs-color-media-backdrop);
+    }
+  }
+
+  :is(
+      .block.listing,
+      .block.teaser,
+      .block.search,
+      .block.image,
+      .block.leadimage,
+      .block.video,
+      .block.maps,
+      .block.html,
+      .block.toc
+    )
+    .ui.message {
+    border-color: var(--govrs-color-border-default);
+    background-color: var(--govrs-color-surface-muted);
+    box-shadow: var(--govrs-shadow-sm);
+    color: var(--govrs-color-text-primary);
+    font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+
+    :is(.header, .message-text, p) {
+      color: var(--govrs-color-text-primary);
+      font-family: var(--govrs-font-family-base, 'Noto Sans', sans-serif);
+    }
+
+    &.warning {
+      background-color: var(--govrs-color-warning-surface);
+      color: var(--govrs-color-warning);
+    }
+
+    &.error,
+    &.negative {
+      background-color: var(--govrs-color-error-surface);
+      color: var(--govrs-color-error);
+    }
+  }
+}
+
+:root:is(.high-contrast, [data-govrs-contrast='high']) {
+  body:is(.public-ui, .cms-ui) {
+    :is(.block.listing, .block.search) .listing-body h3 {
+      color: var(--govrs-color-text-primary);
+    }
+
+    .block.teaser {
+      .teaser-item,
+      .teaser-item :is(.content, .headline, h2, p) {
+        color: var(--govrs-color-text-primary);
+      }
+
+      > a,
+      > a:hover,
+      > a:visited {
+        color: var(--govrs-color-interactive-link);
+      }
+    }
+
+    .block.gridBlock > .govrs-section-block__content > .headline {
+      color: var(--govrs-color-text-primary);
+    }
+  }
+}

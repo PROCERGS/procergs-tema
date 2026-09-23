@@ -28,7 +28,8 @@
 
   th.selected,
   td.selected {
-    box-shadow: inset 0 0 0 1px var(--govrs-color-focus, #ffcd07);
+    box-shadow: inset 0 0 0 var(--govrs-border-width-sm)
+      var(--govrs-color-focus);
   }
 }
 
@@ -44,7 +45,7 @@
 
     th,
     td {
-      padding: 0.625rem 0.75rem;
+      padding: var(--govrs-space-2-5) var(--govrs-space-3);
       border: none;
       vertical-align: middle;
     }
@@ -55,7 +56,7 @@
         var(--govrs-color-border-emphasis, #cccccc);
       background: var(--govrs-color-surface-alt, #f0f0f0);
       color: var(--govrs-color-brand-primary, #1a7235);
-      font-weight: 600;
+      font-weight: var(--govrs-font-weight-semibold);
       text-align: left;
       text-transform: none;
     }

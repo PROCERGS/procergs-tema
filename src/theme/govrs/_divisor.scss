@@ -1,0 +1,21 @@
+.govrs-divisor-block {
+  width: 100%;
+}
+
+.govrs-divisor-block--vertical {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  height: 100%;
+}
+
+.govrs-divisor-block--edit {
+  display: flex;
+  align-items: center;
+  min-height: var(--govrs-space-7, 2rem);
+}
+
+.govrs-divisor-block--edit.govrs-divisor-block--vertical {
+  align-items: stretch;
+  min-height: 6rem;
+}

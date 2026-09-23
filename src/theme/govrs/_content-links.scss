@@ -13,8 +13,8 @@
   }
 
   &:focus-visible {
-    outline: 2px solid $procergs-focus;
-    outline-offset: 2px;
+    outline: var(--govrs-border-width-md, 2px) solid $procergs-focus;
+    outline-offset: calc(var(--govrs-space-1, 0.25rem) / 2);
   }
 }
 

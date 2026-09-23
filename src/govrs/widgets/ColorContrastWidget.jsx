@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Form, Message } from 'semantic-ui-react';
 import {
@@ -146,31 +146,7 @@ const ColorContrastWidget = ({
   inheritedBackgroundOpacity,
   inheritedBorderOpacity,
 }) => {
-  const [draft, setDraft] = useState(() =>
-    getDraftColors({
-      value,
-      defaultValue,
-      showBorder,
-      showOpacity,
-      legacyBorderColor,
-      inheritedBackgroundOpacity,
-      inheritedBorderOpacity,
-    }),
-  );
-
-  useEffect(() => {
-    setDraft(
-      getDraftColors({
-        value,
-        defaultValue,
-        showBorder,
-        showOpacity,
-        legacyBorderColor,
-        inheritedBackgroundOpacity,
-        inheritedBorderOpacity,
-      }),
-    );
-  }, [
+  const draft = getDraftColors({
     value,
     defaultValue,
     showBorder,
@@ -178,7 +154,9 @@ const ColorContrastWidget = ({
     legacyBorderColor,
     inheritedBackgroundOpacity,
     inheritedBorderOpacity,
-  ]);
+  });
+  const draftRef = useRef(draft);
+  draftRef.current = draft;
 
   const backgroundOpacity = showOpacity ? (draft.backgroundOpacity ?? 1) : 1;
   const borderOpacity = showOpacity ? (draft.borderOpacity ?? 1) : 1;
@@ -200,11 +178,11 @@ const ColorContrastWidget = ({
   const isValid = contrast === null ? true : contrast >= 4.5;
 
   const commit = (next) => {
-    setDraft(next);
+    draftRef.current = next;
     onChange(id, next);
   };
 
-  const commitPatch = (patch) => commit({ ...draft, ...patch });
+  const commitPatch = (patch) => commit({ ...draftRef.current, ...patch });
 
   const contrastMessage =
     contrast === null
@@ -222,7 +200,11 @@ const ColorContrastWidget = ({
       <label>{title}</label>
       {description ? <p className="help">{description}</p> : null}
 
-      <div className="govrs-color-contrast-widget__presets">
+      <div
+        className="govrs-color-contrast-widget__presets"
+        role="group"
+        aria-label="Presets de cores"
+      >
         {GOVRS_COLOR_PAIRS.map((pair) => (
           <Button
             key={pair.name}
@@ -245,9 +227,9 @@ const ColorContrastWidget = ({
                   border: pair.border || pair.background,
                 }),
                 ...(showOpacity && {
-                  backgroundOpacity: draft.backgroundOpacity ?? 1,
+                  backgroundOpacity: 1,
                   ...(showBorder && {
-                    borderOpacity: draft.borderOpacity ?? 1,
+                    borderOpacity: 1,
                   }),
                 }),
               });

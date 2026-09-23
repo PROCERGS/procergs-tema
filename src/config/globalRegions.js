@@ -3,6 +3,10 @@ import stateBarSVG from '@plone/volto/icons/row-before.svg';
 import accessibilitySVG from '@plone/volto/icons/accessibility.svg';
 import BlockSettingsSchema from '@plone/volto/components/manage/Blocks/Block/Schema';
 import { configureGlobalRegions } from 'volto-global-regions';
+import {
+  globalRegionsRequestMiddleware,
+  guardGlobalRegionsReducer,
+} from '../helpers/globalRegionsRequests';
 import { ProcergsGlobalHeaderBlock } from '../govrs/components/Header/Header';
 import HeaderBlockEdit from '../govrs/blocks/globalHeader/Edit';
 import HeaderBlockSchema from '../govrs/blocks/globalHeader/schema';
@@ -118,13 +122,13 @@ const configureGlobalRegionBlocks = (config) => {
     blockHasValue: () => true,
   };
 
-  return configureGlobalRegions(config, {
+  configureGlobalRegions(config, {
     activeRegion: 'header',
     fetchPath: '/?expand=actions',
     savePath: '/',
     regions: {
       header: {
-        fieldName: 'global_regions',
+        fieldName: 'header_region',
         title: 'Cabeçalho global',
         allowedBlocks: [
           STATE_BAR_BLOCK_TYPE,
@@ -136,7 +140,7 @@ const configureGlobalRegionBlocks = (config) => {
         createDefault: createDefaultHeaderRegion,
       },
       footer: {
-        fieldName: 'global_regions',
+        fieldName: 'footer_region',
         title: 'Rodapé global',
         allowedBlocks: [FOOTER_BLOCK_TYPE],
         maxLength: 1,
@@ -153,6 +157,15 @@ const configureGlobalRegionBlocks = (config) => {
       },
     },
   });
+
+  config.addonReducers.globalRegions = guardGlobalRegionsReducer(
+    config.addonReducers.globalRegions,
+  );
+  config.settings.storeExtenders = [
+    ...(config.settings.storeExtenders || []),
+    (stack) => [globalRegionsRequestMiddleware, ...stack],
+  ];
+  return config;
 };
 
 export default configureGlobalRegionBlocks;
