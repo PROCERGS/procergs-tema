@@ -38,6 +38,7 @@ import { getContent } from '@plone/volto/actions/content/content';
 import { getNavigation } from '@plone/volto/actions/navigation/navigation';
 import { getTypes } from '@plone/volto/actions/types/types';
 import { getWorkflow } from '@plone/volto/actions/workflow/workflow';
+import { getColorPalette } from '../../../../../actions/colorPalette';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import headerRegionSVG from '@plone/volto/icons/row-before.svg';
@@ -48,10 +49,7 @@ import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFa
 import RouteAnnouncer from '@plone/volto/components/theme/RouteAnnouncer/RouteAnnouncer';
 import getPageSectionChrome from '../../../../../helpers/getPageSectionChrome';
 import isSectionOverlayEnabled from '../../../../../helpers/isSectionOverlayEnabled';
-import {
-  SiteThemeGlobalStyle,
-  SiteThemeToolbar,
-} from '../../../../../govrs/components/SiteTheme/SiteThemeToolbar';
+import SiteThemeGlobalStyle from '../../../../../govrs/components/SiteTheme/SiteThemeGlobalStyle';
 import { getCurrentContentEditPermission } from '../../../../../helpers/canEditCurrentContent';
 import GlobalRegionsPermissions from '../../../../../govrs/components/GlobalRegionsPermissions';
 
@@ -237,7 +235,6 @@ export class App extends Component {
             morePluggable={null}
             order={20}
           />
-          <SiteThemeToolbar visible={Boolean(this.props.token)} order={30} />
           <GlobalRegionsSidebar />
         </GlobalRegionsPermissions>
       </PluggablesProvider>
@@ -325,6 +322,11 @@ export function connectAppComponent(AppComponent) {
       {
         key: 'globalRegions',
         promise: ({ store }) => __SERVER__ && bootstrapGlobalRegions(store),
+      },
+      {
+        key: 'colorPalette',
+        promise: ({ store: { dispatch } }) =>
+          __SERVER__ && dispatch(getColorPalette()),
       },
       {
         key: 'navigation',

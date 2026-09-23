@@ -27,11 +27,9 @@ import {
   BREADCRUMBS_BLOCK_TYPE,
   createDefaultFooterRegion,
   createDefaultHeaderRegion,
-  createDefaultThemeRegion,
   FOOTER_BLOCK_TYPE,
   HEADER_BLOCK_TYPE,
   STATE_BAR_BLOCK_TYPE,
-  THEME_BLOCK_TYPE,
 } from './globalRegionDefaults';
 
 export {
@@ -39,11 +37,9 @@ export {
   BREADCRUMBS_BLOCK_TYPE,
   createDefaultFooterRegion,
   createDefaultHeaderRegion,
-  createDefaultThemeRegion,
   FOOTER_BLOCK_TYPE,
   HEADER_BLOCK_TYPE,
   STATE_BAR_BLOCK_TYPE,
-  THEME_BLOCK_TYPE,
 } from './globalRegionDefaults';
 
 const configureGlobalRegionBlocks = (config) => {
@@ -145,15 +141,6 @@ const configureGlobalRegionBlocks = (config) => {
         allowedBlocks: [FOOTER_BLOCK_TYPE],
         maxLength: 1,
         createDefault: createDefaultFooterRegion,
-      },
-      theme: {
-        fieldName: 'global_regions',
-        title: 'Cores do site',
-        description:
-          'Personalize as cores visuais usadas em todas as páginas do site.',
-        allowedBlocks: [THEME_BLOCK_TYPE],
-        maxLength: 1,
-        createDefault: createDefaultThemeRegion,
       },
     },
   });

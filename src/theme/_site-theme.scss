@@ -254,8 +254,8 @@
     border-radius: 0.4rem !important;
     background: #fff !important;
     color: #252525 !important;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-      monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 0.85rem;
     letter-spacing: 0.03em;
     text-transform: uppercase;
@@ -320,6 +320,136 @@
       width: auto;
       grid-column: 2;
       justify-self: start;
+    }
+  }
+}
+
+.procergs-color-palette-control-panel {
+  .procergs-color-palette-control-panel__title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    a {
+      display: inline-flex;
+      color: inherit;
+    }
+  }
+
+  .procergs-color-palette-control-panel__help {
+    max-width: 48rem;
+    margin: 0 0 1.5rem;
+    color: #454d50;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .procergs-color-palette-control-panel__preview {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid #d7e1e5;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    background: var(--govrs-color-surface-soft, #f6f8f9);
+    gap: 1rem;
+
+    > div:first-child {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+
+      span {
+        color: #5b6367;
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .procergs-color-palette-control-panel__swatches {
+    display: flex;
+    overflow: hidden;
+    flex: 0 0 auto;
+    border: 1px solid #aebbc1;
+    border-radius: 999px;
+
+    span {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .procergs-color-palette-control-panel__fields {
+    display: grid;
+    gap: 0 2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    .field {
+      padding: 1rem 0;
+      border-bottom: 1px solid #edf0f1;
+      margin: 0;
+    }
+
+    .help {
+      min-height: 2.75rem;
+      margin: 0.25rem 0 0.5rem;
+      color: #5b6367;
+      font-size: 0.825rem;
+      line-height: 1.4;
+    }
+  }
+
+  .procergs-color-palette-control-panel__contrast {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    gap: 0.5rem;
+
+    span {
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      background: #e8f5e9;
+      color: #1b5e20;
+      font-size: 0.8rem;
+      font-weight: 700;
+
+      &.is-warning {
+        background: #fff3e0;
+        color: #8a3b00;
+      }
+    }
+  }
+
+  .procergs-color-palette-control-panel__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+    border-top: 1px solid #d7e1e5;
+    margin-top: 1.5rem;
+    gap: 1rem;
+
+    > div {
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .procergs-color-palette-control-panel {
+    .procergs-color-palette-control-panel__fields {
+      grid-template-columns: 1fr;
+    }
+
+    .procergs-color-palette-control-panel__actions {
+      align-items: stretch;
+      flex-direction: column;
+
+      > div {
+        justify-content: flex-end;
+      }
     }
   }
 }
