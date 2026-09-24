@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@procergs/react-govrs-ds": "^0.3.46",
-    "volto-global-regions": "0.1.1"
+    "volto-global-regions": "0.1.2"
   },
   "peerDependencies": {
     "@plone/volto": "18.23.0",
