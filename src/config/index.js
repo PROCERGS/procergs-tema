@@ -12,6 +12,7 @@ import configureDivisorBlock from './blocks/divisor';
 import configureSectionBlock from './blocks/section';
 import configureTitleBlock from './blocks/title';
 import configureGlobalRegionBlocks from './globalRegions';
+import configureColorPalette from './colorPalette';
 import ColorInputWidget from '../govrs/widgets/ColorInputWidget';
 import ColorContrastWidget from '../govrs/widgets/ColorContrastWidget';
 import ButtonIconWidget from '../govrs/widgets/ButtonIconWidget';
@@ -36,6 +37,7 @@ const applyConfig = (config) => {
   configureDivisorBlock(config);
   configureSectionBlock(config);
   configureGlobalRegionBlocks(config);
+  configureColorPalette(config);
 
   config.blocks.requiredBlocks = [];
 

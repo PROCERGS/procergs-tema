@@ -38,6 +38,7 @@ import { getContent } from '@plone/volto/actions/content/content';
 import { getNavigation } from '@plone/volto/actions/navigation/navigation';
 import { getTypes } from '@plone/volto/actions/types/types';
 import { getWorkflow } from '@plone/volto/actions/workflow/workflow';
+import { getColorPalette } from '../../../../../actions/colorPalette';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
 import headerRegionSVG from '@plone/volto/icons/row-before.svg';
@@ -48,6 +49,7 @@ import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFa
 import RouteAnnouncer from '@plone/volto/components/theme/RouteAnnouncer/RouteAnnouncer';
 import getPageSectionChrome from '../../../../../helpers/getPageSectionChrome';
 import isSectionOverlayEnabled from '../../../../../helpers/isSectionOverlayEnabled';
+import SiteThemeGlobalStyle from '../../../../../govrs/components/SiteTheme/SiteThemeGlobalStyle';
 import { getCurrentContentEditPermission } from '../../../../../helpers/canEditCurrentContent';
 import GlobalRegionsPermissions from '../../../../../govrs/components/GlobalRegionsPermissions';
 
@@ -158,6 +160,7 @@ export class App extends Component {
               headerOverlay ? sectionChrome.headerForeground : undefined
             }
           />
+          <SiteThemeGlobalStyle />
           <MultilingualRedirector
             pathname={this.props.pathname}
             contentLanguage={this.props.content?.language?.token}
@@ -225,7 +228,7 @@ export class App extends Component {
             region="footer"
             icon={footerRegionSVG}
             label="Editar rodapé global"
-            initializeLabel="Inicializar rodapé global"
+            initializeLabel="Editar rodapé global"
             cancelLabel="Cancelar edição do rodapé"
             visible={Boolean(this.props.token)}
             requireEditPermission
@@ -319,6 +322,11 @@ export function connectAppComponent(AppComponent) {
       {
         key: 'globalRegions',
         promise: ({ store }) => __SERVER__ && bootstrapGlobalRegions(store),
+      },
+      {
+        key: 'colorPalette',
+        promise: ({ store: { dispatch } }) =>
+          __SERVER__ && dispatch(getColorPalette()),
       },
       {
         key: 'navigation',
