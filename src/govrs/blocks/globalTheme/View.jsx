@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { createSiteThemeCss } from './themeColors';
 
 const ThemeBlockView = ({ data }) => (
-  <style data-procergs-site-theme>{createSiteThemeCss(data)}</style>
+  <style
+    data-procergs-site-theme
+    dangerouslySetInnerHTML={{ __html: createSiteThemeCss(data) }}
+  />
 );
 
 ThemeBlockView.propTypes = {
