@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { compose } from 'redux';
@@ -17,6 +17,8 @@ import {
 } from './getListingVariation';
 import { useGridColumns } from '../grid/GridContext';
 import { getGridListingVariations, normalizeListingForGrid } from './gridRules';
+import { normalizeFileCriteria } from './fileCriteria';
+import { updateFileTitleOverride } from './fileTitles';
 
 const messages = defineMessages({
   listing: {
@@ -47,7 +49,16 @@ const Edit = React.memo(
     } = props;
     const intl = useIntl();
     const gridColumns = useGridColumns();
-    const normalizedData = normalizeListingForGrid(data, gridColumns);
+    const normalizedData = normalizeFileCriteria(
+      normalizeListingForGrid(data, gridColumns),
+    );
+    const isFileListing = getListingVariation(normalizedData) === 'file';
+
+    useEffect(() => {
+      if (!isEqual(normalizedData, data)) {
+        onChangeBlock(block, normalizedData);
+      }
+    }, [block, data, normalizedData, onChangeBlock]);
     const baseBlocksConfig =
       props.blocksConfig || config.blocks?.blocksConfig || {};
     const listingBlockConfig =
@@ -72,11 +83,20 @@ const Edit = React.memo(
     });
     const placeholder =
       normalizedData.placeholder ||
-      (normalizedData?.querystring?.query?.length
+      (isFileListing || normalizedData?.querystring?.query?.length
         ? intl.formatMessage(messages.results)
         : intl.formatMessage(messages.items));
     const handleChangeBlock = (id, value) =>
-      onChangeBlock(id, normalizeListingForGrid(value, gridColumns));
+      onChangeBlock(
+        id,
+        normalizeFileCriteria(normalizeListingForGrid(value, gridColumns)),
+      );
+    const handleFileTitleChange = (item, title) => {
+      const updatedData = updateFileTitleOverride(data, item, title);
+      if (updatedData !== data) {
+        handleChangeBlock(block, updatedData);
+      }
+    };
 
     return (
       <div
@@ -93,12 +113,14 @@ const Edit = React.memo(
           gridColumns={gridColumns}
           path={getBaseUrl(pathname)}
           isEditMode
+          onFileTitleChange={handleFileTitleChange}
+          onFileTitleFocus={() => props.onSelectBlock?.(block)}
           variation={{
             ...props.variation,
             fullobjects: listingNeedsFullObjects(normalizedData),
           }}
         />
-        {!selected && <div className="listing-overlay" />}
+        {!selected && !isFileListing && <div className="listing-overlay" />}
         <SidebarPortal selected={selected}>
           <BlockDataForm
             schema={schema}

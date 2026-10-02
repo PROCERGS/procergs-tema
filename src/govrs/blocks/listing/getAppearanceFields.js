@@ -6,6 +6,8 @@ export const getAppearanceFields = (variation, data) => {
   }
 
   switch (variation) {
+    case 'file':
+      return [];
     case 'link':
       return ['numbered', 'invert', 'mediaPreset'];
     case 'card':

@@ -2,6 +2,7 @@ import { getQueryStringResults } from '@plone/volto/actions/querystringsearch/qu
 import qs from 'query-string';
 import { slugify } from '@plone/volto/helpers/Utils/Utils';
 import { listingNeedsFullObjects } from './getListingVariation';
+import { buildFileListingQuery } from './fileCriteria';
 
 const getCurrentPage = (location, id) => {
   const pageQueryParam = qs.parse(location.search);
@@ -20,7 +21,9 @@ export default function getListingBlockAsyncData(props) {
   const subrequestID = content?.UID ? `${content?.UID}-${id}` : id;
   const currentPage = getCurrentPage(location, id);
 
-  if (!data.querystring) {
+  const normalizedData = buildFileListingQuery(data);
+
+  if (!normalizedData.querystring) {
     return [
       async () => {
         return null;
@@ -29,8 +32,8 @@ export default function getListingBlockAsyncData(props) {
   }
 
   const queryPayload = {
-    ...data.querystring,
-    ...(listingNeedsFullObjects(data)
+    ...normalizedData.querystring,
+    ...(listingNeedsFullObjects(normalizedData)
       ? { fullobjects: 1 }
       : { metadata_fields: '_all' }),
   };
