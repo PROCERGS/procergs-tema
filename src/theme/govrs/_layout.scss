@@ -738,19 +738,8 @@ body:is(.public-ui, .cms-ui).has-toolbar-collapsed
   width: 100%;
 }
 
-.procergs-logout-alert {
-  position: fixed;
+body.cms-ui .govrs-toast {
   z-index: calc(var(--govrs-z-index-toast, 120) + 2);
-  inset-inline-start: 50%;
-  inset-block-end: max(1rem, env(safe-area-inset-bottom));
-  width: min(32rem, calc(100vw - 2rem));
-  box-sizing: border-box;
-  transform: translateX(-50%);
-
-  > .govrs-alert {
-    width: 100%;
-    box-sizing: border-box;
-  }
 }
 
 body.cms-ui .procergs-footer-wrapper {

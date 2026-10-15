@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Alerts } from '@procergs/react-govrs-ds';
+import { Toast } from '@procergs/react-govrs-ds';
 
 const messages = defineMessages({
   loggedOutContent: {
@@ -35,23 +35,17 @@ const LogoutAlert = () => {
     });
   }, [history, location]);
 
-  useEffect(() => {
-    if (!visible) return undefined;
-
-    const timeout = window.setTimeout(() => setVisible(false), 5000);
-    return () => window.clearTimeout(timeout);
-  }, [visible]);
-
   if (!visible) return null;
 
   return (
-    <div className="procergs-logout-alert">
-      <Alerts
-        dismissible
-        variant="info"
-        message={`${intl.formatMessage(messages.loggedOutContent)}`}
-      />
-    </div>
+    <Toast
+      dismissible
+      variant="info"
+      message={intl.formatMessage(messages.loggedOutContent)}
+      duration={5000}
+      position="bottom-center"
+      onClose={() => setVisible(false)}
+    />
   );
 };
 
