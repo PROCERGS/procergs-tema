@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@procergs/react-govrs-ds": "^0.3.49",
+    "slate-history": "0.100.0",
     "volto-global-regions": "0.1.2"
   },
   "peerDependencies": {

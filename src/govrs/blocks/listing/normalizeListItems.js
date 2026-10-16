@@ -2,6 +2,7 @@ import { flattenToAppURL } from '@plone/volto/helpers/Url/Url';
 import { resolveImageUrlFromContent } from '../../helpers/resolveImageUrlFromContent';
 import { getListingVariation } from './getListingVariation';
 import { resolveListItemMedia } from './resolveListItemMedia';
+import { getFileTitleKey, getOriginalFileTitle } from './fileTitles';
 
 const CARD_TEXT_MAX_LENGTH = 140;
 const UNGROUPED_LABEL = 'Outros';
@@ -36,7 +37,8 @@ const getSubjectTags = (item) => {
   return tags.length > 0 ? tags : undefined;
 };
 
-const formatGroupTag = (value) => String(value).trim().toLocaleUpperCase('pt-BR');
+const formatGroupTag = (value) =>
+  String(value).trim().toLocaleUpperCase('pt-BR');
 
 const getGroupLabel = (item, groupBy) => {
   if (groupBy === 'portal_type') {
@@ -81,6 +83,29 @@ export const normalizeListItems = (
   return items.map((item) => {
     const id = getItemId(item);
     const title = getItemTitle(item);
+
+    if (variation === 'file') {
+      const fieldName = item['@type'] === 'Image' ? 'image' : 'file';
+      const attachment = item[fieldName];
+      const filename = attachment?.filename || item.filename;
+      // Image.download can point to a scale; always download the original field.
+      const downloadUrl = item['@id']
+        ? item['@id'] + '/@@download/' + fieldName
+        : attachment?.download;
+      const displayTitle = data.fileTitleOverrides?.[getFileTitleKey(item)];
+
+      return {
+        id: getFileTitleKey(item) || id,
+        title: getOriginalFileTitle(item),
+        ...(displayTitle ? { displayTitle } : {}),
+        ...(downloadUrl ? { href: flattenToAppURL(downloadUrl) } : {}),
+        ...(filename ? { filename } : {}),
+        ...(typeof attachment?.size === 'number'
+          ? { size: attachment.size }
+          : {}),
+      };
+    }
+
     const description = getItemDescription(item);
     const image = resolveImageUrlFromContent(item);
     const mediaPreset =

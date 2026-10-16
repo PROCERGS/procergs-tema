@@ -202,7 +202,8 @@ export const ListingBlockSchema = ({
       },
       querystring: {
         title: intl.formatMessage(messages.query),
-        widget: 'querystring',
+        widget: 'listing_querystring',
+        isFileListing: variation === 'file',
       },
       horizontal: {
         title: intl.formatMessage(messages.horizontal),

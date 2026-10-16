@@ -4,6 +4,8 @@ export const getListVariantProps = (data = {}) => {
   const variation = getListingVariation(data);
 
   switch (variation) {
+    case 'file':
+      return { variant: 'file' };
     case 'link':
       return {
         variant: 'link',
