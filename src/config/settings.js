@@ -1,5 +1,11 @@
+import LogoutAlert from '../govrs/components/Alerts/LogoutAlert';
+
 const configureSettings = (config) => {
   config.settings.navDepth = 2;
+  config.settings.appExtras = [
+    ...(config.settings.appExtras || []),
+    { match: '', component: LogoutAlert },
+  ];
 
   const apiExpanders = (config.settings.apiExpanders || []).map((expander) => ({
     ...expander,
