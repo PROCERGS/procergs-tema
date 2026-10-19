@@ -115,7 +115,7 @@ class Search extends Component {
   render() {
     const options = qs.parse(this.props.history.location.search);
     const pageSize = Number(options.b_size) || this.defaultPageSize;
-    const totalItems = this.props.search?.total || 0;
+    const totalItems = this.props.searchState?.total || 0;
 
     return (
       <Container id="page-search">
@@ -271,7 +271,7 @@ class Search extends Component {
 
 const mapSearchState = (state, props) => ({
   items: state.search.items,
-  search: state.search,
+  searchState: state.search,
   searchableText: qs.parse(props.history.location.search).SearchableText,
   pathname: props.history.location.pathname,
 });
@@ -286,7 +286,7 @@ export default compose(
   connect(
     (state, props) => ({
       items: state.search.items,
-      search: state.search,
+      searchState: state.search,
       searchableText: qs.parse(props.history.location.search).SearchableText,
       pathname: props.location.pathname,
     }),
