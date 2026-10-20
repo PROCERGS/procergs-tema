@@ -69,6 +69,10 @@ const messages = defineMessages({
     id: 'Vertical spacing',
     defaultMessage: 'Espaçamento vertical',
   },
+  blockSpacing: {
+    id: 'Spacing between blocks',
+    defaultMessage: 'Espaçamento entre blocos',
+  },
   overlayHeader: {
     id: 'Use background behind header',
     defaultMessage: 'Estender o fundo sob o Header',
@@ -151,7 +155,7 @@ export const SectionBlockSchema = ({ intl }) => ({
     {
       id: 'layout',
       title: intl.formatMessage(messages.layout),
-      fields: ['minHeight', 'contentWidth', 'spacing'],
+      fields: ['minHeight', 'contentWidth', 'spacing', 'blockSpacing'],
     },
     {
       id: 'integration',
@@ -264,6 +268,15 @@ export const SectionBlockSchema = ({ intl }) => ({
       ],
       default: 'default',
     },
+    blockSpacing: {
+      title: intl.formatMessage(messages.blockSpacing),
+      choices: [
+        ['small', 'Pequeno (padrão do Plone)'],
+        ['medium', 'Médio (45 px)'],
+        ['large', 'Grande (90 px)'],
+      ],
+      default: 'small',
+    },
     overlayHeader: {
       title: intl.formatMessage(messages.overlayHeader),
       description:
@@ -293,7 +306,10 @@ export const NestedSectionBlockSchema = ({ intl }) => {
 
   return {
     ...schema,
-    fieldsets: [backgroundFieldset, { ...layoutFieldset, fields: ['spacing'] }],
+    fieldsets: [
+      backgroundFieldset,
+      { ...layoutFieldset, fields: ['spacing', 'blockSpacing'] },
+    ],
   };
 };
 

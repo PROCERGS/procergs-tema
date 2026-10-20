@@ -203,6 +203,71 @@
     color: inherit;
   }
 }
+.block.procergsSection.govrs-section-block--block-spacing-medium {
+  --procergs-section-block-gap: 45px;
+}
+
+.block.procergsSection.govrs-section-block--block-spacing-large {
+  --procergs-section-block-gap: 90px;
+}
+
+.block.procergsSection:is(
+    .govrs-section-block--block-spacing-medium,
+    .govrs-section-block--block-spacing-large
+  ) {
+  &:not(.govrs-section-block--editing) > .govrs-section-block__content,
+  > .govrs-section-block__content
+    > .blocks-form
+    > fieldset
+    > [data-rbd-droppable-id] {
+    display: flex;
+    flex-direction: column;
+    > * {
+      margin-block: 0;
+    }
+
+    > * + * {
+      margin-block-start: var(--procergs-section-block-gap);
+    }
+  }
+
+  > .govrs-section-block__content
+    > .blocks-form
+    > fieldset
+    > [data-rbd-droppable-id]
+    > [class^='block-editor-']
+    > .cell-wrapper
+    > .block.inner {
+    margin-block: 0;
+
+    > .block {
+      margin-block: 0;
+    }
+  }
+
+  // Slate's first/last paragraph margins must not add to the chosen gap.
+  > .govrs-section-block__content > .procergs-text-typography,
+  > .govrs-section-block__content
+    > .blocks-form
+    > fieldset
+    > [data-rbd-droppable-id]
+    > [class^='block-editor-']
+    > .cell-wrapper
+    > .block.inner
+    > .block:is(.slate, .detachedSlate)
+    > .procergs-text-typography {
+    > :first-child,
+    [data-slate-editor] > :first-child {
+      margin-block-start: 0;
+    }
+
+    > :last-child,
+    [data-slate-editor] > :last-child {
+      margin-block-end: 0;
+    }
+  }
+}
+
 // Keep nested container toolbars in separate lanes. Volto anchors every
 // toolbar inside a Grid to the same top-left point by default.
 body.cms-ui {

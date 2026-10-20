@@ -29,6 +29,7 @@ const SectionBlockBody = ({
     minHeight,
     contentWidth,
     spacing,
+    blockSpacing,
   } = normalized;
 
   useEffect(() => {
@@ -85,6 +86,7 @@ const SectionBlockBody = ({
         `govrs-section-block--position-${mediaPosition}`,
         `govrs-section-block--width-${contentWidth}`,
         `govrs-section-block--spacing-${spacing}`,
+        `govrs-section-block--block-spacing-${blockSpacing}`,
         {
           'govrs-grid-background-block': variant === 'grid',
           'govrs-section-block--nested': isNested,
