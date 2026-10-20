@@ -14,7 +14,6 @@ const configureDivisorBlock = (config) => {
     edit: DivisorBlockEdit,
     schema: BlockSettingsSchema,
     blockSchema: DivisorBlockSchema,
-    gridRules: { allowed: true },
     restricted: false,
     mostUsed: false,
     sidebarTab: 1,

@@ -22,3 +22,25 @@
     text-align: center;
   }
 }
+
+.block.gridBlock .block.banner {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  height: auto;
+  margin-inline: 0;
+
+  .govrs-banner-block__banner {
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .govrs-banner__image {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+}
