@@ -135,8 +135,7 @@ const SectionBlockBody = ({
       </div>
       <div
         className={cx('govrs-section-block__content', {
-          'ui container':
-            variant === 'section' && contentWidth === 'layout' && !isNested,
+          'ui container': contentWidth === 'layout' && !isNested,
         })}
       >
         {children}

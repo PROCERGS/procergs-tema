@@ -203,6 +203,7 @@
     color: inherit;
   }
 }
+
 .block.procergsSection.govrs-section-block--block-spacing-medium {
   --procergs-section-block-gap: 45px;
 }
@@ -222,6 +223,7 @@
     > [data-rbd-droppable-id] {
     display: flex;
     flex-direction: column;
+
     > * {
       margin-block: 0;
     }
@@ -291,8 +293,11 @@ body.cms-ui {
     transform: none;
   }
 }
+
 body.public-ui:not(.cms-ui)
-  .block.procergsSection:not(.govrs-section-block--nested) {
+  :is(.block.procergsSection, .block.gridBlock.govrs-grid-background-block):not(
+    .govrs-section-block--nested
+  ) {
   width: 100vw;
   max-width: none;
   margin-inline: calc(50% - 50vw);
@@ -304,8 +309,8 @@ body.public-ui:not(.cms-ui)
 }
 
 body.public-ui {
-  .block.gridBlock .block.procergsSection,
-  .block.procergsSection .block.procergsSection {
+  :is(.block.gridBlock, .block.procergsSection)
+    :is(.block.procergsSection, .block.gridBlock.govrs-grid-background-block) {
     width: 100%;
     max-width: 100%;
     margin-inline: 0;
