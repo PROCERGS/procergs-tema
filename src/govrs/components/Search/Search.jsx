@@ -216,33 +216,45 @@ class Search extends Component {
               )}
             </header>
             <section id="content-core">
-              {this.props.items.map((item) => (
-                <article className="tileItem" key={item['@id']}>
-                  <h2 className="tileHeadline">
-                    <UniversalLink
-                      item={item}
-                      className="summary url"
-                      title={item['@type']}
-                    >
-                      {item.title}
-                    </UniversalLink>
-                  </h2>
-                  {item.description && (
-                    <div className="tileBody">
-                      <span className="description">{item.description}</span>
+              <div className="govrs-list-link">
+                {this.props.items.map((item) => (
+                  <article
+                    className="tileItem govrs-list-link__item"
+                    key={item['@id']}
+                  >
+                    <div className="govrs-list-link__content">
+                      <h2 className="tileHeadline">
+                        <UniversalLink
+                          item={item}
+                          className="summary url govrs-list-link__anchor"
+                          title={item['@type']}
+                        >
+                          {item.title}
+                        </UniversalLink>
+                      </h2>
+                      {item.description && (
+                        <div className="tileBody">
+                          <span className="description govrs-list-link__meta">
+                            {item.description}
+                          </span>
+                        </div>
+                      )}
+                      <div className="tileFooter">
+                        <UniversalLink
+                          item={item}
+                          className="govrs-list-link__anchor"
+                        >
+                          <FormattedMessage
+                            id="Read More…"
+                            defaultMessage="Read More…"
+                          />
+                        </UniversalLink>
+                      </div>
                     </div>
-                  )}
-                  <div className="tileFooter">
-                    <UniversalLink item={item}>
-                      <FormattedMessage
-                        id="Read More…"
-                        defaultMessage="Read More…"
-                      />
-                    </UniversalLink>
-                  </div>
-                  <div className="visualClear" />
-                </article>
-              ))}
+                    <div className="visualClear" />
+                  </article>
+                ))}
+              </div>
 
               <div className="search-footer">
                 <Pagination

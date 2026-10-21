@@ -1,0 +1,15 @@
+.govrs-content-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--govrs-space-2, 0.5rem);
+}
+
+.govrs-content-tags__link {
+  text-decoration: none;
+}
+
+.govrs-content-tags__link:focus-visible {
+  outline: var(--govrs-border-width-md, 2px) solid
+    var(--govrs-color-focus, #ffcd07);
+  outline-offset: var(--govrs-border-width-sm, 1px);
+}
