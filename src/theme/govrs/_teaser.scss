@@ -22,6 +22,23 @@
   }
 }
 
+.block.teaser .teaser-item.default .procergs-teaser-button.govrs-button {
+  --govrs-button-background: transparent;
+  --govrs-button-foreground: var(
+    --procergs-section-foreground,
+    var(--govrs-color-brand-primary, #1a7235)
+  );
+  --govrs-button-border: currentColor;
+
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-top: var(--govrs-space-6, 1.5rem);
+  color: var(--govrs-button-foreground);
+  gap: var(--govrs-space-2, 0.5rem);
+  text-decoration: none;
+  white-space: normal;
+}
+
 .block.gridBlock .block.teaser,
 .block-editor-gridBlock .block.teaser,
 .block-editor-teaser.contained .block.teaser {

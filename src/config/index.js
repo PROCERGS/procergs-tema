@@ -11,6 +11,7 @@ import configureButtonBlock from './blocks/button';
 import configureDivisorBlock from './blocks/divisor';
 import configureSectionBlock from './blocks/section';
 import configureTitleBlock from './blocks/title';
+import configureTeaserBlock from './blocks/teaser';
 import configureGlobalRegionBlocks from './globalRegions';
 import configureColorPalette from './colorPalette';
 import configureContactForm from './contactForm';
@@ -37,6 +38,7 @@ const applyConfig = (config) => {
   configureSlateTableBlock(config);
   configureButtonBlock(config);
   configureDivisorBlock(config);
+  configureTeaserBlock(config);
   configureSectionBlock(config);
   configureGlobalRegionBlocks(config);
   configureColorPalette(config);
