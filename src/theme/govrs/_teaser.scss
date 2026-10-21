@@ -1,3 +1,27 @@
+.block.teaser .teaser-item.default {
+  .image-wrapper {
+    width: 50%;
+    min-width: 0;
+    max-width: 50%;
+    flex: 0 0 auto;
+  }
+
+  .image-wrapper img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .content {
+    width: auto;
+    min-width: 0;
+    flex: 1 1 0;
+  }
+}
+
 .block.gridBlock .block.teaser,
 .block-editor-gridBlock .block.teaser,
 .block-editor-teaser.contained .block.teaser {
