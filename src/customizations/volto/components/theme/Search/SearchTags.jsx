@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Tag } from '@procergs/react-govrs-ds';
 
 import { getVocabulary } from '@plone/volto/actions/vocabularies/vocabularies';
@@ -9,14 +9,15 @@ const vocabulary = 'plone.app.vocabularies.Keywords';
 
 const SearchTags = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const location = useLocation();
   const activeSubject = new URLSearchParams(location.search).get('Subject');
-  const getTagLocation = (tag, isActive) => {
+  const getTagLocation = (tag, selected) => {
     const searchParams = new URLSearchParams(location.search);
-    if (isActive) {
-      searchParams.delete('Subject');
-    } else {
+    if (selected) {
       searchParams.set('Subject', tag);
+    } else {
+      searchParams.delete('Subject');
     }
 
     const search = searchParams.toString();
@@ -44,19 +45,15 @@ const SearchTags = () => {
         const isActive = activeSubject === item.label;
 
         return (
-          <Link
-            className="search-tags__link"
-            to={getTagLocation(item.label, isActive)}
+          <Tag
             key={item.label}
-            aria-current={isActive ? 'page' : undefined}
-          >
-            <Tag
-              label={item.label}
-              showIcon={false}
-              showButton={false}
-              selected={isActive}
-            />
-          </Link>
+            label={item.label}
+            showIcon={false}
+            selected={isActive}
+            onSelectedChange={(selected) =>
+              history.push(getTagLocation(item.label, selected))
+            }
+          />
         );
       })}
     </div>
