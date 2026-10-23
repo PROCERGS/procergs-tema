@@ -31,9 +31,9 @@ msgid "Accordion"
 msgstr "Acordeão"
 
 #. Default: "Add marker"
-#: govrs/blocks/maps/schema
+#: govrs/blocks/maps/messages
 msgid "Add marker"
-msgstr ""
+msgstr "Adicionar marcador"
 
 #. Default: "Add panel"
 #: govrs/blocks/accordion/messages
@@ -43,7 +43,7 @@ msgstr "Adicionar painel"
 #. Default: "Alignment"
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
-#: govrs/blocks/maps/schema
+#: govrs/blocks/maps/messages
 msgid "Alignment"
 msgstr "Alinhamento"
 
@@ -290,6 +290,7 @@ msgstr ""
 #: govrs/blocks/globalFooter/schema
 #: govrs/blocks/globalHeader/schema
 #: govrs/blocks/globalStateBar/schema
+#: govrs/blocks/maps/messages
 msgid "Default"
 msgstr "Padrão"
 
@@ -545,7 +546,7 @@ msgid "Last modified"
 msgstr "Última modificação"
 
 #. Default: "Latitude"
-#: govrs/blocks/maps/schema
+#: govrs/blocks/maps/messages
 msgid "Latitude"
 msgstr ""
 
@@ -591,25 +592,24 @@ msgid "Logo background opacity"
 msgstr ""
 
 #. Default: "Longitude"
-#: govrs/blocks/maps/schema
+#: govrs/blocks/maps/messages
 msgid "Longitude"
 msgstr ""
 
 #. Default: "Maps"
-#: govrs/blocks/maps/Edit
-#: govrs/blocks/maps/schema
+#: govrs/blocks/maps/messages
 msgid "Maps"
 msgstr ""
 
 #. Default: "Marker list label"
-#: govrs/blocks/maps/schema
+#: govrs/blocks/maps/messages
 msgid "Marker list label"
-msgstr ""
+msgstr "Rótulo da lista de marcadores"
 
 #. Default: "Markers"
-#: govrs/blocks/maps/schema
+#: govrs/blocks/maps/messages
 msgid "Markers"
-msgstr ""
+msgstr "Marcadores"
 
 #. Default: "Media above text"
 #: govrs/blocks/listing/messages
@@ -672,9 +672,9 @@ msgid "No items found in this container."
 msgstr ""
 
 #. Default: "No map markers configured"
-#: govrs/blocks/maps/MapBlockBody
+#: govrs/blocks/maps/messages
 msgid "No map markers configured"
-msgstr ""
+msgstr "Nenhum marcador foi configurado no mapa"
 
 #. Default: "No media"
 #: govrs/blocks/listing/messages
@@ -884,9 +884,9 @@ msgid "Show header title"
 msgstr ""
 
 #. Default: "Show marker list"
-#: govrs/blocks/maps/schema
+#: govrs/blocks/maps/messages
 msgid "Show marker list"
-msgstr ""
+msgstr "Exibir lista de marcadores"
 
 #. Default: "Show tags"
 #: govrs/blocks/listing/messages
@@ -921,6 +921,7 @@ msgstr "Quadrado"
 #. Default: "Style"
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
+#: govrs/blocks/maps/messages
 msgid "Style"
 msgstr "Estilo"
 
@@ -937,7 +938,7 @@ msgstr "Tema"
 #. Default: "Title"
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/carousel/messages
-#: govrs/blocks/maps/schema
+#: govrs/blocks/maps/messages
 msgid "Title"
 msgstr "Título"
 
