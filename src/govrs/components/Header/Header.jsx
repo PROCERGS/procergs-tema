@@ -563,7 +563,7 @@ export const LegacyGovrsHeader = ({
   );
 
   const handleSearch = (term) => {
-    history.push(`/search?SearchableText=${encodeURIComponent(term)}`);
+    history.push(`/busca?SearchableText=${encodeURIComponent(term)}`);
   };
 
   return (
