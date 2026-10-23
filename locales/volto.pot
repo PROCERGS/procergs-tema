@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-10-23T13:15:15.319Z\n"
+"POT-Creation-Date: 2026-10-23T16:45:23.232Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -99,48 +99,48 @@ msgstr ""
 msgid "Autoplay speed (ms)"
 msgstr ""
 
-#. Default: "Fundo"
-#: govrs/blocks/section/schema
+#. Default: "Background"
+#: govrs/blocks/section/messages
 msgid "Background"
 msgstr ""
 
-#. Default: "Cores de fundo e texto"
-#: govrs/blocks/section/schema
+#. Default: "Background and text colors"
+#: govrs/blocks/section/messages
 msgid "Background and text colors"
 msgstr ""
 
-#. Default: "Imagem de fundo"
-#: govrs/blocks/section/schema
+#. Default: "Background image"
+#: govrs/blocks/section/messages
 msgid "Background image"
 msgstr ""
 
-#. Default: "Tipo de fundo"
-#: govrs/blocks/section/schema
+#. Default: "Background type"
+#: govrs/blocks/section/messages
 msgid "Background type"
 msgstr ""
 
-#. Default: "URL do YouTube"
-#: govrs/blocks/section/schema
+#. Default: "Background video URL"
+#: govrs/blocks/section/messages
 msgid "Background video URL"
 msgstr ""
 
-#. Default: "Fim do vídeo (segundos)"
-#: govrs/blocks/section/schema
+#. Default: "Background video end"
+#: govrs/blocks/section/messages
 msgid "Background video end"
 msgstr ""
 
-#. Default: "Arquivo de vídeo de fundo"
-#: govrs/blocks/section/schema
+#. Default: "Background video file"
+#: govrs/blocks/section/messages
 msgid "Background video file"
 msgstr ""
 
-#. Default: "Origem do vídeo"
-#: govrs/blocks/section/schema
+#. Default: "Background video source"
+#: govrs/blocks/section/messages
 msgid "Background video source"
 msgstr ""
 
-#. Default: "Início do vídeo (segundos)"
-#: govrs/blocks/section/schema
+#. Default: "Background video start"
+#: govrs/blocks/section/messages
 msgid "Background video start"
 msgstr ""
 
@@ -264,8 +264,8 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#. Default: "Largura do conteúdo"
-#: govrs/blocks/section/schema
+#. Default: "Content width"
+#: govrs/blocks/section/messages
 msgid "Content width"
 msgstr ""
 
@@ -311,8 +311,8 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#. Default: "Grupo vazio"
-#: govrs/blocks/section/templates
+#. Default: "Empty section"
+#: govrs/blocks/section/messages
 msgid "Empty section"
 msgstr ""
 
@@ -547,11 +547,6 @@ msgstr ""
 msgid "Latitude"
 msgstr ""
 
-#. Default: "Layout"
-#: govrs/blocks/section/schema
-msgid "Layout"
-msgstr ""
-
 #. Default: "Left"
 #: govrs/blocks/slateTable/Edit
 msgid "Left"
@@ -621,7 +616,6 @@ msgstr ""
 
 #. Default: "Media position"
 #: govrs/blocks/listing/messages
-#: govrs/blocks/section/schema
 msgid "Media position"
 msgstr ""
 
@@ -655,8 +649,8 @@ msgstr ""
 msgid "Middle"
 msgstr ""
 
-#. Default: "Altura mínima"
-#: govrs/blocks/section/schema
+#. Default: "Minimum height"
+#: govrs/blocks/section/messages
 msgid "Minimum height"
 msgstr ""
 
@@ -715,13 +709,13 @@ msgstr ""
 msgid "Numbers"
 msgstr ""
 
-#. Default: "Opacidade da camada de contraste"
-#: govrs/blocks/section/schema
+#. Default: "Overlay opacity"
+#: govrs/blocks/section/messages
 msgid "Overlay opacity"
 msgstr ""
 
-#. Default: "Integração com a página"
-#: govrs/blocks/section/schema
+#. Default: "Page integration"
+#: govrs/blocks/section/messages
 msgid "Page integration"
 msgstr ""
 
@@ -863,8 +857,8 @@ msgstr ""
 msgid "Search results for {term}"
 msgstr ""
 
-#. Default: "Grupo"
-#: govrs/blocks/section/schema
+#. Default: "Section"
+#: govrs/blocks/section/messages
 msgid "Section"
 msgstr ""
 
@@ -956,13 +950,13 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#. Default: "Estender o fundo sob o Footer"
-#: govrs/blocks/section/schema
+#. Default: "Use background behind footer"
+#: govrs/blocks/section/messages
 msgid "Use background behind footer"
 msgstr ""
 
-#. Default: "Estender o fundo sob o Header"
-#: govrs/blocks/section/schema
+#. Default: "Use background behind header"
+#: govrs/blocks/section/messages
 msgid "Use background behind header"
 msgstr ""
 
@@ -971,8 +965,8 @@ msgstr ""
 msgid "Variant 4"
 msgstr ""
 
-#. Default: "Espaçamento vertical"
-#: govrs/blocks/section/schema
+#. Default: "Vertical spacing"
+#: govrs/blocks/section/messages
 msgid "Vertical spacing"
 msgstr ""
 
@@ -1014,6 +1008,26 @@ msgstr ""
 #. Default: "No panels match the provided filter."
 #: govrs/blocks/accordion/messages
 msgid "procergs.accordion.noResultsMessage"
+msgstr ""
+
+#. Default: "Layout"
+#: govrs/blocks/section/messages
+msgid "procergs.section.layout"
+msgstr ""
+
+#. Default: "Media position"
+#: govrs/blocks/section/messages
+msgid "procergs.section.mediaPosition"
+msgstr ""
+
+#. Default: "Select a File content item with MP4 or WebM media."
+#: govrs/blocks/section/messages
+msgid "procergs.section.videoFileDescription"
+msgstr ""
+
+#. Default: "Use a YouTube video, Shorts or live stream URL."
+#: govrs/blocks/section/messages
+msgid "procergs.section.videoUrlDescription"
 msgstr ""
 
 #. Default: "results"

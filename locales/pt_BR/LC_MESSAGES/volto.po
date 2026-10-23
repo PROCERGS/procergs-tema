@@ -101,50 +101,50 @@ msgstr "Reprodução automática"
 msgid "Autoplay speed (ms)"
 msgstr "Velocidade da reprodução automática(ms)"
 
-#. Default: "Fundo"
-#: govrs/blocks/section/schema
+#. Default: "Background"
+#: govrs/blocks/section/messages
 msgid "Background"
-msgstr ""
+msgstr "Fundo"
 
-#. Default: "Cores de fundo e texto"
-#: govrs/blocks/section/schema
+#. Default: "Background and text colors"
+#: govrs/blocks/section/messages
 msgid "Background and text colors"
-msgstr ""
+msgstr "Cores de fundo e texto"
 
-#. Default: "Imagem de fundo"
-#: govrs/blocks/section/schema
+#. Default: "Background image"
+#: govrs/blocks/section/messages
 msgid "Background image"
-msgstr ""
+msgstr "Imagem de fundo"
 
-#. Default: "Tipo de fundo"
-#: govrs/blocks/section/schema
+#. Default: "Background type"
+#: govrs/blocks/section/messages
 msgid "Background type"
-msgstr ""
+msgstr "Tipo de fundo"
 
-#. Default: "URL do YouTube"
-#: govrs/blocks/section/schema
+#. Default: "Background video URL"
+#: govrs/blocks/section/messages
 msgid "Background video URL"
-msgstr ""
+msgstr "URL do YouTube"
 
-#. Default: "Fim do vídeo (segundos)"
-#: govrs/blocks/section/schema
+#. Default: "Background video end"
+#: govrs/blocks/section/messages
 msgid "Background video end"
-msgstr ""
+msgstr "Fim do vídeo (segundos)"
 
-#. Default: "Arquivo de vídeo de fundo"
-#: govrs/blocks/section/schema
+#. Default: "Background video file"
+#: govrs/blocks/section/messages
 msgid "Background video file"
-msgstr ""
+msgstr "Arquivo de vídeo de fundo"
 
-#. Default: "Origem do vídeo"
-#: govrs/blocks/section/schema
+#. Default: "Background video source"
+#: govrs/blocks/section/messages
 msgid "Background video source"
-msgstr ""
+msgstr "Origem do vídeo"
 
-#. Default: "Início do vídeo (segundos)"
-#: govrs/blocks/section/schema
+#. Default: "Background video start"
+#: govrs/blocks/section/messages
 msgid "Background video start"
-msgstr ""
+msgstr "Início do vídeo (segundos)"
 
 #. Default: "Banner"
 #: govrs/blocks/banner/messages
@@ -266,10 +266,10 @@ msgstr "Itens contidos"
 msgid "Content"
 msgstr "Conteúdo"
 
-#. Default: "Largura do conteúdo"
-#: govrs/blocks/section/schema
+#. Default: "Content width"
+#: govrs/blocks/section/messages
 msgid "Content width"
-msgstr ""
+msgstr "Largura do conteúdo"
 
 #. Default: "Dark"
 #: govrs/blocks/accordion/messages
@@ -313,10 +313,10 @@ msgstr "Decrescente"
 msgid "Disabled"
 msgstr "Desabilitado"
 
-#. Default: "Grupo vazio"
-#: govrs/blocks/section/templates
+#. Default: "Empty section"
+#: govrs/blocks/section/messages
 msgid "Empty section"
-msgstr ""
+msgstr "Grupo vazio"
 
 #. Default: "Enable panel filter"
 #: govrs/blocks/accordion/messages
@@ -549,11 +549,6 @@ msgstr "Última modificação"
 msgid "Latitude"
 msgstr ""
 
-#. Default: "Layout"
-#: govrs/blocks/section/schema
-msgid "Layout"
-msgstr ""
-
 #. Default: "Left"
 #: govrs/blocks/slateTable/Edit
 msgid "Left"
@@ -623,7 +618,6 @@ msgstr "Acima do texto"
 
 #. Default: "Media position"
 #: govrs/blocks/listing/messages
-#: govrs/blocks/section/schema
 msgid "Media position"
 msgstr "Posição da imagem"
 
@@ -657,10 +651,10 @@ msgstr ""
 msgid "Middle"
 msgstr ""
 
-#. Default: "Altura mínima"
-#: govrs/blocks/section/schema
+#. Default: "Minimum height"
+#: govrs/blocks/section/messages
 msgid "Minimum height"
-msgstr ""
+msgstr "Altura mínima"
 
 #. Default: "News"
 #: govrs/blocks/listing/messages
@@ -717,15 +711,15 @@ msgstr "Lista numerada"
 msgid "Numbers"
 msgstr "Números"
 
-#. Default: "Opacidade da camada de contraste"
-#: govrs/blocks/section/schema
+#. Default: "Overlay opacity"
+#: govrs/blocks/section/messages
 msgid "Overlay opacity"
-msgstr ""
+msgstr "Opacidade da camada de contraste"
 
-#. Default: "Integração com a página"
-#: govrs/blocks/section/schema
+#. Default: "Page integration"
+#: govrs/blocks/section/messages
 msgid "Page integration"
-msgstr ""
+msgstr "Integração com a página"
 
 #. Default: "Panels"
 #: govrs/blocks/accordion/messages
@@ -865,10 +859,10 @@ msgstr ""
 msgid "Search results for {term}"
 msgstr ""
 
-#. Default: "Grupo"
-#: govrs/blocks/section/schema
+#. Default: "Section"
+#: govrs/blocks/section/messages
 msgid "Section"
-msgstr ""
+msgstr "Grupo"
 
 #. Default: "Exibir página inicial"
 #: govrs/blocks/globalBreadcrumbs/schema
@@ -958,25 +952,25 @@ msgstr "Tamanho do título"
 msgid "Top"
 msgstr ""
 
-#. Default: "Estender o fundo sob o Footer"
-#: govrs/blocks/section/schema
+#. Default: "Use background behind footer"
+#: govrs/blocks/section/messages
 msgid "Use background behind footer"
-msgstr ""
+msgstr "Estender o fundo sob o rodapé"
 
-#. Default: "Estender o fundo sob o Header"
-#: govrs/blocks/section/schema
+#. Default: "Use background behind header"
+#: govrs/blocks/section/messages
 msgid "Use background behind header"
-msgstr ""
+msgstr "Estender o fundo sob o cabeçalho"
 
 #. Default: "Variant 4"
 #: govrs/blocks/banner/messages
 msgid "Variant 4"
 msgstr "Variação 4"
 
-#. Default: "Espaçamento vertical"
-#: govrs/blocks/section/schema
+#. Default: "Vertical spacing"
+#: govrs/blocks/section/messages
 msgid "Vertical spacing"
-msgstr ""
+msgstr "Espaçamento vertical"
 
 #. Default: "When enabled, each slide links to its corresponding page or news item"
 #: govrs/blocks/carousel/messages
@@ -1017,6 +1011,26 @@ msgstr "Digite para filtrar..."
 #: govrs/blocks/accordion/messages
 msgid "procergs.accordion.noResultsMessage"
 msgstr "Nenhum painel corresponde ao filtro informado."
+
+#. Default: "Layout"
+#: govrs/blocks/section/messages
+msgid "procergs.section.layout"
+msgstr "Disposição"
+
+#. Default: "Media position"
+#: govrs/blocks/section/messages
+msgid "procergs.section.mediaPosition"
+msgstr "Posição da mídia"
+
+#. Default: "Select a File content item with MP4 or WebM media."
+#: govrs/blocks/section/messages
+msgid "procergs.section.videoFileDescription"
+msgstr "Selecione um conteúdo do tipo Arquivo com mídia MP4 ou WebM."
+
+#. Default: "Use a YouTube video, Shorts or live stream URL."
+#: govrs/blocks/section/messages
+msgid "procergs.section.videoUrlDescription"
+msgstr "Use uma URL de vídeo, Shorts ou transmissão ao vivo do YouTube."
 
 #. Default: "results"
 #: govrs/components/Search/Search
