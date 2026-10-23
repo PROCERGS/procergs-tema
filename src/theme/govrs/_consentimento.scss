@@ -1,32 +1,35 @@
-$consentimento-green: #00ab38;
-$consentimento-green-dark: #1a6b30;
-$consentimento-text: #6b6b6b;
-
 .consentimento__overlay {
   position: fixed;
   inset: 0;
-  z-index: 10000;
+  z-index: var(--govrs-z-index-modal);
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 1.75rem 1rem;
+  padding: var(--govrs-space-6) var(--govrs-space-4);
   overflow-y: auto;
-  background: rgba(0, 0, 0, 0.13);
+  background: var(--govrs-color-overlay-backdrop);
 }
 
 .consentimento__modal {
   box-sizing: border-box;
   width: 100%;
   max-width: 58rem;
-  padding: 2rem 1.25rem 1.25rem;
-  background: #ffffff;
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3);
-  color: $consentimento-text;
-  font-size: 1rem;
-  line-height: 1.75;
+  padding: var(--govrs-space-7) var(--govrs-space-5) var(--govrs-space-5);
+  border-radius: var(--govrs-radius-md);
+  background: var(--govrs-color-surface-base);
+  box-shadow: var(--govrs-shadow-overlay);
+  color: var(--govrs-color-text-primary);
+  font-family: var(--govrs-font-family-base);
+  font-size: var(--govrs-font-size-body-md);
+  line-height: var(--govrs-line-height-body-md);
 
   &:focus {
     outline: none;
+  }
+
+  &:focus-visible {
+    outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
+    outline-offset: var(--govrs-border-width-md);
   }
 
   &--settings {
@@ -35,31 +38,36 @@ $consentimento-text: #6b6b6b;
 }
 
 .consentimento__title {
-  margin: 0 0 1.75rem;
-  color: $consentimento-green;
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 1.1;
+  margin: 0 0 var(--govrs-space-5);
+  color: var(--govrs-color-brand-primary, #1a7235);
+  font-size: var(--govrs-font-size-48, 3rem);
+  font-weight: var(--govrs-font-weight-bold, 700);
+  line-height: var(--govrs-line-height-52, 3.25rem);
   text-transform: uppercase;
 }
 
 .consentimento__text {
   p {
-    margin: 0 0 1.25rem;
+    margin: 0 0 var(--govrs-space-5);
   }
 
   strong {
-    color: #4d4d4d;
+    color: var(--govrs-color-text-primary);
   }
 
   a {
-    color: $consentimento-green-dark;
-    font-weight: 700;
+    color: var(--govrs-color-interactive-link);
+    font-weight: var(--govrs-font-weight-semibold);
     text-decoration: none;
 
     &:hover,
     &:focus-visible {
       text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
+      outline-offset: var(--govrs-border-width-md);
     }
   }
 }
@@ -69,43 +77,71 @@ $consentimento-text: #6b6b6b;
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: var(--govrs-space-4);
+  margin-top: var(--govrs-space-6);
 }
 
 .consentimento__button {
-  padding: 0.6rem 1.5rem;
-  border: 1px solid $consentimento-green-dark;
-  border-radius: 999px;
+  min-height: var(--govrs-size-control-lg);
+  padding: 0 var(--govrs-space-6);
+  border: var(--govrs-border-width-sm) solid var(--govrs-color-brand-primary);
+  border-radius: var(--govrs-radius-pill);
   background: transparent;
-  color: $consentimento-green-dark;
-  font: inherit;
-  font-size: 0.95rem;
-  line-height: 1.2;
+  color: var(--govrs-color-brand-primary);
+  font-family: var(--govrs-font-family-base);
+  font-size: var(--govrs-font-size-body-md);
+  font-weight: var(--govrs-font-weight-semibold);
+  line-height: 1;
   cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color var(--govrs-duration-fast) var(--govrs-easing-standard),
+    border-color var(--govrs-duration-fast) var(--govrs-easing-standard),
+    color var(--govrs-duration-fast) var(--govrs-easing-standard),
+    transform var(--govrs-duration-fast) var(--govrs-easing-standard);
 
   &:focus-visible {
-    outline: 2px solid $procergs-focus;
-    outline-offset: 2px;
+    outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
+    outline-offset: var(--govrs-border-width-md);
+  }
+
+  &:not(:disabled):hover {
+    transform: translateY(var(--govrs-motion-offset-lift));
+  }
+
+  &:not(:disabled):active {
+    transform: translateY(0);
   }
 
   &--primary {
-    background: $consentimento-green-dark;
-    color: #ffffff;
+    border-color: var(--govrs-color-brand-primary);
+    background: var(--govrs-color-brand-primary);
+    color: var(--govrs-color-text-inverse);
 
     &:hover {
-      background: darken($consentimento-green-dark, 6%);
+      border-color: var(--govrs-color-brand-primary-hover);
+      background: var(--govrs-color-brand-primary-hover);
+    }
+
+    &:active {
+      border-color: var(--govrs-color-brand-primary-strong);
+      background: var(--govrs-color-brand-primary-strong);
     }
   }
 
   &--outline:hover {
-    background: rgba($consentimento-green-dark, 0.08);
+    background: var(--govrs-color-brand-primary-alpha-08);
+  }
+
+  &--outline:active {
+    background: var(--govrs-color-brand-primary-alpha-20);
   }
 
   &--link {
-    padding-left: 0;
-    padding-right: 0;
     border-color: transparent;
+    color: var(--govrs-color-interactive-link);
+    padding-inline: var(--govrs-space-4);
 
     &:hover {
       text-decoration: underline;
@@ -120,20 +156,20 @@ $consentimento-text: #6b6b6b;
 }
 
 .consentimento__option {
-  margin: 0 0 0.6rem;
+  margin: 0 0 var(--govrs-space-2);
 }
 
 .consentimento__switch {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: var(--govrs-space-0);
   cursor: pointer;
 }
 
 .consentimento__switch-label {
   flex: 0 0 8.5rem;
-  color: #3d3d3d;
+  color: var(--govrs-color-text-secondary);
 }
 
 .consentimento__switch-input {
@@ -146,31 +182,36 @@ $consentimento-text: #6b6b6b;
 .consentimento__switch-track {
   position: relative;
   display: inline-block;
-  width: 3.1rem;
-  height: 1.75rem;
-  border: 1px solid #d0d0d0;
-  border-radius: 999px;
-  background: #ffffff;
-  transition: background 0.15s ease;
+  width: var(--govrs-space-8);
+  height: var(--govrs-size-control-sm);
+  border: var(--govrs-border-width-sm) solid var(--govrs-color-border-default);
+  border-radius: var(--govrs-radius-pill);
+  background: var(--govrs-color-surface-base);
+  transition:
+    background-color var(--govrs-duration-fast) var(--govrs-easing-standard),
+    border-color var(--govrs-duration-fast) var(--govrs-easing-standard);
 }
 
 .consentimento__switch-thumb {
   position: absolute;
   top: 50%;
-  left: 0.125rem;
+  left: var(--govrs-space-1);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.4rem;
-  height: 1.4rem;
-  border-radius: 50%;
-  background: #c4c4c4;
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 700;
+  width: var(--govrs-space-6);
+  height: var(--govrs-space-6);
+  border-radius: var(--govrs-radius-circle);
+  background: var(--govrs-color-surface-alt-strong);
+  color: var(--govrs-color-text-primary);
+  font-size: var(--govrs-font-size-12);
+  font-weight: var(--govrs-font-weight-semibold);
   line-height: 1;
   transform: translateY(-50%);
-  transition: left 0.15s ease, background 0.15s ease;
+  transition:
+    left var(--govrs-duration-fast) var(--govrs-easing-standard),
+    background-color var(--govrs-duration-fast) var(--govrs-easing-standard),
+    color var(--govrs-duration-fast) var(--govrs-easing-standard);
 
   &::before {
     content: '\2715';
@@ -179,8 +220,9 @@ $consentimento-text: #6b6b6b;
 
 .consentimento__switch-input:checked + .consentimento__switch-track {
   .consentimento__switch-thumb {
-    left: calc(100% - 1.525rem);
-    background: #a8d08d;
+    left: calc(100% - var(--govrs-space-6) - var(--govrs-space-1));
+    background: var(--govrs-color-brand-primary);
+    color: var(--govrs-color-text-inverse);
 
     &::before {
       content: '\2713';
@@ -189,7 +231,7 @@ $consentimento-text: #6b6b6b;
 }
 
 .consentimento__switch-input:disabled + .consentimento__switch-track {
-  opacity: 0.8;
+  opacity: 0.64;
 }
 
 .consentimento__switch-input:disabled ~ .consentimento__switch-track,
@@ -198,13 +240,14 @@ $consentimento-text: #6b6b6b;
 }
 
 .consentimento__switch-input:focus-visible + .consentimento__switch-track {
-  outline: 2px solid $procergs-focus;
-  outline-offset: 2px;
+  outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
+  outline-offset: var(--govrs-border-width-md);
 }
 
-@media (max-width: 40rem) {
+@media (max-width: #{$procergs-breakpoint-smartphone-portrait-max}) {
   .consentimento__title {
-    font-size: 2rem;
+    font-size: var(--govrs-font-size-32, 2rem);
+    line-height: var(--govrs-line-height-36, 2.25rem);
   }
 
   .consentimento__actions {
