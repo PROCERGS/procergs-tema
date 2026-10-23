@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-10-23T11:52:59.193Z\n"
+"POT-Creation-Date: 2026-10-23T12:10:27.855Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Domain: volto\n"
 
 #. Default: "Absolute URL to open when the banner is clicked"
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 msgid "Absolute URL to open when the banner is clicked"
 msgstr ""
 
 #. Default: "Accessible description for the banner image"
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 msgid "Accessible description for the banner image"
 msgstr ""
 
@@ -40,7 +40,7 @@ msgstr ""
 
 #. Default: "Alignment"
 #: govrs/blocks/accordion/messages
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 #: govrs/blocks/maps/schema
 msgid "Alignment"
 msgstr ""
@@ -66,7 +66,7 @@ msgstr ""
 
 #. Default: "Appearance"
 #: govrs/blocks/accordion/messages
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 #: govrs/blocks/button/schema
 #: govrs/blocks/carousel/schema
 #: govrs/blocks/globalHeader/schema
@@ -145,13 +145,12 @@ msgid "Background video start"
 msgstr ""
 
 #. Default: "Banner"
-#: govrs/blocks/banner/Edit
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 msgid "Banner"
 msgstr ""
 
 #. Default: "Banner type"
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 msgid "Banner type"
 msgstr ""
 
@@ -218,7 +217,7 @@ msgid "Center"
 msgstr ""
 
 #. Default: "Choose a banner image"
-#: govrs/blocks/banner/BannerBlockBody
+#: govrs/blocks/banner/messages
 msgid "Choose a banner image"
 msgstr ""
 
@@ -254,7 +253,7 @@ msgstr ""
 
 #. Default: "Content"
 #: govrs/blocks/accordion/messages
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 #: govrs/blocks/button/schema
 #: govrs/blocks/carousel/schema
 #: govrs/blocks/listing/schema
@@ -278,6 +277,7 @@ msgstr ""
 
 #. Default: "Default"
 #: govrs/blocks/accordion/messages
+#: govrs/blocks/banner/messages
 #: govrs/blocks/globalAccessibility/schema
 #: govrs/blocks/globalBreadcrumbs/schema
 #: govrs/blocks/globalFooter/schema
@@ -458,12 +458,12 @@ msgid "Icons only"
 msgstr ""
 
 #. Default: "Image"
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 msgid "Image"
 msgstr ""
 
 #. Default: "Image alt text"
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 msgid "Image alt text"
 msgstr ""
 
@@ -538,7 +538,7 @@ msgid "Left"
 msgstr ""
 
 #. Default: "Link"
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 msgid "Link"
 msgstr ""
 
@@ -873,9 +873,14 @@ msgstr ""
 msgid "Sort order"
 msgstr ""
 
+#. Default: "Square"
+#: govrs/blocks/banner/messages
+msgid "Square"
+msgstr ""
+
 #. Default: "Style"
 #: govrs/blocks/accordion/messages
-#: govrs/blocks/banner/schema
+#: govrs/blocks/banner/messages
 msgid "Style"
 msgstr ""
 
@@ -914,6 +919,11 @@ msgstr ""
 #. Default: "Estender o fundo sob o Header"
 #: govrs/blocks/section/schema
 msgid "Use background behind header"
+msgstr ""
+
+#. Default: "Variant 4"
+#: govrs/blocks/banner/messages
+msgid "Variant 4"
 msgstr ""
 
 #. Default: "Espaçamento vertical"
