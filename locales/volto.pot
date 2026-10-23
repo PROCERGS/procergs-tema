@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-10-23T17:25:01.940Z\n"
+"POT-Creation-Date: 2026-10-23T17:36:41.619Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -259,6 +259,7 @@ msgstr ""
 #: govrs/blocks/banner/messages
 #: govrs/blocks/button/messages
 #: govrs/blocks/carousel/messages
+#: govrs/blocks/grid/messages
 #: govrs/blocks/listing/messages
 msgid "Content"
 msgstr ""
@@ -273,6 +274,12 @@ msgstr ""
 msgid "Dark"
 msgstr ""
 
+#. Default: "Dashed"
+#: govrs/blocks/divisor/messages
+#: govrs/blocks/grid/messages
+msgid "Dashed"
+msgstr ""
+
 #. Default: "Date (newest first)"
 #: govrs/components/Search/Search
 msgid "Date (newest first)"
@@ -282,9 +289,11 @@ msgstr ""
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
 #: govrs/blocks/carousel/messages
+#: govrs/blocks/divisor/messages
 #: govrs/blocks/globalAccessibility/messages
 #: govrs/blocks/globalFooter/messages
 #: govrs/blocks/globalStateBar/messages
+#: govrs/blocks/grid/messages
 #: govrs/blocks/maps/messages
 msgid "Default"
 msgstr ""
@@ -387,6 +396,11 @@ msgstr ""
 #. Default: "Official independent bar of the Government of Rio Grande do Sul."
 #: govrs/blocks/globalStateBar/messages
 msgid "GovRS state bar description"
+msgstr ""
+
+#. Default: "Grid"
+#: govrs/blocks/grid/messages
+msgid "Grid"
 msgstr ""
 
 #. Default: "Group by"
@@ -771,29 +785,28 @@ msgstr ""
 msgid "Procergs Button Open in new tab"
 msgstr ""
 
-#. Default: "Aparência"
-#: govrs/blocks/divisor/schema
+#. Default: "Appearance"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Appearance"
 msgstr ""
 
-#. Default: "Divisor"
-#: govrs/blocks/divisor/Edit
-#: govrs/blocks/divisor/schema
+#. Default: "Divider"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Block"
 msgstr ""
 
-#. Default: "Orientação"
-#: govrs/blocks/divisor/schema
+#. Default: "Orientation"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Orientation"
 msgstr ""
 
-#. Default: "Espessura"
-#: govrs/blocks/divisor/schema
+#. Default: "Thickness"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Thickness"
 msgstr ""
 
-#. Default: "Traço"
-#: govrs/blocks/divisor/schema
+#. Default: "Line style"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Variant"
 msgstr ""
 
@@ -923,6 +936,7 @@ msgstr ""
 #. Default: "Title"
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/carousel/messages
+#: govrs/blocks/grid/messages
 #: govrs/blocks/maps/messages
 msgid "Title"
 msgstr ""
@@ -1007,6 +1021,11 @@ msgstr ""
 msgid "procergs.button.iconHintTitle"
 msgstr ""
 
+#. Default: "Color presets"
+#: govrs/widgets/messages
+msgid "procergs.colors.presets"
+msgstr ""
+
 #. Default: "Bar exclusive to the global header region, with accessibility shortcuts and controls."
 #: govrs/blocks/globalAccessibility/messages
 msgid "procergs.globalAccessibility.editorDescription"
@@ -1035,6 +1054,26 @@ msgstr ""
 #. Default: "Independent bar exclusive to the global header region."
 #: govrs/blocks/globalStateBar/messages
 msgid "procergs.globalStateBar.editorDescription"
+msgstr ""
+
+#. Default: "Divider thickness"
+#: govrs/blocks/grid/messages
+msgid "procergs.grid.dividerThickness"
+msgstr ""
+
+#. Default: "Divider style"
+#: govrs/blocks/grid/messages
+msgid "procergs.grid.dividerVariant"
+msgstr ""
+
+#. Default: "Dividers"
+#: govrs/blocks/grid/messages
+msgid "procergs.grid.dividers"
+msgstr ""
+
+#. Default: "Separate blocks with a vertical divider"
+#: govrs/blocks/grid/messages
+msgid "procergs.grid.verticalDividers"
 msgstr ""
 
 #. Default: "Layout"

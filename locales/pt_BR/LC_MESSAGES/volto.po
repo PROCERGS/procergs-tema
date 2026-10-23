@@ -194,7 +194,7 @@ msgstr "Quando os cartões não cabem"
 #. Default: "Inside a Grid, cards always wrap to the next row."
 #: govrs/blocks/listing/messages
 msgid "Card overflow in Grid description"
-msgstr "Dentro de Grid, os cartões sempre quebram para a linha seguinte."
+msgstr "Dentro de uma grade, os cartões sempre quebram para a linha seguinte."
 
 #. Default: "Card size"
 #: govrs/blocks/listing/messages
@@ -261,6 +261,7 @@ msgstr "Itens contidos"
 #: govrs/blocks/banner/messages
 #: govrs/blocks/button/messages
 #: govrs/blocks/carousel/messages
+#: govrs/blocks/grid/messages
 #: govrs/blocks/listing/messages
 msgid "Content"
 msgstr "Conteúdo"
@@ -275,6 +276,12 @@ msgstr "Largura do conteúdo"
 msgid "Dark"
 msgstr "Escuro"
 
+#. Default: "Dashed"
+#: govrs/blocks/divisor/messages
+#: govrs/blocks/grid/messages
+msgid "Dashed"
+msgstr "Tracejado"
+
 #. Default: "Date (newest first)"
 #: govrs/components/Search/Search
 msgid "Date (newest first)"
@@ -284,9 +291,11 @@ msgstr ""
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
 #: govrs/blocks/carousel/messages
+#: govrs/blocks/divisor/messages
 #: govrs/blocks/globalAccessibility/messages
 #: govrs/blocks/globalFooter/messages
 #: govrs/blocks/globalStateBar/messages
+#: govrs/blocks/grid/messages
 #: govrs/blocks/maps/messages
 msgid "Default"
 msgstr "Padrão"
@@ -391,6 +400,11 @@ msgstr "Barra do Estado independente"
 msgid "GovRS state bar description"
 msgstr "Barra independente oficial do Governo do Estado do Rio Grande do Sul."
 
+#. Default: "Grid"
+#: govrs/blocks/grid/messages
+msgid "Grid"
+msgstr "Grade"
+
 #. Default: "Group by"
 #: govrs/blocks/listing/messages
 msgid "Group by"
@@ -404,7 +418,7 @@ msgstr "Tipo de conteúdo"
 #. Default: "Group by tags"
 #: govrs/blocks/listing/messages
 msgid "Group by tags"
-msgstr "Tags"
+msgstr "Etiquetas"
 
 #. Default: "Group items by label"
 #: govrs/blocks/listing/messages
@@ -520,7 +534,7 @@ msgstr "Itens por linha"
 #. Default: "The maximum is automatically adjusted to the available Grid width."
 #: govrs/blocks/listing/messages
 msgid "Items per row in Grid description"
-msgstr "O máximo é ajustado automaticamente à largura disponível no Grid."
+msgstr "O máximo é ajustado automaticamente à largura disponível na grade."
 
 #. Default: "Large"
 #: govrs/blocks/listing/messages
@@ -616,7 +630,7 @@ msgstr "Só vale na lista vertical."
 #. Default: "In a Grid with 3 or 4 columns, the image is displayed above the text."
 #: govrs/blocks/listing/messages
 msgid "Media position in Grid description"
-msgstr "Em Grid com 3 ou 4 colunas, a imagem fica acima do texto."
+msgstr "Em uma grade com 3 ou 4 colunas, a imagem fica acima do texto."
 
 #. Default: "Media to the left of text"
 #: govrs/blocks/listing/messages
@@ -686,7 +700,7 @@ msgstr "Mensagem de nenhum resultado"
 #. Default: "Number of tags"
 #: govrs/blocks/listing/messages
 msgid "Number of tags"
-msgstr "Quantidade de tags"
+msgstr "Quantidade de etiquetas"
 
 #. Default: "Numbered list"
 #: govrs/blocks/listing/messages
@@ -773,31 +787,30 @@ msgstr "Destino"
 msgid "Procergs Button Open in new tab"
 msgstr "Abrir em nova aba"
 
-#. Default: "Aparência"
-#: govrs/blocks/divisor/schema
+#. Default: "Appearance"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Appearance"
-msgstr ""
+msgstr "Aparência"
 
-#. Default: "Divisor"
-#: govrs/blocks/divisor/Edit
-#: govrs/blocks/divisor/schema
+#. Default: "Divider"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Block"
-msgstr ""
+msgstr "Divisor"
 
-#. Default: "Orientação"
-#: govrs/blocks/divisor/schema
+#. Default: "Orientation"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Orientation"
-msgstr ""
+msgstr "Orientação"
 
-#. Default: "Espessura"
-#: govrs/blocks/divisor/schema
+#. Default: "Thickness"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Thickness"
-msgstr ""
+msgstr "Espessura"
 
-#. Default: "Traço"
-#: govrs/blocks/divisor/schema
+#. Default: "Line style"
+#: govrs/blocks/divisor/messages
 msgid "Procergs Divisor Variant"
-msgstr ""
+msgstr "Traço"
 
 #. Default: "Publication date"
 #: govrs/blocks/carousel/messages
@@ -878,7 +891,7 @@ msgstr "Exibir lista de marcadores"
 #. Default: "Show tags"
 #: govrs/blocks/listing/messages
 msgid "Show tags"
-msgstr "Exibir tags"
+msgstr "Exibir etiquetas"
 
 #. Default: "Small"
 #: govrs/blocks/listing/messages
@@ -925,6 +938,7 @@ msgstr "Tema"
 #. Default: "Title"
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/carousel/messages
+#: govrs/blocks/grid/messages
 #: govrs/blocks/maps/messages
 msgid "Title"
 msgstr "Título"
@@ -1009,6 +1023,11 @@ msgstr "O formato SVG permite que a cor do ícone acompanhe automaticamente a co
 msgid "procergs.button.iconHintTitle"
 msgstr "Use um ícone SVG"
 
+#. Default: "Color presets"
+#: govrs/widgets/messages
+msgid "procergs.colors.presets"
+msgstr "Predefinições de cores"
+
 #. Default: "Bar exclusive to the global header region, with accessibility shortcuts and controls."
 #: govrs/blocks/globalAccessibility/messages
 msgid "procergs.globalAccessibility.editorDescription"
@@ -1038,6 +1057,26 @@ msgstr "Configuração"
 #: govrs/blocks/globalStateBar/messages
 msgid "procergs.globalStateBar.editorDescription"
 msgstr "Barra independente exclusiva da região global do cabeçalho."
+
+#. Default: "Divider thickness"
+#: govrs/blocks/grid/messages
+msgid "procergs.grid.dividerThickness"
+msgstr "Espessura do divisor"
+
+#. Default: "Divider style"
+#: govrs/blocks/grid/messages
+msgid "procergs.grid.dividerVariant"
+msgstr "Tipo de divisor"
+
+#. Default: "Dividers"
+#: govrs/blocks/grid/messages
+msgid "procergs.grid.dividers"
+msgstr "Divisores"
+
+#. Default: "Separate blocks with a vertical divider"
+#: govrs/blocks/grid/messages
+msgid "procergs.grid.verticalDividers"
+msgstr "Separar blocos com divisor vertical"
 
 #. Default: "Layout"
 #: govrs/blocks/section/messages

@@ -1,19 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defineMessages, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import DivisorBlockSchema from './schema';
+import messages from './messages';
 import DivisorBlockBody from './DivisorBlockBody';
 import { normalizeDivisor } from './normalizeDivisor';
-
-const messages = defineMessages({
-  divisor: {
-    id: 'Procergs Divisor Block',
-    defaultMessage: 'Divisor',
-  },
-});
 
 const Edit = (props) => {
   const {
