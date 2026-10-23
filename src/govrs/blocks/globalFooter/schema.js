@@ -1,28 +1,4 @@
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  footer: {
-    id: 'GovRS footer',
-    defaultMessage: 'Rodapé GovRS',
-  },
-  default: {
-    id: 'Default',
-    defaultMessage: 'Default',
-  },
-  behavior: {
-    id: 'Behavior',
-    defaultMessage: 'Behavior',
-  },
-  allowOverlay: {
-    id: 'Allow group overlay',
-    defaultMessage: 'Permitir overlay do bloco Grupo',
-  },
-  description: {
-    id: 'GovRS footer description',
-    defaultMessage:
-      'Este é o rodapé atual do site, exclusivo desta região. Links e créditos continuam vindo das fontes já usadas pelo tema.',
-  },
-});
+import messages from './messages';
 
 const FooterBlockSchema = ({ intl }) => ({
   title: intl.formatMessage(messages.footer),

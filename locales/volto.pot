@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-10-23T17:17:57.033Z\n"
+"POT-Creation-Date: 2026-10-23T17:25:01.940Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -45,12 +45,12 @@ msgstr ""
 msgid "Alignment"
 msgstr ""
 
-#. Default: "Permitir overlay do bloco Grupo"
-#: govrs/blocks/globalAccessibility/schema
-#: govrs/blocks/globalBreadcrumbs/schema
-#: govrs/blocks/globalFooter/schema
-#: govrs/blocks/globalHeader/schema
-#: govrs/blocks/globalStateBar/schema
+#. Default: "Allow group overlay"
+#: govrs/blocks/globalAccessibility/messages
+#: govrs/blocks/globalBreadcrumbs/messages
+#: govrs/blocks/globalFooter/messages
+#: govrs/blocks/globalHeader/messages
+#: govrs/blocks/globalStateBar/messages
 msgid "Allow group overlay"
 msgstr ""
 
@@ -69,7 +69,6 @@ msgstr ""
 #: govrs/blocks/banner/messages
 #: govrs/blocks/button/messages
 #: govrs/blocks/carousel/messages
-#: govrs/blocks/globalHeader/schema
 #: govrs/blocks/listing/messages
 msgid "Appearance"
 msgstr ""
@@ -157,11 +156,11 @@ msgstr ""
 #. Default: "Behavior"
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/carousel/messages
-#: govrs/blocks/globalAccessibility/schema
-#: govrs/blocks/globalBreadcrumbs/schema
-#: govrs/blocks/globalFooter/schema
-#: govrs/blocks/globalHeader/schema
-#: govrs/blocks/globalStateBar/schema
+#: govrs/blocks/globalAccessibility/messages
+#: govrs/blocks/globalBreadcrumbs/messages
+#: govrs/blocks/globalFooter/messages
+#: govrs/blocks/globalHeader/messages
+#: govrs/blocks/globalStateBar/messages
 msgid "Behavior"
 msgstr ""
 
@@ -170,13 +169,13 @@ msgstr ""
 msgid "Bottom"
 msgstr ""
 
-#. Default: "Rótulo acessível da navegação"
-#: govrs/blocks/globalBreadcrumbs/schema
+#. Default: "Breadcrumbs aria label"
+#: govrs/blocks/globalBreadcrumbs/messages
 msgid "Breadcrumbs aria label"
 msgstr ""
 
-#. Default: "Rótulo acessível da página inicial"
-#: govrs/blocks/globalBreadcrumbs/schema
+#. Default: "Breadcrumbs home label"
+#: govrs/blocks/globalBreadcrumbs/messages
 msgid "Breadcrumbs home label"
 msgstr ""
 
@@ -283,11 +282,9 @@ msgstr ""
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
 #: govrs/blocks/carousel/messages
-#: govrs/blocks/globalAccessibility/schema
-#: govrs/blocks/globalBreadcrumbs/schema
-#: govrs/blocks/globalFooter/schema
-#: govrs/blocks/globalHeader/schema
-#: govrs/blocks/globalStateBar/schema
+#: govrs/blocks/globalAccessibility/messages
+#: govrs/blocks/globalFooter/messages
+#: govrs/blocks/globalStateBar/messages
 #: govrs/blocks/maps/messages
 msgid "Default"
 msgstr ""
@@ -342,63 +339,53 @@ msgstr ""
 msgid "Folder whose first 5 pages or news items will be shown in the carousel"
 msgstr ""
 
-#. Default: "Barra de Acessibilidade"
-#: govrs/blocks/globalAccessibility/Edit
-#: govrs/blocks/globalAccessibility/schema
+#. Default: "Accessibility bar"
+#: govrs/blocks/globalAccessibility/messages
 msgid "GovRS accessibility bar"
 msgstr ""
 
-#. Default: "Barra exclusiva da região global do Header, com atalhos e controles de acessibilidade."
-#: govrs/blocks/globalAccessibility/Edit
-#: govrs/blocks/globalAccessibility/schema
+#. Default: "Bar with shortcuts for content, menu, search, contrast and site map."
+#: govrs/blocks/globalAccessibility/messages
 msgid "GovRS accessibility bar description"
 msgstr ""
 
-#. Default: "Breadcrumbs GovRS"
-#: govrs/blocks/globalBreadcrumbs/Edit
-#: govrs/blocks/globalBreadcrumbs/schema
+#. Default: "GovRS navigation trail"
+#: govrs/blocks/globalBreadcrumbs/messages
 msgid "GovRS breadcrumbs"
 msgstr ""
 
-#. Default: "Navegação estrutural exclusiva da região global do Header, preenchida automaticamente com a página atual."
-#: govrs/blocks/globalBreadcrumbs/Edit
-#: govrs/blocks/globalBreadcrumbs/schema
+#. Default: "Items are automatically populated from the current page navigation."
+#: govrs/blocks/globalBreadcrumbs/messages
 msgid "GovRS breadcrumbs description"
 msgstr ""
 
-#. Default: "Rodapé GovRS"
-#: govrs/blocks/globalFooter/Edit
-#: govrs/blocks/globalFooter/schema
+#. Default: "GovRS footer"
+#: govrs/blocks/globalFooter/messages
 msgid "GovRS footer"
 msgstr ""
 
-#. Default: "Este é o rodapé atual do site, exclusivo desta região. Links e créditos continuam vindo das fontes já usadas pelo tema."
-#: govrs/blocks/globalFooter/Edit
-#: govrs/blocks/globalFooter/schema
+#. Default: "This is the site footer, exclusive to this region. Links and credits use the existing theme sources."
+#: govrs/blocks/globalFooter/messages
 msgid "GovRS footer description"
 msgstr ""
 
-#. Default: "Cabeçalho GovRS"
-#: govrs/blocks/globalHeader/Edit
-#: govrs/blocks/globalHeader/schema
+#. Default: "GovRS header"
+#: govrs/blocks/globalHeader/messages
 msgid "GovRS header"
 msgstr ""
 
-#. Default: "Este é o cabeçalho atual do site, exclusivo desta região. Logo, menu e busca continuam vindo das fontes já usadas pelo tema."
-#: govrs/blocks/globalHeader/Edit
-#: govrs/blocks/globalHeader/schema
+#. Default: "This is the site header, exclusive to this region. Logo, menu and search use the existing theme sources."
+#: govrs/blocks/globalHeader/messages
 msgid "GovRS header description"
 msgstr ""
 
-#. Default: "Barra do Estado"
-#: govrs/blocks/globalStateBar/Edit
-#: govrs/blocks/globalStateBar/schema
+#. Default: "Independent state bar"
+#: govrs/blocks/globalStateBar/messages
 msgid "GovRS state bar"
 msgstr ""
 
-#. Default: "Barra Standalone exclusiva da região global do Header."
-#: govrs/blocks/globalStateBar/Edit
-#: govrs/blocks/globalStateBar/schema
+#. Default: "Official independent bar of the Government of Rio Grande do Sul."
+#: govrs/blocks/globalStateBar/messages
 msgid "GovRS state bar description"
 msgstr ""
 
@@ -422,8 +409,8 @@ msgstr ""
 msgid "Group items by label"
 msgstr ""
 
-#. Default: "Variação"
-#: govrs/blocks/globalHeader/schema
+#. Default: "Header variation"
+#: govrs/blocks/globalHeader/messages
 msgid "Header variation"
 msgstr ""
 
@@ -579,13 +566,13 @@ msgstr ""
 msgid "Loading carousel items"
 msgstr ""
 
-#. Default: "Cor de fundo do logo"
-#: govrs/blocks/globalHeader/schema
+#. Default: "Logo background color"
+#: govrs/blocks/globalHeader/messages
 msgid "Logo background color"
 msgstr ""
 
-#. Default: "Opacidade do fundo do logo"
-#: govrs/blocks/globalHeader/schema
+#. Default: "Logo background opacity"
+#: govrs/blocks/globalHeader/messages
 msgid "Logo background opacity"
 msgstr ""
 
@@ -634,13 +621,13 @@ msgstr ""
 msgid "Media to the left of text"
 msgstr ""
 
-#. Default: "Cor de fundo do menu"
-#: govrs/blocks/globalHeader/schema
+#. Default: "Menu background color"
+#: govrs/blocks/globalHeader/messages
 msgid "Menu background color"
 msgstr ""
 
-#. Default: "Opacidade do fundo do menu"
-#: govrs/blocks/globalHeader/schema
+#. Default: "Menu background opacity"
+#: govrs/blocks/globalHeader/messages
 msgid "Menu background opacity"
 msgstr ""
 
@@ -861,8 +848,8 @@ msgstr ""
 msgid "Section"
 msgstr ""
 
-#. Default: "Exibir página inicial"
-#: govrs/blocks/globalBreadcrumbs/schema
+#. Default: "Show breadcrumbs home"
+#: govrs/blocks/globalBreadcrumbs/messages
 msgid "Show breadcrumbs home"
 msgstr ""
 
@@ -871,13 +858,13 @@ msgstr ""
 msgid "Show card action link"
 msgstr ""
 
-#. Default: "Exibir logo"
-#: govrs/blocks/globalHeader/schema
+#. Default: "Show header logo"
+#: govrs/blocks/globalHeader/messages
 msgid "Show header logo"
 msgstr ""
 
-#. Default: "Exibir título"
-#: govrs/blocks/globalHeader/schema
+#. Default: "Show header title"
+#: govrs/blocks/globalHeader/messages
 msgid "Show header title"
 msgstr ""
 
@@ -1018,6 +1005,36 @@ msgstr ""
 #. Default: "Use an SVG icon"
 #: govrs/blocks/button/messages
 msgid "procergs.button.iconHintTitle"
+msgstr ""
+
+#. Default: "Bar exclusive to the global header region, with accessibility shortcuts and controls."
+#: govrs/blocks/globalAccessibility/messages
+msgid "procergs.globalAccessibility.editorDescription"
+msgstr ""
+
+#. Default: "Configuration"
+#: govrs/blocks/globalBreadcrumbs/messages
+msgid "procergs.globalBreadcrumbs.configuration"
+msgstr ""
+
+#. Default: "Structural navigation exclusive to the global header region, automatically populated from the current page."
+#: govrs/blocks/globalBreadcrumbs/messages
+msgid "procergs.globalBreadcrumbs.editorDescription"
+msgstr ""
+
+#. Default: "Default 2 appearance"
+#: govrs/blocks/globalHeader/messages
+msgid "procergs.globalHeader.appearance"
+msgstr ""
+
+#. Default: "Configuration"
+#: govrs/blocks/globalHeader/messages
+msgid "procergs.globalHeader.configuration"
+msgstr ""
+
+#. Default: "Independent bar exclusive to the global header region."
+#: govrs/blocks/globalStateBar/messages
+msgid "procergs.globalStateBar.editorDescription"
 msgstr ""
 
 #. Default: "Layout"
