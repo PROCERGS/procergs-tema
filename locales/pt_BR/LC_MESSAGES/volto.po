@@ -70,7 +70,7 @@ msgstr ""
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
 #: govrs/blocks/button/schema
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 #: govrs/blocks/globalHeader/schema
 #: govrs/blocks/listing/schema
 msgid "Appearance"
@@ -82,9 +82,9 @@ msgid "Arrows on the right"
 msgstr "Setas à direita"
 
 #. Default: "Ascending"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Ascending"
-msgstr ""
+msgstr "Crescente"
 
 #. Default: "Automático (imagem, senão ícone; senão nada)"
 #: govrs/blocks/listing/schema
@@ -92,14 +92,14 @@ msgid "Automatic image or icon"
 msgstr ""
 
 #. Default: "Autoplay"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Autoplay"
-msgstr ""
+msgstr "Reprodução automática"
 
 #. Default: "Autoplay speed (ms)"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Autoplay speed (ms)"
-msgstr ""
+msgstr "Velocidade da reprodução automática(ms)"
 
 #. Default: "Fundo"
 #: govrs/blocks/section/schema
@@ -158,7 +158,7 @@ msgstr "Tipo de banner"
 
 #. Default: "Behavior"
 #: govrs/blocks/accordion/messages
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 #: govrs/blocks/globalAccessibility/schema
 #: govrs/blocks/globalBreadcrumbs/schema
 #: govrs/blocks/globalFooter/schema
@@ -208,10 +208,9 @@ msgid "Cards per row"
 msgstr ""
 
 #. Default: "Carousel"
-#: govrs/blocks/carousel/Edit
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Carousel"
-msgstr ""
+msgstr "Carrossel"
 
 #. Default: "Center"
 #: govrs/blocks/slateTable/Edit
@@ -224,14 +223,14 @@ msgid "Choose a banner image"
 msgstr "Escolha uma imagem para o banner"
 
 #. Default: "Choose a target folder for the carousel"
-#: govrs/blocks/carousel/CarouselBlockBody
+#: govrs/blocks/carousel/messages
 msgid "Choose a target folder for the carousel"
-msgstr ""
+msgstr "Escolha uma pasta de origem para o carrossel"
 
 #. Default: "Circular"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Circular"
-msgstr ""
+msgstr "Circular"
 
 #. Default: "Clear filter label"
 #: govrs/blocks/accordion/messages
@@ -257,7 +256,7 @@ msgstr ""
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
 #: govrs/blocks/button/schema
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 #: govrs/blocks/listing/schema
 msgid "Content"
 msgstr "Conteúdo"
@@ -280,6 +279,7 @@ msgstr ""
 #. Default: "Default"
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
+#: govrs/blocks/carousel/messages
 #: govrs/blocks/globalAccessibility/schema
 #: govrs/blocks/globalBreadcrumbs/schema
 #: govrs/blocks/globalFooter/schema
@@ -299,9 +299,9 @@ msgid "Delete row"
 msgstr ""
 
 #. Default: "Descending"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Descending"
-msgstr ""
+msgstr "Decrescente"
 
 #. Default: "Disabled"
 #: govrs/blocks/accordion/messages
@@ -319,9 +319,9 @@ msgid "Enable panel filter"
 msgstr "Habilitar filtro dos painéis"
 
 #. Default: "Enable swipe"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Enable swipe"
-msgstr ""
+msgstr "Permitir navegação deslizando/arrastando"
 
 #. Default: "Filter label"
 #: govrs/blocks/accordion/messages
@@ -334,9 +334,9 @@ msgid "Filter placeholder"
 msgstr "Texto interno do filtro"
 
 #. Default: "Folder whose first 5 pages or news items will be shown in the carousel (images and files are ignored)"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Folder whose first 5 pages or news items will be shown in the carousel"
-msgstr ""
+msgstr "Pasta cujas primeiras 5 páginas ou notícias serão exibidas no carrossel (imagens e arquivos são ignorados)"
 
 #. Default: "Barra de Acessibilidade"
 #: govrs/blocks/globalAccessibility/Edit
@@ -435,9 +435,9 @@ msgid "Headline level"
 msgstr ""
 
 #. Default: "Hide arrows on mobile"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Hide arrows on mobile"
-msgstr ""
+msgstr "Ocultar setas em larguras de tela menores(mobile)"
 
 #. Default: "Horizontal layout"
 #: govrs/blocks/listing/schema
@@ -475,9 +475,9 @@ msgid "Images only"
 msgstr ""
 
 #. Default: "Indicators"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Indicators"
-msgstr ""
+msgstr "Indicadores"
 
 #. Default: "Insert col after"
 #: govrs/blocks/slateTable/Edit
@@ -498,6 +498,11 @@ msgstr ""
 #: govrs/blocks/slateTable/Edit
 msgid "Insert row before"
 msgstr ""
+
+#. Default: "Inside"
+#: govrs/blocks/carousel/messages
+msgid "Inside"
+msgstr "Internos"
 
 #. Default: "Invert meta and title"
 #: govrs/blocks/listing/schema
@@ -520,9 +525,9 @@ msgid "Items per row in Grid description"
 msgstr ""
 
 #. Default: "Last modified"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Last modified"
-msgstr ""
+msgstr "Última modificação"
 
 #. Default: "Latitude"
 #: govrs/blocks/maps/schema
@@ -545,9 +550,9 @@ msgid "Link"
 msgstr "Link"
 
 #. Default: "Link slides to content pages"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Link slides to content pages"
-msgstr ""
+msgstr "Vincular itens do carrossel às páginas de conteúdo"
 
 #. Default: "Listing"
 #: govrs/blocks/listing/Edit
@@ -556,9 +561,9 @@ msgid "Listing"
 msgstr ""
 
 #. Default: "Loading carousel items"
-#: govrs/blocks/carousel/CarouselBlockBody
+#: govrs/blocks/carousel/messages
 msgid "Loading carousel items"
-msgstr ""
+msgstr "Carregando itens do carrossel"
 
 #. Default: "Cor de fundo do logo"
 #: govrs/blocks/globalHeader/schema
@@ -682,6 +687,11 @@ msgstr ""
 msgid "Numbered list"
 msgstr ""
 
+#. Default: "Numbers"
+#: govrs/blocks/carousel/messages
+msgid "Numbers"
+msgstr "Números"
+
 #. Default: "Opacidade da camada de contraste"
 #: govrs/blocks/section/schema
 msgid "Overlay opacity"
@@ -698,9 +708,9 @@ msgid "Panels"
 msgstr "Painéis"
 
 #. Default: "Position in folder"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Position in folder"
-msgstr ""
+msgstr "Posição na pasta"
 
 #. Default: "Alinhamento"
 #: govrs/blocks/button/schema
@@ -780,9 +790,9 @@ msgid "Procergs Divisor Variant"
 msgstr ""
 
 #. Default: "Publication date"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Publication date"
-msgstr ""
+msgstr "Data de publicação"
 
 #. Default: "Query"
 #: govrs/blocks/listing/schema
@@ -866,14 +876,14 @@ msgid "Sort By:"
 msgstr ""
 
 #. Default: "Sort on"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Sort on"
-msgstr ""
+msgstr "Classificar por"
 
 #. Default: "Sort order"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Sort order"
-msgstr ""
+msgstr "Ordem de classificação"
 
 #. Default: "Square"
 #: govrs/blocks/banner/messages
@@ -887,9 +897,9 @@ msgid "Style"
 msgstr "Estilo"
 
 #. Default: "Target"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "Target"
-msgstr ""
+msgstr "Pasta de origem"
 
 #. Default: "Theme"
 #: govrs/blocks/accordion/messages
@@ -898,7 +908,7 @@ msgstr "Tema"
 
 #. Default: "Title"
 #: govrs/blocks/accordion/messages
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 #: govrs/blocks/maps/schema
 msgid "Title"
 msgstr "Título"
@@ -934,9 +944,9 @@ msgid "Vertical spacing"
 msgstr ""
 
 #. Default: "When enabled, each slide links to its corresponding page or news item"
-#: govrs/blocks/carousel/schema
+#: govrs/blocks/carousel/messages
 msgid "When enabled, each slide links to its corresponding page or news item"
-msgstr ""
+msgstr "Quando habilitado, cada item do carrossel leva à página ou notícia correspondente"
 
 #. Default: "Quebrar linha"
 #: govrs/blocks/listing/schema

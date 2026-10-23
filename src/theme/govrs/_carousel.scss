@@ -26,3 +26,18 @@
     text-align: center;
   }
 }
+
+#sidebar .field-wrapper-autoplaySpeed {
+  > .ui.grid > .row {
+    row-gap: 0.5rem;
+
+    > .column {
+      width: 100% !important;
+    }
+  }
+
+  .wrapper > label {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+}
