@@ -69,7 +69,7 @@ msgstr ""
 #. Default: "Appearance"
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
-#: govrs/blocks/button/schema
+#: govrs/blocks/button/messages
 #: govrs/blocks/carousel/messages
 #: govrs/blocks/globalHeader/schema
 #: govrs/blocks/listing/messages
@@ -260,7 +260,7 @@ msgstr "Itens contidos"
 #. Default: "Content"
 #: govrs/blocks/accordion/messages
 #: govrs/blocks/banner/messages
-#: govrs/blocks/button/schema
+#: govrs/blocks/button/messages
 #: govrs/blocks/carousel/messages
 #: govrs/blocks/listing/messages
 msgid "Content"
@@ -455,9 +455,9 @@ msgid "Horizontal scroll"
 msgstr "Rolagem horizontal"
 
 #. Default: "Hover"
-#: govrs/blocks/button/schema
+#: govrs/blocks/button/messages
 msgid "Hover"
-msgstr ""
+msgstr "Ao passar o mouse"
 
 #. Default: "Icon"
 #: govrs/blocks/listing/messages
@@ -736,56 +736,55 @@ msgstr "Posição na pasta"
 msgid "Post"
 msgstr "Publicação"
 
-#. Default: "Alinhamento"
-#: govrs/blocks/button/schema
+#. Default: "Alignment"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Alignment"
-msgstr ""
+msgstr "Alinhamento"
 
-#. Default: "Botão"
-#: govrs/blocks/button/Edit
-#: govrs/blocks/button/schema
+#. Default: "Button"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Block"
-msgstr ""
+msgstr "Botão"
 
-#. Default: "Cores do botão e do texto"
-#: govrs/blocks/button/schema
+#. Default: "Button and text colors"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Colors"
-msgstr ""
+msgstr "Cores do botão e do texto"
 
-#. Default: "Cores do botão no hover"
-#: govrs/blocks/button/schema
+#. Default: "Button colors on hover"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Hover Colors"
-msgstr ""
+msgstr "Cores do botão ao passar o mouse"
 
-#. Default: "Ícone (SVG recomendado)"
-#: govrs/blocks/button/schema
+#. Default: "Icon (SVG recommended)"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Icon"
-msgstr ""
+msgstr "Ícone (SVG recomendado)"
 
-#. Default: "Posição do ícone"
-#: govrs/blocks/button/schema
+#. Default: "Icon position"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Icon Position"
-msgstr ""
+msgstr "Posição do ícone"
 
-#. Default: "Ícone"
-#: govrs/blocks/button/schema
+#. Default: "Icon"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Icon Section"
-msgstr ""
+msgstr "Ícone"
 
-#. Default: "Texto do botão"
-#: govrs/blocks/button/schema
+#. Default: "Button text"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Label"
-msgstr ""
+msgstr "Texto do botão"
 
-#. Default: "Destino"
-#: govrs/blocks/button/schema
+#. Default: "Destination"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Link"
-msgstr ""
+msgstr "Destino"
 
-#. Default: "Abrir em nova aba"
-#: govrs/blocks/button/schema
+#. Default: "Open in new tab"
+#: govrs/blocks/button/messages
 msgid "Procergs Button Open in new tab"
-msgstr ""
+msgstr "Abrir em nova aba"
 
 #. Default: "Aparência"
 #: govrs/blocks/divisor/schema
@@ -1011,6 +1010,16 @@ msgstr "Digite para filtrar..."
 #: govrs/blocks/accordion/messages
 msgid "procergs.accordion.noResultsMessage"
 msgstr "Nenhum painel corresponde ao filtro informado."
+
+#. Default: "SVG allows the icon color to automatically follow the text color, including on hover."
+#: govrs/blocks/button/messages
+msgid "procergs.button.iconHint"
+msgstr "O formato SVG permite que a cor do ícone acompanhe automaticamente a cor do texto, inclusive ao passar o mouse."
+
+#. Default: "Use an SVG icon"
+#: govrs/blocks/button/messages
+msgid "procergs.button.iconHintTitle"
+msgstr "Use um ícone SVG"
 
 #. Default: "Layout"
 #: govrs/blocks/section/messages
