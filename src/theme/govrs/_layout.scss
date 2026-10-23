@@ -738,6 +738,10 @@ body:is(.public-ui, .cms-ui).has-toolbar-collapsed
   width: 100%;
 }
 
+body.cms-ui .govrs-toast {
+  z-index: calc(var(--govrs-z-index-toast, 120) + 2);
+}
+
 body.cms-ui .procergs-footer-wrapper {
   box-sizing: border-box;
   margin-inline-start: var(--procergs-header-layout-inset-left, 0px);

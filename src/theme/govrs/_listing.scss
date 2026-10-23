@@ -475,3 +475,37 @@
     display: none;
   }
 }
+
+// Keep the embedded Slate field inline with the DS file metadata.
+.govrs-file-listing-editor__field .slate-editor {
+  display: inline;
+}
+
+.govrs-file-listing-editor__title {
+  display: inline-block;
+  white-space: pre-wrap;
+  min-width: 1ch;
+  max-width: 100%;
+  cursor: text;
+  overflow-wrap: anywhere;
+}
+
+// Slate positions its placeholder absolutely, so an empty inline field needs
+// an invisible sizing line to retain the original name's natural width.
+.govrs-file-listing-editor__title[data-empty='true']::before {
+  content: attr(data-placeholder);
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.govrs-file-listing-editor__title:hover,
+.govrs-file-listing-editor__title:focus {
+  text-decoration: underline;
+}
+
+.govrs-file-listing-editor__title:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}

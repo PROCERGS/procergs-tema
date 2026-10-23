@@ -10,10 +10,13 @@ import {
 } from './getListingVariation';
 import { useGridColumns } from '../grid/GridContext';
 import { normalizeListingForGrid } from './gridRules';
+import { normalizeFileCriteria } from './fileCriteria';
 
 const View = ({ data, path, pathname, className, style, ...props }) => {
   const gridColumns = useGridColumns();
-  const normalizedData = normalizeListingForGrid(data, gridColumns);
+  const normalizedData = normalizeFileCriteria(
+    normalizeListingForGrid(data, gridColumns),
+  );
 
   return (
     <div

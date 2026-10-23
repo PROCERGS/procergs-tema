@@ -18,6 +18,8 @@ import {
 import { getListVariantProps } from './getListVariantProps';
 import { getGridColumnCount } from './gridRules';
 import { normalizeListItems } from './normalizeListItems';
+import { buildFileListingQuery } from './fileCriteria';
+import FileListingEdit from './FileListingEdit';
 import {
   getListingItemHrefFromEvent,
   isClickableDefaultListing,
@@ -50,9 +52,12 @@ Headline.propTypes = {
 
 const ListingBlockBody = withQuerystringResults((props) => {
   const {
-    data = {},
+    data: queryData = {},
+    displayData,
     id,
     isEditMode,
+    onFileTitleChange,
+    onFileTitleFocus,
     listingItems,
     totalPages,
     onPaginationChange,
@@ -65,6 +70,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
     gridColumns,
   } = props;
 
+  const data = displayData || queryData;
   const listingRef = createRef();
   const variationId = getListingVariation(data);
   const useDsList = isDsListingVariation(variationId);
@@ -116,7 +122,15 @@ const ListingBlockBody = withQuerystringResults((props) => {
 
   let listContent = null;
   if (hasItems) {
-    if (useDsList) {
+    if (variationId === 'file' && isEditMode) {
+      listContent = (
+        <FileListingEdit
+          items={items}
+          onTitleChange={onFileTitleChange}
+          onTitleFocus={onFileTitleFocus}
+        />
+      );
+    } else if (useDsList) {
       listContent = (
         <List
           {...listProps}
@@ -226,4 +240,12 @@ const ListingBlockBody = withQuerystringResults((props) => {
   );
 });
 
-export default ListingBlockBody;
+const ListingBlockBodyWithQuery = (props) => (
+  <ListingBlockBody
+    {...props}
+    data={buildFileListingQuery(props.data)}
+    displayData={props.data}
+  />
+);
+
+export default ListingBlockBodyWithQuery;

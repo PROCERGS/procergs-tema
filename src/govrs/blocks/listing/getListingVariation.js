@@ -1,4 +1,4 @@
-export const DS_LISTING_VARIATIONS = ['default', 'link', 'card'];
+export const DS_LISTING_VARIATIONS = ['default', 'link', 'card', 'file'];
 
 export const getListingVariation = (data = {}) =>
   data.variation || data.listingBodyTemplate || 'default';
@@ -27,7 +27,7 @@ export const resolveListingVariationConfig = (
 export const listingNeedsFullObjects = (data = {}) => {
   const variation = getListingVariation(data);
 
-  if (variation === 'card') {
+  if (variation === 'card' || variation === 'file') {
     return true;
   }
 
