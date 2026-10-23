@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Banner } from '@procergs/react-govrs-ds';
 import { normalizeBanner } from './normalizeBanner';
+import messages from './messages';
 
 const BannerBlockBody = ({ data, isEditMode = false }) => {
   const hasImage = Boolean(
@@ -13,10 +14,7 @@ const BannerBlockBody = ({ data, isEditMode = false }) => {
   if (!hasImage || !bannerProps.imageUrl) {
     return (
       <div className="govrs-banner-block__empty">
-        <FormattedMessage
-          id="Choose a banner image"
-          defaultMessage="Choose a banner image"
-        />
+        <FormattedMessage {...messages.empty} />
       </div>
     );
   }

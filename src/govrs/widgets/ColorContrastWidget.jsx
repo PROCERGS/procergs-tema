@@ -1,5 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
+import messages from './messages';
 import { Button, Form, Message } from 'semantic-ui-react';
 import {
   GOVRS_COLOR_PAIRS,
@@ -146,6 +148,7 @@ const ColorContrastWidget = ({
   inheritedBackgroundOpacity,
   inheritedBorderOpacity,
 }) => {
+  const intl = useIntl();
   const draft = getDraftColors({
     value,
     defaultValue,
@@ -158,8 +161,8 @@ const ColorContrastWidget = ({
   const draftRef = useRef(draft);
   draftRef.current = draft;
 
-  const backgroundOpacity = showOpacity ? (draft.backgroundOpacity ?? 1) : 1;
-  const borderOpacity = showOpacity ? (draft.borderOpacity ?? 1) : 1;
+  const backgroundOpacity = showOpacity ? draft.backgroundOpacity ?? 1 : 1;
+  const borderOpacity = showOpacity ? draft.borderOpacity ?? 1 : 1;
   const contrast = useMemo(() => {
     if (showOpacity && backgroundOpacity < 0.01) {
       return null;
@@ -203,7 +206,7 @@ const ColorContrastWidget = ({
       <div
         className="govrs-color-contrast-widget__presets"
         role="group"
-        aria-label="Presets de cores"
+        aria-label={intl.formatMessage(messages.colorPresets)}
       >
         {GOVRS_COLOR_PAIRS.map((pair) => (
           <Button
