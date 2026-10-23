@@ -1,95 +1,4 @@
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  accordion: {
-    id: 'Accordion',
-    defaultMessage: 'Accordion',
-  },
-  content: {
-    id: 'Content',
-    defaultMessage: 'Content',
-  },
-  behavior: {
-    id: 'Behavior',
-    defaultMessage: 'Behavior',
-  },
-  appearance: {
-    id: 'Appearance',
-    defaultMessage: 'Appearance',
-  },
-  style: {
-    id: 'Style',
-    defaultMessage: 'Style',
-  },
-  headline: {
-    id: 'Headline',
-    defaultMessage: 'Headline',
-  },
-  items: {
-    id: 'Panels',
-    defaultMessage: 'Panels',
-  },
-  addPanel: {
-    id: 'Add panel',
-    defaultMessage: 'Add panel',
-  },
-  panelTitle: {
-    id: 'Title',
-    defaultMessage: 'Title',
-  },
-  panelContent: {
-    id: 'Content',
-    defaultMessage: 'Content',
-  },
-  disabled: {
-    id: 'Disabled',
-    defaultMessage: 'Disabled',
-  },
-  collapsed: {
-    id: 'Collapsed by default',
-    defaultMessage: 'Collapsed by default',
-  },
-  nonExclusive: {
-    id: 'Allow multiple open panels',
-    defaultMessage: 'Allow multiple open panels',
-  },
-  rightArrows: {
-    id: 'Arrows on the right',
-    defaultMessage: 'Arrows on the right',
-  },
-  filtering: {
-    id: 'Enable panel filter',
-    defaultMessage: 'Enable panel filter',
-  },
-  filterPlaceholder: {
-    id: 'Filter placeholder',
-    defaultMessage: 'Filter placeholder',
-  },
-  filterLabel: {
-    id: 'Filter label',
-    defaultMessage: 'Filter label',
-  },
-  clearFilterLabel: {
-    id: 'Clear filter label',
-    defaultMessage: 'Clear filter label',
-  },
-  noResultsMessage: {
-    id: 'No results message',
-    defaultMessage: 'No results message',
-  },
-  theme: {
-    id: 'Theme',
-    defaultMessage: 'Theme',
-  },
-  titleSize: {
-    id: 'Title size',
-    defaultMessage: 'Title size',
-  },
-  alignment: {
-    id: 'Alignment',
-    defaultMessage: 'Alignment',
-  },
-});
+import messages from './messages';
 
 const panelItemSchema = ({ intl }) => ({
   title: intl.formatMessage(messages.items),
@@ -97,7 +6,7 @@ const panelItemSchema = ({ intl }) => ({
   fieldsets: [
     {
       id: 'default',
-      title: 'Default',
+      title: intl.formatMessage(messages.defaultTheme),
       fields: ['title', 'content', 'disabled'],
     },
   ],
@@ -187,25 +96,25 @@ export const AccordionBlockSchema = ({ data, intl }) => ({
     },
     filterPlaceholder: {
       title: intl.formatMessage(messages.filterPlaceholder),
-      default: 'Digite para filtrar...',
+      default: intl.formatMessage(messages.filterPlaceholderDefault),
     },
     filterLabel: {
       title: intl.formatMessage(messages.filterLabel),
-      default: 'Filtrar painéis do accordion',
+      default: intl.formatMessage(messages.filterLabelDefault),
     },
     clearFilterLabel: {
       title: intl.formatMessage(messages.clearFilterLabel),
-      default: 'Limpar filtro',
+      default: intl.formatMessage(messages.clearFilterLabelDefault),
     },
     noResultsMessage: {
       title: intl.formatMessage(messages.noResultsMessage),
-      default: 'Nenhum painel corresponde ao filtro informado.',
+      default: intl.formatMessage(messages.noResultsMessageDefault),
     },
     theme: {
       title: intl.formatMessage(messages.theme),
       choices: [
-        ['default', 'Default'],
-        ['dark', 'Dark'],
+        ['default', intl.formatMessage(messages.defaultTheme)],
+        ['dark', intl.formatMessage(messages.darkTheme)],
       ],
       default: 'default',
     },
