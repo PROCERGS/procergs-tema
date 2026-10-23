@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Plone\n"
-"POT-Creation-Date: 2026-10-23T12:27:02.286Z\n"
+"POT-Creation-Date: 2026-10-23T13:15:15.319Z\n"
 "Last-Translator: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Language-Team: Plone i18n <plone-i18n@lists.sourceforge.net>\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -70,7 +70,7 @@ msgstr ""
 #: govrs/blocks/button/schema
 #: govrs/blocks/carousel/messages
 #: govrs/blocks/globalHeader/schema
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Appearance"
 msgstr ""
 
@@ -84,8 +84,8 @@ msgstr ""
 msgid "Ascending"
 msgstr ""
 
-#. Default: "Automático (imagem, senão ícone; senão nada)"
-#: govrs/blocks/listing/schema
+#. Default: "Automatic image or icon"
+#: govrs/blocks/listing/messages
 msgid "Automatic image or icon"
 msgstr ""
 
@@ -180,28 +180,33 @@ msgstr ""
 msgid "Breadcrumbs home label"
 msgstr ""
 
-#. Default: "Quando os cards não cabem"
-#: govrs/blocks/listing/schema
+#. Default: "Card"
+#: govrs/blocks/listing/messages
+msgid "Card"
+msgstr ""
+
+#. Default: "Card overflow"
+#: govrs/blocks/listing/messages
 msgid "Card overflow"
 msgstr ""
 
-#. Default: "Dentro de Grid, os cards sempre quebram para a linha seguinte."
-#: govrs/blocks/listing/schema
+#. Default: "Inside a Grid, cards always wrap to the next row."
+#: govrs/blocks/listing/messages
 msgid "Card overflow in Grid description"
 msgstr ""
 
 #. Default: "Card size"
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Card size"
 msgstr ""
 
 #. Default: "Card style"
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Card style"
 msgstr ""
 
 #. Default: "Cards per row"
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Cards per row"
 msgstr ""
 
@@ -240,13 +245,13 @@ msgstr ""
 msgid "Collapsed by default"
 msgstr ""
 
-#. Default: "Grupos recolhíveis"
-#: govrs/blocks/listing/schema
+#. Default: "Collapsible groups"
+#: govrs/blocks/listing/messages
 msgid "Collapsible groups"
 msgstr ""
 
 #. Default: "Contained items"
-#: govrs/blocks/listing/Edit
+#: govrs/blocks/listing/messages
 msgid "Contained items"
 msgstr ""
 
@@ -255,7 +260,7 @@ msgstr ""
 #: govrs/blocks/banner/messages
 #: govrs/blocks/button/schema
 #: govrs/blocks/carousel/messages
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Content"
 msgstr ""
 
@@ -396,23 +401,23 @@ msgstr ""
 msgid "GovRS state bar description"
 msgstr ""
 
-#. Default: "Agrupar por"
-#: govrs/blocks/listing/schema
+#. Default: "Group by"
+#: govrs/blocks/listing/messages
 msgid "Group by"
 msgstr ""
 
-#. Default: "Tipo de conteúdo"
-#: govrs/blocks/listing/schema
+#. Default: "Group by content type"
+#: govrs/blocks/listing/messages
 msgid "Group by content type"
 msgstr ""
 
-#. Default: "Tags"
-#: govrs/blocks/listing/schema
+#. Default: "Group by tags"
+#: govrs/blocks/listing/messages
 msgid "Group by tags"
 msgstr ""
 
-#. Default: "Agrupar itens"
-#: govrs/blocks/listing/schema
+#. Default: "Group items by label"
+#: govrs/blocks/listing/messages
 msgid "Group items by label"
 msgstr ""
 
@@ -423,12 +428,12 @@ msgstr ""
 
 #. Default: "Headline"
 #: govrs/blocks/accordion/messages
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Headline"
 msgstr ""
 
 #. Default: "Headline level"
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Headline level"
 msgstr ""
 
@@ -438,12 +443,12 @@ msgid "Hide arrows on mobile"
 msgstr ""
 
 #. Default: "Horizontal layout"
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Horizontal layout"
 msgstr ""
 
-#. Default: "Rolagem horizontal"
-#: govrs/blocks/listing/schema
+#. Default: "Horizontal scroll"
+#: govrs/blocks/listing/messages
 msgid "Horizontal scroll"
 msgstr ""
 
@@ -452,8 +457,13 @@ msgstr ""
 msgid "Hover"
 msgstr ""
 
-#. Default: "Somente ícones"
-#: govrs/blocks/listing/schema
+#. Default: "Icon"
+#: govrs/blocks/listing/messages
+msgid "Icon"
+msgstr ""
+
+#. Default: "Icons only"
+#: govrs/blocks/listing/messages
 msgid "Icons only"
 msgstr ""
 
@@ -467,8 +477,8 @@ msgstr ""
 msgid "Image alt text"
 msgstr ""
 
-#. Default: "Somente imagens"
-#: govrs/blocks/listing/schema
+#. Default: "Images only"
+#: govrs/blocks/listing/messages
 msgid "Images only"
 msgstr ""
 
@@ -503,23 +513,28 @@ msgid "Inside"
 msgstr ""
 
 #. Default: "Invert meta and title"
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Invert meta and title"
 msgstr ""
 
-#. Default: "Mídia dos itens"
-#: govrs/blocks/listing/schema
+#. Default: "Item media"
+#: govrs/blocks/listing/messages
 msgid "Item media"
 msgstr ""
 
-#. Default: "Itens por linha"
-#: govrs/blocks/listing/schema
+#. Default: "Items per row"
+#: govrs/blocks/listing/messages
 msgid "Items per row"
 msgstr ""
 
-#. Default: "O máximo é ajustado automaticamente à largura disponível no Grid."
-#: govrs/blocks/listing/schema
+#. Default: "The maximum is automatically adjusted to the available Grid width."
+#: govrs/blocks/listing/messages
 msgid "Items per row in Grid description"
+msgstr ""
+
+#. Default: "Large"
+#: govrs/blocks/listing/messages
+msgid "Large"
 msgstr ""
 
 #. Default: "Last modified"
@@ -544,6 +559,7 @@ msgstr ""
 
 #. Default: "Link"
 #: govrs/blocks/banner/messages
+#: govrs/blocks/listing/messages
 msgid "Link"
 msgstr ""
 
@@ -552,9 +568,13 @@ msgstr ""
 msgid "Link slides to content pages"
 msgstr ""
 
+#. Default: "List"
+#: govrs/blocks/listing/messages
+msgid "List"
+msgstr ""
+
 #. Default: "Listing"
-#: govrs/blocks/listing/Edit
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Listing"
 msgstr ""
 
@@ -594,29 +614,29 @@ msgstr ""
 msgid "Markers"
 msgstr ""
 
-#. Default: "Acima do texto"
-#: govrs/blocks/listing/schema
+#. Default: "Media above text"
+#: govrs/blocks/listing/messages
 msgid "Media above text"
 msgstr ""
 
-#. Default: "Posição da imagem"
-#: govrs/blocks/listing/schema
+#. Default: "Media position"
+#: govrs/blocks/listing/messages
 #: govrs/blocks/section/schema
 msgid "Media position"
 msgstr ""
 
-#. Default: "Só vale na lista vertical."
-#: govrs/blocks/listing/schema
+#. Default: "Only applies to vertical lists."
+#: govrs/blocks/listing/messages
 msgid "Media position description"
 msgstr ""
 
-#. Default: "Em Grid com 3 ou 4 colunas, a imagem fica acima do texto."
-#: govrs/blocks/listing/schema
+#. Default: "In a Grid with 3 or 4 columns, the image is displayed above the text."
+#: govrs/blocks/listing/messages
 msgid "Media position in Grid description"
 msgstr ""
 
-#. Default: "À esquerda do texto"
-#: govrs/blocks/listing/schema
+#. Default: "Media to the left of text"
+#: govrs/blocks/listing/messages
 msgid "Media to the left of text"
 msgstr ""
 
@@ -640,6 +660,11 @@ msgstr ""
 msgid "Minimum height"
 msgstr ""
 
+#. Default: "News"
+#: govrs/blocks/listing/messages
+msgid "News"
+msgstr ""
+
 #. Default: "No accordion panels configured"
 #: govrs/blocks/accordion/messages
 msgid "No accordion panels configured"
@@ -655,8 +680,8 @@ msgstr ""
 msgid "No map markers configured"
 msgstr ""
 
-#. Default: "Sem mídia"
-#: govrs/blocks/listing/schema
+#. Default: "No media"
+#: govrs/blocks/listing/messages
 msgid "No media"
 msgstr ""
 
@@ -675,13 +700,13 @@ msgstr ""
 msgid "No results message"
 msgstr ""
 
-#. Default: "Quantidade de tags"
-#: govrs/blocks/listing/schema
+#. Default: "Number of tags"
+#: govrs/blocks/listing/messages
 msgid "Number of tags"
 msgstr ""
 
 #. Default: "Numbered list"
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Numbered list"
 msgstr ""
 
@@ -708,6 +733,11 @@ msgstr ""
 #. Default: "Position in folder"
 #: govrs/blocks/carousel/messages
 msgid "Position in folder"
+msgstr ""
+
+#. Default: "Post"
+#: govrs/blocks/listing/messages
+msgid "Post"
 msgstr ""
 
 #. Default: "Alinhamento"
@@ -793,7 +823,7 @@ msgid "Publication date"
 msgstr ""
 
 #. Default: "Query"
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Query"
 msgstr ""
 
@@ -808,7 +838,7 @@ msgid "Relevance"
 msgstr ""
 
 #. Default: "Results preview"
-#: govrs/blocks/listing/Edit
+#: govrs/blocks/listing/messages
 msgid "Results preview"
 msgstr ""
 
@@ -844,7 +874,7 @@ msgid "Show breadcrumbs home"
 msgstr ""
 
 #. Default: "Show card action link"
-#: govrs/blocks/listing/schema
+#: govrs/blocks/listing/messages
 msgid "Show card action link"
 msgstr ""
 
@@ -863,9 +893,14 @@ msgstr ""
 msgid "Show marker list"
 msgstr ""
 
-#. Default: "Exibir tags"
-#: govrs/blocks/listing/schema
+#. Default: "Show tags"
+#: govrs/blocks/listing/messages
 msgid "Show tags"
+msgstr ""
+
+#. Default: "Small"
+#: govrs/blocks/listing/messages
+msgid "Small"
 msgstr ""
 
 #. Default: "Sort by:"
@@ -946,8 +981,8 @@ msgstr ""
 msgid "When enabled, each slide links to its corresponding page or news item"
 msgstr ""
 
-#. Default: "Quebrar linha"
-#: govrs/blocks/listing/schema
+#. Default: "Wrap to next row"
+#: govrs/blocks/listing/messages
 msgid "Wrap to next row"
 msgstr ""
 
