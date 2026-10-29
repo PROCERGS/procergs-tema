@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { defineMessages, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import CarouselBlockSchema from './schema';
 import CarouselBlockBody from './CarouselBlockBody';
 import withCarouselItems from './withCarouselItems';
-
-const messages = defineMessages({
-  carousel: {
-    id: 'Carousel',
-    defaultMessage: 'Carousel',
-  },
-});
+import messages from './messages';
 
 const Edit = (props) => {
   const {
