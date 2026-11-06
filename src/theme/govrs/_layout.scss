@@ -7,17 +7,17 @@
   }
 
   .acess-wrapper {
-    --govrs-layout-container-barra-max-lg: var(
-      --govrs-layout-container-header-max-width,
-      90rem
+    --govrs-layout-container-barra-lg: var(
+      --govrs-layout-container-header,
+      var(--govrs-layout-container-header-max-width, 72rem)
     );
-    --govrs-layout-container-barra-max-xl: var(
-      --govrs-layout-container-header-max-width,
-      90rem
+    --govrs-layout-container-barra-xl: var(
+      --govrs-layout-container-header,
+      var(--govrs-layout-container-header-max-width, 72rem)
     );
-    --govrs-layout-container-barra-max-xxxl: var(
-      --govrs-layout-container-header-max-width,
-      90rem
+    --govrs-layout-container-barra-xxxl: var(
+      --govrs-layout-container-header,
+      var(--govrs-layout-container-header-max-width, 72rem)
     );
     padding-inline: var(
       --govrs-header-padding-inline,
