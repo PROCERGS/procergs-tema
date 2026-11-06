@@ -56,7 +56,7 @@ const configureGlobalRegionBlocks = (config) => {
 
   config.blocks.blocksConfig[STATE_BAR_BLOCK_TYPE] = {
     id: STATE_BAR_BLOCK_TYPE,
-    title: 'Barra do Estado Standalone',
+    title: 'GovRS state bar',
     icon: stateBarSVG,
     group: 'common',
     view: ProcergsGlobalStateBarBlock,
@@ -101,7 +101,7 @@ const configureGlobalRegionBlocks = (config) => {
 
   config.blocks.blocksConfig[BREADCRUMBS_BLOCK_TYPE] = {
     id: BREADCRUMBS_BLOCK_TYPE,
-    title: 'Breadcrumbs GovRS',
+    title: 'GovRS breadcrumbs',
     icon: layoutSVG,
     group: 'common',
     view: ProcergsGlobalBreadcrumbsBlock,

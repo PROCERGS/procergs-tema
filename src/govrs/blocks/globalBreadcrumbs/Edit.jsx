@@ -1,22 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defineMessages, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
+import messages from './messages';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import BreadcrumbsBlockSchema from './schema';
 import { ProcergsGlobalBreadcrumbsBlock } from '../../components/Breadcrumbs/Breadcrumbs';
-
-const messages = defineMessages({
-  breadcrumbs: {
-    id: 'GovRS breadcrumbs',
-    defaultMessage: 'Breadcrumbs GovRS',
-  },
-  description: {
-    id: 'GovRS breadcrumbs description',
-    defaultMessage:
-      'Navegação estrutural exclusiva da região global do Header, preenchida automaticamente com a página atual.',
-  },
-});
 
 const BreadcrumbsBlockEdit = (props) => {
   const {
@@ -38,7 +27,7 @@ const BreadcrumbsBlockEdit = (props) => {
         <BlockDataForm
           schema={schema}
           title={intl.formatMessage(messages.breadcrumbs)}
-          description={intl.formatMessage(messages.description)}
+          description={intl.formatMessage(messages.editorDescription)}
           onChangeField={(id, value) => {
             onChangeBlock(block, {
               ...data,

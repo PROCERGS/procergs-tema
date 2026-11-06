@@ -1,27 +1,4 @@
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  divisor: {
-    id: 'Procergs Divisor Block',
-    defaultMessage: 'Divisor',
-  },
-  appearance: {
-    id: 'Procergs Divisor Appearance',
-    defaultMessage: 'Aparência',
-  },
-  variant: {
-    id: 'Procergs Divisor Variant',
-    defaultMessage: 'Traço',
-  },
-  thickness: {
-    id: 'Procergs Divisor Thickness',
-    defaultMessage: 'Espessura',
-  },
-  orientation: {
-    id: 'Procergs Divisor Orientation',
-    defaultMessage: 'Orientação',
-  },
-});
+import messages from './messages';
 
 export const DivisorBlockSchema = ({ intl }) => ({
   title: intl.formatMessage(messages.divisor),
@@ -36,8 +13,8 @@ export const DivisorBlockSchema = ({ intl }) => ({
     variant: {
       title: intl.formatMessage(messages.variant),
       choices: [
-        ['default', 'Default'],
-        ['dashed', 'Dashed'],
+        ['default', intl.formatMessage(messages.defaultVariant)],
+        ['dashed', intl.formatMessage(messages.dashedVariant)],
       ],
       default: 'default',
     },

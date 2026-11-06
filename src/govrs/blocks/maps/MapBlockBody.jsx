@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Map } from '@procergs/react-govrs-ds';
+import messages from './messages';
 import {
   DEFAULT_MAP_ZOOM,
   getMapCenter,
@@ -20,10 +21,7 @@ const MapBlockBody = ({ data }) => {
   if (!markers.length) {
     return (
       <div className="govrs-map-block__empty">
-        <FormattedMessage
-          id="No map markers configured"
-          defaultMessage="No map markers configured"
-        />
+        <FormattedMessage {...messages.empty} />
       </div>
     );
   }

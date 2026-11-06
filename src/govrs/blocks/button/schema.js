@@ -1,63 +1,8 @@
-import { defineMessages } from 'react-intl';
+import messages from './messages';
 import {
   DEFAULT_BUTTON_COLORS,
   DEFAULT_BUTTON_HOVER_COLORS,
 } from './normalizeButton';
-
-const messages = defineMessages({
-  button: {
-    id: 'Procergs Button Block',
-    defaultMessage: 'Botão',
-  },
-  content: {
-    id: 'Content',
-    defaultMessage: 'Conteúdo',
-  },
-  appearance: {
-    id: 'Appearance',
-    defaultMessage: 'Aparência',
-  },
-  hover: {
-    id: 'Hover',
-    defaultMessage: 'Hover',
-  },
-  iconSection: {
-    id: 'Procergs Button Icon Section',
-    defaultMessage: 'Ícone',
-  },
-  title: {
-    id: 'Procergs Button Label',
-    defaultMessage: 'Texto do botão',
-  },
-  link: {
-    id: 'Procergs Button Link',
-    defaultMessage: 'Destino',
-  },
-  openLinkInNewTab: {
-    id: 'Procergs Button Open in new tab',
-    defaultMessage: 'Abrir em nova aba',
-  },
-  colors: {
-    id: 'Procergs Button Colors',
-    defaultMessage: 'Cores do botão e do texto',
-  },
-  hoverColors: {
-    id: 'Procergs Button Hover Colors',
-    defaultMessage: 'Cores do botão no hover',
-  },
-  icon: {
-    id: 'Procergs Button Icon',
-    defaultMessage: 'Ícone (SVG recomendado)',
-  },
-  iconPosition: {
-    id: 'Procergs Button Icon Position',
-    defaultMessage: 'Posição do ícone',
-  },
-  alignment: {
-    id: 'Procergs Button Alignment',
-    defaultMessage: 'Alinhamento',
-  },
-});
 
 export const ButtonBlockSchema = ({ intl, data }) => ({
   title: intl.formatMessage(messages.button),

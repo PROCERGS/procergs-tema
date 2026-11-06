@@ -1,21 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defineMessages, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
+import messages from './messages';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import StateBarBlockSchema from './schema';
 import { ProcergsGlobalStateBarBlock } from '../../components/Header/StateBar';
-
-const messages = defineMessages({
-  stateBar: {
-    id: 'GovRS state bar',
-    defaultMessage: 'Barra do Estado',
-  },
-  description: {
-    id: 'GovRS state bar description',
-    defaultMessage: 'Barra Standalone exclusiva da região global do Header.',
-  },
-});
 
 const StateBarBlockEdit = (props) => {
   const {
@@ -37,7 +27,7 @@ const StateBarBlockEdit = (props) => {
         <BlockDataForm
           schema={schema}
           title={intl.formatMessage(messages.stateBar)}
-          description={intl.formatMessage(messages.description)}
+          description={intl.formatMessage(messages.editorDescription)}
           onChangeField={(id, value) => {
             onChangeBlock(block, {
               ...data,

@@ -1,28 +1,4 @@
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  accessibilityBar: {
-    id: 'GovRS accessibility bar',
-    defaultMessage: 'Barra de Acessibilidade',
-  },
-  default: {
-    id: 'Default',
-    defaultMessage: 'Default',
-  },
-  behavior: {
-    id: 'Behavior',
-    defaultMessage: 'Comportamento',
-  },
-  description: {
-    id: 'GovRS accessibility bar description',
-    defaultMessage:
-      'Barra com atalhos de conteúdo, menu, busca, contraste e mapa do site.',
-  },
-  allowOverlay: {
-    id: 'Allow group overlay',
-    defaultMessage: 'Permitir overlay do bloco Grupo',
-  },
-});
+import messages from './messages';
 
 const AccessibilityBarBlockSchema = ({ intl, data = {} }) => ({
   title: intl.formatMessage(messages.accessibilityBar),

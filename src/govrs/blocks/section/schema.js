@@ -1,83 +1,4 @@
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  section: {
-    id: 'Section',
-    defaultMessage: 'Grupo',
-  },
-  background: {
-    id: 'Background',
-    defaultMessage: 'Fundo',
-  },
-  layout: {
-    id: 'Layout',
-    defaultMessage: 'Layout',
-  },
-  integration: {
-    id: 'Page integration',
-    defaultMessage: 'Integração com a página',
-  },
-  backgroundType: {
-    id: 'Background type',
-    defaultMessage: 'Tipo de fundo',
-  },
-  colors: {
-    id: 'Background and text colors',
-    defaultMessage: 'Cores de fundo e texto',
-  },
-  image: {
-    id: 'Background image',
-    defaultMessage: 'Imagem de fundo',
-  },
-  videoFile: {
-    id: 'Background video file',
-    defaultMessage: 'Arquivo de vídeo de fundo',
-  },
-  videoSource: {
-    id: 'Background video source',
-    defaultMessage: 'Origem do vídeo',
-  },
-  videoUrl: {
-    id: 'Background video URL',
-    defaultMessage: 'URL do YouTube',
-  },
-  videoStart: {
-    id: 'Background video start',
-    defaultMessage: 'Início do vídeo (segundos)',
-  },
-  videoEnd: {
-    id: 'Background video end',
-    defaultMessage: 'Fim do vídeo (segundos)',
-  },
-  mediaPosition: {
-    id: 'Media position',
-    defaultMessage: 'Posição da mídia',
-  },
-  overlayOpacity: {
-    id: 'Overlay opacity',
-    defaultMessage: 'Opacidade da camada de contraste',
-  },
-  minHeight: {
-    id: 'Minimum height',
-    defaultMessage: 'Altura mínima',
-  },
-  contentWidth: {
-    id: 'Content width',
-    defaultMessage: 'Largura do conteúdo',
-  },
-  spacing: {
-    id: 'Vertical spacing',
-    defaultMessage: 'Espaçamento vertical',
-  },
-  overlayHeader: {
-    id: 'Use background behind header',
-    defaultMessage: 'Estender o fundo sob o Header',
-  },
-  overlayFooter: {
-    id: 'Use background behind footer',
-    defaultMessage: 'Estender o fundo sob o Footer',
-  },
-});
+import messages from './messages';
 
 const imageBrowserField = (title) => ({
   title,
@@ -191,7 +112,7 @@ export const SectionBlockSchema = ({ intl }) => ({
     },
     videoFile: {
       title: intl.formatMessage(messages.videoFile),
-      description: 'Selecione um conteúdo File com mídia MP4 ou WebM.',
+      description: intl.formatMessage(messages.videoFileDescription),
       widget: 'object_browser',
       mode: 'link',
       allowExternals: false,
@@ -199,7 +120,7 @@ export const SectionBlockSchema = ({ intl }) => ({
     },
     videoUrl: {
       title: intl.formatMessage(messages.videoUrl),
-      description: 'Use uma URL de vídeo, Shorts ou live do YouTube.',
+      description: intl.formatMessage(messages.videoUrlDescription),
       widget: 'url',
     },
     videoStart: {

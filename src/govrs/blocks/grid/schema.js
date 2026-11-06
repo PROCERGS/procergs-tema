@@ -1,3 +1,4 @@
+import messages from './messages';
 import {
   SectionBlockSchema,
   backgroundSchemaEnhancer,
@@ -11,18 +12,18 @@ export const GridBlockSchema = ({ intl }) => {
   const backgroundFieldIds = backgroundFieldset.fields;
 
   return {
-    title: 'Grid',
+    title: intl.formatMessage(messages.grid),
     block: 'grid',
     fieldsets: [
       backgroundFieldset,
       {
         id: 'content',
-        title: 'Conteúdo',
+        title: intl.formatMessage(messages.content),
         fields: ['headline'],
       },
       {
         id: 'dividers',
-        title: 'Divisores',
+        title: intl.formatMessage(messages.dividers),
         fields: ['verticalDividers'],
       },
     ],
@@ -31,23 +32,23 @@ export const GridBlockSchema = ({ intl }) => {
         backgroundFieldIds.map((id) => [id, sectionSchema.properties[id]]),
       ),
       headline: {
-        title: 'Título',
+        title: intl.formatMessage(messages.title),
       },
       verticalDividers: {
-        title: 'Separar blocos com divisor vertical',
+        title: intl.formatMessage(messages.verticalDividers),
         type: 'boolean',
         default: false,
       },
       dividerVariant: {
-        title: 'Tipo de divisor',
+        title: intl.formatMessage(messages.dividerVariant),
         choices: [
-          ['default', 'Default'],
-          ['dashed', 'Dashed'],
+          ['default', intl.formatMessage(messages.defaultVariant)],
+          ['dashed', intl.formatMessage(messages.dashedVariant)],
         ],
         default: 'default',
       },
       dividerThickness: {
-        title: 'Espessura do divisor',
+        title: intl.formatMessage(messages.dividerThickness),
         choices: [
           ['1', '1 px'],
           ['2', '2 px'],

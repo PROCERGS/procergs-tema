@@ -1,13 +1,6 @@
-import { defineMessages } from 'react-intl';
+import messages from './messages';
 import { blocksFormGenerator } from '@plone/volto/helpers/Blocks/Blocks';
 import sectionTemplate from './section-1.svg';
-
-const messages = defineMessages({
-  emptySection: {
-    id: 'Empty section',
-    defaultMessage: 'Grupo vazio',
-  },
-});
 
 const templates = () => (intl) => [
   {
