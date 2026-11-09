@@ -5,6 +5,7 @@ import RenderBlocks from '@plone/volto/components/theme/View/RenderBlocks';
 import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import config from '@plone/volto/registry';
 import isNestedContainer from '../container/isNestedContainer';
+import { getRenderableBlocksConfig } from '../container/restrictions';
 import SectionBlockBody from '../section/SectionBlockBody';
 import { GridColumnsProvider } from './GridContext';
 import { GridDividersProvider, GridViewColumn } from './GridDividers';
@@ -21,7 +22,13 @@ const GridBlockView = (props) => {
   const blockConfig =
     props.blocksConfig?.[data['@type']] ||
     config.blocks.blocksConfig[data['@type']];
-  const blocksConfig = blockConfig.blocksConfig || props.blocksConfig;
+  const configuredBlocks = blockConfig.blocksConfig || props.blocksConfig || {};
+  const blocksConfig = getRenderableBlocksConfig({
+    allowedBlocks: Object.keys(configuredBlocks),
+    blocksConfig: configuredBlocks,
+    fallbackBlocksConfig: config.blocks.blocksConfig,
+    data,
+  });
   const location = props.location || { pathname: path };
 
   return (

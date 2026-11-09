@@ -116,7 +116,8 @@
   .govrs-section-block__content {
     min-height: inherit;
     box-sizing: border-box;
-    padding: var(--procergs-section-padding-block) var(--govrs-space-scale-6, 1.5rem);
+    padding: var(--procergs-section-padding-block)
+      var(--govrs-space-scale-6, 1.5rem);
     margin-inline: auto;
   }
 
@@ -261,11 +262,11 @@ body.cms-ui .block.procergsSection {
   color: var(--procergs-section-foreground, inherit);
 
   :is(
-      .procergs-text-typography,
-      .slate-editor,
-      .block.html,
-      .block.listing:not(.card)
-    ) {
+    .procergs-text-typography,
+    .slate-editor,
+    .block.html,
+    .block.listing:not(.card)
+  ) {
     --govrs-color-text-primary: var(--procergs-section-foreground, inherit);
     --govrs-color-text-secondary: var(--procergs-section-foreground, inherit);
     --govrs-color-text-muted: var(--procergs-section-foreground, inherit);
@@ -563,7 +564,8 @@ body.cms-ui .block.procergsSection {
     border: 1px solid #cfcfcf;
     border-radius: 0.25rem;
     background-color: #ffffff;
-    background-image: linear-gradient(45deg, #d0d0d0 25%, transparent 25%),
+    background-image:
+      linear-gradient(45deg, #d0d0d0 25%, transparent 25%),
       linear-gradient(-45deg, #d0d0d0 25%, transparent 25%),
       linear-gradient(45deg, transparent 75%, #d0d0d0 75%),
       linear-gradient(-45deg, transparent 75%, #d0d0d0 75%);
@@ -781,12 +783,18 @@ body.cms-ui .block.procergsSection {
     > barra-estado {
     --govrs-barra-estado-bg: transparent;
     --govrs-barra-estado-menu-bg: transparent;
-    --govrs-barra-estado-text: var(--procergs-overlay-header-foreground, #ffffff);
+    --govrs-barra-estado-text: var(
+      --procergs-overlay-header-foreground,
+      #ffffff
+    );
     --govrs-barra-estado-text-hover: var(
       --procergs-overlay-header-foreground,
       #ffffff
     );
-    --govrs-barra-estado-alt-text: var(--procergs-overlay-header-foreground, #ffffff);
+    --govrs-barra-estado-alt-text: var(
+      --procergs-overlay-header-foreground,
+      #ffffff
+    );
     --govrs-barra-estado-logo-fill: var(
       --procergs-overlay-header-foreground,
       #ffffff
@@ -952,5 +960,23 @@ body.cms-ui {
   .ui.basic.segment.content-area {
     margin-top: 0;
     margin-bottom: 0;
+  }
+}
+
+// Root grids extend their background while retaining the page content width.
+body.public-ui:not(.cms-ui)
+  .block.gridBlock.govrs-grid-background-block:not(
+    .govrs-section-block--nested
+  ):is(
+    .govrs-section-block--color,
+    .govrs-section-block--image,
+    .govrs-section-block--video
+  ) {
+  width: 100vw;
+  max-width: none;
+  margin-inline: calc(50% - 50vw);
+
+  > .govrs-section-block__content {
+    width: min(100%, var(--procergs-section-content-width));
   }
 }

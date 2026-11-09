@@ -22,3 +22,18 @@
     text-align: center;
   }
 }
+
+// In the published grid, the artwork fills its column at its natural ratio.
+body.public-ui:not(.cms-ui) .block.gridBlock .block.banner {
+  .govrs-banner-block__banner {
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .govrs-banner__image {
+    width: 100%;
+    height: auto;
+    max-height: none;
+  }
+}
