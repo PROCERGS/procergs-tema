@@ -21,7 +21,7 @@ body {
 }
 
 .govrs-header-wrapper[data-menu-open='true'] .govrs-menu-hamburger__content {
-  z-index: var(--govrs-z-index-navigation, 50) !important;
+  z-index: var(--govrs-layer-navigation, 50) !important;
 }
 
 body.cms-ui .govrs-header-wrapper .govrs-menu-hamburger__content,

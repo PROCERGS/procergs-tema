@@ -12,7 +12,7 @@
 .govrs-divisor-block--edit {
   display: flex;
   align-items: center;
-  min-height: var(--govrs-space-7, 2rem);
+  min-height: var(--govrs-space-scale-7, 2rem);
 }
 
 .govrs-divisor-block--edit.govrs-divisor-block--vertical {

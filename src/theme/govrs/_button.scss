@@ -21,7 +21,7 @@
   }
 
   .procergs-button-block__button.govrs-button {
-    padding: var(--govrs-space-2, 0.5rem)
+    padding: var(--govrs-space-scale-2, 0.5rem)
       var(--govrs-button-padding-inline, 1.5rem);
     background-color: var(--procergs-button-resolved-background);
     border-color: var(--procergs-button-resolved-border);
@@ -45,7 +45,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--govrs-space-2, 0.5rem);
+    gap: var(--govrs-space-scale-2, 0.5rem);
   }
 
   .procergs-button-block__content--top {

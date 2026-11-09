@@ -9,19 +9,19 @@
   .acess-wrapper {
     --govrs-layout-container-barra-lg: var(
       --govrs-layout-container-header,
-      var(--govrs-layout-container-header-max-width, 72rem)
+      90rem
     );
     --govrs-layout-container-barra-xl: var(
       --govrs-layout-container-header,
-      var(--govrs-layout-container-header-max-width, 72rem)
+      90rem
     );
     --govrs-layout-container-barra-xxxl: var(
       --govrs-layout-container-header,
-      var(--govrs-layout-container-header-max-width, 72rem)
+      90rem
     );
     padding-inline: var(
       --govrs-header-padding-inline,
-      var(--govrs-space-2-5, 0.625rem)
+      var(--govrs-space-scale-2-5, 0.625rem)
     );
   }
 }
@@ -164,7 +164,7 @@ body > .barra-estado-host {
   --procergs-header-v2-menu-foreground: #ffffff;
 
   position: relative;
-  z-index: var(--govrs-z-index-header, 40);
+  z-index: var(--govrs-layer-header, 40);
   display: grid;
   width: 100%;
   min-width: 0;
@@ -173,7 +173,7 @@ body > .barra-estado-host {
   grid-template-columns: clamp(10.5rem, 17vw, 16rem) minmax(0, 1fr);
   column-gap: clamp(2rem, 7vw, 8.5rem);
   align-items: start;
-  padding-block-end: var(--govrs-space-6, 1.5rem);
+  padding-block-end: var(--govrs-space-scale-6, 1.5rem);
   padding-inline-start: max(
     calc(var(--procergs-header-layout-inset-left, 0px) + 1rem),
     calc((100% - 90rem) / 2 + 1rem)
@@ -223,7 +223,7 @@ body > .barra-estado-host {
   min-height: 5rem;
   box-sizing: border-box;
   align-items: center;
-  padding: var(--govrs-space-4, 1rem) clamp(1.25rem, 3vw, 2.5rem);
+  padding: var(--govrs-space-scale-4, 1rem) clamp(1.25rem, 3vw, 2.5rem);
   border-radius: var(--govrs-border-radius-lg, 0.75rem);
   margin-block-start: clamp(2rem, 4vw, 3.25rem);
   background: var(--procergs-header-v2-menu-background);
@@ -280,7 +280,7 @@ body > .barra-estado-host {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--govrs-space-2, 0.5rem);
+  gap: var(--govrs-space-scale-2, 0.5rem);
   color: inherit;
   font-size: clamp(0.875rem, 1vw, 1.0625rem);
   line-height: 1.25;
@@ -314,13 +314,13 @@ body > .barra-estado-host {
 
 .procergs-header-v2__submenu {
   position: absolute;
-  z-index: calc(var(--govrs-z-index-navigation, 50) + 1);
+  z-index: calc(var(--govrs-layer-navigation, 50) + 1);
   top: calc(100% + 0.75rem);
   left: -1rem;
   width: max-content;
   min-width: 14rem;
   max-width: min(22rem, 80vw);
-  padding: var(--govrs-space-2, 0.5rem);
+  padding: var(--govrs-space-scale-2, 0.5rem);
   border: 1px solid rgb(255 255 255 / 22%);
   border-radius: var(--govrs-border-radius-md, 0.5rem);
   background: var(--procergs-header-v2-menu-background);
@@ -335,7 +335,7 @@ body > .barra-estado-host {
   visibility: hidden;
 
   .procergs-header-v2__link {
-    padding: var(--govrs-space-3, 0.75rem);
+    padding: var(--govrs-space-scale-3, 0.75rem);
     text-transform: none;
     white-space: normal;
   }
@@ -369,7 +369,7 @@ body > .barra-estado-host {
   .procergs-header-v2 {
     min-height: 0;
     grid-template-columns: minmax(0, 1fr);
-    row-gap: var(--govrs-space-4, 1rem);
+    row-gap: var(--govrs-space-scale-4, 1rem);
     padding-inline-start: calc(
       var(--procergs-header-layout-inset-left, 0px) + 1rem
     );
@@ -437,7 +437,7 @@ body.cms-ui {
 
   > #toolbar,
   > #sidebar {
-    z-index: calc(var(--govrs-z-index-toast, 120) + 2);
+    z-index: calc(var(--govrs-layer-toast, 120) + 2);
     flex: 0 0 0;
     width: 0;
     height: 0;
@@ -705,7 +705,7 @@ body:is(.public-ui, .cms-ui).has-toolbar
 body:is(.public-ui, .cms-ui).has-toolbar-collapsed
   #toolbar
   :is(.toolbar, .toolbar-content) {
-  z-index: calc(var(--govrs-z-index-toast, 120) + 1);
+  z-index: calc(var(--govrs-layer-toast, 120) + 1);
 }
 
 @media (max-width: 47.9375rem) {
@@ -739,7 +739,7 @@ body:is(.public-ui, .cms-ui).has-toolbar-collapsed
 }
 
 body.cms-ui .govrs-toast {
-  z-index: calc(var(--govrs-z-index-toast, 120) + 2);
+  z-index: calc(var(--govrs-layer-toast, 120) + 2);
 }
 
 body.cms-ui .procergs-footer-wrapper {

@@ -1,10 +1,10 @@
 .block.procergsSection,
 .block.gridBlock.govrs-grid-background-block {
   --procergs-section-content-width: var(
-    --govrs-layout-container-header-max-width,
+    --govrs-layout-container-header,
     89.75rem
   );
-  --procergs-section-padding-block: var(--govrs-space-10, 2.5rem);
+  --procergs-section-padding-block: var(--govrs-space-scale-7-5, 2.5rem);
   --procergs-section-media-object-position: 50% 50%;
   --procergs-section-media-anchor-x: 50%;
   --procergs-section-media-anchor-y: 50%;
@@ -25,11 +25,11 @@
   }
 
   &.govrs-section-block--spacing-compact {
-    --procergs-section-padding-block: var(--govrs-space-5, 1.25rem);
+    --procergs-section-padding-block: var(--govrs-space-scale-5, 1.25rem);
   }
 
   &.govrs-section-block--spacing-spacious {
-    --procergs-section-padding-block: var(--govrs-space-20, 5rem);
+    --procergs-section-padding-block: var(--govrs-space-section-spacious, 5rem);
   }
 
   &.govrs-section-block--width-narrow {
@@ -116,7 +116,7 @@
   .govrs-section-block__content {
     min-height: inherit;
     box-sizing: border-box;
-    padding: var(--procergs-section-padding-block) var(--govrs-space-6, 1.5rem);
+    padding: var(--procergs-section-padding-block) var(--govrs-space-scale-6, 1.5rem);
     margin-inline: auto;
   }
 
@@ -313,7 +313,7 @@ body.cms-ui .block.procergsSection {
     min-width: 0;
     max-width: 100% !important;
     container: procergs-nested-group / inline-size;
-    padding-inline: var(--govrs-space-3, 0.75rem);
+    padding-inline: var(--govrs-space-scale-3, 0.75rem);
   }
 
   > .govrs-section-block__content > .column {
@@ -343,7 +343,7 @@ body.cms-ui .block.procergsSection {
 }
 
 .block.gridBlock {
-  --procergs-grid-column-gutter: var(--govrs-space-2, 0.5rem);
+  --procergs-grid-column-gutter: var(--govrs-space-scale-2, 0.5rem);
 
   .ui.grid > .column {
     min-width: 0;
@@ -385,7 +385,7 @@ body.cms-ui .block.procergsSection {
   &.govrs-section-block--color,
   &.govrs-section-block--image,
   &.govrs-section-block--video {
-    --procergs-section-padding-block: var(--govrs-space-10, 2.5rem);
+    --procergs-section-padding-block: var(--govrs-space-scale-7-5, 2.5rem);
   }
 
   > .govrs-section-block__content {
@@ -519,8 +519,8 @@ body.cms-ui .block.procergsSection {
   .govrs-color-contrast-widget__custom {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--govrs-space-3, 0.75rem);
-    margin-block: var(--govrs-space-3, 0.75rem);
+    gap: var(--govrs-space-scale-3, 0.75rem);
+    margin-block: var(--govrs-space-scale-3, 0.75rem);
   }
 
   .govrs-color-contrast-widget__presets .button {
@@ -532,7 +532,7 @@ body.cms-ui .block.procergsSection {
   .govrs-color-contrast-widget__custom label {
     display: flex;
     align-items: center;
-    gap: var(--govrs-space-2, 0.5rem);
+    gap: var(--govrs-space-scale-2, 0.5rem);
   }
 
   .govrs-color-contrast-widget__custom--vertical {
@@ -550,7 +550,7 @@ body.cms-ui .block.procergsSection {
     display: flex;
     width: 100%;
     flex-direction: column;
-    gap: var(--govrs-space-2, 0.5rem);
+    gap: var(--govrs-space-scale-2, 0.5rem);
   }
 
   .govrs-color-contrast-widget__preview {
@@ -559,7 +559,7 @@ body.cms-ui .block.procergsSection {
     min-height: 3.5rem;
     align-items: center;
     justify-content: center;
-    padding: var(--govrs-space-3, 0.75rem);
+    padding: var(--govrs-space-scale-3, 0.75rem);
     border: 1px solid #cfcfcf;
     border-radius: 0.25rem;
     background-color: #ffffff;
@@ -573,7 +573,7 @@ body.cms-ui .block.procergsSection {
       6px -6px,
       -6px 0;
     background-size: 12px 12px;
-    margin-block: var(--govrs-space-2, 0.5rem);
+    margin-block: var(--govrs-space-scale-2, 0.5rem);
   }
 
   .govrs-color-contrast-widget__preview-swatch {
@@ -600,7 +600,7 @@ body.cms-ui .block.procergsSection {
     align-items: center;
     justify-content: space-between;
     font-size: 0.875rem;
-    gap: var(--govrs-space-2, 0.5rem);
+    gap: var(--govrs-space-scale-2, 0.5rem);
   }
 
   .govrs-color-contrast-widget__opacity-value {
@@ -634,8 +634,8 @@ body.cms-ui .block.procergsSection {
     min-height: 3rem;
     align-items: center;
     justify-content: stretch;
-    padding: var(--govrs-space-2, 0.5rem);
-    gap: var(--govrs-space-3, 0.75rem);
+    padding: var(--govrs-space-scale-2, 0.5rem);
+    gap: var(--govrs-space-scale-3, 0.75rem);
     grid-template-columns: auto minmax(0, 1fr);
   }
 
@@ -765,7 +765,7 @@ body.cms-ui .block.procergsSection {
   ):not(.global-region-editing) {
   .global-blocks-region-header {
     position: absolute;
-    z-index: var(--govrs-z-index-header, 40);
+    z-index: var(--govrs-layer-header, 40);
     top: 0;
     left: 0;
     width: 100%;
@@ -779,15 +779,15 @@ body.cms-ui .block.procergsSection {
   .procergs-state-bar-wrapper.allows-group-overlay
     > .barra-estado-host
     > barra-estado {
-    --barra-estado-bg: transparent;
-    --barra-estado-menu-bg: transparent;
-    --barra-estado-text: var(--procergs-overlay-header-foreground, #ffffff);
-    --barra-estado-text-hover: var(
+    --govrs-barra-estado-bg: transparent;
+    --govrs-barra-estado-menu-bg: transparent;
+    --govrs-barra-estado-text: var(--procergs-overlay-header-foreground, #ffffff);
+    --govrs-barra-estado-text-hover: var(
       --procergs-overlay-header-foreground,
       #ffffff
     );
-    --barra-estado-alt-text: var(--procergs-overlay-header-foreground, #ffffff);
-    --barra-estado-logo-fill: var(
+    --govrs-barra-estado-alt-text: var(--procergs-overlay-header-foreground, #ffffff);
+    --govrs-barra-estado-logo-fill: var(
       --procergs-overlay-header-foreground,
       #ffffff
     );
@@ -795,7 +795,7 @@ body.cms-ui .block.procergsSection {
 
   .procergs-header-wrapper.allows-group-overlay > .govrs-header-wrapper {
     position: relative !important;
-    z-index: var(--govrs-z-index-header, 40) !important;
+    z-index: var(--govrs-layer-header, 40) !important;
     top: auto;
     left: 0;
     background: transparent;
@@ -819,7 +819,7 @@ body.cms-ui .block.procergsSection {
 
   .procergs-header-wrapper.allows-group-overlay
     > .govrs-header-wrapper[data-menu-open='true'] {
-    z-index: var(--govrs-z-index-navigation, 50) !important;
+    z-index: var(--govrs-layer-navigation, 50) !important;
   }
 
   .procergs-header-wrapper.allows-group-overlay .govrs-header__search-wrapper {
@@ -896,7 +896,7 @@ body.cms-ui .block.procergsSection {
     .section-overlays-disabled
   ):not(.global-region-editing) {
   &.has-section-header-overlay .global-blocks-region-header {
-    z-index: var(--govrs-z-index-toast, 120);
+    z-index: var(--govrs-layer-toast, 120);
   }
 
   .ui.basic.segment.content-area {
@@ -919,7 +919,7 @@ body.cms-ui .block.procergsSection {
 
   .global-blocks-region-footer {
     position: relative;
-    z-index: var(--govrs-z-index-header, 40);
+    z-index: var(--govrs-layer-header, 40);
     margin-top: calc(-1 * var(--procergs-overlay-footer-height, 0px));
     color: var(--procergs-overlay-footer-foreground, #ffffff);
   }
