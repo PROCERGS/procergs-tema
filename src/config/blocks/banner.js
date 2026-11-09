@@ -14,6 +14,7 @@ const configureBannerBlock = (config) => {
     edit: BannerBlockEdit,
     schema: BlockSettingsSchema,
     blockSchema: BannerBlockSchema,
+    gridRules: { allowed: true },
     restricted: false,
     mostUsed: false,
     sidebarTab: 1,
