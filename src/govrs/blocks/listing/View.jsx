@@ -4,16 +4,43 @@ import cx from 'classnames';
 import { compose } from 'redux';
 import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import ListingBlockBody from './ListingBlockBody';
-import { getListingVariation } from './getListingVariation';
+import {
+  getListingVariation,
+  listingNeedsFullObjects,
+} from './getListingVariation';
+import { useGridColumns } from '../grid/GridContext';
+import { normalizeListingForGrid } from './gridRules';
+import { normalizeFileCriteria } from './fileCriteria';
 
-const View = ({ data, path, pathname, className, style, ...props }) => (
-  <div
-    className={cx('block listing', getListingVariation(data), className)}
-    style={style}
-  >
-    <ListingBlockBody {...props} data={data} path={path ?? pathname} />
-  </div>
-);
+const View = ({ data, path, pathname, className, style, ...props }) => {
+  const gridColumns = useGridColumns();
+  const normalizedData = normalizeFileCriteria(
+    normalizeListingForGrid(data, gridColumns),
+  );
+
+  return (
+    <div
+      className={cx(
+        'block listing',
+        getListingVariation(normalizedData),
+        gridColumns && 'listing--in-grid',
+        className,
+      )}
+      style={style}
+    >
+      <ListingBlockBody
+        {...props}
+        data={normalizedData}
+        gridColumns={gridColumns}
+        path={path ?? pathname}
+        variation={{
+          ...props.variation,
+          fullobjects: listingNeedsFullObjects(normalizedData),
+        }}
+      />
+    </div>
+  );
+};
 
 View.propTypes = {
   data: PropTypes.objectOf(PropTypes.any).isRequired,

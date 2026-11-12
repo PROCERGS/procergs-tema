@@ -1,43 +1,4 @@
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  maps: {
-    id: 'Maps',
-    defaultMessage: 'Maps',
-  },
-  markers: {
-    id: 'Markers',
-    defaultMessage: 'Markers',
-  },
-  addMarker: {
-    id: 'Add marker',
-    defaultMessage: 'Add marker',
-  },
-  markerTitle: {
-    id: 'Title',
-    defaultMessage: 'Title',
-  },
-  latitude: {
-    id: 'Latitude',
-    defaultMessage: 'Latitude',
-  },
-  longitude: {
-    id: 'Longitude',
-    defaultMessage: 'Longitude',
-  },
-  showMarkerList: {
-    id: 'Show marker list',
-    defaultMessage: 'Show marker list',
-  },
-  markerListLabel: {
-    id: 'Marker list label',
-    defaultMessage: 'Marker list label',
-  },
-  alignment: {
-    id: 'Alignment',
-    defaultMessage: 'Alignment',
-  },
-});
+import messages from './messages';
 
 const markerItemSchema = ({ intl }) => ({
   title: intl.formatMessage(messages.markers),
@@ -45,7 +6,7 @@ const markerItemSchema = ({ intl }) => ({
   fieldsets: [
     {
       id: 'default',
-      title: 'Default',
+      title: intl.formatMessage(messages.defaultGroup),
       fields: ['title', 'lat', 'lng'],
     },
   ],
@@ -70,12 +31,12 @@ export const MapsBlockSchema = ({ intl }) => ({
   fieldsets: [
     {
       id: 'default',
-      title: 'Default',
+      title: intl.formatMessage(messages.defaultGroup),
       fields: ['markers', 'showMarkerList', 'markerListLabel'],
     },
     {
       id: 'style',
-      title: 'Style',
+      title: intl.formatMessage(messages.style),
       fields: ['align'],
     },
   ],

@@ -16,27 +16,21 @@ body {
   z-index: auto !important;
 }
 
-.govrs-header__scroll-top {
-  z-index: 2 !important;
-}
-
 .govrs-header-wrapper .govrs-menu-hamburger__toggle {
   z-index: auto !important;
 }
 
 .govrs-header-wrapper[data-menu-open='true'] .govrs-menu-hamburger__content {
-  z-index: var(--govrs-z-index-navigation, 50) !important;
+  z-index: var(--govrs-layer-navigation, 50) !important;
 }
 
-body.cms-ui.has-sidebar .govrs-header-wrapper .govrs-menu-hamburger__content,
-body.cms-ui.has-sidebar-collapsed
-  .govrs-header-wrapper
-  .govrs-menu-hamburger__content,
+body.cms-ui .govrs-header-wrapper .govrs-menu-hamburger__content,
 body.has-sidebar .govrs-header-wrapper .govrs-menu-hamburger__content,
 body.has-sidebar-collapsed
   .govrs-header-wrapper
   .govrs-menu-hamburger__content {
   left: 0;
+  right: 0;
   width: 100%;
   max-width: 100%;
   transform: none;
@@ -62,12 +56,22 @@ body:not(.cms-ui).has-toolbar-collapsed
 @import './content-links';
 @import './layout';
 @import './typography-text';
+@import './news';
 @import './map';
+@import './consentimento';
 @import './search';
 @import './accordion';
 @import './carousel';
 @import './listing';
+@import './teaser';
 @import './pagination';
+@import './breadcrumbs';
 @import './banner';
+@import './button';
+@import './divisor';
 @import './table';
+@import './tags';
+@import './section';
+@import './native-blocks';
+@import './grid-dividers';
 @import './high-contrast';

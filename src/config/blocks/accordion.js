@@ -3,6 +3,7 @@ import BlockSettingsSchema from '@plone/volto/components/manage/Blocks/Block/Sch
 import AccordionBlockView from '../../govrs/blocks/accordion/View';
 import AccordionBlockEdit from '../../govrs/blocks/accordion/Edit';
 import AccordionBlockSchema from '../../govrs/blocks/accordion/schema';
+import accordionGridRules from '../../govrs/blocks/accordion/gridRules';
 
 const configureAccordionBlock = (config) => {
   config.blocks.blocksConfig.accordion = {
@@ -14,6 +15,7 @@ const configureAccordionBlock = (config) => {
     edit: AccordionBlockEdit,
     schema: BlockSettingsSchema,
     blockSchema: AccordionBlockSchema,
+    gridRules: accordionGridRules,
     restricted: false,
     mostUsed: false,
     sidebarTab: 1,

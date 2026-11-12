@@ -1,127 +1,27 @@
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  listing: {
-    id: 'Listing',
-    defaultMessage: 'Listing',
-  },
-  content: {
-    id: 'Content',
-    defaultMessage: 'Content',
-  },
-  appearance: {
-    id: 'Appearance',
-    defaultMessage: 'Appearance',
-  },
-  query: {
-    id: 'Query',
-    defaultMessage: 'Query',
-  },
-  headline: {
-    id: 'Headline',
-    defaultMessage: 'Headline',
-  },
-  headlineTag: {
-    id: 'Headline level',
-    defaultMessage: 'Headline level',
-  },
-  horizontal: {
-    id: 'Horizontal layout',
-    defaultMessage: 'Horizontal layout',
-  },
-  labeled: {
-    id: 'Group items by label',
-    defaultMessage: 'Group items by label',
-  },
-  collapsible: {
-    id: 'Collapsible groups',
-    defaultMessage: 'Collapsible groups',
-  },
-  mediaPreset: {
-    id: 'Media preset',
-    defaultMessage: 'Media preset',
-  },
-  groupBy: {
-    id: 'Group by',
-    defaultMessage: 'Group by',
-  },
-  numbered: {
-    id: 'Numbered list',
-    defaultMessage: 'Numbered list',
-  },
-  invert: {
-    id: 'Invert meta and title',
-    defaultMessage: 'Invert meta and title',
-  },
-  perRow: {
-    id: 'Cards per row',
-    defaultMessage: 'Cards per row',
-  },
-  cardVariant: {
-    id: 'Card style',
-    defaultMessage: 'Card style',
-  },
-  cardSize: {
-    id: 'Card size',
-    defaultMessage: 'Card size',
-  },
-  showCardAction: {
-    id: 'Show card action link',
-    defaultMessage: 'Show card action link',
-  },
-  showTags: {
-    id: 'Show tags',
-    defaultMessage: 'Exibir tags',
-  },
-  tagsLimit: {
-    id: 'Number of tags',
-    defaultMessage: 'Quantidade de tags',
-  },
-  cardOverflow: {
-    id: 'Card overflow',
-    defaultMessage: 'Quando os cards não cabem',
-  },
-  cardOverflowWrap: {
-    id: 'Wrap to next row',
-    defaultMessage: 'Quebrar linha',
-  },
-  cardOverflowScroll: {
-    id: 'Horizontal scroll',
-    defaultMessage: 'Rolagem horizontal',
-  },
-});
+import messages from './messages';
+import { getAppearanceFields } from './getAppearanceFields';
+import { getGridColumnCount, getGridListingMaxPerRow } from './gridRules';
 
 const DEFAULT_HEADLINE_LEVELS = [
   ['h2', 'h2'],
   ['h3', 'h3'],
 ];
 
-const getAppearanceFields = (variation, data) => {
-  switch (variation) {
-    case 'link':
-      return ['numbered', 'invert', 'mediaPreset'];
-    case 'card':
-      return [
-        'perRow',
-        'cardOverflow',
-        'cardVariant',
-        'cardSize',
-        'showCardAction',
-        'showTags',
-        ...(data?.showTags ? ['tagsLimit'] : []),
-      ];
-    default:
-      return [
-        'horizontal',
-        'labeled',
-        ...(data?.labeled ? ['collapsible', 'groupBy'] : []),
-        'mediaPreset',
-      ];
-  }
-};
-
-export const ListingBlockSchema = ({ data = {}, intl }) => {
+export const ListingBlockSchema = ({
+  data = {},
+  intl,
+  gridColumns: gridColumnsProp,
+}) => {
   const variation = data.variation || 'default';
+  const appearanceFields = getAppearanceFields(variation, data);
+  const gridColumns = getGridColumnCount(gridColumnsProp);
+  const isInGrid = Boolean(gridColumns);
+  const maxPerRow = getGridListingMaxPerRow({
+    variation,
+    cardSize: data.cardSize,
+    gridColumns,
+  });
+  const forceMediaAbove = variation === 'default' && gridColumns > 2;
 
   return {
     title: intl.formatMessage(messages.listing),
@@ -131,11 +31,15 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
         title: intl.formatMessage(messages.content),
         fields: ['headline', 'headlineTag', 'querystring'],
       },
-      {
-        id: 'appearance',
-        title: intl.formatMessage(messages.appearance),
-        fields: getAppearanceFields(variation, data),
-      },
+      ...(appearanceFields.length > 0
+        ? [
+            {
+              id: 'appearance',
+              title: intl.formatMessage(messages.appearance),
+              fields: appearanceFields,
+            },
+          ]
+        : []),
     ],
     properties: {
       headline: {
@@ -149,7 +53,8 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
       },
       querystring: {
         title: intl.formatMessage(messages.query),
-        widget: 'querystring',
+        widget: 'listing_querystring',
+        isFileListing: variation === 'file',
       },
       horizontal: {
         title: intl.formatMessage(messages.horizontal),
@@ -171,24 +76,41 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
         choices:
           variation === 'link'
             ? [
-                ['icons', 'Icons'],
-                ['none', 'None'],
+                ['icons', intl.formatMessage(messages.mediaPresetIcons)],
+                ['none', intl.formatMessage(messages.mediaPresetNone)],
               ]
             : [
-                ['mixed', 'Mixed'],
-                ['images', 'Images'],
-                ['icons', 'Icons'],
-                ['none', 'None'],
+                ['mixed', intl.formatMessage(messages.mediaPresetMixed)],
+                ['images', intl.formatMessage(messages.mediaPresetImages)],
+                ['icons', intl.formatMessage(messages.mediaPresetIcons)],
+                ['none', intl.formatMessage(messages.mediaPresetNone)],
               ],
         default: variation === 'link' ? 'none' : 'mixed',
+      },
+      mediaPosition: {
+        title: intl.formatMessage(messages.mediaPosition),
+        description: intl.formatMessage(
+          forceMediaAbove
+            ? messages.mediaPositionGridDescription
+            : messages.mediaPositionDescription,
+        ),
+        choices: forceMediaAbove
+          ? [['above', intl.formatMessage(messages.mediaPositionAbove)]]
+          : [
+              ['left', intl.formatMessage(messages.mediaPositionLeft)],
+              ['above', intl.formatMessage(messages.mediaPositionAbove)],
+            ],
+        default: forceMediaAbove ? 'above' : 'left',
+        noValueOption: false,
       },
       groupBy: {
         title: intl.formatMessage(messages.groupBy),
         choices: [
-          ['portal_type', 'Content type'],
-          ['none', 'None'],
+          ['subject', intl.formatMessage(messages.groupBySubject)],
+          ['portal_type', intl.formatMessage(messages.groupByPortalType)],
         ],
-        default: 'portal_type',
+        default: 'subject',
+        noValueOption: false,
       },
       numbered: {
         title: intl.formatMessage(messages.numbered),
@@ -201,34 +123,49 @@ export const ListingBlockSchema = ({ data = {}, intl }) => {
         default: false,
       },
       perRow: {
-        title: intl.formatMessage(messages.perRow),
+        title:
+          variation === 'card'
+            ? intl.formatMessage(messages.perRow)
+            : intl.formatMessage(messages.itemsPerRow),
         type: 'number',
         default: 3,
+        minimum: 1,
+        ...(maxPerRow ? { maximum: maxPerRow } : {}),
+        ...(isInGrid
+          ? {
+              description: intl.formatMessage(messages.perRowGridDescription),
+            }
+          : {}),
       },
       cardOverflow: {
         title: intl.formatMessage(messages.cardOverflow),
-        choices: [
-          ['wrap', intl.formatMessage(messages.cardOverflowWrap)],
-          ['scroll', intl.formatMessage(messages.cardOverflowScroll)],
-        ],
+        description: isInGrid
+          ? intl.formatMessage(messages.cardOverflowGridDescription)
+          : undefined,
+        choices: isInGrid
+          ? [['wrap', intl.formatMessage(messages.cardOverflowWrap)]]
+          : [
+              ['wrap', intl.formatMessage(messages.cardOverflowWrap)],
+              ['scroll', intl.formatMessage(messages.cardOverflowScroll)],
+            ],
         default: 'wrap',
         noValueOption: false,
       },
       cardVariant: {
         title: intl.formatMessage(messages.cardVariant),
         choices: [
-          ['post', 'Post'],
-          ['list', 'List'],
-          ['news', 'News'],
-          ['icon', 'Icon'],
+          ['post', intl.formatMessage(messages.post)],
+          ['list', intl.formatMessage(messages.list)],
+          ['news', intl.formatMessage(messages.news)],
+          ['icon', intl.formatMessage(messages.icon)],
         ],
         default: 'news',
       },
       cardSize: {
         title: intl.formatMessage(messages.cardSize),
         choices: [
-          ['small', 'Small'],
-          ['large', 'Large'],
+          ['small', intl.formatMessage(messages.small)],
+          ['large', intl.formatMessage(messages.large)],
         ],
         default: 'small',
       },

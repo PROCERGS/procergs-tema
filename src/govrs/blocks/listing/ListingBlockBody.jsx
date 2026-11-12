@@ -2,15 +2,29 @@ import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import { useHistory } from 'react-router-dom';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import Slugger from 'github-slugger';
 import { List } from '@procergs/react-govrs-ds';
 import withQuerystringResults from '@plone/volto/components/manage/Blocks/Listing/withQuerystringResults';
 import { normalizeString } from '@plone/volto/helpers/Utils/Utils';
+import config from '@plone/volto/registry';
 import Pagination from '../../components/Pagination/Pagination';
-import { getListingVariation } from './getListingVariation';
+import {
+  getListingVariation,
+  isDsListingVariation,
+  resolveListingVariationConfig,
+} from './getListingVariation';
 import { getListVariantProps } from './getListVariantProps';
+import { getGridColumnCount } from './gridRules';
 import { normalizeListItems } from './normalizeListItems';
+import { buildFileListingQuery } from './fileCriteria';
+import FileListingEdit from './FileListingEdit';
+import {
+  getListingItemHrefFromEvent,
+  isClickableDefaultListing,
+  shouldHandleListingNavigation,
+} from './listingItemNavigation';
 
 const Headline = ({ headlineTag = 'h2', id, data, listingItems }) => {
   const Tag = headlineTag;
@@ -38,9 +52,12 @@ Headline.propTypes = {
 
 const ListingBlockBody = withQuerystringResults((props) => {
   const {
-    data = {},
+    data: queryData = {},
+    displayData,
     id,
     isEditMode,
+    onFileTitleChange,
+    onFileTitleFocus,
     listingItems,
     totalPages,
     onPaginationChange,
@@ -49,26 +66,118 @@ const ListingBlockBody = withQuerystringResults((props) => {
     batch_size,
     isFolderContentsListing,
     hasLoaded,
+    variation: variationProp,
+    gridColumns,
   } = props;
 
+  const data = displayData || queryData;
   const listingRef = createRef();
-  const variation = getListingVariation(data);
+  const variationId = getListingVariation(data);
+  const useDsList = isDsListingVariation(variationId);
+  const variationConfig = resolveListingVariationConfig(
+    data,
+    variationProp,
+    config.blocks?.blocksConfig?.listing?.variations,
+  );
+  const gridColumnCount = getGridColumnCount(gridColumns);
+  const itemsPerRow =
+    variationId === 'card' ||
+    (variationId === 'default' && Boolean(data.horizontal))
+      ? Number(data.perRow) || 3
+      : null;
+  const ListingBodyTemplate = variationConfig?.template;
+  const NoResults =
+    variationConfig?.noResultsComponent ||
+    config.blocks?.blocksConfig?.listing?.noResultsComponent;
+  const history = useHistory();
   const listProps = getListVariantProps(data);
-  const items = normalizeListItems(listingItems, data, { isEditMode });
+  const items = normalizeListItems(listingItems, data, {
+    isEditMode,
+  });
   const HeadlineTag = data.headlineTag || 'h2';
+  const hasItems = items.length > 0;
+  const isClickableDefault = isClickableDefaultListing(data, items, isEditMode);
+  const defaultListingStyle =
+    variationId === 'default' && listProps.horizontal
+      ? { '--govrs-list-default-cols': listProps.perRow }
+      : undefined;
 
-  const listContent =
-    items.length > 0 ? (
-      <List
-        {...listProps}
-        items={items}
-        className="govrs-listing-block__list"
+  const handleListClick = (event) => {
+    if (!isClickableDefault || !shouldHandleListingNavigation(event)) {
+      return;
+    }
+
+    const href = getListingItemHrefFromEvent(
+      event,
+      items,
+      Boolean(data.labeled),
+    );
+    if (!href) {
+      return;
+    }
+
+    event.preventDefault();
+    history.push(href);
+  };
+
+  let listContent = null;
+  if (hasItems) {
+    if (variationId === 'file' && isEditMode) {
+      listContent = (
+        <FileListingEdit
+          items={items}
+          onTitleChange={onFileTitleChange}
+          onTitleFocus={onFileTitleFocus}
+        />
+      );
+    } else if (useDsList) {
+      listContent = (
+        <List
+          {...listProps}
+          items={items}
+          className={cx('govrs-listing-block__list', {
+            'govrs-listing-block__list--media-left':
+              listProps.mediaPosition === 'left',
+            'govrs-listing-block__list--show-tags':
+              variationId === 'default' && Boolean(data.showTags),
+            'govrs-listing-block__list--clickable': isClickableDefault,
+          })}
+        />
+      );
+    } else if (ListingBodyTemplate) {
+      listContent = (
+        <ListingBodyTemplate
+          items={listingItems}
+          isEditMode={isEditMode}
+          {...data}
+          {...variationConfig}
+        />
+      );
+    }
+  }
+
+  const emptyMessage =
+    hasLoaded &&
+    (NoResults ? (
+      <NoResults isEditMode={isEditMode} {...data} />
+    ) : (
+      <FormattedMessage
+        id="No results found."
+        defaultMessage="No results found."
       />
-    ) : null;
+    ));
 
   return (
     <div
-      className={cx('govrs-listing-block', `govrs-listing-block--${variation}`)}
+      className={cx(
+        'govrs-listing-block',
+        `govrs-listing-block--${variationId}`,
+        gridColumnCount && 'govrs-listing-block--in-grid',
+        gridColumnCount &&
+          `govrs-listing-block--grid-columns-${gridColumnCount}`,
+        itemsPerRow && `govrs-listing-block--items-per-row-${itemsPerRow}`,
+      )}
+      style={defaultListingStyle}
     >
       {data.headline && (
         <Headline
@@ -79,7 +188,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
         />
       )}
       {listContent ? (
-        <div ref={listingRef}>
+        <div ref={listingRef} onClick={handleListClick} role="presentation">
           {listContent}
           <Pagination
             page={currentPage}
@@ -107,12 +216,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
               defaultMessage="No items found in this container."
             />
           )}
-          {hasLoaded && (
-            <FormattedMessage
-              id="No results found."
-              defaultMessage="No results found."
-            />
-          )}
+          {emptyMessage}
           <Dimmer active={!hasLoaded} inverted>
             <Loader indeterminate size="small">
               <FormattedMessage id="loading" defaultMessage="Loading" />
@@ -124,12 +228,7 @@ const ListingBlockBody = withQuerystringResults((props) => {
           className="govrs-listing-block__empty emptyListing"
           ref={listingRef}
         >
-          {hasLoaded && (
-            <FormattedMessage
-              id="No results found."
-              defaultMessage="No results found."
-            />
-          )}
+          {emptyMessage}
           <Dimmer active={!hasLoaded} inverted>
             <Loader indeterminate size="small">
               <FormattedMessage id="loading" defaultMessage="Loading" />
@@ -141,4 +240,12 @@ const ListingBlockBody = withQuerystringResults((props) => {
   );
 });
 
-export default ListingBlockBody;
+const ListingBlockBodyWithQuery = (props) => (
+  <ListingBlockBody
+    {...props}
+    data={buildFileListingQuery(props.data)}
+    displayData={props.data}
+  />
+);
+
+export default ListingBlockBodyWithQuery;

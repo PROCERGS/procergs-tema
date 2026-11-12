@@ -1,0 +1,92 @@
+.block.gridBlock .block.teaser,
+.block-editor-gridBlock .block.teaser,
+.block-editor-teaser.contained .block.teaser {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  container: procergs-grid-teaser / inline-size;
+
+  > a {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    color: inherit;
+  }
+
+  .teaser-item.default {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    flex-direction: row;
+    gap: var(--govrs-space-scale-4, 1rem);
+    color: inherit;
+  }
+
+  .teaser-item.default .image-wrapper {
+    width: auto;
+    min-width: 0;
+    max-width: 40%;
+    margin: 0;
+    flex: 0 1 35%;
+  }
+
+  .teaser-item.default .image-wrapper img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .teaser-item.default .content {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    flex: 1 1 0;
+    color: inherit;
+  }
+
+  .teaser-item.default :is(.headline, h2, p) {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .teaser-item.default h2 {
+    margin-top: 0;
+    font-size: var(
+      --procergs-teaser-font-size,
+      var(--govrs-font-size-heading-2xl)
+    );
+    line-height: var(
+      --procergs-teaser-line-height,
+      var(--govrs-line-height-heading-2xl)
+    );
+  }
+}
+
+@container procergs-grid-teaser (max-width: 22rem) {
+  .teaser-item.default {
+    --procergs-teaser-font-size: var(--govrs-font-size-heading-lg);
+    --procergs-teaser-line-height: var(--govrs-line-height-heading-lg);
+
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .teaser-item.default .image-wrapper {
+    width: 100%;
+    max-width: 100%;
+    flex-basis: auto;
+  }
+
+  .teaser-item.default .content {
+    width: 100%;
+  }
+}

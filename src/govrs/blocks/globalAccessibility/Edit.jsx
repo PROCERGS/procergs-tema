@@ -1,0 +1,61 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
+import messages from './messages';
+import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
+import { BlockDataForm } from '@plone/volto/components/manage/Form';
+import AccessibilityBarBlockSchema from './schema';
+import { updateAccessibilityField } from './secretariat';
+import { ProcergsGlobalAccessibilityBarBlock } from '../../components/Header/AccessibilityBar';
+
+const AccessibilityBarBlockEdit = (props) => {
+  const {
+    block,
+    blocksErrors,
+    onChangeBlock,
+    data,
+    selected,
+    navRoot,
+    contentType,
+  } = props;
+  const intl = useIntl();
+  const schema = AccessibilityBarBlockSchema({ ...props, intl });
+
+  return (
+    <>
+      <ProcergsGlobalAccessibilityBarBlock {...props} />
+      <SidebarPortal selected={selected}>
+        <BlockDataForm
+          schema={schema}
+          title={intl.formatMessage(messages.accessibilityBar)}
+          description={intl.formatMessage(messages.editorDescription)}
+          onChangeField={(id, value, itemInfo) => {
+            onChangeBlock(
+              block,
+              updateAccessibilityField(data, id, value, itemInfo),
+            );
+          }}
+          onChangeBlock={onChangeBlock}
+          formData={{
+            ...data,
+            isSecretariat: data?.isSecretariat === true,
+            allowOverlay: data?.allowOverlay !== false,
+          }}
+          block={block}
+          navRoot={navRoot}
+          contentType={contentType}
+          errors={blocksErrors}
+        />
+      </SidebarPortal>
+    </>
+  );
+};
+
+AccessibilityBarBlockEdit.propTypes = {
+  block: PropTypes.string,
+  selected: PropTypes.bool,
+  data: PropTypes.objectOf(PropTypes.any),
+  onChangeBlock: PropTypes.func,
+};
+
+export default AccessibilityBarBlockEdit;

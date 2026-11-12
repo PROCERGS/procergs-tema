@@ -16,6 +16,11 @@ import config from '@plone/volto/registry';
 import { PluggablesProvider } from '@plone/volto/components/manage/Pluggable';
 import { visitBlocks } from '@plone/volto/helpers/Blocks/Blocks';
 import { injectIntl } from 'react-intl';
+import {
+  bootstrapGlobalRegions,
+  GlobalRegionsToolbarPlug,
+} from 'volto-global-regions';
+import { GlobalRegionsSidebar } from 'volto-global-regions/components';
 
 import Error from '@plone/volto/error';
 
@@ -33,12 +38,20 @@ import { getContent } from '@plone/volto/actions/content/content';
 import { getNavigation } from '@plone/volto/actions/navigation/navigation';
 import { getTypes } from '@plone/volto/actions/types/types';
 import { getWorkflow } from '@plone/volto/actions/workflow/workflow';
+import { getColorPalette } from '../../../../../actions/colorPalette';
 
 import clearSVG from '@plone/volto/icons/clear.svg';
+import headerRegionSVG from '@plone/volto/icons/row-before.svg';
+import footerRegionSVG from '@plone/volto/icons/row-after.svg';
 import MultilingualRedirector from '@plone/volto/components/theme/MultilingualRedirector/MultilingualRedirector';
 import WorkingCopyToastsFactory from '@plone/volto/components/manage/WorkingCopyToastsFactory/WorkingCopyToastsFactory';
 import LockingToastsFactory from '@plone/volto/components/manage/LockingToastsFactory/LockingToastsFactory';
 import RouteAnnouncer from '@plone/volto/components/theme/RouteAnnouncer/RouteAnnouncer';
+import getPageSectionChrome from '../../../../../helpers/getPageSectionChrome';
+import isSectionOverlayEnabled from '../../../../../helpers/isSectionOverlayEnabled';
+import SiteThemeGlobalStyle from '../../../../../govrs/components/SiteTheme/SiteThemeGlobalStyle';
+import { getCurrentContentEditPermission } from '../../../../../helpers/canEditCurrentContent';
+import GlobalRegionsPermissions from '../../../../../govrs/components/GlobalRegionsPermissions';
 
 export class App extends Component {
   static propTypes = {
@@ -83,95 +96,147 @@ export class App extends Component {
     const path = getBaseUrl(this.props.pathname);
     const action = getView(this.props.pathname);
     const isCmsUI = isCmsUi(this.props.pathname);
+    const sectionOverlaysEnabled = isSectionOverlayEnabled({
+      action,
+      isCmsUI,
+      pathname: this.props.pathname,
+      content: this.props.content,
+    });
     const ConnectionRefusedView = views.errorViews.ECONNREFUSED;
+    const sectionChrome = getPageSectionChrome(this.props.content);
+    const headerOverlay = sectionOverlaysEnabled && sectionChrome.headerEnabled;
+    const footerOverlay = sectionOverlaysEnabled && sectionChrome.footerEnabled;
 
     const language =
       this.props.content?.language?.token ?? this.props.intl?.locale;
 
     return (
       <PluggablesProvider>
-        <Helmet>
-          {language && <html lang={language} />}
-          <script src="https://cdn.jsdelivr.net/gh/PROCERGS/react-govrs-ds@a62a819ce2a9662e21edada58c6f99d549b0e7ba/src/components/BarraEstado/BarraEstadoStandalone.js"></script>
-        </Helmet>
-        <BodyClass className={`view-${action}view`} />
-
-        {this.props.content && this.props.content['@type'] && (
-          <BodyClass
-            className={`contenttype-${this.props.content['@type']
-              .replaceAll(' ', '-')
-              .toLowerCase()}`}
-          />
-        )}
-
-        <BodyClass
-          className={cx({
-            [trim(join(split(this.props.pathname, '/'), ' section-'))]:
-              this.props.pathname !== '/',
-            siteroot: this.props.pathname === '/',
-            [`is-adding-contenttype-${decodeURIComponent(
-              this.props.location?.search?.startsWith('?type=')
-                ? this.props.location?.search?.replace('?type=', '')
-                : '',
-            )
-              .replaceAll(' ', '-')
-              .toLowerCase()}`]:
-              this.props.location?.search?.startsWith('?type='),
-            'is-authenticated': !!this.props.token,
-            'is-anonymous': !this.props.token,
-            'cms-ui': isCmsUI,
-            'public-ui': !isCmsUI,
-          })}
-        />
-        <SkipLinks />
-        <Header pathname={path} />
-        <MultilingualRedirector
-          pathname={this.props.pathname}
-          contentLanguage={this.props.content?.language?.token}
+        <GlobalRegionsPermissions
+          token={this.props.token}
+          userId={this.props.userId}
+          canEditContent={this.props.canEditContent}
         >
-          <Segment
-            basic
-            className="content-area"
-            onClick={this.dispatchContentClick}
-          >
-            <main id="main" ref={this.mainRef}>
-              <OutdatedBrowser />
-              {this.props.connectionRefused ? (
-                <ConnectionRefusedView />
-              ) : this.state.hasError ? (
-                <Error
-                  message={this.state.error.message}
-                  stackTrace={this.state.errorInfo.componentStack}
-                />
-              ) : (
-                renderRoutes(this.props.route.routes, {
-                  staticContext: this.props.staticContext,
-                })
-              )}
-            </main>
-          </Segment>
-        </MultilingualRedirector>
-        <RouteAnnouncer />
-        <Footer />
-        <LockingToastsFactory
-          content={this.props.content}
-          user={this.props.userId}
-        />
-        <WorkingCopyToastsFactory content={this.props.content} />
-        <ToastContainer
-          position={toast.POSITION.BOTTOM_CENTER}
-          hideProgressBar
-          transition={Slide}
-          autoClose={5000}
-          closeButton={
-            <Icon
-              className="toast-dismiss-action"
-              name={clearSVG}
-              size="18px"
+          <Helmet>
+            {language && <html lang={language} />}
+            <script src="https://cdn.jsdelivr.net/gh/PROCERGS/react-govrs-ds@29dbc8de98b4b6b620bcfdcc23a9449d754b70d6/src/components/BarraEstado/BarraEstadoStandalone.js"></script>
+          </Helmet>
+          <BodyClass className={`view-${action}view`} />
+
+          {this.props.content && this.props.content['@type'] && (
+            <BodyClass
+              className={`contenttype-${this.props.content['@type']
+                .replaceAll(' ', '-')
+                .toLowerCase()}`}
             />
-          }
-        />
-        <AppExtras {...this.props} />
+          )}
+
+          <BodyClass
+            className={cx({
+              [trim(join(split(this.props.pathname, '/'), ' section-'))]:
+                this.props.pathname !== '/',
+              siteroot: this.props.pathname === '/',
+              [`is-adding-contenttype-${decodeURIComponent(
+                this.props.location?.search?.startsWith('?type=')
+                  ? this.props.location?.search?.replace('?type=', '')
+                  : '',
+              )
+                .replaceAll(' ', '-')
+                .toLowerCase()}`]:
+                this.props.location?.search?.startsWith('?type='),
+              'is-authenticated': !!this.props.token,
+              'is-anonymous': !this.props.token,
+              'cms-ui': isCmsUI,
+              'public-ui': !isCmsUI,
+              'section-overlays-disabled': !sectionOverlaysEnabled,
+              'has-section-header-overlay': headerOverlay,
+              'has-section-footer-overlay': footerOverlay,
+            })}
+          />
+          <SkipLinks />
+          <Header
+            pathname={path}
+            overlayForeground={
+              headerOverlay ? sectionChrome.headerForeground : undefined
+            }
+          />
+          <SiteThemeGlobalStyle />
+          <MultilingualRedirector
+            pathname={this.props.pathname}
+            contentLanguage={this.props.content?.language?.token}
+          >
+            <Segment
+              basic
+              className="content-area"
+              onClick={this.dispatchContentClick}
+            >
+              <main id="main" ref={this.mainRef}>
+                <OutdatedBrowser />
+                {this.props.connectionRefused ? (
+                  <ConnectionRefusedView />
+                ) : this.state.hasError ? (
+                  <Error
+                    message={this.state.error.message}
+                    stackTrace={this.state.errorInfo.componentStack}
+                  />
+                ) : (
+                  renderRoutes(this.props.route.routes, {
+                    staticContext: this.props.staticContext,
+                  })
+                )}
+              </main>
+            </Segment>
+          </MultilingualRedirector>
+          <RouteAnnouncer />
+          <Footer
+            pathname={path}
+            overlayForeground={
+              footerOverlay ? sectionChrome.footerForeground : undefined
+            }
+          />
+          <LockingToastsFactory
+            content={this.props.content}
+            user={this.props.userId}
+          />
+          <WorkingCopyToastsFactory content={this.props.content} />
+          <ToastContainer
+            position={toast.POSITION.BOTTOM_CENTER}
+            hideProgressBar
+            transition={Slide}
+            autoClose={5000}
+            closeButton={
+              <Icon
+                className="toast-dismiss-action"
+                name={clearSVG}
+                size="18px"
+              />
+            }
+          />
+          <AppExtras {...this.props} />
+          <GlobalRegionsToolbarPlug
+            region="header"
+            icon={headerRegionSVG}
+            label="Editar cabeçalho global"
+            initializeLabel="Inicializar cabeçalho global"
+            cancelLabel="Cancelar edição do cabeçalho"
+            visible={Boolean(this.props.token)}
+            requireEditPermission
+            morePluggable={null}
+            order={10}
+          />
+          <GlobalRegionsToolbarPlug
+            region="footer"
+            icon={footerRegionSVG}
+            label="Editar rodapé global"
+            initializeLabel="Editar rodapé global"
+            cancelLabel="Cancelar edição do rodapé"
+            visible={Boolean(this.props.token)}
+            requireEditPermission
+            morePluggable={null}
+            order={20}
+          />
+          <GlobalRegionsSidebar />
+        </GlobalRegionsPermissions>
       </PluggablesProvider>
     );
   }
@@ -181,6 +246,13 @@ export const __test__ = connect(
   (state, props) => ({
     pathname: props.location.pathname,
     token: state.userSession.token,
+    userId: state.userSession.token
+      ? jwtDecode(state.userSession.token).sub
+      : '',
+    canEditContent: getCurrentContentEditPermission(
+      state,
+      state.userSession.token ? jwtDecode(state.userSession.token).sub : '',
+    ),
     content: state.content.data,
     apiError: state.apierror.error,
     connectionRefused: state.apierror.connectionRefused,
@@ -248,6 +320,15 @@ export function connectAppComponent(AppComponent) {
           __SERVER__ && fetchContent({ store, location }),
       },
       {
+        key: 'globalRegions',
+        promise: ({ store }) => __SERVER__ && bootstrapGlobalRegions(store),
+      },
+      {
+        key: 'colorPalette',
+        promise: ({ store: { dispatch } }) =>
+          __SERVER__ && dispatch(getColorPalette()),
+      },
+      {
         key: 'navigation',
         promise: ({ location, store: { dispatch } }) => {
           if (
@@ -285,6 +366,10 @@ export function connectAppComponent(AppComponent) {
       (state, props) => ({
         pathname: props.location.pathname,
         token: state.userSession.token,
+        canEditContent: getCurrentContentEditPermission(
+          state,
+          state.userSession.token ? jwtDecode(state.userSession.token).sub : '',
+        ),
         userId: state.userSession.token
           ? jwtDecode(state.userSession.token).sub
           : '',

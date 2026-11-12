@@ -7,9 +7,29 @@ import configureCarouselBlock from './blocks/carousel';
 import configureListingBlock from './blocks/listing';
 import configureBannerBlock from './blocks/banner';
 import configureSlateTableBlock from './blocks/slateTable';
+import configureButtonBlock from './blocks/button';
+import configureDivisorBlock from './blocks/divisor';
+import configureSectionBlock from './blocks/section';
+import configureTitleBlock from './blocks/title';
+import configureGlobalRegionBlocks from './globalRegions';
+import configureColorPalette from './colorPalette';
+import configureContactForm from './contactForm';
+import configureSearch from './search';
+import ColorInputWidget from '../govrs/widgets/ColorInputWidget';
+import ColorContrastWidget from '../govrs/widgets/ColorContrastWidget';
+import ButtonIconWidget from '../govrs/widgets/ButtonIconWidget';
 
 const applyConfig = (config) => {
+  config.widgets.widget = {
+    ...(config.widgets.widget || {}),
+    color_input: ColorInputWidget,
+    color_contrast: ColorContrastWidget,
+    button_icon: ButtonIconWidget,
+  };
+
   configureSettings(config);
+  configureContactForm(config);
+  configureSearch(config);
   configureTextBlock(config);
   configureMapsBlock(config);
   configureAccordionBlock(config);
@@ -17,9 +37,15 @@ const applyConfig = (config) => {
   configureListingBlock(config);
   configureBannerBlock(config);
   configureSlateTableBlock(config);
+  configureButtonBlock(config);
+  configureDivisorBlock(config);
+  configureSectionBlock(config);
+  configureGlobalRegionBlocks(config);
+  configureColorPalette(config);
 
   config.blocks.requiredBlocks = [];
 
+  configureTitleBlock(config);
   return config;
 };
 
