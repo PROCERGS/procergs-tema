@@ -124,6 +124,19 @@ const configureGlobalRegionBlocks = (config) => {
     },
   };
 
+  [
+    STATE_BAR_BLOCK_TYPE,
+    ACCESSIBILITY_BAR_BLOCK_TYPE,
+    HEADER_BLOCK_TYPE,
+    BREADCRUMBS_BLOCK_TYPE,
+    FOOTER_BLOCK_TYPE,
+  ].forEach((type) => {
+    regionBlocksConfig[type] = {
+      ...regionBlocksConfig[type],
+      unique: true,
+    };
+  });
+
   configureGlobalRegions(config, {
     activeRegion: 'header',
     fieldName: 'global_regions',

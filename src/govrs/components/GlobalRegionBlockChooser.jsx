@@ -11,7 +11,8 @@ const GlobalRegionBlockChooser = ({
   onMutateBlock,
   selected,
 }) =>
-  selected && config.experimental.addBlockButton.enabled ? null : (
+  (Array.isArray(allowedBlocks) && allowedBlocks.length === 0) ||
+  (selected && config.experimental.addBlockButton.enabled) ? null : (
     <BlockChooserButton
       block={block}
       data={data}

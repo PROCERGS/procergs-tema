@@ -29,6 +29,7 @@ import { createPortal } from 'react-dom';
 
 import Order from './Order/Order';
 import { isMoveAllowed } from './moveValidation';
+import getAvailableRegionBlocks from '../../../../../../helpers/getAvailableRegionBlocks';
 
 const BlocksForm = (props) => {
   const {
@@ -69,6 +70,13 @@ const BlocksForm = (props) => {
   }, []);
 
   const blockList = getBlocks(properties);
+  const availableBlocks = getAvailableRegionBlocks(
+    allowedBlocks,
+    properties,
+    blocksConfig,
+  );
+  const canAddBlocks =
+    !Array.isArray(availableBlocks) || availableBlocks.length > 0;
 
   const dispatch = useDispatch();
   const intl = useIntl();
@@ -299,7 +307,7 @@ const BlocksForm = (props) => {
             {(dragProps) => {
               const { child, childId, index } = dragProps;
               const blockProps = {
-                allowedBlocks,
+                allowedBlocks: availableBlocks,
                 showRestricted,
                 block: childId,
                 data: child,
@@ -330,7 +338,7 @@ const BlocksForm = (props) => {
                 multiSelected: multiSelected?.includes(childId),
                 type: child['@type'],
                 editable,
-                showBlockChooser: selectedBlock === childId,
+                showBlockChooser: canAddBlocks && selectedBlock === childId,
                 detached: isContainer,
                 isContainer,
                 // Properties to pass to the BlocksForm to match the View ones
