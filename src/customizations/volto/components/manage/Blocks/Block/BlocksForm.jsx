@@ -258,7 +258,7 @@ const BlocksForm = (props) => {
         createPortal(
           <div>
             <Order
-              items={getBlocksHierarchy(properties)}
+              items={getBlocksHierarchy(properties, blocksConfig)}
               onMoveBlock={onMoveBlockEnhanced}
               onDeleteBlock={onDeleteBlock}
               onSelectBlock={onSelectBlock}
