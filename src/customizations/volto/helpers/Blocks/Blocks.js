@@ -44,7 +44,7 @@ export function deleteBlock(...args) {
 export function getBlocksHierarchy(formData, blocksConfig) {
   const items = originalGetBlocksHierarchy(formData);
   return blocksConfig
-    ? items.filter(
+    ? items?.filter(
         ({ data }) =>
           !blocksConfig[data?.['@type']]?.isPlaceholder || blockHasValue(data),
       )

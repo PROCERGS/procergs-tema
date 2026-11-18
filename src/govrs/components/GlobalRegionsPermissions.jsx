@@ -37,6 +37,7 @@ export function GlobalRegionsPermissionBoundary({
   token,
   userId,
   canEditContent,
+  pathname,
 }) {
   const globalRegions = useGlobalRegions();
   const sessionUser = token ? userId : null;
@@ -51,7 +52,7 @@ export function GlobalRegionsPermissionBoundary({
       .catch(() => {});
   }, [sessionUser]);
 
-  const canEdit = Boolean(token && canEditContent);
+  const canEdit = Boolean(token && canEditContent && pathname === '/');
   const preserveEditing = canEdit;
 
   if (!preserveEditing || !editingRegion) {
