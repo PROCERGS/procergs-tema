@@ -1,4 +1,4 @@
-## 1.0.0-alpha.0 (unreleased)
+## 1.0.0 (2026-11-12)
 - tema PROCERGS para projetos Volto.
 - Componentes de cabeçalho e rodapé orientados ao GOV.RS.
 - Blocos personalizados do Volto para acordeão, banner, carrossel, listagem,
