@@ -3,6 +3,7 @@ import stateBarSVG from '@plone/volto/icons/row-before.svg';
 import accessibilitySVG from '@plone/volto/icons/accessibility.svg';
 import BlockSettingsSchema from '@plone/volto/components/manage/Blocks/Block/Schema';
 import { configureGlobalRegions } from 'volto-global-regions';
+import GlobalRegionBlockChooser from '../govrs/components/GlobalRegionBlockChooser';
 import { ProcergsGlobalHeaderBlock } from '../govrs/components/Header/Header';
 import HeaderBlockEdit from '../govrs/blocks/globalHeader/Edit';
 import HeaderBlockSchema from '../govrs/blocks/globalHeader/schema';
@@ -114,6 +115,28 @@ const configureGlobalRegionBlocks = (config) => {
     blockHasValue: () => true,
   };
 
+  const regionBlocksConfig = {
+    ...config.blocks.blocksConfig,
+    [config.settings.defaultBlockType]: {
+      ...config.blocks.blocksConfig[config.settings.defaultBlockType],
+      edit: GlobalRegionBlockChooser,
+      isPlaceholder: true,
+    },
+  };
+
+  [
+    STATE_BAR_BLOCK_TYPE,
+    ACCESSIBILITY_BAR_BLOCK_TYPE,
+    HEADER_BLOCK_TYPE,
+    BREADCRUMBS_BLOCK_TYPE,
+    FOOTER_BLOCK_TYPE,
+  ].forEach((type) => {
+    regionBlocksConfig[type] = {
+      ...regionBlocksConfig[type],
+      unique: true,
+    };
+  });
+
   configureGlobalRegions(config, {
     activeRegion: 'header',
     fieldName: 'global_regions',
@@ -122,6 +145,7 @@ const configureGlobalRegionBlocks = (config) => {
     regions: {
       header: {
         title: 'Cabeçalho global',
+        blocksConfig: regionBlocksConfig,
         allowedBlocks: [
           STATE_BAR_BLOCK_TYPE,
           ACCESSIBILITY_BAR_BLOCK_TYPE,
@@ -133,6 +157,7 @@ const configureGlobalRegionBlocks = (config) => {
       },
       footer: {
         title: 'Rodapé global',
+        blocksConfig: regionBlocksConfig,
         allowedBlocks: [FOOTER_BLOCK_TYPE],
         maxLength: 1,
         createDefault: createDefaultFooterRegion,

@@ -116,6 +116,7 @@ export class App extends Component {
           token={this.props.token}
           userId={this.props.userId}
           canEditContent={this.props.canEditContent}
+          pathname={this.props.pathname}
         >
           <Helmet>
             {language && <html lang={language} />}
