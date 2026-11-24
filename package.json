@@ -25,7 +25,7 @@
     "i18n": "rm -rf build/messages && BABEL_ENV=i18n NODE_ENV=production i18n --addon"
   },
   "dependencies": {
-    "@procergs/react-govrs-ds": "^0.3.51",
+    "@procergs/react-govrs-ds": "^0.3.52",
     "slate-history": "0.100.0",
     "volto-global-regions": "0.1.2"
   },
