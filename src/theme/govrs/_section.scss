@@ -980,3 +980,17 @@ body.public-ui:not(.cms-ui)
     width: min(100%, var(--procergs-section-content-width));
   }
 }
+
+// Largura máxima de 760px para páginas internas em telas >= 1200px.
+// body.siteroot isola a capa; body.public-ui preserva o modo de edição.
+@media (min-width: 75rem) {
+  body.public-ui:not(.cms-ui):not(.siteroot) {
+    .content-area .ui.container {
+      max-width: 47.5rem !important;
+    }
+
+    .govrs-section-block__content {
+      width: min(100%, 47.5rem);
+    }
+  }
+}
