@@ -1,4 +1,5 @@
 import messages from './messages';
+import { isSecretariatEnabled } from './settings';
 
 const AccessibilityBarBlockSchema = ({ intl, data = {} }) => {
   const schema = {

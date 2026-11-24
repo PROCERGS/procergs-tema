@@ -973,6 +973,10 @@ msgstr "Variação 4"
 msgid "Vertical spacing"
 msgstr "Espaçamento vertical"
 
+#: govrs/blocks/section/messages
+msgid "Spacing between blocks"
+msgstr "Espaçamento entre blocos"
+
 #. Default: "When enabled, each slide links to its corresponding page or news item"
 #: govrs/blocks/carousel/messages
 msgid "When enabled, each slide links to its corresponding page or news item"
