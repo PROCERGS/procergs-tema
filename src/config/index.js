@@ -15,6 +15,7 @@ import configureTeaserBlock from './blocks/teaser';
 import configureGlobalRegionBlocks from './globalRegions';
 import configureColorPalette from './colorPalette';
 import configureContactForm from './contactForm';
+import configureSearch from './search';
 import ColorInputWidget from '../govrs/widgets/ColorInputWidget';
 import ColorContrastWidget from '../govrs/widgets/ColorContrastWidget';
 import ButtonIconWidget from '../govrs/widgets/ButtonIconWidget';
@@ -29,6 +30,7 @@ const applyConfig = (config) => {
 
   configureSettings(config);
   configureContactForm(config);
+  configureSearch(config);
   configureTextBlock(config);
   configureMapsBlock(config);
   configureAccordionBlock(config);

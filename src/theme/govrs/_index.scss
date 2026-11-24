@@ -21,7 +21,7 @@ body {
 }
 
 .govrs-header-wrapper[data-menu-open='true'] .govrs-menu-hamburger__content {
-  z-index: var(--govrs-z-index-navigation, 50) !important;
+  z-index: var(--govrs-layer-navigation, 50) !important;
 }
 
 body.cms-ui .govrs-header-wrapper .govrs-menu-hamburger__content,
@@ -58,6 +58,7 @@ body:not(.cms-ui).has-toolbar-collapsed
 @import './typography-text';
 @import './news';
 @import './map';
+@import './consentimento';
 @import './search';
 @import './accordion';
 @import './carousel';
@@ -69,6 +70,7 @@ body:not(.cms-ui).has-toolbar-collapsed
 @import './button';
 @import './divisor';
 @import './table';
+@import './tags';
 @import './section';
 @import './native-blocks';
 @import './grid-dividers';

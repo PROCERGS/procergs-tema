@@ -1,23 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { defineMessages, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
+import messages from './messages';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import AccessibilityBarBlockSchema from './schema';
 import { updateAccessibilityField } from './secretariat';
 import { ProcergsGlobalAccessibilityBarBlock } from '../../components/Header/AccessibilityBar';
-
-const messages = defineMessages({
-  accessibilityBar: {
-    id: 'GovRS accessibility bar',
-    defaultMessage: 'Barra de Acessibilidade',
-  },
-  description: {
-    id: 'GovRS accessibility bar description',
-    defaultMessage:
-      'Barra exclusiva da região global do Header, com atalhos e controles de acessibilidade.',
-  },
-});
 
 const AccessibilityBarBlockEdit = (props) => {
   const {
@@ -39,7 +28,7 @@ const AccessibilityBarBlockEdit = (props) => {
         <BlockDataForm
           schema={schema}
           title={intl.formatMessage(messages.accessibilityBar)}
-          description={intl.formatMessage(messages.description)}
+          description={intl.formatMessage(messages.editorDescription)}
           onChangeField={(id, value, itemInfo) => {
             onChangeBlock(
               block,

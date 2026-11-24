@@ -32,7 +32,7 @@
   }
 
   .govrs-list-default--horizontal {
-    gap: calc(var(--govrs-space-3-75) * 6 / var(--govrs-list-default-cols, 3));
+    gap: calc(var(--govrs-space-scale-3-75) * 6 / var(--govrs-list-default-cols, 3));
   }
 
   .govrs-listing-block--default .govrs-list__base--horizontal {
@@ -78,7 +78,7 @@
 
   .govrs-list-default__title .govrs-list-default__tags {
     display: block;
-    margin: 0 0 var(--govrs-space-2, 0.5rem);
+    margin: 0 0 var(--govrs-space-scale-2, 0.5rem);
     padding: 0;
     color: var(--govrs-color-neutral-text-subtle);
     font-size: var(--govrs-font-size-body-md, 1rem);
@@ -95,13 +95,13 @@
   }
 
   .govrs-list-default__text {
-    margin-top: var(--govrs-space-4);
+    margin-top: var(--govrs-space-scale-4);
     color: var(--govrs-color-text-primary, #04290f);
   }
 
   .govrs-list-default__tags {
-    margin: 0 0 var(--govrs-space-4);
-    padding-top: var(--govrs-space-4);
+    margin: 0 0 var(--govrs-space-scale-4);
+    padding-top: var(--govrs-space-scale-4);
     color: var(--govrs-color-neutral-text-subtle);
     font-family: var(--govrs-font-family-base);
     line-height: var(--govrs-line-height-body-sm, 1.5rem);
@@ -117,7 +117,7 @@
   .govrs-listing-block__list--show-tags
     .govrs-list__base--horizontal
     .govrs-list-default__inner--with-image {
-    gap: var(--govrs-space-3);
+    gap: var(--govrs-space-scale-3);
   }
 
   .govrs-listing-block__list--show-tags
@@ -131,8 +131,8 @@
     )::before {
     content: '\00a0';
     display: block;
-    margin: 0 0 var(--govrs-space-4);
-    padding-top: var(--govrs-space-4);
+    margin: 0 0 var(--govrs-space-scale-4);
+    padding-top: var(--govrs-space-scale-4);
     font-family: var(--govrs-font-family-base);
     font-size: var(--govrs-font-size-body-md, 1rem);
     line-height: var(--govrs-line-height-body-sm, 1.5rem);
@@ -150,7 +150,7 @@
       content: '\00a0';
       grid-column: 2;
       grid-row: 1;
-      margin-bottom: var(--govrs-space-2, 0.5rem);
+      margin-bottom: var(--govrs-space-scale-2, 0.5rem);
       font-family: var(--govrs-font-family-base);
       font-size: var(--govrs-font-size-body-md, 1rem);
       line-height: var(--govrs-line-height-body-sm, 1.5rem);
@@ -182,7 +182,7 @@
   }
 
   .govrs-list-default__inner--media-left .govrs-list-default__tags {
-    margin-bottom: var(--govrs-space-2, 0.5rem);
+    margin-bottom: var(--govrs-space-scale-2, 0.5rem);
     padding-top: 0;
   }
 
@@ -196,7 +196,7 @@
     .govrs-list-default__inner:not(.govrs-list-default__inner--media-left) {
     display: grid;
     align-items: start;
-    column-gap: var(--govrs-space-4, 1rem);
+    column-gap: var(--govrs-space-scale-4, 1rem);
     grid-template-columns: auto minmax(0, 1fr);
 
     .govrs-list-default__media {
@@ -217,7 +217,7 @@
     }
 
     .govrs-list-default__tags {
-      margin-bottom: var(--govrs-space-2, 0.5rem);
+      margin-bottom: var(--govrs-space-scale-2, 0.5rem);
       padding-top: 0;
     }
   }
@@ -322,17 +322,17 @@
   }
 
   .govrs-listing-block__headline {
-    margin: 0 0 var(--govrs-space-4, 1rem);
+    margin: 0 0 var(--govrs-space-scale-4, 1rem);
   }
 
   .govrs-listing-block__pagination {
-    margin-top: var(--govrs-space-6, 1.5rem);
+    margin-top: var(--govrs-space-scale-6, 1.5rem);
   }
 
   .govrs-listing-block__empty {
     position: relative;
     min-height: 4rem;
-    padding: var(--govrs-space-4, 1rem);
+    padding: var(--govrs-space-scale-4, 1rem);
     color: var(--govrs-color-text-muted, #555555);
     font-family: var(--govrs-font-family-base);
     font-size: var(--govrs-font-size-body-md, 1rem);
@@ -353,7 +353,7 @@
     }
 
     .listing-item h3 {
-      margin-top: var(--govrs-space-4, 1rem);
+      margin-top: var(--govrs-space-scale-4, 1rem);
     }
   }
 
@@ -374,11 +374,11 @@
   .govrs-listing-block--grid-columns-4 {
     .govrs-pagination {
       padding-inline: 0;
-      gap: var(--govrs-space-1, 0.25rem);
+      gap: var(--govrs-space-scale-1, 0.25rem);
     }
 
     .govrs-pagination__pages {
-      gap: var(--govrs-space-1, 0.25rem);
+      gap: var(--govrs-space-scale-1, 0.25rem);
     }
 
     .govrs-pagination__page:not(.govrs-pagination__page--active),
@@ -445,7 +445,7 @@
     }
 
     .listing-item h3 {
-      margin-top: var(--govrs-space-4, 1rem);
+      margin-top: var(--govrs-space-scale-4, 1rem);
     }
   }
 
@@ -467,7 +467,7 @@
   }
 
   .govrs-pagination__pages {
-    gap: var(--govrs-space-1, 0.25rem);
+    gap: var(--govrs-space-scale-1, 0.25rem);
   }
 
   .govrs-pagination__page:not(.govrs-pagination__page--active),

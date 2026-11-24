@@ -1,3 +1,4 @@
+import Consentimento from '../govrs/components/Consentimento/Consentimento';
 import LogoutAlert from '../govrs/components/Alerts/LogoutAlert';
 
 const configureSettings = (config) => {
@@ -37,6 +38,18 @@ const configureSettings = (config) => {
     license: '',
     children: null,
   };
+
+  config.settings.procergsConsentimento = {
+    privacyPolicyUrl: '/politica-de-privacidade',
+    siglaSistema: 'PLONE',
+    siglaSite: 'www',
+    versao: 1,
+  };
+
+  config.settings.appExtras = [
+    ...(config.settings.appExtras || []),
+    { match: '', component: Consentimento },
+  ];
 
   config.settings.procergsSection = {
     maxLength: 50,

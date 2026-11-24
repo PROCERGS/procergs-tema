@@ -15,10 +15,10 @@ describe('site theme colors', () => {
     const variables = getSiteThemeVariables({ primaryColor: '#123456' });
 
     expect(variables['--govrs-color-brand-primary']).toBe('#123456');
-    expect(variables['--govrs-color-success']).toBeUndefined();
-    expect(variables['--govrs-color-warning']).toBeUndefined();
+    expect(variables['--govrs-color-status-success-default']).toBeUndefined();
+    expect(variables['--govrs-color-status-warning-default']).toBeUndefined();
     expect(variables['--govrs-color-danger']).toBeUndefined();
-    expect(variables['--govrs-color-error']).toBeUndefined();
+    expect(variables['--govrs-color-status-error-default']).toBeUndefined();
   });
 
   it('does not apply the custom palette in high contrast mode', () => {

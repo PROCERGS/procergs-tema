@@ -1,28 +1,4 @@
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  stateBar: {
-    id: 'GovRS state bar',
-    defaultMessage: 'Barra do Estado',
-  },
-  default: {
-    id: 'Default',
-    defaultMessage: 'Default',
-  },
-  behavior: {
-    id: 'Behavior',
-    defaultMessage: 'Comportamento',
-  },
-  description: {
-    id: 'GovRS state bar description',
-    defaultMessage:
-      'Barra Standalone oficial do Governo do Estado do Rio Grande do Sul.',
-  },
-  allowOverlay: {
-    id: 'Allow group overlay',
-    defaultMessage: 'Permitir overlay do bloco Grupo',
-  },
-});
+import messages from './messages';
 
 const StateBarBlockSchema = ({ intl }) => ({
   title: intl.formatMessage(messages.stateBar),

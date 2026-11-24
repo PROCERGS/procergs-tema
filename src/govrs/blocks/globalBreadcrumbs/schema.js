@@ -1,40 +1,4 @@
-import { defineMessages } from 'react-intl';
-
-const messages = defineMessages({
-  breadcrumbs: {
-    id: 'GovRS breadcrumbs',
-    defaultMessage: 'Breadcrumbs GovRS',
-  },
-  default: {
-    id: 'Default',
-    defaultMessage: 'Configuração',
-  },
-  showHome: {
-    id: 'Show breadcrumbs home',
-    defaultMessage: 'Exibir página inicial',
-  },
-  homeLabel: {
-    id: 'Breadcrumbs home label',
-    defaultMessage: 'Rótulo acessível da página inicial',
-  },
-  ariaLabel: {
-    id: 'Breadcrumbs aria label',
-    defaultMessage: 'Rótulo acessível da navegação',
-  },
-  behavior: {
-    id: 'Behavior',
-    defaultMessage: 'Comportamento',
-  },
-  allowOverlay: {
-    id: 'Allow group overlay',
-    defaultMessage: 'Permitir overlay do bloco Grupo',
-  },
-  description: {
-    id: 'GovRS breadcrumbs description',
-    defaultMessage:
-      'Os itens são preenchidos automaticamente a partir da navegação estrutural da página atual.',
-  },
-});
+import messages from './messages';
 
 const BreadcrumbsBlockSchema = ({ intl }) => ({
   title: intl.formatMessage(messages.breadcrumbs),

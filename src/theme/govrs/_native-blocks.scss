@@ -131,7 +131,7 @@ body:is(.public-ui, .cms-ui) {
 
         &:focus-visible {
           outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
-          outline-offset: var(--govrs-space-1);
+          outline-offset: var(--govrs-space-scale-1);
         }
       }
 
@@ -211,7 +211,7 @@ body:is(.public-ui, .cms-ui) {
 
       &:focus-visible {
         outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
-        outline-offset: var(--govrs-space-1);
+        outline-offset: var(--govrs-space-scale-1);
       }
     }
   }
@@ -314,7 +314,7 @@ body:is(.public-ui, .cms-ui) {
 
     :is(button, input, [tabindex]):focus-visible {
       outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
-      outline-offset: var(--govrs-space-1);
+      outline-offset: var(--govrs-space-scale-1);
     }
 
     .ui.checkbox {
@@ -338,7 +338,7 @@ body:is(.public-ui, .cms-ui) {
 
       input:focus-visible ~ label::before {
         outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
-        outline-offset: var(--govrs-space-1);
+        outline-offset: var(--govrs-space-scale-1);
       }
 
       &.radio input:checked ~ label::after {
@@ -393,7 +393,7 @@ body:is(.public-ui, .cms-ui) {
 
       .react-select__control--is-focused {
         outline: var(--govrs-border-width-md) solid var(--govrs-color-focus);
-        outline-offset: var(--govrs-space-1);
+        outline-offset: var(--govrs-space-scale-1);
       }
     }
 
@@ -567,14 +567,14 @@ body:is(.public-ui, .cms-ui) {
     }
 
     &.warning {
-      background-color: var(--govrs-color-warning-surface);
-      color: var(--govrs-color-warning);
+      background-color: var(--govrs-color-status-warning-surface);
+      color: var(--govrs-color-status-warning-default);
     }
 
     &.error,
     &.negative {
-      background-color: var(--govrs-color-error-surface);
-      color: var(--govrs-color-error);
+      background-color: var(--govrs-color-status-error-surface);
+      color: var(--govrs-color-status-error-default);
     }
   }
 }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { Carousel } from '@procergs/react-govrs-ds';
 import { normalizeSlides } from './normalizeSlides';
+import messages from './messages';
 
 const CarouselBlockBody = ({ data, items = [], loaded = true }) => {
   const slides = normalizeSlides(items, {
@@ -13,10 +14,7 @@ const CarouselBlockBody = ({ data, items = [], loaded = true }) => {
   if (!hasTarget) {
     return (
       <div className="govrs-carousel-block__empty">
-        <FormattedMessage
-          id="Choose a target folder for the carousel"
-          defaultMessage="Choose a target folder for the carousel"
-        />
+        <FormattedMessage {...messages.empty} />
       </div>
     );
   }
@@ -24,10 +22,7 @@ const CarouselBlockBody = ({ data, items = [], loaded = true }) => {
   if (!loaded) {
     return (
       <div className="govrs-carousel-block__empty">
-        <FormattedMessage
-          id="Loading carousel items"
-          defaultMessage="Loading carousel items"
-        />
+        <FormattedMessage {...messages.loading} />
       </div>
     );
   }

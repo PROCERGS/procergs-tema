@@ -1,155 +1,6 @@
-import { defineMessages } from 'react-intl';
+import messages from './messages';
 import { getAppearanceFields } from './getAppearanceFields';
 import { getGridColumnCount, getGridListingMaxPerRow } from './gridRules';
-
-const messages = defineMessages({
-  listing: {
-    id: 'Listing',
-    defaultMessage: 'Listing',
-  },
-  content: {
-    id: 'Content',
-    defaultMessage: 'Content',
-  },
-  appearance: {
-    id: 'Appearance',
-    defaultMessage: 'Appearance',
-  },
-  query: {
-    id: 'Query',
-    defaultMessage: 'Query',
-  },
-  headline: {
-    id: 'Headline',
-    defaultMessage: 'Headline',
-  },
-  headlineTag: {
-    id: 'Headline level',
-    defaultMessage: 'Headline level',
-  },
-  horizontal: {
-    id: 'Horizontal layout',
-    defaultMessage: 'Horizontal layout',
-  },
-  labeled: {
-    id: 'Group items by label',
-    defaultMessage: 'Agrupar itens',
-  },
-  collapsible: {
-    id: 'Collapsible groups',
-    defaultMessage: 'Grupos recolhíveis',
-  },
-  mediaPreset: {
-    id: 'Item media',
-    defaultMessage: 'Mídia dos itens',
-  },
-  mediaPresetMixed: {
-    id: 'Automatic image or icon',
-    defaultMessage: 'Automático (imagem, senão ícone; senão nada)',
-  },
-  mediaPresetImages: {
-    id: 'Images only',
-    defaultMessage: 'Somente imagens',
-  },
-  mediaPresetIcons: {
-    id: 'Icons only',
-    defaultMessage: 'Somente ícones',
-  },
-  mediaPresetNone: {
-    id: 'No media',
-    defaultMessage: 'Sem mídia',
-  },
-  mediaPosition: {
-    id: 'Media position',
-    defaultMessage: 'Posição da imagem',
-  },
-  mediaPositionAbove: {
-    id: 'Media above text',
-    defaultMessage: 'Acima do texto',
-  },
-  mediaPositionLeft: {
-    id: 'Media to the left of text',
-    defaultMessage: 'À esquerda do texto',
-  },
-  mediaPositionDescription: {
-    id: 'Media position description',
-    defaultMessage: 'Só vale na lista vertical.',
-  },
-  mediaPositionGridDescription: {
-    id: 'Media position in Grid description',
-    defaultMessage: 'Em Grid com 3 ou 4 colunas, a imagem fica acima do texto.',
-  },
-  groupBy: {
-    id: 'Group by',
-    defaultMessage: 'Agrupar por',
-  },
-  groupBySubject: {
-    id: 'Group by tags',
-    defaultMessage: 'Tags',
-  },
-  groupByPortalType: {
-    id: 'Group by content type',
-    defaultMessage: 'Tipo de conteúdo',
-  },
-  numbered: {
-    id: 'Numbered list',
-    defaultMessage: 'Numbered list',
-  },
-  invert: {
-    id: 'Invert meta and title',
-    defaultMessage: 'Invert meta and title',
-  },
-  perRow: {
-    id: 'Cards per row',
-    defaultMessage: 'Cards per row',
-  },
-  itemsPerRow: {
-    id: 'Items per row',
-    defaultMessage: 'Itens por linha',
-  },
-  perRowGridDescription: {
-    id: 'Items per row in Grid description',
-    defaultMessage:
-      'O máximo é ajustado automaticamente à largura disponível no Grid.',
-  },
-  cardVariant: {
-    id: 'Card style',
-    defaultMessage: 'Card style',
-  },
-  cardSize: {
-    id: 'Card size',
-    defaultMessage: 'Card size',
-  },
-  showCardAction: {
-    id: 'Show card action link',
-    defaultMessage: 'Show card action link',
-  },
-  showTags: {
-    id: 'Show tags',
-    defaultMessage: 'Exibir tags',
-  },
-  tagsLimit: {
-    id: 'Number of tags',
-    defaultMessage: 'Quantidade de tags',
-  },
-  cardOverflow: {
-    id: 'Card overflow',
-    defaultMessage: 'Quando os cards não cabem',
-  },
-  cardOverflowWrap: {
-    id: 'Wrap to next row',
-    defaultMessage: 'Quebrar linha',
-  },
-  cardOverflowGridDescription: {
-    id: 'Card overflow in Grid description',
-    defaultMessage:
-      'Dentro de Grid, os cards sempre quebram para a linha seguinte.',
-  },
-  cardOverflowScroll: {
-    id: 'Horizontal scroll',
-    defaultMessage: 'Rolagem horizontal',
-  },
-});
 
 const DEFAULT_HEADLINE_LEVELS = [
   ['h2', 'h2'],
@@ -303,18 +154,18 @@ export const ListingBlockSchema = ({
       cardVariant: {
         title: intl.formatMessage(messages.cardVariant),
         choices: [
-          ['post', 'Post'],
-          ['list', 'List'],
-          ['news', 'News'],
-          ['icon', 'Icon'],
+          ['post', intl.formatMessage(messages.post)],
+          ['list', intl.formatMessage(messages.list)],
+          ['news', intl.formatMessage(messages.news)],
+          ['icon', intl.formatMessage(messages.icon)],
         ],
         default: 'news',
       },
       cardSize: {
         title: intl.formatMessage(messages.cardSize),
         choices: [
-          ['small', 'Small'],
-          ['large', 'Large'],
+          ['small', intl.formatMessage(messages.small)],
+          ['large', intl.formatMessage(messages.large)],
         ],
         default: 'small',
       },

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { compose } from 'redux';
-import { defineMessages, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import isEqual from 'lodash/isEqual';
 import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
@@ -10,6 +10,7 @@ import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import { getBaseUrl } from '@plone/volto/helpers/Url/Url';
 import config from '@plone/volto/registry';
 import ListingBlockSchema from './schema';
+import messages from './messages';
 import ListingBlockBody from './ListingBlockBody';
 import {
   getListingVariation,
@@ -19,21 +20,6 @@ import { useGridColumns } from '../grid/GridContext';
 import { getGridListingVariations, normalizeListingForGrid } from './gridRules';
 import { normalizeFileCriteria } from './fileCriteria';
 import { updateFileTitleOverride } from './fileTitles';
-
-const messages = defineMessages({
-  listing: {
-    id: 'Listing',
-    defaultMessage: 'Listing',
-  },
-  results: {
-    id: 'Results preview',
-    defaultMessage: 'Results preview',
-  },
-  items: {
-    id: 'Contained items',
-    defaultMessage: 'Contained items',
-  },
-});
 
 const Edit = React.memo(
   function ListingBlockEdit(props) {

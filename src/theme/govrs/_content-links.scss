@@ -14,7 +14,7 @@
 
   &:focus-visible {
     outline: var(--govrs-border-width-md, 2px) solid $procergs-focus;
-    outline-offset: calc(var(--govrs-space-1, 0.25rem) / 2);
+    outline-offset: calc(var(--govrs-space-scale-1, 0.25rem) / 2);
   }
 }
 

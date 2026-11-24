@@ -2,20 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { compose } from 'redux';
-import { defineMessages, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { withBlockExtensions } from '@plone/volto/helpers/Extensions';
 import SidebarPortal from '@plone/volto/components/manage/Sidebar/SidebarPortal';
 import { BlockDataForm } from '@plone/volto/components/manage/Form';
 import ButtonBlockSchema from './schema';
+import messages from './messages';
 import ButtonBlockBody from './ButtonBlockBody';
 import { normalizeButton } from './normalizeButton';
-
-const messages = defineMessages({
-  button: {
-    id: 'Procergs Button Block',
-    defaultMessage: 'Botão',
-  },
-});
 
 const Edit = (props) => {
   const {

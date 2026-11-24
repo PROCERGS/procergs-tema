@@ -1,19 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { Accordion } from '@procergs/react-govrs-ds';
 import { normalizeItems } from './normalizeItems';
+import messages from './messages';
 
 const AccordionBlockBody = ({ data }) => {
+  const intl = useIntl();
   const items = normalizeItems(data.items);
 
   if (!items.length) {
     return (
       <div className="govrs-accordion-block__empty">
-        <FormattedMessage
-          id="No accordion panels configured"
-          defaultMessage="No accordion panels configured"
-        />
+        <FormattedMessage {...messages.empty} />
       </div>
     );
   }
@@ -28,12 +27,20 @@ const AccordionBlockBody = ({ data }) => {
       collapsed={data.collapsed !== false}
       nonExclusive={data.nonExclusive !== false}
       filtering={Boolean(data.filtering)}
-      filterPlaceholder={data.filterPlaceholder || 'Digite para filtrar...'}
-      filterLabel={data.filterLabel || 'Filtrar painéis do accordion'}
-      clearFilterLabel={data.clearFilterLabel || 'Limpar filtro'}
+      filterPlaceholder={
+        data.filterPlaceholder ||
+        intl.formatMessage(messages.filterPlaceholderDefault)
+      }
+      filterLabel={
+        data.filterLabel || intl.formatMessage(messages.filterLabelDefault)
+      }
+      clearFilterLabel={
+        data.clearFilterLabel ||
+        intl.formatMessage(messages.clearFilterLabelDefault)
+      }
       noResultsMessage={
         data.noResultsMessage ||
-        'Nenhum painel corresponde ao filtro informado.'
+        intl.formatMessage(messages.noResultsMessageDefault)
       }
       className="govrs-accordion-block__accordion"
     />

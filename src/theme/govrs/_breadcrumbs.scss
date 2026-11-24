@@ -10,14 +10,14 @@
   width: 100%;
   box-sizing: border-box;
   margin-inline: auto;
-  padding-block: var(--govrs-space-3, 0.75rem);
+  padding-block: var(--govrs-space-scale-3, 0.75rem);
   padding-inline: var(
     --govrs-header-padding-inline,
-    var(--govrs-space-2-5, 0.625rem)
+    var(--govrs-space-scale-2-5, 0.625rem)
   );
 
   @media (min-width: 90rem) {
-    max-width: var(--govrs-layout-container-header-max-width, 90rem);
+    max-width: var(--govrs-layout-container-header, 90rem);
   }
 }
 
