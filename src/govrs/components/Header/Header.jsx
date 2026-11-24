@@ -17,6 +17,7 @@ import {
 import resolveBranding from '../../../helpers/resolveBranding';
 import toHexColor from '../../helpers/toHexColor';
 import { createDefaultHeaderRegion } from '../../../config/globalRegionDefaults';
+import SecretariatHeader, { getSecretariatMenuItems } from './SecretariatHeader';
 
 const DEFAULT_LOGO_BACKGROUND = '#ffffff';
 const DEFAULT_MENU_BACKGROUND = '#172b36';
@@ -241,6 +242,7 @@ export const LegacyGovrsHeader = ({
   showLogo = true,
   showTitle = true,
   variation = 'default',
+  subtitle,
   logoBackgroundColor,
   logoBackgroundOpacity,
   menuBackgroundColor,
@@ -251,6 +253,7 @@ export const LegacyGovrsHeader = ({
   const headerRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchActive, setSearchActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const intl = useIntl();
@@ -274,6 +277,21 @@ export const LegacyGovrsHeader = ({
   const logo = logoSrc ? (
     <img src={logoSrc} alt="" className="procergs-header-logo" />
   ) : null;
+
+  useEffect(() => {
+    if (variation !== 'secretariat') return;
+
+    const mediaQuery = window.matchMedia('(max-width: 61.9375rem)');
+    const updateMobile = () => {
+      setIsMobile(mediaQuery.matches);
+      setMenuOpen(false);
+      setSearchActive(false);
+    };
+
+    updateMobile();
+    mediaQuery.addEventListener('change', updateMobile);
+    return () => mediaQuery.removeEventListener('change', updateMobile);
+  }, [variation]);
 
   useEffect(() => {
     const { settings } = config;
@@ -307,7 +325,7 @@ export const LegacyGovrsHeader = ({
       const headerWrapper =
         headerElement?.closest('.global-blocks-region-header') || headerElement;
       const govrsHeader = headerElement?.querySelector(
-        '.govrs-header-wrapper, .procergs-header-v2',
+        '.govrs-header-wrapper, .procergs-header-v2, .procergs-secretariat-header',
       );
       const stateBar = headerWrapper?.querySelector(
         '.procergs-state-bar-wrapper',
@@ -565,6 +583,10 @@ export const LegacyGovrsHeader = ({
   const handleSearch = (term) => {
     history.push(`/busca?SearchableText=${encodeURIComponent(term)}`);
   };
+  const secretariatMenuItems =
+    variation === 'secretariat'
+      ? getSecretariatMenuItems(menuItems, homeHref)
+      : menuItems;
 
   return (
     <header
@@ -582,7 +604,32 @@ export const LegacyGovrsHeader = ({
           : undefined
       }
     >
-      {variation === 'default2' ? (
+      {variation === 'secretariat' && !isMobile ? (
+        <SecretariatHeader
+          logo={logo}
+          logoHref={logoHref}
+          homeHref={homeHref}
+          siteTitle={siteTitle}
+          subtitle={subtitle}
+          showLogo={showLogo}
+          showTitle={showTitle}
+          onSearch={handleSearch}
+        >
+          <nav
+            className="procergs-header-v2__desktop-navigation"
+            aria-label="Navegação principal"
+          >
+            <ul className="procergs-header-v2__menu">
+              {secretariatMenuItems.map((item, index) => (
+                <HeaderVariant2MenuItem
+                  key={item.id || item.href || item.url || index}
+                  item={item}
+                />
+              ))}
+            </ul>
+          </nav>
+        </SecretariatHeader>
+      ) : variation === 'default2' ? (
         <HeaderVariant2
           logo={logo}
           logoHref={logoHref}
@@ -629,7 +676,8 @@ LegacyGovrsHeader.propTypes = {
   allowOverlay: PropTypes.bool,
   showLogo: PropTypes.bool,
   showTitle: PropTypes.bool,
-  variation: PropTypes.oneOf(['default', 'default2']),
+  variation: PropTypes.oneOf(['default', 'default2', 'secretariat']),
+  subtitle: PropTypes.string,
   logoBackgroundColor: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
@@ -660,6 +708,7 @@ export const ProcergsGlobalHeaderBlock = (props) => {
       showLogo={data?.showLogo !== false}
       showTitle={data?.showTitle !== false}
       variation={data?.variation || 'default'}
+      subtitle={data?.subtitle}
       logoBackgroundColor={data?.logoBackgroundColor}
       logoBackgroundOpacity={data?.logoBackgroundOpacity}
       menuBackgroundColor={data?.menuBackgroundColor}
@@ -675,7 +724,8 @@ ProcergsGlobalHeaderBlock.propTypes = {
     allowOverlay: PropTypes.bool,
     showLogo: PropTypes.bool,
     showTitle: PropTypes.bool,
-    variation: PropTypes.oneOf(['default', 'default2']),
+    variation: PropTypes.oneOf(['default', 'default2', 'secretariat']),
+    subtitle: PropTypes.string,
     logoBackgroundColor: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,

@@ -888,6 +888,17 @@ body.cms-ui .block.procergsSection {
     );
   }
 
+  .procergs-header-wrapper.allows-group-overlay > .procergs-secretariat-header {
+    background: transparent;
+    color: var(--procergs-overlay-header-foreground, #ffffff);
+
+    .procergs-secretariat-header__navigation .govrs-menu-hamburger {
+      --govrs-menu-hamburger-toggle-foreground: var(
+        --procergs-header-v2-menu-foreground
+      );
+    }
+  }
+
   .procergs-header-wrapper.allows-group-overlay .govrs-menu-hamburger {
     --govrs-menu-hamburger-toggle-foreground: var(
       --procergs-overlay-header-foreground,
