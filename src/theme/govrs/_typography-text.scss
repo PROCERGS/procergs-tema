@@ -115,19 +115,6 @@ body:is(.public-ui, .cms-ui) {
   margin-block-start: var(--govrs-space-scale-5, 1.25rem);
 }
 
-// Bloco de texto limitado a 760px em páginas internas em telas >= 1200px.
-// body.siteroot isola a capa; body.cms-ui preserva o modo de edição.
-@media (min-width: 75rem) {
-  body.public-ui:not(.cms-ui):not(.siteroot) {
-    .procergs-text-typography {
-      max-width: 47.5rem;
-      margin-block: var(--govrs-space-scale-5, 1.25rem);
-      margin-inline: auto;
-      text-align: justify;
-    }
-  }
-}
-
 @media (max-width: #{$procergs-breakpoint-smartphone-portrait-max}) {
   body:is(.public-ui, .cms-ui) {
     .documentFirstHeading {
