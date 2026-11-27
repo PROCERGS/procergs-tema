@@ -89,7 +89,7 @@ const Consentimento = () => {
         onKeyDown={handleKeyDown}
       >
         <h2 id="consentimento-title" className="consentimento__title">
-          Aviso de privacidade
+          Aviso de Privacidade
         </h2>
 
         {isSettings ? (
@@ -151,17 +151,15 @@ const Consentimento = () => {
           <>
             <div className="consentimento__text">
               <p>
-                Para dar à você a melhor experiência de usuário possível,
-                utilizamos cookies em nosso site. Cookies necessários para o
-                funcionamento do site são configurados automaticamente. Você
-                também pode permitir outros cookies. Você pode{' '}
+                Para oferecer à você a melhor experiência possível,
+                utilizamos cookies em nosso site. Os cookies essenciais para o funcionamento da página são ativados automaticamente, mas você também pode permitir outras categorias. Escolha entre{' '}
                 <strong>aceitar todos os cookies</strong> ou{' '}
-                <strong>ajustar as configurações de privacidade</strong>.
+                <strong>ajustar suas preferências de privacidade</strong>.
               </p>
               <p>
-                Você pode encontrar mais informações sobre os cookies usados e
-                como pode revogar seu consentimento posteriormente em nosso{' '}
-                <a href={privacyUrl}>Políticas de Privacidade</a>.
+                Para mais informações sobre os cookies que usamos e
+                como revogar seu consentimento a qualquer momento, acesse nossa{' '}
+                <a href={privacyUrl}>Política de Privacidade</a>.
               </p>
             </div>
             <div className="consentimento__actions">

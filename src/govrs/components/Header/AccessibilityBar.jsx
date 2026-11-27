@@ -41,6 +41,17 @@ const activateMenuShortcut = () => {
   if (!isPublicPage()) return;
 
   const header = document.querySelector('.procergs-header-wrapper');
+  const desktopLink = header?.querySelector(
+    '.procergs-secretariat-header .procergs-header-v2__desktop-navigation a',
+  );
+  if (
+    desktopLink instanceof HTMLElement &&
+    desktopLink.getClientRects().length
+  ) {
+    header?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    desktopLink.focus();
+    return;
+  }
   const toggle = header?.querySelector('.govrs-menu-hamburger__toggle');
 
   header?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -96,6 +107,9 @@ export const ProcergsGlobalAccessibilityBarBlock = ({ data, metadata }) => {
         },
       ]}
       hrefSitemap="/sitemap"
+      secretariatName={identity?.text}
+      secretariatImageSrc={identity?.imageUrl}
+      secretariatImageAlt={identity?.imageAlt}
     />
   );
 
@@ -114,29 +128,7 @@ export const ProcergsGlobalAccessibilityBarBlock = ({ data, metadata }) => {
           : undefined
       }
     >
-      {identity ? (
-        <div className="acess-bar procergs-secretariat-bar">
-          <div className="acess-wrapper procergs-secretariat-bar__layout">
-            <div className="procergs-secretariat-bar__identity">
-              {identity.imageUrl && (
-                <img
-                  className="procergs-secretariat-bar__image"
-                  src={identity.imageUrl}
-                  alt={identity.imageAlt}
-                />
-              )}
-              {identity.text && (
-                <span className="procergs-secretariat-bar__text">
-                  {identity.text}
-                </span>
-              )}
-            </div>
-            {accessibilityBar}
-          </div>
-        </div>
-      ) : (
-        accessibilityBar
-      )}
+      {accessibilityBar}
     </div>
   );
 };

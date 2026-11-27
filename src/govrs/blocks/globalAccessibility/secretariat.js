@@ -1,7 +1,8 @@
 import { normalizeBanner } from '../banner/normalizeBanner';
+import { isSecretariatEnabled } from './settings';
 
 export const getSecretariatIdentity = (data = {}) => {
-  if (data.isSecretariat !== true) return undefined;
+  if (!isSecretariatEnabled() || data.isSecretariat !== true) return undefined;
 
   const text = (data.secretariatText || '').trim();
   const { imageUrl, imageAlt } = normalizeBanner({

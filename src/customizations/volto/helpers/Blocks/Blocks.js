@@ -3,8 +3,11 @@ import cloneDeep from 'lodash/cloneDeep';
 // Resolved by Volto's customization webpack alias.
 /* eslint-disable import/no-unresolved */
 import {
+  blockHasValue,
+  deleteBlock as originalDeleteBlock,
   findContainer,
   getBlocksFieldname,
+  getBlocksHierarchy as originalGetBlocksHierarchy,
   getBlocksLayoutFieldname,
 } from '@plone/volto-original/helpers/Blocks/Blocks';
 
@@ -31,6 +34,22 @@ const removeFromArray = (items, position) => [
 
 const resolveContainer = (formData, parentId) =>
   parentId ? findContainer(formData, { containerId: parentId }) : formData;
+
+export function deleteBlock(...args) {
+  const result = originalDeleteBlock(...args);
+  // Volto returns addBlock's [id, formData] tuple when deleting the last block.
+  return Array.isArray(result) ? result[1] : result;
+}
+
+export function getBlocksHierarchy(formData, blocksConfig) {
+  const items = originalGetBlocksHierarchy(formData);
+  return blocksConfig
+    ? items?.filter(
+        ({ data }) =>
+          !blocksConfig[data?.['@type']]?.isPlaceholder || blockHasValue(data),
+      )
+    : items;
+}
 
 /**
  * Move a block between arbitrary levels of nested Group/Grid containers.

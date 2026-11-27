@@ -69,6 +69,10 @@ const messages = defineMessages({
     id: 'Vertical spacing',
     defaultMessage: 'Vertical spacing',
   },
+  blockSpacing: {
+    id: 'Spacing between blocks',
+    defaultMessage: 'Spacing between blocks',
+  },
   overlayHeader: {
     id: 'Use background behind header',
     defaultMessage: 'Use background behind header',

@@ -2,6 +2,7 @@ import messages from './messages';
 
 const HeaderBlockSchema = ({ intl, data }) => {
   const isDefault2 = data?.variation === 'default2';
+  const isSecretariat = data?.variation === 'secretariat';
 
   return {
     title: intl.formatMessage(messages.header),
@@ -12,7 +13,12 @@ const HeaderBlockSchema = ({ intl, data }) => {
         title: intl.formatMessage(messages.default),
         fields: isDefault2
           ? ['variation', 'showLogo']
-          : ['variation', 'showLogo', 'showTitle'],
+          : [
+              'variation',
+              'showLogo',
+              'showTitle',
+              ...(isSecretariat ? ['subtitle', 'allowOverlay'] : []),
+            ],
       },
       ...(isDefault2
         ? [
@@ -28,11 +34,15 @@ const HeaderBlockSchema = ({ intl, data }) => {
             },
           ]
         : []),
-      {
-        id: 'behavior',
-        title: intl.formatMessage(messages.behavior),
-        fields: ['allowOverlay'],
-      },
+      ...(!isSecretariat
+        ? [
+            {
+              id: 'behavior',
+              title: intl.formatMessage(messages.behavior),
+              fields: ['allowOverlay'],
+            },
+          ]
+        : []),
     ],
     properties: {
       variation: {
@@ -40,8 +50,14 @@ const HeaderBlockSchema = ({ intl, data }) => {
         choices: [
           ['default', 'Padrão'],
           ['default2', 'Padrão 2'],
+          ['secretariat', 'Secretaria'],
         ],
         default: 'default',
+      },
+      subtitle: {
+        title: 'Órgão ou secretaria vinculada',
+        description: 'Texto opcional exibido acima do nome do site.',
+        type: 'string',
       },
       showLogo: {
         title: intl.formatMessage(messages.showLogo),
@@ -85,8 +101,9 @@ const HeaderBlockSchema = ({ intl, data }) => {
       },
       allowOverlay: {
         title: intl.formatMessage(messages.allowOverlay),
-        description:
-          'Quando habilitado, o fundo do primeiro Grupo da página pode aparecer sob este bloco.',
+        description: isSecretariat
+          ? 'Quando habilitado, o fundo do primeiro Grupo aparece sob a faixa superior. O menu mantém suas próprias cores.'
+          : 'Quando habilitado, o fundo do primeiro Grupo da página pode aparecer sob este bloco.',
         type: 'boolean',
         default: true,
       },

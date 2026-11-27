@@ -204,6 +204,11 @@ export const normalizeSection = (data = {}) => {
       ['compact', 'default', 'spacious'],
       'default',
     ),
+    blockSpacing: choice(
+      data.blockSpacing,
+      ['small', 'medium', 'large'],
+      'small',
+    ),
   };
 };
 

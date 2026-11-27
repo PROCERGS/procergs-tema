@@ -40,7 +40,7 @@ export function mapVoltoNavigationToFooterSections(items = []) {
 export function appendAuthMenuItem(menuItems, token, intl) {
   const authItem = token
     ? {
-        title: intl.formatMessage({ id: 'Log out', defaultMessage: 'Log out' }),
+        title: intl.formatMessage({ id: 'Logout', defaultMessage: 'Log out' }),
         url: '/logout',
         href: '/logout',
       }

@@ -474,6 +474,10 @@ body.cms-ui {
     background: unset;
   }
 
+  .global-blocks-region-footer {
+    z-index: auto;
+  }
+
   .global-blocks-region-header .block {
     margin-bottom: 0;
     height: auto !important;
@@ -511,7 +515,7 @@ body.cms-ui {
   .ui.basic.segment.content-area {
     position: relative !important;
     top: auto !important;
-    z-index: 0;
+    z-index: auto;
     box-sizing: border-box;
     flex: 0 0 auto;
     width: 100%;

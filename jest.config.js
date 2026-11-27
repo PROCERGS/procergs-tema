@@ -1,6 +1,7 @@
 module.exports = {
   testEnvironment: 'node',
   testMatch: ['<rootDir>/src/**/?(*.)+(spec|test).[jt]s?(x)'],
+  transformIgnorePatterns: ['node_modules/(?!.*volto-global-regions)'],
   // Pure-logic unit tests run standalone, without the full Volto core
   // checkout. Volto's own URL helpers rely on app-wide config (apiPath,
   // externalRoutes, etc.) which isn't available here, so they're mapped to a
