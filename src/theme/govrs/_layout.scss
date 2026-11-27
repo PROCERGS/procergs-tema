@@ -34,7 +34,7 @@
 
   .procergs-secretariat-bar__layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 2fr) auto minmax(0, 1fr);
     align-items: center;
     gap: 0.75rem clamp(1.5rem, 3vw, 3rem);
     padding-block: 0.5rem;
@@ -68,7 +68,7 @@
   .procergs-secretariat-bar__text {
     min-width: 0;
     color: inherit;
-    font-size: 1rem;
+    font-size: 0.7rem;
     line-height: 1.25;
     overflow-wrap: anywhere;
   }
